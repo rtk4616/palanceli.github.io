@@ -1,0 +1,714 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="键盘消息处理学习笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x518D;&amp;#x56DE;&amp;#x8FC7;&amp;#x5934;&amp;#x6765;&amp;#x770B;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E09;&amp;#xFF09;&amp;#x300B;&amp;#x4E2D;InputReaderThread&amp;#x7684">
+<meta property="og:type" content="article">
+<meta property="og:title" content="键盘消息处理学习笔记（九）">
+<meta property="og:url" content="http://palanceli.github.io/2016/10/03/2016/1002KeyboardLearning9/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x518D;&amp;#x56DE;&amp;#x8FC7;&amp;#x5934;&amp;#x6765;&amp;#x770B;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E09;&amp;#xFF09;&amp;#x300B;&amp;#x4E2D;InputReaderThread&amp;#x7684">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/03/2016/1002KeyboardLearning9/img01.png">
+<meta property="og:updated_time" content="2016-10-04T10:33:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="键盘消息处理学习笔记（九）">
+<meta name="twitter:description" content="&amp;#x518D;&amp;#x56DE;&amp;#x8FC7;&amp;#x5934;&amp;#x6765;&amp;#x770B;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E09;&amp;#xFF09;&amp;#x300B;&amp;#x4E2D;InputReaderThread&amp;#x7684">
+<meta name="twitter:image" content="http://palanceli.github.io/2016/10/03/2016/1002KeyboardLearning9/img01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/10/03/2016/1002KeyboardLearning9/"/>
+
+  <title> 键盘消息处理学习笔记（九） | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                键盘消息处理学习笔记（九）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-03T23:17:40+08:00" content="2016-10-03">
+              2016-10-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/03/2016/1002KeyboardLearning9/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/03/2016/1002KeyboardLearning9/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x518D;&#x56DE;&#x8FC7;&#x5934;&#x6765;&#x770B;&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x4E09;&#xFF09;&#x300B;&#x4E2D;<a href="http://palanceli.com/2016/10/02/2016/1002KeyboardLearning3/#InputReaderThread&#x7684;&#x542F;&#x52A8;" target="_blank" rel="external">InputReaderThread&#x7684;&#x542F;&#x52A8;</a>&#x3002;Step3&#x4E2D;<code>mEventHub-&gt;getEvents(...)</code>&#x4ECE;&#x6240;&#x6709;&#x8F93;&#x5165;&#x8BBE;&#x5907;&#x8BFB;&#x53D6;&#x4E00;&#x8F6E;IO&#x4E8B;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x6709;IO&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#xFF0C;&#x8BE5;&#x51FD;&#x6570;&#x4E2D;&#x7684;&#x5FAA;&#x73AF;&#x5C31;&#x4F1A;&#x7EC8;&#x6B62;&#xFF0C;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x5230;Step2&#x4E2D;&#x7684;<code>InputReader::loopOnce()</code>&#xFF0C;&#x63A5;&#x7740;&#x7531;<code>InputReader::processEventsLocked(...)</code>&#x6765;&#x5904;&#x7406;&#x8FD9;&#x4E9B;IO&#x4E8B;&#x4EF6;&#x3002;&#x672C;&#x6587;&#x4EE5;&#x8BE5;&#x51FD;&#x6570;&#x4E3A;&#x8D77;&#x70B9;&#x7814;&#x7A76;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x7684;&#x5904;&#x7406;&#x3002;<br><a id="more"></a><br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/services/inputflinger/InputReader.cpp:272</span></div><div class="line"><span class="keyword">void</span> InputReader::loopOnce() {</div><div class="line">    ... ...</div><div class="line">    <span class="keyword">int32_t</span> timeoutMillis;</div><div class="line">    ... ...</div><div class="line">    <span class="keyword">size_t</span> count = mEventHub-&gt;getEvents(timeoutMillis, mEventBuffer, EVENT_BUFFER_SIZE);    <span class="comment">// &#x4ECE;&#x6240;&#x6709;&#x8F93;&#x5165;&#x8BBE;&#x5907;&#x8BFB;&#x53D6;&#x4E00;&#x8F6E;IO&#x4E8B;&#x4EF6;&#xFF0C;&#x4FDD;&#x5B58;&#x5230;mEventBuffer</span></div><div class="line">    ... ...</div><div class="line">        <span class="keyword">if</span> (count) {</div><div class="line">            processEventsLocked(mEventBuffer, count); <span class="comment">// &#x1F3C1;</span></div><div class="line">        }</div><div class="line">    ... ...</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<h1 id="Step1-InputReader-processEventsLocked-&#x2026;"><a href="#Step1-InputReader-processEventsLocked-&#x2026;" class="headerlink" title="Step1: InputReader::processEventsLocked(&#x2026;)"></a>Step1: InputReader::processEventsLocked(&#x2026;)</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/services/inputflinger/InputReader.cpp:336</span></div><div class="line"><span class="keyword">void</span> InputReader::processEventsLocked(<span class="keyword">const</span> RawEvent* rawEvents, <span class="keyword">size_t</span> count) {</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> RawEvent* rawEvent = rawEvents; count;) {</div><div class="line">        <span class="keyword">int32_t</span> type = rawEvent-&gt;type;</div><div class="line">        <span class="comment">// &#x626B;&#x63CF;rawEvent&#x4E4B;&#x540E;&#x8FDE;&#x7EED;&#x51FA;&#x73B0;&#x4E14;&#x548C;rawEvent-&gt;deviceId&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x975E;&#x8BBE;&#x5907;&#x589E;&#x5220;&#x67E5;&#x7684;&#x4E8B;&#x4EF6;&#x4E2A;&#x6570;</span></div><div class="line">        <span class="keyword">size_t</span> batchSize = <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (type &lt; EventHubInterface::FIRST_SYNTHETIC_EVENT) {</div><div class="line">            <span class="keyword">int32_t</span> deviceId = rawEvent-&gt;deviceId;</div><div class="line">            <span class="keyword">while</span> (batchSize &lt; count) {</div><div class="line">                <span class="keyword">if</span> (rawEvent[batchSize].type &gt;= EventHubInterface::FIRST_SYNTHETIC_EVENT</div><div class="line">                        || rawEvent[batchSize].deviceId != deviceId) {</div><div class="line">                    <span class="keyword">break</span>;</div><div class="line">                }</div><div class="line">                batchSize += <span class="number">1</span>;</div><div class="line">            }</div><div class="line">... ...</div><div class="line">            <span class="comment">// &#x1F3C1;&#x6279;&#x91CF;&#x5904;&#x7406;&#x8FD9;&#x4E9B;IO&#x4E8B;&#x4EF6;</span></div><div class="line">            processEventsForDeviceLocked(deviceId, rawEvent, batchSize);</div><div class="line">        } <span class="keyword">else</span> {</div><div class="line">            <span class="comment">// &#x5904;&#x7406;&#x8BBE;&#x5907;&#x7684;&#x589E;&#x3001;&#x5220;&#x3001;&#x67E5;&#x8BF7;&#x6C42;</span></div><div class="line">            <span class="keyword">switch</span> (rawEvent-&gt;type) {</div><div class="line">            <span class="keyword">case</span> EventHubInterface::DEVICE_ADDED:</div><div class="line">                addDeviceLocked(rawEvent-&gt;when, rawEvent-&gt;deviceId);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> EventHubInterface::DEVICE_REMOVED:</div><div class="line">                removeDeviceLocked(rawEvent-&gt;when, rawEvent-&gt;deviceId);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">case</span> EventHubInterface::FINISHED_DEVICE_SCAN:</div><div class="line">                handleConfigurationChangedLocked(rawEvent-&gt;when);</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            <span class="keyword">default</span>:</div><div class="line">                ALOG_ASSERT(<span class="literal">false</span>); <span class="comment">// can&apos;t happen</span></div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            }</div><div class="line">        }</div><div class="line">        count -= batchSize;</div><div class="line">        rawEvent += batchSize;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="Step2-InputReader-processEventsForDevicedLocked-&#x2026;"><a href="#Step2-InputReader-processEventsForDevicedLocked-&#x2026;" class="headerlink" title="Step2: InputReader::processEventsForDevicedLocked(&#x2026;)"></a>Step2: InputReader::processEventsForDevicedLocked(&#x2026;)</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/services/inputflinger/InputReader.cpp:503</span></div><div class="line"><span class="keyword">void</span> InputReader::processEventsForDeviceLocked(<span class="keyword">int32_t</span> deviceId,</div><div class="line">        <span class="keyword">const</span> RawEvent* rawEvents, <span class="keyword">size_t</span> count) {</div><div class="line">    <span class="keyword">ssize_t</span> deviceIndex = mDevices.indexOfKey(deviceId);</div><div class="line">    ... ... <span class="comment">// &#x83B7;&#x53D6;&#x53D1;&#x751F;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x7684;&#x8F93;&#x5165;&#x8BBE;&#x5907;</span></div><div class="line">    InputDevice* device = mDevices.valueAt(deviceIndex);</div><div class="line">    ... ...</div><div class="line">    device-&gt;process(rawEvents, count);  <span class="comment">// &#x1F3C1;</span></div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="Step3-InputDevice-process-&#x2026;"><a href="#Step3-InputDevice-process-&#x2026;" class="headerlink" title="Step3: InputDevice::process(&#x2026;)"></a>Step3: InputDevice::process(&#x2026;)</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/services/inputflinger/InputReader.cpp:1027</span></div><div class="line"><span class="keyword">void</span> InputDevice::process(<span class="keyword">const</span> RawEvent* rawEvents, <span class="keyword">size_t</span> count) {</div><div class="line">    <span class="comment">// Process all of the events in order for each mapper.</span></div><div class="line">    <span class="comment">// We cannot simply ask each mapper to process them in bulk because mappers may</span></div><div class="line">    <span class="comment">// have side-effects that must be interleaved.  For example, joystick movement events and</span></div><div class="line">    <span class="comment">// gamepad button presses are handled by different mappers but they should be dispatched</span></div><div class="line">    <span class="comment">// in the order received.</span></div><div class="line">    <span class="keyword">size_t</span> numMappers = mMappers.size();</div><div class="line">    <span class="comment">// &#x904D;&#x5386;&#x6BCF;&#x4E00;&#x4E2A;IO&#x4E8B;&#x4EF6;</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">const</span> RawEvent* rawEvent = rawEvents; count--; rawEvent++) {</div><div class="line">... ...</div><div class="line">            <span class="comment">// &#x904D;&#x5386;&#x6BCF;&#x4E00;&#x4E2A;InputMapper&#x5BF9;&#x8C61;&#xFF0C;&#x627E;&#x5230;&#x548C;&#x4E8B;&#x4EF6;&#x5339;&#x914D;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5904;&#x7406;</span></div><div class="line">            <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; numMappers; i++) {</div><div class="line">                InputMapper* mapper = mMappers[i];</div><div class="line">                mapper-&gt;process(rawEvent);  <span class="comment">// &#x1F3C1;</span></div><div class="line">            }</div><div class="line">... ...</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x6BCF;&#x4E00;&#x79CD;&#x7C7B;&#x578B;&#x7684;&#x7684;IO&#x4E8B;&#x4EF6;&#x90FD;&#x7531;&#x4E00;&#x4E2A;InputMapper&#x5BF9;&#x8C61;&#x6765;&#x5904;&#x7406;&#xFF0C;&#x5C3D;&#x7BA1;&#x5728;&#x7B2C;&#x4E8C;&#x4E2A;for&#x5FAA;&#x73AF;&#x4E2D;&#x904D;&#x5386;&#x4E86;&#x6240;&#x6709;&#x7684;InputMapper&#x5BF9;&#x8C61;&#xFF0C;&#x800C;&#x5B9E;&#x9645;&#x53EA;&#x6709;&#x4E00;&#x4E2A;InputMapper&#x5BF9;&#x8C61;&#x4F1A;&#x5BF9;&#x548C;&#x81EA;&#x5DF1;&#x5339;&#x914D;&#x7684;&#x4E8B;&#x4EF6;&#x8FDB;&#x884C;&#x5904;&#x7406;&#x3002;&#x6B64;&#x5904;&#x6211;&#x4EEC;&#x5173;&#x5FC3;&#x7684;&#x662F;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#xFF0C;&#x56E0;&#x6B64;&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x5173;&#x6CE8;&#x5904;&#x7406;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x7684;mapper&#x2014;&#x2014;KeyboardInputMapper&#x3002;</p>
+<h1 id="Step4-KeyboardInputMapper-process-&#x2026;"><a href="#Step4-KeyboardInputMapper-process-&#x2026;" class="headerlink" title="Step4: KeyboardInputMapper::process(&#x2026;)"></a>Step4: KeyboardInputMapper::process(&#x2026;)</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/services/inputflinger/InputReader.cpp:2172</span></div><div class="line"><span class="keyword">void</span> KeyboardInputMapper::process(<span class="keyword">const</span> RawEvent* rawEvent) {</div><div class="line">    <span class="keyword">switch</span> (rawEvent-&gt;type) {</div><div class="line">    <span class="keyword">case</span> EV_KEY: {</div><div class="line">        <span class="keyword">int32_t</span> scanCode = rawEvent-&gt;code; <span class="comment">// &#x83B7;&#x5F97;&#x626B;&#x63CF;&#x7801;</span></div><div class="line">        <span class="keyword">int32_t</span> usageCode = mCurrentHidUsage;</div><div class="line">        mCurrentHidUsage = <span class="number">0</span>;</div><div class="line">        <span class="comment">// &#x68C0;&#x67E5;&#x8BE5;&#x626B;&#x63CF;&#x7801;&#x662F;&#x5426;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x5408;&#x6CD5;&#x6309;&#x952E;</span></div><div class="line">        <span class="keyword">if</span> (isKeyboardOrGamepadKey(scanCode)) {</div><div class="line">            processKey(rawEvent-&gt;when, rawEvent-&gt;value != <span class="number">0</span>, scanCode, usageCode);  <span class="comment">// &#x1F3C1;</span></div><div class="line">        }</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    }</div><div class="line">    ... ...</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x7B80;&#x5355;&#x4ECB;&#x7ECD;&#x4E00;&#x4E0B;&#x626B;&#x63CF;&#x7801;&#x7684;&#x6982;&#x5FF5;&#xFF1A;</p>
+<blockquote>
+<p>  &#x5F53;&#x7528;&#x6237;&#x6309;&#x4E0B;&#x952E;&#x76D8;&#x4E0A;&#x7684;&#x4E00;&#x4E2A;&#x952E;&#x65F6;&#xFF0C;&#x952E;&#x76D8;&#x5185;&#x7684;&#x82AF;&#x7247;&#x4F1A;&#x68C0;&#x6D4B;&#x5230;&#x8FD9;&#x4E2A;&#x52A8;&#x4F5C;&#xFF0C;&#x5E76;&#x628A;&#x8FD9;&#x4E2A;&#x4FE1;&#x53F7;&#x4F20;&#x9001;&#x5230;&#x8BA1;&#x7B97;&#x673A;&#x3002;&#x5982;&#x4F55;&#x533A;&#x522B;&#x662F;&#x54EA;&#x4E00;&#x4E2A;&#x952E;&#x88AB;&#x6309;&#x4E0B;&#x4E86;&#x5462;&#xFF1F;&#x952E;&#x76D8;&#x4E0A;&#x7684;&#x6240;&#x6709;&#x6309;&#x952E;&#x90FD;&#x6709;&#x4E00;&#x4E2A;&#x7F16;&#x7801;&#xFF0C;&#x79F0;&#x4F5C;&#x952E;&#x76D8;&#x626B;&#x63CF;&#x7801;&#x3002;&#x5F53;&#x4F60;&#x6309;&#x4E0B;&#x4E00;&#x4E2A;&#x952E;&#x65F6;&#xFF0C;&#x8FD9;&#x4E2A;&#x952E;&#x7684;&#x626B;&#x63CF;&#x7801;&#x5C31;&#x88AB;&#x4F20;&#x7ED9;&#x7CFB;&#x7EDF;&#x3002;&#x626B;&#x63CF;&#x7801;&#x662F;&#x8DDF;&#x5177;&#x4F53;&#x7684;&#x786C;&#x4EF6;&#x76F8;&#x5173;&#x7684;&#xFF0C;&#x540C;&#x4E00;&#x4E2A;&#x952E;&#xFF0C;&#x5728;&#x4E0D;&#x540C;&#x952E;&#x76D8;&#x4E0A;&#x7684;&#x626B;&#x63CF;&#x7801;&#x6709;&#x53EF;&#x80FD;&#x4E0D;&#x540C;&#x3002;&#x952E;&#x76D8;&#x63A7;&#x5236;&#x5668;&#x5C31;&#x662F;&#x5C06;&#x8FD9;&#x4E2A;&#x626B;&#x63CF;&#x7801;&#x4F20;&#x7ED9;&#x8BA1;&#x7B97;&#x673A;&#xFF0C;&#x7136;&#x540E;&#x4EA4;&#x7ED9;&#x952E;&#x76D8;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x3002;&#x952E;&#x76D8;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x4F1A;&#x5B8C;&#x6210;&#x76F8;&#x5173;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x5E76;&#x628A;&#x8FD9;&#x4E2A;&#x626B;&#x63CF;&#x7801;&#x8F6C;&#x6362;&#x4E3A;&#x952E;&#x76D8;&#x865A;&#x62DF;&#x7801;&#x3002;<br>  &#x4E0E;&#x626B;&#x63CF;&#x7801;&#x76F8;&#x5BF9;&#x7684;&#x8FD8;&#x6709;&#x4E00;&#x4E2A;&#x865A;&#x62DF;&#x7801;&#x3002;&#x56E0;&#x4E3A;&#x626B;&#x63CF;&#x7801;&#x4E0E;&#x786C;&#x4EF6;&#x76F8;&#x5173;&#xFF0C;&#x4E0D;&#x5177;&#x6709;&#x901A;&#x7528;&#x6027;&#xFF0C;&#x4E3A;&#x4E86;&#x7EDF;&#x4E00;&#x952E;&#x76D8;&#x4E0A;&#x6240;&#x6709;&#x952E;&#x7684;&#x7F16;&#x7801;&#xFF0C;&#x4E8E;&#x662F;&#x5C31;&#x63D0;&#x51FA;&#x4E86;&#x865A;&#x62DF;&#x7801;&#x6982;&#x5FF5;&#x3002;&#x65E0;&#x8BBA;&#x4EC0;&#x4E48;&#x952E;&#x76D8;&#xFF0C;&#x540C;&#x4E00;&#x4E2A;&#x6309;&#x952E;&#x7684;&#x865A;&#x62DF;&#x7801;&#x603B;&#x662F;&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x8FD9;&#x6837;&#x7A0B;&#x5E8F;&#x5C31;&#x53EF;&#x4EE5;&#x8BC6;&#x522B;&#x4E86;&#x3002;&#x7B80;&#x5355;&#x70B9;&#x8BF4;&#xFF0C;&#x865A;&#x62DF;&#x7801;&#x5C31;&#x662F;&#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x7684;&#x50CF;VK_A,VK_B&#x8FD9;&#x6837;&#x7684;&#x5E38;&#x6570;&#xFF0C;&#x6BD4;&#x5982;&#x952E;A&#x7684;&#x865A;&#x62DF;&#x7801;&#x662F;65&#xFF0C;&#x5199;&#x6210;16&#x8FDB;&#x5236;&#x5C31;&#x662F;0x41&#x3002;<br>  &#x5F53;&#x952E;&#x76D8;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x628A;&#x626B;&#x63CF;&#x7801;&#x8F6C;&#x6362;&#x4E3A;&#x865A;&#x62DF;&#x7801;&#x540E;&#xFF0C;&#x4F1A;&#x628A;&#x8FD9;&#x4E2A;&#x952E;&#x76D8;&#x64CD;&#x4F5C;&#x7684;&#x626B;&#x63CF;&#x7801;&#x548C;&#x865A;&#x62DF;&#x7801;&#x8FD8;&#x6709;&#x5176;&#x5B83;&#x4FE1;&#x606F;&#x4E00;&#x8D77;&#x4F20;&#x9012;&#x7ED9;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;&#x7136;&#x540E;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5219;&#x4F1A;&#x628A;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x5C01;&#x88C5;&#x5728;&#x4E00;&#x4E2A;&#x6D88;&#x606F;&#x4E2D;&#xFF0C;&#x5E76;&#x628A;&#x8FD9;&#x4E2A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x63D2;&#x5165;&#x5230;&#x6D88;&#x606F;&#x5217;&#x961F;&#x3002;</p>
+</blockquote>
+<h1 id="Step5-KeyboardInputMapper-processKey-&#x2026;"><a href="#Step5-KeyboardInputMapper-processKey-&#x2026;" class="headerlink" title="Step5: KeyboardInputMapper::processKey(&#x2026;)"></a>Step5: KeyboardInputMapper::processKey(&#x2026;)</h1><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line">// frameworks/native/services/inputflinger/InputReader.cpp:2205</div><div class="line">void KeyboardInputMapper::processKey(nsecs_t when, bool down, int32_t scanCode,</div><div class="line">        int32_t usageCode) {</div><div class="line">    int32_t keyCode;</div><div class="line">    int32_t keyMetaState;</div><div class="line">    uint32_t policyFlags;</div><div class="line">    ... ...</div><div class="line">    if (down) {</div><div class="line">        // Rotate key codes according to orientation if needed.</div><div class="line">        // &#x5F53;&#x5C4F;&#x5E55;&#x65CB;&#x8F6C;&#x4E86;&#xFF0C;&#x540C;&#x4E00;&#x4E2A;DPAD&#x6309;&#x952E;&#x5BF9;&#x5E94;&#x7684;keyCode&#x662F;&#x4E0D;&#x540C;&#x7684;&#xFF0C;&#x6B64;&#x5904;&#x5B8C;&#x6210;&#x8F6C;&#x6362;</div><div class="line">        if (mParameters.orientationAware &amp;&amp; mParameters.hasAssociatedDisplay) {</div><div class="line">            keyCode = rotateKeyCode(keyCode, mOrientation);</div><div class="line">        }</div><div class="line"></div><div class="line">        // Add key down.</div><div class="line">        // &#x5F53;&#x524D;&#x6309;&#x4E0B;&#x7684;&#x952E;&#x4E4B;&#x524D;&#x662F;&#x5426;&#x5DF2;&#x7ECF;&#x88AB;&#x6309;&#x4E0B;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x662F;&#xFF0C;keyDownIndex&#x4E3A;&#x975E;&#x8D1F;</div><div class="line">        ssize_t keyDownIndex = findKeyDown(scanCode);</div><div class="line">        if (keyDownIndex &gt;= 0) {</div><div class="line">            // key repeat, be sure to use same keycode as before in case of rotation</div><div class="line">            // mKeyDowns&#x4FDD;&#x5B58;&#x7740;&#x5DF2;&#x7ECF;&#x88AB;&#x6309;&#x4E0B;&#x7684;&#x6309;&#x952E;&#x96C6;&#x5408;&#xFF0C;&#x5982;&#x679C;&#x5F53;&#x524D;&#x6309;&#x952E;&#x4E4B;&#x524D;&#x5DF2;&#x7ECF;&#x88AB;&#x6309;&#x4E0B;&#x4E86;&#xFF0C;</div><div class="line">            // &#x5219;keyCode&#x4FDD;&#x6301;&#x4E4B;&#x524D;&#x7684;&#x542B;&#x4E49;&#xFF0C;&#x4E0D;&#x8981;&#x53D7;&#x5C4F;&#x5E55;&#x65CB;&#x8F6C;&#x7684;&#x5F71;&#x54CD;&#x3002;</div><div class="line">            keyCode = mKeyDowns.itemAt(keyDownIndex).keyCode;</div><div class="line">        } else {</div><div class="line">            ... ...</div><div class="line">            // &#x628A;&#x5F53;&#x524D;&#x6309;&#x4E0B;&#x7684;&#x6309;&#x952E;&#x5B58;&#x5165;mKeyDowns</div><div class="line">            mKeyDowns.push();</div><div class="line">            KeyDown&amp; keyDown = mKeyDowns.editTop();</div><div class="line">            keyDown.keyCode = keyCode;</div><div class="line">            keyDown.scanCode = scanCode;</div><div class="line">        }</div><div class="line"></div><div class="line">        mDownTime = when;</div><div class="line">    } else {</div><div class="line">        // Remove key down. &#x68C0;&#x67E5;&#x5F53;&#x524D;&#x677E;&#x5F00;&#x7684;&#x6309;&#x952E;&#x4E4B;&#x524D;&#x5904;&#x4E8E;&#x88AB;&#x6309;&#x4E0B;&#x7684;&#x72B6;&#x6001;</div><div class="line">        ssize_t keyDownIndex = findKeyDown(scanCode);</div><div class="line">        if (keyDownIndex &gt;= 0) {</div><div class="line">            // key up, be sure to use same keycode as before in case of rotation</div><div class="line">            // &#x5C06;&#x8BE5;&#x6309;&#x952E;&#x4ECE;mKeyDowns&#x4E2D;&#x5220;&#x9664;</div><div class="line">            keyCode = mKeyDowns.itemAt(keyDownIndex).keyCode;</div><div class="line">            mKeyDowns.removeAt(size_t(keyDownIndex));</div><div class="line">        } ... ...</div><div class="line">    }</div><div class="line"></div><div class="line">    int32_t oldMetaState = mMetaState;</div><div class="line">    // &#x53D6;&#x51FA;&#x7EC4;&#x5408;&#x952E;&#x4FE1;&#x606F;&#xFF08;&#x5982;Alt&#x3001;Shift&#xFF09;&#x4FDD;&#x5B58;&#x5728;newMetaState&#x4E2D;&#xFF0C;&#x5982;&#x679C;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x5219;&#x66F4;&#x65B0;mMetaState</div><div class="line">    int32_t newMetaState = updateMetaState(keyCode, down, oldMetaState);</div><div class="line">    bool metaStateChanged = oldMetaState != newMetaState;</div><div class="line">    if (metaStateChanged) {</div><div class="line">        mMetaState = newMetaState;</div><div class="line">        updateLedState(false);</div><div class="line"></div><div class="line">        // If global meta state changed send it along with the key.</div><div class="line">        // If it has not changed then we&apos;ll use what keymap gave us,</div><div class="line">        // since key replacement logic might temporarily reset a few</div><div class="line">        // meta bits for given key.</div><div class="line">        keyMetaState = newMetaState;</div><div class="line">    }</div><div class="line"></div><div class="line">    nsecs_t downTime = mDownTime;</div><div class="line"></div><div class="line">    ... ...</div><div class="line"></div><div class="line">    NotifyKeyArgs args(when, getDeviceId(), mSource, policyFlags,</div><div class="line">            down ? AKEY_EVENT_ACTION_DOWN : AKEY_EVENT_ACTION_UP,</div><div class="line">            AKEY_EVENT_FLAG_FROM_SYSTEM, keyCode, scanCode, keyMetaState, downTime);</div><div class="line">    getListener()-&gt;notifyKey(&amp;args);    // &#x1F3C1;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4EE3;&#x7801;&#x4E2D;&#x7684;keyCode&#x5C31;&#x662F;&#x524D;&#x9762;&#x8BB2;&#x7684;&#x865A;&#x62DF;&#x7801;&#x7684;&#x6982;&#x5FF5;&#xFF0C;DPAD&#x6309;&#x952E;&#x5C31;&#x662F;&#x624B;&#x673A;&#x4E0A;&#x7684;&#x65B9;&#x5411;&#x952E;&#xFF1A;<br><img src="/2016/10/03/2016/1002KeyboardLearning9/img01.png" alt="DPAD&#x6309;&#x952E;"><br>&#x540C;&#x4E00;&#x4E2A;&#x6309;&#x952E;&#xFF0C;&#x5F53;&#x624B;&#x673A;&#x65CB;&#x8F6C;&#x540E;&#xFF0C;&#x5C3D;&#x7BA1;&#x626B;&#x63CF;&#x7801;&#x662F;&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x53EF;&#x662F;&#x6309;&#x952E;&#x7684;&#x903B;&#x8F91;&#x542B;&#x4E49;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x4E86;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x628A;keyCode&#x4F5C;&#x76F8;&#x5E94;&#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x5982;&#x539F;&#x5148;&#x7684;&#x201C;&#x4E0A;&#x4E0B;&#x5DE6;&#x53F3;&#x201D;&#x987A;&#x65F6;&#x9488;&#x65CB;&#x8F6C;90&#xB0;&#x540E;&#x5C31;&#x53D8;&#x6210;&#x4E86;&#x201C;&#x53F3;&#x4E0B;&#x5DE6;&#x4E0A;&#x201D;&#x3002;</p>
+<p>&#x8FD9;&#x4E00;&#x5927;&#x6BB5;&#x7684;&#x4EE3;&#x7801;&#x4E3B;&#x8981;&#x662F;&#x6765;&#x5FAE;&#x8C03;keyCode&#x4EE5;&#x53CA;&#x66F4;&#x65B0;&#x7EC4;&#x5408;&#x952E;&#x4FE1;&#x606F;&#xFF0C;&#x6700;&#x540E;&#x628A;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x6253;&#x5305;&#x5230;NotifyKeyArgs&#x4E2D;&#xFF0C;&#x7531;getListener()-&gt;notifyKey(&#x2026;)&#x6765;&#x5904;&#x7406;&#x3002;&#x51FD;&#x6570;KeyboardInputMapper::getListener()&#x7EE7;&#x627F;&#x81EA;&#x57FA;&#x7C7B;InputMapper&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/services/inputflinger/InputReader.h:1012</span></div><div class="line">    <span class="function"><span class="keyword">inline</span> InputListenerInterface* <span class="title">getListener</span><span class="params">()</span> </span>{ <span class="keyword">return</span> mContext-&gt;getListener(); }</div></pre></td></tr></table></figure></p>
+<p>mContext&#x662F;&#x5728;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x4F20;&#x5165;&#x7684;&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/services/inputflinger/InputReader.cpp:1823</span></div><div class="line">InputMapper::InputMapper(InputDevice* device) :</div><div class="line">        mDevice(device), mContext(device-&gt;getContext()) {</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p><font color="red">KeyboardInputMapper&#x5728;&#x6784;&#x9020;&#x7684;&#x65F6;&#x5019;&#x4F20;&#x5165;&#x7684;InputDevice&#x662F;&#x8C01;&#xFF1F;&#x8BE5;&#x8BBE;&#x5907;&#x7684;context&#x53C8;&#x662F;&#x8C01;&#xFF1F;&#x8FD9;&#x4E9B;&#x90FD;&#x662F;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x4ECE;&#x9759;&#x6001;&#x4EE3;&#x7801;&#x67E5;&#x627E;&#x5F88;&#x56F0;&#x96BE;&#x3002;&#x53EF;&#x4EE5;&#x6682;&#x65F6;&#x6401;&#x7F6E;&#xFF0C;&#x65E5;&#x540E;&#x8C03;&#x8BD5;&#x8FDB;&#x6765;&#x518D;&#x770B;&#x3002;</font><br>&#x4E00;&#x4E2A;&#x7B80;&#x5355;&#x7684;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x662F;&#x4ECE;notifyKey&#x5165;&#x624B;&#xFF0C;&#x5728;Android&#x6E90;&#x7801;&#x6839;&#x76EE;&#x5F55;&#x67E5;&#x627E;&#x201D;::notifyKey&#x201D;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ find . -name <span class="string">&quot;*.cpp&quot;</span> |xargs grep <span class="string">&quot;::notifyKey&quot;</span></div><div class="line">appledeiMac:android-6.0.1_r11 palance$ find . -name <span class="string">&quot;*.cpp&quot;</span> |xargs grep <span class="string">&quot;::notifyKey&quot;</span></div><div class="line">./frameworks/native/services/inputflinger/InputDispatcher.cpp:void InputDispatcher::notifyKey(const NotifyKeyArgs* args) {</div><div class="line">./frameworks/native/services/inputflinger/InputListener.cpp:void QueuedInputListener::notifyKey(const NotifyKeyArgs* args) {</div><div class="line">./system/core/fingerprintd/FingerprintDaemonProxy.cpp:void FingerprintDaemonProxy::notifyKeystore(const uint8_t *auth_token, const size_t auth_token_length) {</div></pre></td></tr></table></figure></p>
+<p>&#x627E;&#x5230;&#x6BD4;&#x8F83;&#x9760;&#x8C31;&#x7684;&#x4EE3;&#x7801;&#x5C31;&#x662F;InputDispatcher.cpp&#x4E86;&#x3002;</p>
+<h1 id="Step6-InputDispatcher-notifyKey-&#x2026;"><a href="#Step6-InputDispatcher-notifyKey-&#x2026;" class="headerlink" title="Step6: InputDispatcher::notifyKey(&#x2026;)"></a>Step6: InputDispatcher::notifyKey(&#x2026;)</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/services/inputflinger/InputDispatcher.cpp:2359</span></div><div class="line"><span class="keyword">void</span> InputDispatcher::notifyKey(<span class="keyword">const</span> NotifyKeyArgs* args) {</div><div class="line">... ...</div><div class="line">    <span class="keyword">uint32_t</span> policyFlags = args-&gt;policyFlags;</div><div class="line">    <span class="keyword">int32_t</span> flags = args-&gt;flags;</div><div class="line">    <span class="keyword">int32_t</span> metaState = args-&gt;metaState;</div><div class="line">    ... ...</div><div class="line"></div><div class="line">    <span class="keyword">bool</span> needWake;</div><div class="line">        ... ...</div><div class="line"></div><div class="line">        <span class="keyword">int32_t</span> repeatCount = <span class="number">0</span>;</div><div class="line">        KeyEntry* newEntry = <span class="keyword">new</span> KeyEntry(args-&gt;eventTime,</div><div class="line">                args-&gt;deviceId, args-&gt;source, policyFlags,</div><div class="line">                args-&gt;action, flags, keyCode, args-&gt;scanCode,</div><div class="line">                metaState, repeatCount, args-&gt;downTime);</div><div class="line"></div><div class="line">        needWake = enqueueInboundEventLocked(newEntry); <span class="comment">// &#x5C06;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x6DFB;&#x52A0;&#x5230;&#x5F85;&#x5206;&#x53D1;&#x961F;&#x5217;</span></div><div class="line">    ... ...</div><div class="line"></div><div class="line">    <span class="keyword">if</span> (needWake) {</div><div class="line">        mLooper-&gt;wake();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x8FD9;&#x91CC;&#x6211;&#x7701;&#x7565;&#x7684;&#x4EE3;&#x7801;&#x6BD4;&#x8F83;&#x591A;&#xFF0C;&#x56E0;&#x4E3A;&#x4E00;&#x4E9B;&#x6309;&#x952E;&#x7684;&#x5FAE;&#x8C03;&#x3001;&#x8FC7;&#x6EE4;&#x5728;&#x8FD9;&#x91CC;&#x90FD;&#x4E0D;&#x662F;&#x4E3B;&#x8981;&#x903B;&#x8F91;&#xFF0C;&#x6B64;&#x5904;&#x7684;&#x4E3B;&#x6D41;&#x662F;&#x5C06;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x5C01;&#x88C5;&#x6210;KeyEntry&#xFF0C;&#x6DFB;&#x52A0;&#x5230;&#x5F85;&#x5206;&#x53D1;&#x961F;&#x5217;&#xFF0C;&#x5E76;&#x5524;&#x9192;Looper&#x3002;<br>&#x6765;&#x770B;&#x5411;&#x5F85;&#x5206;&#x53D1;&#x961F;&#x5217;&#x63D2;&#x5165;KeyEntry&#xFF1A;</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/services/inputflinger/InputDispatcher.cpp:408</span></div><div class="line"><span class="keyword">bool</span> InputDispatcher::enqueueInboundEventLocked(EventEntry* entry) {</div><div class="line">    <span class="comment">// &#x5982;&#x679C;&#x4E4B;&#x524D;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x65B0;&#x6765;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x9700;&#x8981;&#x7ACB;&#x523B;&#x5524;&#x9192;InputDispatcher&#x6765;&#x5904;&#x7406;</span></div><div class="line">    <span class="keyword">bool</span> needWake = mInboundQueue.isEmpty();</div><div class="line">    mInboundQueue.enqueueAtTail(entry); <span class="comment">// &#x5C06;entry&#x8FDB;&#x961F;</span></div><div class="line">    traceInboundQueueLengthLocked();</div><div class="line"></div><div class="line">    <span class="keyword">switch</span> (entry-&gt;type) {</div><div class="line">    <span class="keyword">case</span> EventEntry::TYPE_KEY: {</div><div class="line">        <span class="comment">// Optimize app switch latency.</span></div><div class="line">        <span class="comment">// If the application takes too long to catch up then we drop all events preceding</span></div><div class="line">        <span class="comment">// the app switch key.</span></div><div class="line">        KeyEntry* keyEntry = <span class="keyword">static_cast</span>&lt;KeyEntry*&gt;(entry);</div><div class="line">        <span class="comment">// &#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x4E0E;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7A97;&#x53E3;&#x5207;&#x6362;&#x64CD;&#x4F5C;&#x76F8;&#x5173;&#xFF0C;&#x5982;Home&#x952E;&#xFF0C;</span></div><div class="line">        <span class="comment">// &#x5728;&#x62AC;&#x8D77;&#x65F6;&#x5E94;&#x7ACB;&#x523B;&#x5524;&#x9192;InputDispatcher&#x6765;&#x5904;&#x7406;</span></div><div class="line">        <span class="keyword">if</span> (isAppSwitchKeyEventLocked(keyEntry)) { </div><div class="line">            <span class="keyword">if</span> (keyEntry-&gt;action == AKEY_EVENT_ACTION_DOWN) {</div><div class="line">                mAppSwitchSawKeyDown = <span class="literal">true</span>;</div><div class="line">            } <span class="keyword">else</span> <span class="keyword">if</span> (keyEntry-&gt;action == AKEY_EVENT_ACTION_UP) {</div><div class="line">                <span class="keyword">if</span> (mAppSwitchSawKeyDown) {</div><div class="line">... ...</div><div class="line">                    mAppSwitchDueTime = keyEntry-&gt;eventTime + APP_SWITCH_TIMEOUT;</div><div class="line">                    mAppSwitchSawKeyDown = <span class="literal">false</span>;</div><div class="line">                    needWake = <span class="literal">true</span>;</div><div class="line">                }</div><div class="line">            }</div><div class="line">        }</div><div class="line">        <span class="keyword">break</span>;</div><div class="line">    }</div><div class="line">    ... ...</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">return</span> needWake;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>InputDispatcher::mInboundQueue&#x7EF4;&#x62A4;&#x4E00;&#x4E2A;&#x5F85;&#x5206;&#x53D1;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x961F;&#x5217;&#xFF0C;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x4E8B;&#x4EF6;&#x90FD;&#x662F;&#x9700;&#x8981;&#x5206;&#x53D1;&#x7ED9;&#x7CFB;&#x7EDF;&#x5F53;&#x524D;&#x6D3B;&#x52A8;&#x7A97;&#x53E3;&#x6765;&#x5904;&#x7406;&#x7684;&#x3002;&#x51FD;&#x6570;enqueueInboundEventLocked(&#x2026;)&#x9664;&#x4E86;&#x8BA9;&#x4E8B;&#x4EF6;&#x8FDB;&#x961F;&#xFF0C;&#x8FD8;&#x4F1A;&#x8FD4;&#x56DE;&#x662F;&#x5426;&#x7ACB;&#x523B;&#x5524;&#x9192;InputDispatcher&#xFF0C;&#x4EE5;&#x5206;&#x53D1;&#x961F;&#x5217;&#x4E2D;&#x7684;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x3002;<br>&#x5982;&#x679C;&#x9700;&#x8981;&#x5524;&#x9192;InputDispatcher&#xFF0C;&#x5219;&#x5728;InputDispatcher::notifyKey(&#x2026;)&#x7684;&#x5C3E;&#x90E8;&#x8C03;&#x7528;mLooper()-&gt;wake()&#x3002;</p>
+<h1 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h1><p>&#x672C;&#x6587;&#x7684;&#x8D77;&#x70B9;&#x662F;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x8F93;&#x5165;&#x8BBE;&#x5907;&#x6709;IO&#x4E8B;&#x4EF6;&#x53D1;&#x751F;&#xFF0C;&#x8FD9;&#x5C06;&#x4F1A;&#x5524;&#x9192;InputReader&#xFF0C;&#x5B83;&#x6536;&#x5230;&#x8FD9;&#x4E2A;&#x4E8B;&#x4EF6;&#x540E;&#xFF0C;&#x628A;&#x4E8B;&#x4EF6;&#x505A;&#x4E86;&#x7B80;&#x5355;&#x5C01;&#x88C5;&#xFF0C;&#x63D2;&#x5165;&#x5F85;&#x5206;&#x53D1;&#x961F;&#x5217;&#x4E2D;&#xFF0C;&#x7136;&#x540E;&#x5524;&#x9192;Dispatcher&#x3002;&#x56DE;&#x987E;&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x4E09;&#xFF09;&#x300B;&#x4E4B;<a href="http://palanceli.com/2016/10/02/2016/1002KeyboardLearning3/#InputDispatcherThread&#x7684;&#x542F;&#x52A8;" target="_blank" rel="external">InputDispatcherThread&#x7684;&#x542F;&#x52A8;</a>&#x4E00;&#x8282;&#x4E2D;&#xFF0C;InputDispatcher&#x542F;&#x52A8;&#x540E;&#x5C31;&#x7B49;&#x5F85;&#x5728;<code>mLooper-&gt;pollOnce(timeoutMillis);</code>&#xFF0C;InputReader&#x901A;&#x8FC7;&#x8C03;&#x7528;<code>mLooper()-&gt;wake()</code>&#x5C31;&#x628A;InputDispatcher&#x7684;&#x7B49;&#x5F85;&#x5524;&#x9192;&#x4E86;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/键盘消息处理学习笔记/" rel="tag">#键盘消息处理学习笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/03/2016/1002KeyboardLearning8/" rel="next" title="键盘消息处理学习笔记（八）">
+                <i class="fa fa-chevron-left"></i> 键盘消息处理学习笔记（八）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/04/2016/1004KeyboardLearning10/" rel="prev" title="键盘消息处理学习笔记（十）">
+                键盘消息处理学习笔记（十） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/03/2016/1002KeyboardLearning9/"
+           data-title="键盘消息处理学习笔记（九）" data-url="http://palanceli.github.io/2016/10/03/2016/1002KeyboardLearning9/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Step1-InputReader-processEventsLocked-…"><span class="nav-number">1.</span> <span class="nav-text">Step1: InputReader::processEventsLocked(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step2-InputReader-processEventsForDevicedLocked-…"><span class="nav-number">2.</span> <span class="nav-text">Step2: InputReader::processEventsForDevicedLocked(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step3-InputDevice-process-…"><span class="nav-number">3.</span> <span class="nav-text">Step3: InputDevice::process(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step4-KeyboardInputMapper-process-…"><span class="nav-number">4.</span> <span class="nav-text">Step4: KeyboardInputMapper::process(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step5-KeyboardInputMapper-processKey-…"><span class="nav-number">5.</span> <span class="nav-text">Step5: KeyboardInputMapper::processKey(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step6-InputDispatcher-notifyKey-…"><span class="nav-number">6.</span> <span class="nav-text">Step6: InputDispatcher::notifyKey(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,704 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="键盘消息处理学习笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x627F;&amp;#x63A5;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E94;&amp;#xFF09;&amp;#x300B;Step1&amp;#xFF1A;123// &amp;#x1F3C1;&amp;#x5C06;mInputChannel&amp;#x6CE8;&amp;#x518C">
+<meta property="og:type" content="article">
+<meta property="og:title" content="键盘消息处理学习笔记（八）">
+<meta property="og:url" content="http://palanceli.github.io/2016/10/03/2016/1002KeyboardLearning8/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x627F;&amp;#x63A5;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E94;&amp;#xFF09;&amp;#x300B;Step1&amp;#xFF1A;123// &amp;#x1F3C1;&amp;#x5C06;mInputChannel&amp;#x6CE8;&amp;#x518C">
+<meta property="og:updated_time" content="2016-10-03T15:03:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="键盘消息处理学习笔记（八）">
+<meta name="twitter:description" content="&amp;#x627F;&amp;#x63A5;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E94;&amp;#xFF09;&amp;#x300B;Step1&amp;#xFF1A;123// &amp;#x1F3C1;&amp;#x5C06;mInputChannel&amp;#x6CE8;&amp;#x518C">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/10/03/2016/1002KeyboardLearning8/"/>
+
+  <title> 键盘消息处理学习笔记（八） | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                键盘消息处理学习笔记（八）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-03T22:01:23+08:00" content="2016-10-03">
+              2016-10-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/03/2016/1002KeyboardLearning8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/03/2016/1002KeyboardLearning8/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x627F;&#x63A5;<a href="http://palanceli.com/2016/10/02/2016/1002KeyboardLearning5/" target="_blank" rel="external">&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x4E94;&#xFF09;&#x300B;</a>Step1&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// &#x1F3C1;&#x5C06;mInputChannel&#x6CE8;&#x518C;&#x5230;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;Activity&#x6240;&#x5728;&#x8FDB;&#x7A0B;&#x7684;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E2D;</span></div><div class="line">mInputEventReceiver = <span class="keyword">new</span> WindowInputEventReceiver(mInputChannel,</div><div class="line">                            Looper.myLooper());</div></pre></td></tr></table></figure></p>
+<p>mInputChannel&#x662F;&#x5728;ViewRootImpl::setView(&#x2026;)&#x4E2D;&#x521B;&#x5EFA;&#x7684;Client&#x7AEF;InputChannel&#x3002;&#x901A;&#x8FC7;&#x6784;&#x9020;WindowInputEventReceiver&#x5C06;InputChannel&#x6CE8;&#x518C;&#x5230;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;Activity&#x6240;&#x5728;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E2D;&#xFF0C;&#x672C;&#x6587;&#x7EE7;&#x7EED;&#x6DF1;&#x5165;WindowInputEventReceiver&#x3002;<br><a id="more"></a></p>
+<h1 id="Step1-WindowInputEventReceiver&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;"><a href="#Step1-WindowInputEventReceiver&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;" class="headerlink" title="Step1: WindowInputEventReceiver&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;"></a>Step1: WindowInputEventReceiver&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/java/android/view/ViewRootImpl.java:6018</span></div><div class="line">    <span class="keyword">final</span> <span class="class"><span class="keyword">class</span> <span class="title">WindowInputEventReceiver</span> <span class="keyword">extends</span> <span class="title">InputEventReceiver</span> </span>{</div><div class="line">    ... ...</div><div class="line">        <span class="comment">/// inputChannel    ViewRootImpl::mInputChannel</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="title">WindowInputEventReceiver</span><span class="params">(InputChannel inputChannel, Looper looper)</span> </span>{</div><div class="line">            <span class="keyword">super</span>(inputChannel, looper);    <span class="comment">// &#x1F3C1;</span></div><div class="line">        }</div></pre></td></tr></table></figure>
+<h1 id="Step2-InputEventReceiver&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;"><a href="#Step2-InputEventReceiver&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;" class="headerlink" title="Step2: InputEventReceiver&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;"></a>Step2: InputEventReceiver&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/java/android/view/InputEventReceiver.java:60</span></div><div class="line">    <span class="comment">// inputChannel     ViewRootImpl::mInputChannel</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">InputEventReceiver</span><span class="params">(InputChannel inputChannel, Looper looper)</span> </span>{</div><div class="line">        ... ...</div><div class="line">        mInputChannel = inputChannel;</div><div class="line">        mMessageQueue = looper.getQueue();</div><div class="line">        mReceiverPtr = nativeInit(<span class="keyword">new</span> WeakReference&lt;InputEventReceiver&gt;(<span class="keyword">this</span>),</div><div class="line">                inputChannel, mMessageQueue);   <span class="comment">// &#x1F3C1;</span></div><div class="line"></div><div class="line">        mCloseGuard.open(<span class="string">&quot;dispose&quot;</span>);</div><div class="line">    }</div></pre></td></tr></table></figure>
+<h1 id="Step3-nativeInit-&#x2026;"><a href="#Step3-nativeInit-&#x2026;" class="headerlink" title="Step3: nativeInit(&#x2026;)"></a>Step3: nativeInit(&#x2026;)</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/jni/android_view_InputEventReceiver.cpp:333</span></div><div class="line"><span class="function"><span class="keyword">static</span> jlong <span class="title">nativeInit</span><span class="params">(JNIEnv* env, jclass clazz, jobject receiverWeak,</span></span></div><div class="line">        jobject inputChannelObj, jobject messageQueueObj) {</div><div class="line">    <span class="comment">// &#x628A;java&#x5C42;&#x5BF9;&#x8C61;&#x8F6C;&#x6210;c++&#x5C42;</span></div><div class="line">    sp&lt;InputChannel&gt; inputChannel = android_view_InputChannel_getInputChannel(env,</div><div class="line">            inputChannelObj);</div><div class="line">    ... ...</div><div class="line">    sp&lt;MessageQueue&gt; messageQueue = android_os_MessageQueue_getMessageQueue(env, messageQueueObj);</div><div class="line">    ... ...</div><div class="line"></div><div class="line">    sp&lt;NativeInputEventReceiver&gt; receiver = <span class="keyword">new</span> NativeInputEventReceiver(env,</div><div class="line">            receiverWeak, inputChannel, messageQueue);</div><div class="line">    <span class="keyword">status_t</span> status = receiver-&gt;initialize(); <span class="comment">// &#x1F3C1;</span></div><div class="line">    ... ...</div><div class="line"></div><div class="line">    receiver-&gt;incStrong(gInputEventReceiverClassInfo.clazz); <span class="comment">// retain a reference for the object</span></div><div class="line">    <span class="keyword">return</span> <span class="keyword">reinterpret_cast</span>&lt;jlong&gt;(receiver.get());</div><div class="line">}</div><div class="line"></div><div class="line"><span class="comment">// :89</span></div><div class="line"><span class="comment">// inputChannel     Client&#x7AEF;InputChannel</span></div><div class="line">NativeInputEventReceiver::NativeInputEventReceiver(JNIEnv* env,</div><div class="line">        jobject receiverWeak, <span class="keyword">const</span> sp&lt;InputChannel&gt;&amp; inputChannel,</div><div class="line">        <span class="keyword">const</span> sp&lt;MessageQueue&gt;&amp; messageQueue) :</div><div class="line">        mReceiverWeakGlobal(env-&gt;NewGlobalRef(receiverWeak)),</div><div class="line">        mInputConsumer(inputChannel), mMessageQueue(messageQueue),</div><div class="line">        mBatchedInputEventPending(<span class="literal">false</span>), mFdEvents(<span class="number">0</span>) {</div><div class="line">    ... ...</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x7531;&#x4E8E;&#x540E;&#x9762;&#x4F1A;&#x7528;&#x5230;&#xFF0C;&#x6765;&#x770B;mInputConsumer&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/libs/input/InputTransport.cpp:376</span></div><div class="line">InputConsumer::InputConsumer(<span class="keyword">const</span> sp&lt;InputChannel&gt;&amp; channel) :</div><div class="line">        mResampleTouch(isTouchResamplingEnabled()),</div><div class="line">        mChannel(channel), mMsgDeferred(<span class="literal">false</span>) {</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>mChannel&#x7684;&#x7C7B;&#x578B;&#x4E3A;InputChannel&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/libs/input/InputTransport.h:138</span></div><div class="line"><span class="keyword">class</span> InputChannel : <span class="keyword">public</span> RefBase {</div><div class="line">... ...</div><div class="line">    InputChannel(<span class="keyword">const</span> String8&amp; name, <span class="keyword">int</span> fd);</div><div class="line"></div><div class="line">... ...</div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">getFd</span><span class="params">()</span> <span class="keyword">const</span> </span>{ <span class="keyword">return</span> mFd; }</div></pre></td></tr></table></figure></p>
+<h1 id="Step4-NativeInputEventReceiver-initialize"><a href="#Step4-NativeInputEventReceiver-initialize" class="headerlink" title="Step4: NativeInputEventReceiver::initialize()"></a>Step4: NativeInputEventReceiver::initialize()</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/jni/android_view_InputEventReceiver.cpp:105</span></div><div class="line"><span class="keyword">status_t</span> NativeInputEventReceiver::initialize() {</div><div class="line">    setFdEvents(ALOOPER_EVENT_INPUT); <span class="comment">// &#x1F3C1;</span></div><div class="line">    <span class="keyword">return</span> OK;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p><code>ALOOPER_EVENT_INPUT</code>&#x5B9A;&#x4E49;&#x5728;frameworks/native/include/android/looper.h&#x4E2D;&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">enum</span> {</div><div class="line">    <span class="comment">/**</span></div><div class="line">     * The file descriptor is available for read operations.</div><div class="line">     */</div><div class="line">    ALOOPER_EVENT_INPUT = <span class="number">1</span> &lt;&lt; <span class="number">0</span>,</div><div class="line">    ... ...</div><div class="line">}&#xFF1B;</div></pre></td></tr></table></figure></p>
+<h1 id="Step5-NativeInputEventReceiver-setFdEvents-&#x2026;"><a href="#Step5-NativeInputEventReceiver-setFdEvents-&#x2026;" class="headerlink" title="Step5: NativeInputEventReceiver::setFdEvents(&#x2026;)"></a>Step5: NativeInputEventReceiver::setFdEvents(&#x2026;)</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/jni/android_view_InputEventReceiver.cpp:145</span></div><div class="line"><span class="keyword">void</span> NativeInputEventReceiver::setFdEvents(<span class="keyword">int</span> events) {</div><div class="line">    <span class="keyword">if</span> (mFdEvents != events) {</div><div class="line">        mFdEvents = events;</div><div class="line">        <span class="keyword">int</span> fd = mInputConsumer.getChannel()-&gt;getFd();</div><div class="line">        <span class="keyword">if</span> (events) { <span class="comment">// &#x4E3A;&#x771F;</span></div><div class="line">            mMessageQueue-&gt;getLooper()-&gt;addFd(fd, <span class="number">0</span>, events, <span class="keyword">this</span>, <span class="literal">NULL</span>);</div><div class="line">        } <span class="keyword">else</span> {</div><div class="line">            mMessageQueue-&gt;getLooper()-&gt;removeFd(fd);</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x6839;&#x636E;Step3&#x7684;&#x5206;&#x6790;&#xFF0C;mInputConsumer.getChannel()-&gt;getFd()&#x8FD4;&#x56DE;ViewRootImpl::mInputChannel-&gt;getFd()&#xFF0C;&#x5373;Client&#x7AEF;&#x7684;InputChannel&#x7684;socket&#x63CF;&#x8FF0;&#x7B26;&#x3002;</p>
+<p>mMessageQueue-&gt;getLooper()&#x662F;&#x4ECE;Step2&#x4E2D;&#x4E00;&#x8DEF;&#x4F20;&#x8FDB;&#x6765;&#xFF0C;&#x5176;&#x5B9E;&#x5C31;&#x662F;&#x4E3B;&#x7EBF;&#x7A0B;&#x7684;Looper&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x662F;&#x4E2A;&#x7EBF;&#x7A0B;&#x5168;&#x5C40;&#x53D8;&#x91CF;&#xFF0C;&#x72EC;&#x4E00;&#x4EFD;&#x3002;</p>
+<h1 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h1><p>&#x6240;&#x8C13;&#x201C;&#x5C06;mInputChannel&#x6CE8;&#x518C;&#x5230;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;Activity&#x6240;&#x5728;&#x8FDB;&#x7A0B;&#x7684;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E2D;&#x201D;&#x7684;&#x542B;&#x4E49;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5C31;&#x662F;&#x5411;&#x4E3B;&#x7EBF;&#x7A0B;&#x6CE8;&#x518C;&#x6D3B;&#x52A8;&#x7A97;&#x53E3;&#x7684;InputChannel&#x7684;socket&#xFF0C;&#x8BA9;&#x4E3B;&#x7EBF;&#x7A0B;Looper&#x76D1;&#x542C;&#x8BE5;socket&#x3002;<br>&#x81F3;&#x6B64;&#xFF0C;&#x821E;&#x53F0;&#x4F3C;&#x4E4E;&#x5DF2;&#x7ECF;&#x642D;&#x5EFA;&#x5B8C;&#x6210;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x770B;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x600E;&#x4E48;&#x5728;&#x8FD9;&#x4E2A;&#x821E;&#x53F0;&#x4E0A;&#x6D41;&#x8F6C;&#x548C;&#x5904;&#x7406;&#x4E86;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/键盘消息处理学习笔记/" rel="tag">#键盘消息处理学习笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/03/2016/1002KeyboardLearning7/" rel="next" title="键盘消息处理学习笔记（七）">
+                <i class="fa fa-chevron-left"></i> 键盘消息处理学习笔记（七）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/03/2016/1002KeyboardLearning9/" rel="prev" title="键盘消息处理学习笔记（九）">
+                键盘消息处理学习笔记（九） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/03/2016/1002KeyboardLearning8/"
+           data-title="键盘消息处理学习笔记（八）" data-url="http://palanceli.github.io/2016/10/03/2016/1002KeyboardLearning8/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Step1-WindowInputEventReceiver的构造函数"><span class="nav-number">1.</span> <span class="nav-text">Step1: WindowInputEventReceiver的构造函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step2-InputEventReceiver的构造函数"><span class="nav-number">2.</span> <span class="nav-text">Step2: InputEventReceiver的构造函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step3-nativeInit-…"><span class="nav-number">3.</span> <span class="nav-text">Step3: nativeInit(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step4-NativeInputEventReceiver-initialize"><span class="nav-number">4.</span> <span class="nav-text">Step4: NativeInputEventReceiver::initialize()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step5-NativeInputEventReceiver-setFdEvents-…"><span class="nav-number">5.</span> <span class="nav-text">Step5: NativeInputEventReceiver::setFdEvents(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">6.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

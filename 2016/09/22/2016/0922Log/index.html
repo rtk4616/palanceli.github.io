@@ -1,0 +1,696 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Coding," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Looger&amp;#x662F;&amp;#x548C;&amp;#x8C03;&amp;#x8BD5;&amp;#x65B9;&amp;#x6CD5;&amp;#x540C;&amp;#x7B49;&amp;#x91CD;&amp;#x8981;&amp;#x7684;&amp;#x7F16;&amp;#x7A0B;&amp;#x8F85;&amp;#x52A9;&amp;#x5229;&amp;#x5668;&amp;#xFF0C;&amp;#x51FA;&amp;#x9053;&amp;#x4EE5;&amp;#x6765;&amp;#xFF0C;&amp;#x7EF4;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于Logger">
+<meta property="og:url" content="http://palanceli.github.io/2016/09/22/2016/0922Log/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="Looger&amp;#x662F;&amp;#x548C;&amp;#x8C03;&amp;#x8BD5;&amp;#x65B9;&amp;#x6CD5;&amp;#x540C;&amp;#x7B49;&amp;#x91CD;&amp;#x8981;&amp;#x7684;&amp;#x7F16;&amp;#x7A0B;&amp;#x8F85;&amp;#x52A9;&amp;#x5229;&amp;#x5668;&amp;#xFF0C;&amp;#x51FA;&amp;#x9053;&amp;#x4EE5;&amp;#x6765;&amp;#xFF0C;&amp;#x7EF4;&amp;#">
+<meta property="og:updated_time" content="2016-09-22T14:35:22.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于Logger">
+<meta name="twitter:description" content="Looger&amp;#x662F;&amp;#x548C;&amp;#x8C03;&amp;#x8BD5;&amp;#x65B9;&amp;#x6CD5;&amp;#x540C;&amp;#x7B49;&amp;#x91CD;&amp;#x8981;&amp;#x7684;&amp;#x7F16;&amp;#x7A0B;&amp;#x8F85;&amp;#x52A9;&amp;#x5229;&amp;#x5668;&amp;#xFF0C;&amp;#x51FA;&amp;#x9053;&amp;#x4EE5;&amp;#x6765;&amp;#xFF0C;&amp;#x7EF4;&amp;#">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/09/22/2016/0922Log/"/>
+
+  <title> 关于Logger | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                关于Logger
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-09-22T23:44:27+08:00" content="2016-09-22">
+              2016-09-22
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/随笔笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/09/22/2016/0922Log/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/09/22/2016/0922Log/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Looger&#x662F;&#x548C;&#x8C03;&#x8BD5;&#x65B9;&#x6CD5;&#x540C;&#x7B49;&#x91CD;&#x8981;&#x7684;&#x7F16;&#x7A0B;&#x8F85;&#x52A9;&#x5229;&#x5668;&#xFF0C;&#x51FA;&#x9053;&#x4EE5;&#x6765;&#xFF0C;&#x7EF4;&#x62A4;&#x6700;&#x4E45;&#x7684;&#x6A21;&#x5757;&#x5C31;&#x662F;&#x81EA;&#x5DF1;&#x7684;Logger&#x3002;&#x6700;&#x521D;&#x662F;&#x628A;&#x5B83;&#x505A;&#x5F97;&#x65E0;&#x6BD4;&#x5F3A;&#x5927;&#xFF0C;&#x652F;&#x6301;&#x591A;&#x7EBF;&#x7A0B;&#x3001;&#x652F;&#x6301;&#x591A;&#x7EA7;&#x522B;&#xFF0C;&#x5F15;&#x5165;Singleton&#x8BA9;&#x8C03;&#x7528;&#x7B80;&#x5355;&#x3002;&#x540E;&#x6765;&#x53D1;&#x73B0;&#x51E0;&#x4E4E;&#x90FD;&#x7528;&#x4E0D;&#x7740;&#xFF0C;&#x6700;&#x5927;&#x7684;&#x8BC9;&#x6C42;&#x662F;&#x63A5;&#x53E3;&#x7B80;&#x5355;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x6BCF;&#x6B21;&#x7528;&#x4E4B;&#x524D;&#x590D;&#x4E60;&#x3002;&#x4EE3;&#x7801;&#x6700;&#x597D;&#x80FD;&#x7B80;&#x6D01;&#xFF0C;&#x6700;&#x597D;&#x5C31;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x3002;</p>
+<p>&#x524D;&#x5929;&#x627E;&#x5230;&#x4E00;&#x79CD;&#x4E00;&#x53E5;&#x8BDD;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#x7684;C&#x7248;&#x7684;Logger&#xFF0C;&#x5FC5;&#x987B;&#x8BB0;&#x5F55;&#x4E0B;&#x6765;&#xFF0C;&#x4EE5;&#x540E;&#x5C31;&#x5B83;&#x4E86;&#xFF1A;<br><a id="more"></a></p>
+<h1 id="Logger-C&#x7248;"><a href="#Logger-C&#x7248;" class="headerlink" title="Logger C&#x7248;"></a>Logger C&#x7248;</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">if</span> 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG(format, ...) printf(<span class="meta-string">&quot;[%-12s:%-4d ] &quot;</span>format<span class="meta-string">&quot;\n&quot;</span>, __FILE__, __LINE__, ##__VA_ARGS__)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG(format, ...) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<p>&#x7B80;&#x6D01;&#x5427;~ &#x5728;Linux&#x4E0B;&#x4F7F;&#x7528;&#x5F88;&#x65B9;&#x4FBF;&#xFF0C;Windows&#x9700;&#x8981;&#x505A;&#x4E00;&#x4E2A;Unicode&#x5B57;&#x4E32;&#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x4EE5;&#x540E;&#x7528;&#x5F97;&#x7740;&#x65F6;&#x518D;&#x66F4;&#x65B0;&#x5427;&#x3002;</p>
+<h1 id="Logger-Python&#x7248;"><a href="#Logger-Python&#x7248;" class="headerlink" title="Logger Python&#x7248;"></a>Logger Python&#x7248;</h1><p>&#x987A;&#x9053;&#x628A;&#x5176;&#x4ED6;&#x7248;&#x672C;&#x7684;&#x4E5F;&#x5907;&#x5FD8;&#x4E00;&#x4E0B;&#xFF0C;python&#x7684;logger&#x673A;&#x5236;&#x505A;&#x5F97;&#x5F88;&#x987A;&#x624B;&#x4E86;&#xFF0C;&#x53EA;&#x662F;&#x5728;&#x4F7F;&#x7528;&#x4E4B;&#x524D;&#xFF0C;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x914D;&#x7F6E;&#x4E00;&#x4E0B;log&#x683C;&#x5F0F;&#xFF1A;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> logging</div><div class="line"></div><div class="line">......</div><div class="line">loggingFormat = <span class="string">&apos;%(asctime)s %(lineno)4d %(levelname)-8s %(message)s&apos;</span></div><div class="line">logging.basicConfig(level=logging.DEBUG, format=loggingFormat, datefmt=<span class="string">&apos;%H:%M&apos;</span>)</div><div class="line"></div><div class="line">logging.debug(<span class="string">&apos;hello word!&apos;</span>)</div></pre></td></tr></table></figure></p>
+<h1 id="Logger-objective-c&#x7248;"><a href="#Logger-objective-c&#x7248;" class="headerlink" title="Logger objective-c&#x7248;"></a>Logger objective-c&#x7248;</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#if DEBUG</div><div class="line">#define NSLog(FORMAT, ...) fprintf(stderr,&quot;[%s:%d]\t%s\n&quot;,[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])</div><div class="line">#else</div><div class="line">#define NSLog(FORMAT, ...) nil</div><div class="line">#endif</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Coding/" rel="tag">#Coding</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/09/22/2016/0922关于面试/" rel="next" title="关于面试">
+                <i class="fa fa-chevron-left"></i> 关于面试
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/09/25/2016/0925AOSPOnMac/" rel="prev" title="解决macOSX10.12.SDK下编译Android Open Source Project出错的问题">
+                解决macOSX10.12.SDK下编译Android Open Source Project出错的问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/09/22/2016/0922Log/"
+           data-title="关于Logger" data-url="http://palanceli.github.io/2016/09/22/2016/0922Log/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Logger-C版"><span class="nav-number">1.</span> <span class="nav-text">Logger C版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logger-Python版"><span class="nav-number">2.</span> <span class="nav-text">Logger Python版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logger-objective-c版"><span class="nav-number">3.</span> <span class="nav-text">Logger objective-c版</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

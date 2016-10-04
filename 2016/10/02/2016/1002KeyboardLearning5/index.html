@@ -1,0 +1,704 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="键盘消息处理学习笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x672C;&amp;#x6587;&amp;#x7684;&amp;#x8D77;&amp;#x70B9;&amp;#x662F;ViewRootImpl&amp;#x7684;setView(&amp;#x2026;)&amp;#x51FD;&amp;#x6570;&amp;#xFF0C;&amp;#x5148;&amp;#x4E0D;&amp;#x7BA1;Android&amp;#x7CFB;&amp;#x7EDF;&amp;#x4E2D;&amp;#x5B83;&amp;#x548C;Activity&amp;#x4E4B;&amp;#x9">
+<meta property="og:type" content="article">
+<meta property="og:title" content="键盘消息处理学习笔记（五）">
+<meta property="og:url" content="http://palanceli.github.io/2016/10/02/2016/1002KeyboardLearning5/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x672C;&amp;#x6587;&amp;#x7684;&amp;#x8D77;&amp;#x70B9;&amp;#x662F;ViewRootImpl&amp;#x7684;setView(&amp;#x2026;)&amp;#x51FD;&amp;#x6570;&amp;#xFF0C;&amp;#x5148;&amp;#x4E0D;&amp;#x7BA1;Android&amp;#x7CFB;&amp;#x7EDF;&amp;#x4E2D;&amp;#x5B83;&amp;#x548C;Activity&amp;#x4E4B;&amp;#x9">
+<meta property="og:updated_time" content="2016-10-03T14:04:25.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="键盘消息处理学习笔记（五）">
+<meta name="twitter:description" content="&amp;#x672C;&amp;#x6587;&amp;#x7684;&amp;#x8D77;&amp;#x70B9;&amp;#x662F;ViewRootImpl&amp;#x7684;setView(&amp;#x2026;)&amp;#x51FD;&amp;#x6570;&amp;#xFF0C;&amp;#x5148;&amp;#x4E0D;&amp;#x7BA1;Android&amp;#x7CFB;&amp;#x7EDF;&amp;#x4E2D;&amp;#x5B83;&amp;#x548C;Activity&amp;#x4E4B;&amp;#x9">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/10/02/2016/1002KeyboardLearning5/"/>
+
+  <title> 键盘消息处理学习笔记（五） | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                键盘消息处理学习笔记（五）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-02T21:17:38+08:00" content="2016-10-02">
+              2016-10-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/02/2016/1002KeyboardLearning5/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/02/2016/1002KeyboardLearning5/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x672C;&#x6587;&#x7684;&#x8D77;&#x70B9;&#x662F;ViewRootImpl&#x7684;setView(&#x2026;)&#x51FD;&#x6570;&#xFF0C;&#x5148;&#x4E0D;&#x7BA1;Android&#x7CFB;&#x7EDF;&#x4E2D;&#x5B83;&#x548C;Activity&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x672C;&#x6587;&#x7684;&#x76EE;&#x6807;&#x662F;&#x63A2;&#x7D22;InputChannel&#x7684;&#x6CE8;&#x518C;&#x8FC7;&#x7A0B;&#xFF0C;&#x7B49;&#x8FD9;&#x4E2A;&#x8FC7;&#x7A0B;&#x634B;&#x987A;&#x4E86;&#xFF0C;InputChannel&#x548C;&#x7A97;&#x53E3;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x81EA;&#x7136;&#x4F1A;&#x6E05;&#x6670;&#x3002;<br><a id="more"></a></p>
+<h1 id="Step1-ViewRootImpl-setView-&#x2026;"><a href="#Step1-ViewRootImpl-setView-&#x2026;" class="headerlink" title="Step1: ViewRootImpl::setView(&#x2026;)"></a>Step1: ViewRootImpl::setView(&#x2026;)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/java/android/view/ViewRootImpl.java:447</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setView</span><span class="params">(View view, WindowManager.LayoutParams attrs, View panelParentView)</span> </span>{</div><div class="line">        ... ...</div><div class="line">                mView = view;</div><div class="line">                ... ...</div><div class="line">                mAdded = <span class="keyword">true</span>;</div><div class="line">                ... ...</div><div class="line">                <span class="keyword">if</span> ((mWindowAttributes.inputFeatures</div><div class="line">                        &amp; WindowManager.LayoutParams.INPUT_FEATURE_NO_INPUT_CHANNEL) == <span class="number">0</span>) {</div><div class="line">                    mInputChannel = <span class="keyword">new</span> InputChannel();</div><div class="line">                }</div><div class="line">                <span class="keyword">try</span> {</div><div class="line">                    ... ...</div><div class="line">                    <span class="comment">// &#x1F3C1;&#x5C06;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7A97;&#x53E3;&#x6DFB;&#x52A0;&#x5230;WindowManagerService&#x4E2D;</span></div><div class="line">                    res = mWindowSession.addToDisplay(mWindow, mSeq, mWindowAttributes,</div><div class="line">                            getHostVisibility(), mDisplay.getDisplayId(),</div><div class="line">                            mAttachInfo.mContentInsets, mAttachInfo.mStableInsets,</div><div class="line">                            mAttachInfo.mOutsets, mInputChannel);</div><div class="line">                } <span class="keyword">catch</span> (RemoteException e) {</div><div class="line">                    ... ...</div><div class="line">                } <span class="keyword">finally</span> {</div><div class="line">                    ... ...</div><div class="line">                }</div><div class="line">                ... ...</div><div class="line">                <span class="keyword">if</span> (view <span class="keyword">instanceof</span> RootViewSurfaceTaker) {</div><div class="line">                    mInputQueueCallback =</div><div class="line">                        ((RootViewSurfaceTaker)view).willYouTakeTheInputQueue();</div><div class="line">                }</div><div class="line">                <span class="keyword">if</span> (mInputChannel != <span class="keyword">null</span>) {</div><div class="line">                    <span class="keyword">if</span> (mInputQueueCallback != <span class="keyword">null</span>) {</div><div class="line">                        mInputQueue = <span class="keyword">new</span> InputQueue();</div><div class="line">                        mInputQueueCallback.onInputQueueCreated(mInputQueue);</div><div class="line">                    }</div><div class="line">                    <span class="comment">// &#x1F3C1;&#x5C06;mInputChannel&#x6CE8;&#x518C;&#x5230;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;Activity&#x6240;&#x5728;&#x8FDB;&#x7A0B;&#x7684;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E2D;</span></div><div class="line">                    <span class="comment">// &#x5728;&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x516B;&#xFF09;&#x300B;&#x4E2D;&#x6DF1;&#x5165;&#x8BA8;&#x8BBA;</span></div><div class="line">                    mInputEventReceiver = <span class="keyword">new</span> WindowInputEventReceiver(mInputChannel,</div><div class="line">                            Looper.myLooper());</div><div class="line">                }</div><div class="line">                ... ...</div><div class="line">    }</div></pre></td></tr></table></figure>
+<p>mWindowSession&#x662F;&#x5728;ViewRootImpl&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x521B;&#x5EFA;&#x7684;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/java/android/view/ViewRootImpl.java:358</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ViewRootImpl</span><span class="params">(Context context, Display display)</span> </span>{</div><div class="line">        mContext = context;</div><div class="line">        mWindowSession = WindowManagerGlobal.getWindowSession();</div><div class="line">        ... ...</div><div class="line">    }</div></pre></td></tr></table></figure></p>
+<p>WindowManagerGlobal.getWindowSession()&#x662F;&#x4E00;&#x4E2A;&#x5355;&#x4F8B;&#x5DE5;&#x5382;&#x65B9;&#x6CD5;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/java/android/view/WindowManagerGlobal.java:148</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> IWindowSession <span class="title">getWindowSession</span><span class="params">()</span> </span>{</div><div class="line">        <span class="keyword">synchronized</span> (WindowManagerGlobal.class) {</div><div class="line">            <span class="keyword">if</span> (sWindowSession == <span class="keyword">null</span>) {</div><div class="line">                <span class="keyword">try</span> {</div><div class="line">                    InputMethodManager imm = InputMethodManager.getInstance();</div><div class="line">                    <span class="comment">// &#x83B7;&#x5F97;WindowManagerService&#x7684;&#x4EE3;&#x7406;&#x5BF9;&#x8C61;</span></div><div class="line">                    IWindowManager windowManager = getWindowManagerService();</div><div class="line">                    <span class="comment">// &#x83B7;&#x5F97;session&#x7684;&#x4EE3;&#x7406;&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x4FDD;&#x5B58;&#x5230;&#x9759;&#x6001;&#x53D8;&#x91CF;sWindowsSession</span></div><div class="line">                    sWindowSession = windowManager.openSession(</div><div class="line">                            <span class="keyword">new</span> IWindowSessionCallback.Stub() {</div><div class="line">                                <span class="meta">@Override</span></div><div class="line">                                <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onAnimatorScaleChanged</span><span class="params">(<span class="keyword">float</span> scale)</span> </span>{</div><div class="line">                                    ValueAnimator.setDurationScale(scale);</div><div class="line">                                }</div><div class="line">                            },</div><div class="line">                            imm.getClient(), imm.getInputContext());</div><div class="line">                } <span class="keyword">catch</span> (RemoteException e) {...}</div><div class="line">            }</div><div class="line">            <span class="keyword">return</span> sWindowSession;</div><div class="line">        }</div><div class="line">    }</div></pre></td></tr></table></figure></p>
+<p>&#x56DE;&#x5230;ViewRootImpl::setView(&#x2026;)&#x4E2D;&#xFF0C;&#x5B83;&#x8C03;&#x7528;mWindowSession.addToDisplay(&#x2026;)&#x5411;&#x8FD0;&#x884C;&#x5728;WindowManagerService&#x4E2D;&#x7684;&#x4E00;&#x4E2A;Session&#x53D1;&#x9001;&#x8FDB;&#x7A0B;&#x95F4;&#x901A;&#x4FE1;&#x8BF7;&#x6C42;&#xFF0C;&#x5C06;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7A97;&#x53E3;&#x6DFB;&#x52A0;&#x5230;WindowManagerService&#x4E2D;&#x3002;</p>
+<h1 id="Step2-Session-addToDisplay-&#x2026;"><a href="#Step2-Session-addToDisplay-&#x2026;" class="headerlink" title="Step2: Session::addToDisplay(&#x2026;)"></a>Step2: Session::addToDisplay(&#x2026;)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/services/core/java/com/android/server/wm/Session.java:69</span></div><div class="line">    <span class="comment">// outInputChannel  ViewRootImpl::mInputChannel</span></div><div class="line">    <span class="comment">// window           ViewRootImpl::mWindow</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">addToDisplay</span><span class="params">(IWindow window, <span class="keyword">int</span> seq, WindowManager.LayoutParams attrs,</span></span></div><div class="line">            <span class="keyword">int</span> viewVisibility, <span class="keyword">int</span> displayId, Rect outContentInsets, Rect outStableInsets,</div><div class="line">            Rect outOutsets, InputChannel outInputChannel) {</div><div class="line">        <span class="keyword">return</span> mService.addWindow(<span class="keyword">this</span>, window, seq, attrs, viewVisibility, displayId,</div><div class="line">                outContentInsets, outStableInsets, outOutsets, outInputChannel);</div><div class="line">    }</div></pre></td></tr></table></figure>
+<p>&#x5176;&#x4E2D;mService&#x7C7B;&#x578B;&#x4E3A;WindowManagerService&#x3002;</p>
+<h1 id="Step3-WindowManagerService-addWindow-&#x2026;"><a href="#Step3-WindowManagerService-addWindow-&#x2026;" class="headerlink" title="Step3: WindowManagerService::addWindow(&#x2026;)"></a>Step3: WindowManagerService::addWindow(&#x2026;)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/services/core/java/com/android/server/wm/WindowManagerService.java:2353</span></div><div class="line">    <span class="comment">// outInputChannel  ViewRootImpl::mInputChannel</span></div><div class="line">    <span class="comment">// client           ViewRootImpl::mWindow</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">addWindow</span><span class="params">(Session session, IWindow client, <span class="keyword">int</span> seq,</span></span></div><div class="line">            WindowManager.LayoutParams attrs, <span class="keyword">int</span> viewVisibility, <span class="keyword">int</span> displayId,</div><div class="line">            Rect outContentInsets, Rect outStableInsets, Rect outOutsets,</div><div class="line">            InputChannel outInputChannel) {</div><div class="line">        ... ...</div><div class="line">        WindowState attachedWindow = <span class="keyword">null</span>;</div><div class="line">        ... ...</div><div class="line">        <span class="keyword">synchronized</span>(mWindowMap) {</div><div class="line">            ... ...</div><div class="line">            <span class="comment">// &#x63CF;&#x8FF0;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7A97;&#x53E3;</span></div><div class="line">            WindowState win = <span class="keyword">new</span> WindowState(<span class="keyword">this</span>, session, client, token,</div><div class="line">                    attachedWindow, appOp[<span class="number">0</span>], seq, attrs, viewVisibility, displayContent);</div><div class="line">            ... ...</div><div class="line">            <span class="comment">// &#x6B64;&#x53E5;&#x4E3A;&#x771F;</span></div><div class="line">            <span class="keyword">if</span> (outInputChannel != <span class="keyword">null</span> &amp;&amp; (attrs.inputFeatures</div><div class="line">                    &amp; WindowManager.LayoutParams.INPUT_FEATURE_NO_INPUT_CHANNEL) == <span class="number">0</span>) {    </div><div class="line">                String name = win.makeInputChannelName();</div><div class="line">                <span class="comment">// &#x1F3C1;&#x521B;&#x5EFA;&#x4E00;&#x5BF9;InputChannel</span></div><div class="line">                InputChannel[] inputChannels = InputChannel.openInputChannelPair(name);</div><div class="line">                <span class="comment">// server&#x7AEF;InputChannel     </span></div><div class="line">                win.setInputChannel(inputChannels[<span class="number">0</span>]);</div><div class="line">                <span class="comment">// client&#x7AEF;InputChannel</span></div><div class="line">                inputChannels[<span class="number">1</span>].transferTo(outInputChannel);</div><div class="line">                <span class="comment">// &#x1F3C1;&#x628A;server&#x7AEF;InputChannel&#x6CE8;&#x518C;&#x5230;InputManager</span></div><div class="line">                <span class="comment">// &#x8BE6;&#x89C1;&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x516D;&#xFF09;&#x300B;</span></div><div class="line">                mInputManager.registerInputChannel(win.mInputChannel, win.mInputWindowHandle);</div><div class="line">            }</div><div class="line">            ... ...</div><div class="line">            <span class="comment">// client&#x5373;ViewRootImpl::mWindow&#xFF0C;&#x662F;&#x6B63;&#x5728;&#x521B;&#x5EFA;&#x7684;&#x7A97;&#x53E3;&#x7684;&#x4EE3;&#x7406;&#x5BF9;&#x8C61;</span></div><div class="line">            <span class="comment">// &#x4EE5;&#x8BE5;&#x4EE3;&#x7406;&#x7684;IBinder&#x63A5;&#x53E3;&#x4E3A;key&#xFF0C;&#x4FDD;&#x5B58;WindowState&#x5BF9;&#x8C61;</span></div><div class="line">            mWindowMap.put(client.asBinder(), win);</div><div class="line">            ... ...</div><div class="line">            <span class="keyword">if</span> (type == TYPE_INPUT_METHOD) {</div><div class="line">                ... ...</div><div class="line">            } <span class="keyword">else</span> <span class="keyword">if</span> (type == TYPE_INPUT_METHOD_DIALOG) {</div><div class="line">                ... ...</div><div class="line">            } <span class="keyword">else</span> { <span class="comment">// &#x5982;&#x679C;&#x6B63;&#x5728;&#x521B;&#x5EFA;&#x7684;&#x7A97;&#x53E3;&#x4E0D;&#x662F;&#x4E0E;&#x8F93;&#x5165;&#x6CD5;&#x76F8;&#x5173;&#x7684;&#x7A97;&#x53E3;</span></div><div class="line">                <span class="comment">// &#x5C06;&#x6B63;&#x5728;&#x521B;&#x5EFA;&#x7684;WindowState&#x4FDD;&#x5B58;&#x5728;mWindows&#x6240;&#x63CF;&#x8FF0;&#x7684;&#x7A97;&#x53E3;&#x5217;&#x8868;&#x4E2D;</span></div><div class="line">                addWindowToListInOrderLocked(win, <span class="keyword">true</span>);</div><div class="line">                ... ...</div><div class="line">            }</div><div class="line">            ... ...</div><div class="line"></div><div class="line">            <span class="keyword">boolean</span> focusChanged = <span class="keyword">false</span>;</div><div class="line">            <span class="keyword">if</span> (win.canReceiveKeys()) { <span class="comment">// &#x53EF;&#x4EE5;&#x63A5;&#x6536;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;</span></div><div class="line">                <span class="comment">// &#x5C06;&#x6B63;&#x5728;&#x521B;&#x5EFA;&#x7684;&#x7A97;&#x53E3;&#x4F5C;&#x4E3A;&#x5F53;&#x524D;&#x6D3B;&#x52A8;&#x7A97;&#x53E3;&#xFF0C;&#x5373;&#x628A;win&#x4FDD;&#x5B58;&#x5728;mCurrentFocus&#x4E2D;</span></div><div class="line">                focusChanged = updateFocusedWindowLocked(UPDATE_FOCUS_WILL_ASSIGN_LAYERS,</div><div class="line">                        <span class="keyword">false</span> <span class="comment">/*updateInputWindows*/</span>);</div><div class="line">                ... ...</div><div class="line">            }</div><div class="line">            ... ...</div><div class="line">            <span class="comment">// &#x5982;&#x679C;&#x5F53;&#x524D;&#x6D3B;&#x52A8;&#x7A97;&#x53E3;&#x548C;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;&#x7A97;&#x53E3;&#x4E0D;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x7A97;&#x53E3;&#xFF0C;&#x5219;&#x5F53;&#x524D;&#x7126;&#x70B9;&#x4F1A;&#x53D1;&#x751F;&#x6539;&#x53D8;</span></div><div class="line">            <span class="keyword">if</span> (focusChanged) {</div><div class="line">                <span class="comment">// &#x1F3C1;&#x628A;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;&#x7A97;&#x53E3;&#x6CE8;&#x518C;&#x5230;InputDispatcher&#x4E2D;&#xFF0C;&#x4EE5;&#x4FBF;InputDispatcher&#x53EF;&#x4EE5;&#x5C06;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x5206;&#x53D1;&#x7ED9;&#x5B83;&#xFF0C;&#x5728;&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x4E03;&#xFF09;&#x300B;&#x4E2D;&#x8BE6;&#x7EC6;&#x8BA8;&#x8BBA;</span></div><div class="line">                mInputMonitor.setInputFocusLw(mCurrentFocus, <span class="keyword">false</span> <span class="comment">/*updateInputWindows*/</span>);</div><div class="line">            }</div><div class="line">            ... ...</div><div class="line">        }</div><div class="line">        ... ...</div><div class="line">    }</div></pre></td></tr></table></figure>
+<h1 id="Step4-InputChannel-openInputChannelPair-&#x2026;"><a href="#Step4-InputChannel-openInputChannelPair-&#x2026;" class="headerlink" title="Step4: InputChannel::openInputChannelPair(&#x2026;)"></a>Step4: InputChannel::openInputChannelPair(&#x2026;)</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/java/android/view/InputChannel.java:86</span></div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> InputChannel[] openInputChannelPair(String name) {</div><div class="line">        ... ...</div><div class="line">        <span class="keyword">return</span> nativeOpenInputChannelPair(name);</div><div class="line">    }</div></pre></td></tr></table></figure>
+<h1 id="Step5-nativeOpenInputChannelPair-&#x2026;"><a href="#Step5-nativeOpenInputChannelPair-&#x2026;" class="headerlink" title="Step5: nativeOpenInputChannelPair(&#x2026;)"></a>Step5: nativeOpenInputChannelPair(&#x2026;)</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/jni/android_view_InputChannel.cpp:123</span></div><div class="line"><span class="function"><span class="keyword">static</span> jobjectArray <span class="title">android_view_InputChannel_nativeOpenInputChannelPair</span><span class="params">(JNIEnv* env,</span></span></div><div class="line">        jclass clazz, jstring nameObj) {</div><div class="line">    <span class="keyword">const</span> <span class="keyword">char</span>* nameChars = env-&gt;GetStringUTFChars(nameObj, <span class="literal">NULL</span>);</div><div class="line">    <span class="function">String8 <span class="title">name</span><span class="params">(nameChars)</span></span>;</div><div class="line">    env-&gt;ReleaseStringUTFChars(nameObj, nameChars);</div><div class="line"></div><div class="line">    sp&lt;InputChannel&gt; serverChannel;</div><div class="line">    sp&lt;InputChannel&gt; clientChannel;</div><div class="line">    <span class="comment">// &#x1F3C1;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;server&#x7AEF;InputChannel&#x548C;&#x4E00;&#x4E2A;client&#x7AEF;InputChannel</span></div><div class="line">    <span class="keyword">status_t</span> result = InputChannel::openInputChannelPair(name, serverChannel, clientChannel);</div><div class="line">    ... ...</div><div class="line">    jobjectArray channelPair = env-&gt;NewObjectArray(<span class="number">2</span>, gInputChannelClassInfo.clazz, <span class="literal">NULL</span>);</div><div class="line">    ... ...</div><div class="line">    <span class="comment">// &#x628A;C++&#x5C42;&#x7684;InputChannel&#x5BF9;&#x8C61;&#x5C01;&#x88C5;&#x6210;java&#x5C42;InputChannel&#x5BF9;&#x8C61;</span></div><div class="line">    jobject serverChannelObj = android_view_InputChannel_createInputChannel(env,</div><div class="line">            <span class="keyword">new</span> NativeInputChannel(serverChannel));</div><div class="line">    ... ...</div><div class="line">    <span class="comment">// &#x628A;C++&#x5C42;&#x7684;InputChannel&#x5BF9;&#x8C61;&#x5C01;&#x88C5;&#x6210;java&#x5C42;InputChannel&#x5BF9;&#x8C61;</span></div><div class="line">    jobject clientChannelObj = android_view_InputChannel_createInputChannel(env,</div><div class="line">            <span class="keyword">new</span> NativeInputChannel(clientChannel));</div><div class="line">    ... ...</div><div class="line">    <span class="comment">// &#x5C06;&#x4E24;&#x4E2A;&#x5BF9;&#x8C61;&#x4FDD;&#x5B58;&#x5230;&#x6570;&#x7EC4;channelPair&#xFF0C;&#x8FD4;&#x56DE;&#x7ED9;&#x8C03;&#x7528;&#x8005;</span></div><div class="line">    env-&gt;SetObjectArrayElement(channelPair, <span class="number">0</span>, serverChannelObj);</div><div class="line">    env-&gt;SetObjectArrayElement(channelPair, <span class="number">1</span>, clientChannelObj);</div><div class="line">    <span class="keyword">return</span> channelPair;</div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="Step6-InputChannel-openInputChannelPair-&#x2026;"><a href="#Step6-InputChannel-openInputChannelPair-&#x2026;" class="headerlink" title="Step6: InputChannel::openInputChannelPair(&#x2026;)"></a>Step6: InputChannel::openInputChannelPair(&#x2026;)</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/libs/input/InputTransport.cpp: 124</span></div><div class="line"><span class="keyword">status_t</span> InputChannel::openInputChannelPair(<span class="keyword">const</span> String8&amp; name,</div><div class="line">        sp&lt;InputChannel&gt;&amp; outServerChannel, sp&lt;InputChannel&gt;&amp; outClientChannel) {</div><div class="line">    <span class="keyword">int</span> sockets[<span class="number">2</span>];</div><div class="line">    <span class="comment">// &#x521B;&#x5EFA;&#x4E00;&#x5BF9;&#x533F;&#x540D;&#x7684;&#x76F8;&#x4E92;&#x8FDE;&#x63A5;&#x7684;socket&#xFF0C;&#x6210;&#x529F;&#x8FD4;&#x56DE;0</span></div><div class="line">    <span class="keyword">if</span> (socketpair(AF_UNIX, SOCK_SEQPACKET, <span class="number">0</span>, sockets)) {</div><div class="line">        ... ...</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">int</span> bufferSize = SOCKET_BUFFER_SIZE;</div><div class="line">    setsockopt(sockets[<span class="number">0</span>], SOL_SOCKET, SO_SNDBUF, &amp;bufferSize, <span class="keyword">sizeof</span>(bufferSize));</div><div class="line">    setsockopt(sockets[<span class="number">0</span>], SOL_SOCKET, SO_RCVBUF, &amp;bufferSize, <span class="keyword">sizeof</span>(bufferSize));</div><div class="line">    setsockopt(sockets[<span class="number">1</span>], SOL_SOCKET, SO_SNDBUF, &amp;bufferSize, <span class="keyword">sizeof</span>(bufferSize));</div><div class="line">    setsockopt(sockets[<span class="number">1</span>], SOL_SOCKET, SO_RCVBUF, &amp;bufferSize, <span class="keyword">sizeof</span>(bufferSize));</div><div class="line"></div><div class="line">    String8 serverChannelName = name;</div><div class="line">    serverChannelName.append(<span class="string">&quot; (server)&quot;</span>);</div><div class="line">    outServerChannel = <span class="keyword">new</span> InputChannel(serverChannelName, sockets[<span class="number">0</span>]);</div><div class="line"></div><div class="line">    String8 clientChannelName = name;</div><div class="line">    clientChannelName.append(<span class="string">&quot; (client)&quot;</span>);</div><div class="line">    outClientChannel = <span class="keyword">new</span> InputChannel(clientChannelName, sockets[<span class="number">1</span>]);</div><div class="line">    <span class="keyword">return</span> OK;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>Server&#x7AEF;&#x7684;InputChannel&#x548C;Client&#x7AEF;&#x7684;InputChannel&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4E24;&#x4E2A;&#x76F8;&#x4E92;&#x8FDE;&#x63A5;&#x7684;socket&#x3002;</p>
+<h1 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h1><p>&#x7A97;&#x4F53;&#x5728;&#x521B;&#x5EFA;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x5C06;&#x81EA;&#x5DF1;&#x6DFB;&#x52A0;&#x5230;Window&#x7BA1;&#x7406;&#x670D;&#x52A1;WindowManagerService&#x4E2D;&#xFF08;&#x5982;Step1&#x6240;&#x793A;&#xFF09;&#xFF0C;&#x5728;&#x6DFB;&#x52A0;&#x7684;&#x540C;&#x65F6;WindowManagerService&#x4F1A;&#x521B;&#x5EFA;&#x4E00;&#x5BF9;&#x76F8;&#x4E92;&#x8FDE;&#x63A5;&#x7684;InputChannel&#xFF0C;&#x4E00;&#x4E2A;&#x7528;&#x4E8E;Server&#x7AEF;&#xFF0C;&#x4E00;&#x4E2A;&#x7528;&#x4E8E;Client&#x7AEF;&#xFF0C;&#x5E76;&#x628A;Server&#x7AEF;&#x7684;InputChannel&#x6CE8;&#x518C;&#x5230;InputManager&#xFF08;&#x5982;Step3&#x6240;&#x793A;&#xFF09;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/键盘消息处理学习笔记/" rel="tag">#键盘消息处理学习笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/02/2016/1002KeyboardLearning4/" rel="next" title="键盘消息处理学习笔记（四）">
+                <i class="fa fa-chevron-left"></i> 键盘消息处理学习笔记（四）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/02/2016/1002KeyboardLearning6/" rel="prev" title="键盘消息处理学习笔记（六）">
+                键盘消息处理学习笔记（六） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/02/2016/1002KeyboardLearning5/"
+           data-title="键盘消息处理学习笔记（五）" data-url="http://palanceli.github.io/2016/10/02/2016/1002KeyboardLearning5/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Step1-ViewRootImpl-setView-…"><span class="nav-number">1.</span> <span class="nav-text">Step1: ViewRootImpl::setView(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step2-Session-addToDisplay-…"><span class="nav-number">2.</span> <span class="nav-text">Step2: Session::addToDisplay(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step3-WindowManagerService-addWindow-…"><span class="nav-number">3.</span> <span class="nav-text">Step3: WindowManagerService::addWindow(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step4-InputChannel-openInputChannelPair-…"><span class="nav-number">4.</span> <span class="nav-text">Step4: InputChannel::openInputChannelPair(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step5-nativeOpenInputChannelPair-…"><span class="nav-number">5.</span> <span class="nav-text">Step5: nativeOpenInputChannelPair(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step6-InputChannel-openInputChannelPair-…"><span class="nav-number">6.</span> <span class="nav-text">Step6: InputChannel::openInputChannelPair(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,719 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="键盘消息处理学习笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x5728;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E09;&amp;#xFF09;&amp;#x300B;&amp;#x4E2D;&amp;#xFF0C;InputSispatcher::dispatchOnce()&amp;#x51FD;&amp;#x6570;&amp;#x91CC;&amp;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="键盘消息处理学习笔记（四）">
+<meta property="og:url" content="http://palanceli.github.io/2016/10/02/2016/1002KeyboardLearning4/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x5728;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E09;&amp;#xFF09;&amp;#x300B;&amp;#x4E2D;&amp;#xFF0C;InputSispatcher::dispatchOnce()&amp;#x51FD;&amp;#x6570;&amp;#x91CC;&amp;">
+<meta property="og:updated_time" content="2016-10-02T12:17:47.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="键盘消息处理学习笔记（四）">
+<meta name="twitter:description" content="&amp;#x5728;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E09;&amp;#xFF09;&amp;#x300B;&amp;#x4E2D;&amp;#xFF0C;InputSispatcher::dispatchOnce()&amp;#x51FD;&amp;#x6570;&amp;#x91CC;&amp;">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/10/02/2016/1002KeyboardLearning4/"/>
+
+  <title> 键盘消息处理学习笔记（四） | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                键盘消息处理学习笔记（四）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-02T11:30:41+08:00" content="2016-10-02">
+              2016-10-02
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/02/2016/1002KeyboardLearning4/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/02/2016/1002KeyboardLearning4/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x5728;<a href="http://palanceli.com/2016/10/02/2016/1002KeyboardLearning3/" target="_blank" rel="external">&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x4E09;&#xFF09;&#x300B;</a>&#x4E2D;&#xFF0C;InputSispatcher::dispatchOnce()&#x51FD;&#x6570;&#x91CC;&#xFF0C;&#x6D88;&#x606F;&#x7684;&#x7B49;&#x5F85;&#x843D;&#x5230;&#x4E86;Looper::pollOnce(&#x2026;)&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x672C;&#x6587;&#x5C31;&#x6765;&#x4E13;&#x95E8;&#x7814;&#x7A76;&#x4E00;&#x4E0B;Looper&#x8FD9;&#x4E2A;&#x7C7B;&#x3002;&#x8BE5;&#x7C7B;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x76D1;&#x63A7;&#x4E00;&#x7EC4;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x7684;&#x4E8B;&#x4EF6;&#xFF0C;&#x5F53;&#x4EFB;&#x610F;&#x4E00;&#x4E2A;&#x5B83;&#x6240;&#x7EF4;&#x62A4;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x6709;&#x65B0;&#x6D88;&#x606F;&#x65F6;&#xFF0C;&#x5C06;&#x88AB;&#x5524;&#x9192;&#xFF0C;&#x5426;&#x5219;&#x5C31;&#x4E00;&#x76F4;&#x7B49;&#x5F85;&#x3002;</p>
+<a id="more"></a>
+<h1 id="Looper&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;"><a href="#Looper&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;" class="headerlink" title="Looper&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;"></a>Looper&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// system/core/libutils/Looper.cpp:71</span></div><div class="line">Looper::Looper(<span class="keyword">bool</span> allowNonCallbacks) :</div><div class="line">        mAllowNonCallbacks(allowNonCallbacks), mSendingMessage(<span class="literal">false</span>),</div><div class="line">        mPolling(<span class="literal">false</span>), mEpollFd(<span class="number">-1</span>), mEpollRebuildRequired(<span class="literal">false</span>),</div><div class="line">        mNextRequestSeq(<span class="number">0</span>), mResponseIndex(<span class="number">0</span>), mNextMessageUptime(LLONG_MAX) {</div><div class="line">    mWakeEventFd = eventfd(<span class="number">0</span>, EFD_NONBLOCK);</div><div class="line">    ... ...</div><div class="line">    rebuildEpollLocked();</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x51FD;&#x6570;eventfd()&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;&#x7684;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x8BE5;&#x5BF9;&#x8C61;&#x53EF;&#x4EE5;&#x7528;&#x4E8E;&#x4E8B;&#x4EF6;&#x7684;&#x7B49;&#x5F85;/&#x901A;&#x77E5;&#x673A;&#x5236;&#x3002;&#x5176;&#x539F;&#x578B;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/eventfd.h&gt;</span></span></div><div class="line"><span class="function"><span class="keyword">int</span> <span class="title">eventfd</span><span class="params">(<span class="keyword">unsigned</span> <span class="keyword">int</span> initval, <span class="keyword">int</span> flags)</span></span>;</div></pre></td></tr></table></figure></p>
+<p>&#x8BE5;&#x5BF9;&#x8C61;&#x5728;&#x5185;&#x6838;&#x7EF4;&#x62A4;&#x7740;&#x4E00;&#x4E2A;&#x8BA1;&#x6570;&#x5668;&#xFF0C;&#x521D;&#x59CB;&#x503C;&#x4E3A;initval&#x3002;&#x5B83;&#x6709;&#x4E24;&#x4E2A;&#x51FD;&#x6570;&#xFF1A;</p>
+<ul>
+<li>ssize_t write(int fd, const void* buf, size_t count)<br>&#x4ECE;buf&#x4E2D;&#x53D6;&#x51FA;8&#x5B57;&#x8282;&#x7684;&#x6574;&#x578B;&#x503C;&#xFF0C;&#x52A0;&#x5230;&#x8BA1;&#x6570;&#x5668;&#x4E0A;&#x3002;&#x5982;&#x679C;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x503C;&#x8FBE;&#x5230;0xfffffffffffffffe&#x5C31;&#x4F1A;&#x963B;&#x585E;&#xFF0C;&#x76F4;&#x5230;&#x88AB;read&#x3002;</li>
+<li>ssize_t read(int fd, void* buf, size_t count)<br>&#x8BFB;&#x53D6;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x503C;&#x3002;&#x5982;&#x679C;&#x8BA1;&#x6570;&#x5668;&#x7684;&#x503C;&#x4E0D;&#x4E3A;0&#xFF0C;&#x5219;&#x8BFB;&#x53D6;&#x6210;&#x529F;&#x8FD4;&#x56DE;&#x8BE5;&#x503C;&#xFF1B;&#x5982;&#x679C;&#x4E3A;0&#xFF0C;&#x975E;&#x963B;&#x585E;&#x6A21;&#x5F0F;&#x65F6;&#x76F4;&#x63A5;&#x8FD4;&#x56DE;&#x5931;&#x8D25;&#xFF0C;&#x5E76;&#x628A;error&#x7F6E;&#x4E3A;EINVAL&#xFF0C;&#x963B;&#x585E;&#x6A21;&#x5F0F;&#x5219;&#x4E00;&#x76F4;&#x963B;&#x585E;&#x5230;&#x8BA1;&#x6570;&#x5668;&#x975E;0&#x3002;</li>
+</ul>
+<p>mWakeEventFd&#x6B63;&#x662F;&#x8FD9;&#x6837;&#x4E00;&#x79CD;&#x5BF9;&#x8C61;&#x3002;</p>
+<h2 id="Looper-rebuildEpollLocked"><a href="#Looper-rebuildEpollLocked" class="headerlink" title="Looper::rebuildEpollLocked()"></a>Looper::rebuildEpollLocked()</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> Looper::rebuildEpollLocked() {</div><div class="line">    ... ...</div><div class="line"></div><div class="line">    <span class="comment">// Allocate the new epoll instance and register the wake pipe.</span></div><div class="line">    mEpollFd = epoll_create(EPOLL_SIZE_HINT);</div><div class="line">    ... ...</div><div class="line"></div><div class="line">    <span class="keyword">struct</span> epoll_event eventItem;</div><div class="line">    <span class="built_in">memset</span>(&amp; eventItem, <span class="number">0</span>, <span class="keyword">sizeof</span>(epoll_event)); <span class="comment">// zero out unused members of data field union</span></div><div class="line">    eventItem.events = EPOLLIN;</div><div class="line">    eventItem.data.fd = mWakeEventFd;</div><div class="line">    <span class="keyword">int</span> result = epoll_ctl(mEpollFd, EPOLL_CTL_ADD, mWakeEventFd, &amp; eventItem);</div><div class="line">    ... ...</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">size_t</span> i = <span class="number">0</span>; i &lt; mRequests.size(); i++) {</div><div class="line">        <span class="keyword">const</span> Request&amp; request = mRequests.valueAt(i);</div><div class="line">        <span class="keyword">struct</span> epoll_event eventItem;</div><div class="line">        request.initEventItem(&amp;eventItem);</div><div class="line"></div><div class="line">        <span class="keyword">int</span> epollResult = epoll_ctl(mEpollFd, EPOLL_CTL_ADD, request.fd, &amp; eventItem);</div><div class="line">        ... ...</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x7B2C;5&#x884C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;epoll&#x5B9E;&#x4F8B;&#xFF0C;&#x8BE5;&#x5B9E;&#x4F8B;&#x53EF;&#x4EE5;&#x76D1;&#x63A7;&#x4E00;&#x7EC4;&#x5DF2;&#x6CE8;&#x518C;&#x7684;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x63CF;&#x8FF0;&#x7B26;&#x53D1;&#x751F;&#x4E86;&#x8BFB;&#x5199;&#x4E8B;&#x4EF6;&#xFF0C;&#x5BF9;&#x8BE5;epoll&#x5B9E;&#x4F8B;&#x7684;wait&#x90FD;&#x4F1A;&#x8FD4;&#x56DE;&#xFF0C;&#x5426;&#x5219;&#x4F1A;&#x4E00;&#x76F4;&#x963B;&#x585E;&#x3002;<br>&#x7B2C;12&#x884C;&#x5C06;mWakeEventFd&#x6CE8;&#x518C;&#x5230;mEpollFd&#x4E2D;&#xFF0C;&#x6210;&#x4E3A;&#x4E00;&#x4E2A;&#x88AB;&#x76D1;&#x63A7;&#x7684;&#x63CF;&#x8FF0;&#x7B26;&#x3002;</p>
+<h1 id="Looper-addFd-&#x2026;"><a href="#Looper-addFd-&#x2026;" class="headerlink" title="Looper::addFd(&#x2026;)"></a>Looper::addFd(&#x2026;)</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">int</span> Looper::addFd(<span class="keyword">int</span> fd, <span class="keyword">int</span> ident, <span class="keyword">int</span> events, <span class="keyword">const</span> sp&lt;LooperCallback&gt;&amp; callback, <span class="keyword">void</span>* data) {</div><div class="line"></div><div class="line"></div><div class="line">    <span class="keyword">if</span> (!callback.get()) {</div><div class="line">        ... ...</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        ident = POLL_CALLBACK;</div><div class="line">    }</div><div class="line"></div><div class="line">    { <span class="comment">// acquire lock</span></div><div class="line">        AutoMutex <span class="number">_l</span>(mLock);</div><div class="line"></div><div class="line">        Request request;</div><div class="line">        request.fd = fd;</div><div class="line">        request.ident = ident;</div><div class="line">        request.events = events;</div><div class="line">        request.seq = mNextRequestSeq++;</div><div class="line">        request.callback = callback;</div><div class="line">        request.data = data;</div><div class="line">        <span class="keyword">if</span> (mNextRequestSeq == <span class="number">-1</span>) mNextRequestSeq = <span class="number">0</span>; <span class="comment">// reserve sequence number -1</span></div><div class="line"></div><div class="line">        <span class="keyword">struct</span> epoll_event eventItem;</div><div class="line">        request.initEventItem(&amp;eventItem);</div><div class="line"></div><div class="line">        </div><div class="line">            <span class="keyword">int</span> epollResult = epoll_ctl(mEpollFd, EPOLL_CTL_ADD, fd, &amp; eventItem);</div><div class="line">            ... ...</div><div class="line">            mRequests.add(fd, request);</div><div class="line">            ... ...</div><div class="line">    } <span class="comment">// release lock</span></div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="Looper-pollOnce-&#x2026;"><a href="#Looper-pollOnce-&#x2026;" class="headerlink" title="Looper::pollOnce(&#x2026;)"></a>Looper::pollOnce(&#x2026;)</h1><p>&#x524D;&#x9762;&#x6CE8;&#x518C;&#x4E86;&#x82E5;&#x5E72;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x51FD;&#x6570;pollOnce(timeoutMillis)&#x5219;&#x7528;&#x6765;&#x7B49;&#x5F85;&#x8FD9;&#x4E9B;&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x6700;&#x957F;&#x7B49;&#x5F85;timeoutMillis&#x6BEB;&#x79D2;&#x3002;&#x7B49;&#x5F85;&#x671F;&#x95F4;&#xFF0C;&#x4EFB;&#x4F55;&#x4E00;&#x4E2A;&#x63CF;&#x8FF0;&#x7B26;&#x53D1;&#x751F;&#x8BFB;&#x5199;&#x4E8B;&#x4EF6;&#xFF0C;&#x5219;&#x8BE5;&#x51FD;&#x6570;&#x7ACB;&#x523B;&#x8FD4;&#x56DE;&#x3002;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// system/core/include/utils/Looper.h</span></div><div class="line"><span class="keyword">class</span> Looper : <span class="keyword">public</span> RefBase {</div><div class="line">... ...</div><div class="line"><span class="comment">// : 263</span></div><div class="line">    <span class="function"><span class="keyword">int</span> <span class="title">pollOnce</span><span class="params">(<span class="keyword">int</span> timeoutMillis, <span class="keyword">int</span>* outFd, <span class="keyword">int</span>* outEvents, <span class="keyword">void</span>** outData)</span></span>;</div><div class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">int</span> <span class="title">pollOnce</span><span class="params">(<span class="keyword">int</span> timeoutMillis)</span> </span>{</div><div class="line">        <span class="keyword">return</span> pollOnce(timeoutMillis, <span class="literal">NULL</span>, <span class="literal">NULL</span>, <span class="literal">NULL</span>); <span class="comment">// &#x1F3C1;</span></div><div class="line">    }</div><div class="line">... ...</div><div class="line">};</div></pre></td></tr></table></figure></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// system/core/libutils/Looper.cpp:184</span></div><div class="line"><span class="keyword">int</span> Looper::pollOnce(<span class="keyword">int</span> timeoutMillis, <span class="keyword">int</span>* outFd, <span class="keyword">int</span>* outEvents, <span class="keyword">void</span>** outData) {</div><div class="line">    <span class="keyword">int</span> result = <span class="number">0</span>;</div><div class="line">    <span class="keyword">for</span> (;;) {</div><div class="line">... ...</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (result != <span class="number">0</span>) {</div><div class="line">... ...</div><div class="line">            <span class="keyword">return</span> result;</div><div class="line">        }</div><div class="line"></div><div class="line">        result = pollInner(timeoutMillis); <span class="comment">// &#x1F3C1;</span></div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x8BE5;&#x51FD;&#x6570;&#x4E0D;&#x65AD;&#x8C03;&#x7528;pollInner(&#x2026;)&#x67E5;&#x8BE2;&#x662F;&#x5426;&#x6709;&#x65B0;&#x6D88;&#x606F;&#x9700;&#x8981;&#x5904;&#x7406;&#x3002;&#x5982;&#x679C;&#x6709;pollInner(&#x2026;)&#x8FD4;&#x56DE;&#x975E;0&#xFF0C;&#x8DF3;&#x51FA;&#x5FAA;&#x73AF;&#x3002;</p>
+<h2 id="Looper-pollInner-&#x2026;"><a href="#Looper-pollInner-&#x2026;" class="headerlink" title="Looper::pollInner(&#x2026;)"></a>Looper::pollInner(&#x2026;)</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// system/core/libutils/Looper.cpp:220</span></div><div class="line"><span class="keyword">int</span> Looper::pollInner(<span class="keyword">int</span> timeoutMillis) {</div><div class="line">    ... ...</div><div class="line"></div><div class="line">    <span class="keyword">int</span> result = POLL_WAKE; <span class="comment">// &#x8BE5;&#x503C;&#x5B9A;&#x4E49;&#x5728;Looper.h&#x4E2D;&#xFF0C;&#x4E3A;-1</span></div><div class="line">    ... ...</div><div class="line"></div><div class="line">    <span class="keyword">struct</span> epoll_event eventItems[EPOLL_MAX_EVENTS];</div><div class="line">    <span class="keyword">int</span> eventCount = epoll_wait(mEpollFd, eventItems, EPOLL_MAX_EVENTS, timeoutMillis);</div><div class="line">    ... ...</div><div class="line">    <span class="comment">// &#x68C0;&#x67E5;&#x662F;&#x54EA;&#x4E00;&#x4E2A;&#x63CF;&#x8FF0;&#x7B26;&#x53D1;&#x751F;&#x4E86;&#x8BFB;&#x5199;&#x4E8B;&#x4EF6;</span></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; eventCount; i++) {</div><div class="line">        <span class="keyword">int</span> fd = eventItems[i].data.fd;</div><div class="line">        <span class="keyword">uint32_t</span> epollEvents = eventItems[i].events;</div><div class="line">        <span class="keyword">if</span> (fd == mWakeEventFd) {</div><div class="line">            <span class="keyword">if</span> (epollEvents &amp; EPOLLIN) {</div><div class="line">                awoken();   <span class="comment">// &#x1F3C1;</span></div><div class="line">            } </div><div class="line">            ... ...</div><div class="line">        } <span class="keyword">else</span> {</div><div class="line">            <span class="keyword">ssize_t</span> requestIndex = mRequests.indexOfKey(fd);</div><div class="line">            <span class="keyword">if</span> (requestIndex &gt;= <span class="number">0</span>) {</div><div class="line">                <span class="keyword">int</span> events = <span class="number">0</span>;</div><div class="line">                <span class="keyword">if</span> (epollEvents &amp; EPOLLIN) events |= EVENT_INPUT;</div><div class="line">                <span class="keyword">if</span> (epollEvents &amp; EPOLLOUT) events |= EVENT_OUTPUT;</div><div class="line">                <span class="keyword">if</span> (epollEvents &amp; EPOLLERR) events |= EVENT_ERROR;</div><div class="line">                <span class="keyword">if</span> (epollEvents &amp; EPOLLHUP) events |= EVENT_HANGUP;</div><div class="line">                pushResponse(events, mRequests.valueAt(requestIndex));</div><div class="line">            } </div><div class="line">            ... ...</div><div class="line">        }</div><div class="line">    }</div><div class="line">... ...</div><div class="line">    <span class="keyword">return</span> result;</div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="Looper-awoken"><a href="#Looper-awoken" class="headerlink" title="Looper::awoken()"></a>Looper::awoken()</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// system/core/libutils/Looper.cpp:418</span></div><div class="line"><span class="keyword">void</span> Looper::awoken() {</div><div class="line">    ... ...</div><div class="line">    <span class="keyword">uint64_t</span> counter;</div><div class="line">    TEMP_FAILURE_RETRY(read(mWakeEventFd, &amp;counter, <span class="keyword">sizeof</span>(<span class="keyword">uint64_t</span>)));</div><div class="line">}</div></pre></td></tr></table></figure>
+<p><code>TEMP_FAILURE_RETRY</code>&#x7684;&#x5B9A;&#x4E49;&#x4E3A;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">define</span> TEMP_FAILURE_RETRY(expression) \  </span></div><div class="line">  (<span class="number">__</span>extension__\  </div><div class="line">   ({ <span class="keyword">long</span> <span class="keyword">int</span> <span class="number">__</span>result;\  </div><div class="line">       <span class="keyword">do</span> <span class="number">__</span>result = (<span class="keyword">long</span> <span class="keyword">int</span>)(expression);\  </div><div class="line">       <span class="keyword">while</span>(<span class="number">__</span>result == <span class="number">-1</span>L&amp;&amp; errno == EINTR);\  </div><div class="line">       <span class="number">__</span>result;})\  </div><div class="line">#endif</div></pre></td></tr></table></figure></p>
+<p>&#x76F4;&#x5230;&#x8BFB;&#x51FA;&#x4E00;&#x4E2A;&#x6B63;&#x6570;&#x624D;&#x8FD4;&#x56DE;&#x3002;</p>
+<h1 id="Looper-wake"><a href="#Looper-wake" class="headerlink" title="Looper::wake()"></a>Looper::wake()</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// system/core/libutils/Looper.cpp:404</span></div><div class="line"><span class="keyword">void</span> Looper::wake() {</div><div class="line"> ... ...</div><div class="line">    <span class="keyword">uint64_t</span> inc = <span class="number">1</span>;</div><div class="line">    <span class="keyword">ssize_t</span> nWrite = TEMP_FAILURE_RETRY(write(mWakeEventFd, &amp;inc, <span class="keyword">sizeof</span>(<span class="keyword">uint64_t</span>)));</div><div class="line">    ... ...</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x663E;&#x7136;Looper&#x6784;&#x9020;&#x4E86;&#x4E00;&#x4E2A;&#x5B8C;&#x6574;&#x7684;&#x6D88;&#x606F;&#x6CF5;&#x903B;&#x8F91;&#xFF0C;poll&#x7CFB;&#x5217;&#x7684;&#x51FD;&#x6570;&#x4ECE;&#x8BE5;&#x6CF5;&#x4E2D;&#x83B7;&#x53D6;&#x4FE1;&#x53F7;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x4FE1;&#x53F7;&#x5219;&#x4E00;&#x76F4;&#x7B49;&#x5F85;&#xFF1B;wake()&#x51FD;&#x6570;&#x8D1F;&#x8D23;&#x5411;&#x8BE5;&#x6CF5;&#x53D1;&#x9001;&#x4FE1;&#x53F7;&#x3002;</p>
+<h1 id="&#x5173;&#x4E8E;epoll"><a href="#&#x5173;&#x4E8E;epoll" class="headerlink" title="&#x5173;&#x4E8E;epoll"></a>&#x5173;&#x4E8E;epoll</h1><p>epoll&#x5728;Looper&#x4E2D;&#x4EE5;&#x53CA;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x673A;&#x5236;&#x4E2D;&#x90FD;&#x6709;&#x88AB;&#x4F7F;&#x7528;&#xFF0C;&#x8FD9;&#x91CC;&#x7B80;&#x5355;&#x63CF;&#x8FF0;&#x4E00;&#x4E0B;&#x5B83;&#x7684;&#x539F;&#x7406;&#x548C;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x3002;epoll&#x662F;&#x7528;&#x6765;&#x66FF;&#x4EE3;select&#xFF0C;&#x4F46;&#x548C;select&#x76F8;&#x6BD4;&#xFF0C;&#x5B83;&#x4E0D;&#x4F1A;&#x968F;&#x7740;&#x76D1;&#x542C;fd&#x6570;&#x76EE;&#x7684;&#x589E;&#x957F;&#x800C;&#x964D;&#x4F4E;&#x6548;&#x7387;&#x3002;epoll&#x7684;&#x63A5;&#x53E3;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x5171;&#x4E09;&#x4E2A;&#x51FD;&#x6570;&#x3002;</p>
+<h2 id="int-epoll-create-int-size"><a href="#int-epoll-create-int-size" class="headerlink" title="int epoll_create(int size)"></a>int epoll_create(int size)</h2><p>&#x521B;&#x5EFA;&#x4E00;&#x4E2A;epoll&#x53E5;&#x67C4;&#xFF0C;size&#x7528;&#x6765;&#x544A;&#x8BC9;&#x5185;&#x6838;&#x8FD9;&#x4E2A;&#x76D1;&#x542C;&#x7684;&#x6570;&#x76EE;&#x4E00;&#x5171;&#x6709;&#x591A;&#x5927;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x5F53;&#x521B;&#x5EFA;&#x597D;epoll&#x53E5;&#x67C4;&#x540E;&#xFF0C;&#x5B83;&#x4F1A;&#x5360;&#x7528;&#x4E00;&#x4E2A;fd&#x503C;&#xFF0C;&#x5728;linux&#x4E0B;&#x5982;&#x679C;&#x67E5;&#x770B;/proc/&#x8FDB;&#x7A0B;id/fd/&#xFF0C;&#x662F;&#x80FD;&#x591F;&#x770B;&#x5230;&#x8FD9;&#x4E2A;fd&#x7684;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x4F7F;&#x7528;&#x5B8C;epoll&#x540E;&#xFF0C;&#x5FC5;&#x987B;&#x8C03;&#x7528;close()&#x5173;&#x95ED;&#xFF0C;&#x5426;&#x5219;&#x53EF;&#x80FD;&#x5BFC;&#x81F4;fd&#x88AB;&#x8017;&#x5C3D;&#x3002;</p>
+<h2 id="int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event"><a href="#int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event" class="headerlink" title="int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)"></a>int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)</h2><p>epoll&#x7684;&#x4E8B;&#x4EF6;&#x6CE8;&#x518C;&#x51FD;&#x6570;&#x3002;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;epoll_create()&#x7684;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570;&#x8868;&#x793A;&#x52A8;&#x4F5C;&#xFF0C;&#x7528;&#x4E09;&#x4E2A;&#x5B8F;&#x6765;&#x8868;&#x793A;&#xFF1A;<br>EPOLL_CTL_ADD&#xFF1A;&#x6CE8;&#x518C;&#x65B0;&#x7684;fd&#x5230;epfd&#x4E2D;&#xFF1B;<br>EPOLL_CTL_MOD&#xFF1A;&#x4FEE;&#x6539;&#x5DF2;&#x7ECF;&#x6CE8;&#x518C;&#x7684;fd&#x7684;&#x76D1;&#x542C;&#x4E8B;&#x4EF6;&#xFF1B;<br>EPOLL_CTL_DEL&#xFF1A;&#x4ECE;epfd&#x4E2D;&#x5220;&#x9664;&#x4E00;&#x4E2A;fd&#xFF1B;<br>&#x7B2C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x9700;&#x8981;&#x76D1;&#x542C;&#x7684;fd&#xFF0C;&#x7B2C;&#x56DB;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x544A;&#x8BC9;&#x5185;&#x6838;&#x9700;&#x8981;&#x76D1;&#x542C;&#x4EC0;&#x4E48;&#x4E8B;&#xFF0C;struct epoll_event&#x7ED3;&#x6784;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">union</span> epoll_data {</div><div class="line">    <span class="keyword">void</span> *ptr;</div><div class="line">    <span class="keyword">int</span> fd;</div><div class="line">    <span class="keyword">__uint32_t</span> u32;</div><div class="line">    <span class="keyword">__uint64_t</span> u64;</div><div class="line">} <span class="keyword">epoll_data_t</span>;</div><div class="line"></div><div class="line"><span class="keyword">struct</span> epoll_event {</div><div class="line">    <span class="keyword">__uint32_t</span> events; <span class="comment">/* Epoll events */</span></div><div class="line">    <span class="keyword">epoll_data_t</span> data; <span class="comment">/* User data variable */</span></div><div class="line">};</div></pre></td></tr></table></figure></p>
+<p>events&#x53EF;&#x4EE5;&#x662F;&#x4EE5;&#x4E0B;&#x51E0;&#x4E2A;&#x5B8F;&#x7684;&#x96C6;&#x5408;&#xFF1A;<br>EPOLLIN &#xFF1A;&#x8868;&#x793A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x53EF;&#x4EE5;&#x8BFB;&#xFF08;&#x5305;&#x62EC;&#x5BF9;&#x7AEF;SOCKET&#x6B63;&#x5E38;&#x5173;&#x95ED;&#xFF09;&#xFF1B;<br>EPOLLOUT&#xFF1A;&#x8868;&#x793A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x53EF;&#x4EE5;&#x5199;&#xFF1B;<br>EPOLLPRI&#xFF1A;&#x8868;&#x793A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x6709;&#x7D27;&#x6025;&#x7684;&#x6570;&#x636E;&#x53EF;&#x8BFB;&#xFF08;&#x8FD9;&#x91CC;&#x5E94;&#x8BE5;&#x8868;&#x793A;&#x6709;&#x5E26;&#x5916;&#x6570;&#x636E;&#x5230;&#x6765;&#xFF09;&#xFF1B;<br>EPOLLERR&#xFF1A;&#x8868;&#x793A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x53D1;&#x751F;&#x9519;&#x8BEF;&#xFF1B;<br>EPOLLHUP&#xFF1A;&#x8868;&#x793A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26;&#x88AB;&#x6302;&#x65AD;&#xFF1B;<br>EPOLLET&#xFF1A; &#x5C06;EPOLL&#x8BBE;&#x4E3A;&#x8FB9;&#x7F18;&#x89E6;&#x53D1;(Edge Triggered)&#x6A21;&#x5F0F;&#xFF0C;&#x8FD9;&#x662F;&#x76F8;&#x5BF9;&#x4E8E;&#x6C34;&#x5E73;&#x89E6;&#x53D1;(Level Triggered)&#x6765;&#x8BF4;&#x7684;&#x3002;<br>EPOLLONESHOT&#xFF1A;&#x53EA;&#x76D1;&#x542C;&#x4E00;&#x6B21;&#x4E8B;&#x4EF6;&#xFF0C;&#x5F53;&#x76D1;&#x542C;&#x5B8C;&#x8FD9;&#x6B21;&#x4E8B;&#x4EF6;&#x4E4B;&#x540E;&#xFF0C;&#x5982;&#x679C;&#x8FD8;&#x9700;&#x8981;&#x7EE7;&#x7EED;&#x76D1;&#x542C;&#x8FD9;&#x4E2A;socket&#x7684;&#x8BDD;&#xFF0C;&#x9700;&#x8981;&#x518D;&#x6B21;&#x628A;&#x8FD9;&#x4E2A;socket&#x52A0;&#x5165;&#x5230;EPOLL&#x961F;&#x5217;&#x91CC;</p>
+<h2 id="int-epoll-wait-int-epfd-struct-epoll-event-events-int-maxevents-int-timeout"><a href="#int-epoll-wait-int-epfd-struct-epoll-event-events-int-maxevents-int-timeout" class="headerlink" title="int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout)"></a>int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout)</h2><p>&#x7B49;&#x5F85;&#x4E8B;&#x4EF6;&#x7684;&#x4EA7;&#x751F;&#x3002;&#x53C2;&#x6570;events&#x7528;&#x6765;&#x4ECE;&#x5185;&#x6838;&#x5F97;&#x5230;&#x4E8B;&#x4EF6;&#x7684;&#x96C6;&#x5408;&#xFF0C;maxevents&#x8868;&#x793A;events&#x6709;&#x591A;&#x5927;&#xFF0C;&#x8FD9;&#x4E2A; maxevents&#x7684;&#x503C;&#x4E0D;&#x80FD;&#x5927;&#x4E8E;&#x521B;&#x5EFA;epoll_create()&#x65F6;&#x7684;size&#xFF0C;&#x53C2;&#x6570;timeout&#x662F;&#x8D85;&#x65F6;&#x65F6;&#x95F4;&#xFF08;&#x6BEB;&#x79D2;&#xFF0C;0&#x4F1A;&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#xFF0C;-1&#x5C06;&#x6C38;&#x4E45;&#x963B;&#x585E;&#xFF09;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x9700;&#x8981;&#x5904;&#x7406;&#x7684;&#x4E8B;&#x4EF6;&#x6570;&#x76EE;&#xFF0C;&#x5982;&#x8FD4;&#x56DE;0&#x8868;&#x793A;&#x5DF2;&#x8D85;&#x65F6;&#x3002;</p>
+<h2 id="epoll&#x7684;&#x4F7F;&#x7528;&#x6A21;&#x5F0F;"><a href="#epoll&#x7684;&#x4F7F;&#x7528;&#x6A21;&#x5F0F;" class="headerlink" title="epoll&#x7684;&#x4F7F;&#x7528;&#x6A21;&#x5F0F;"></a>epoll&#x7684;&#x4F7F;&#x7528;&#x6A21;&#x5F0F;</h2><p>&#x51E0;&#x4E4E;&#x6240;&#x6709;&#x7684;epoll&#x7A0B;&#x5E8F;&#x90FD;&#x662F;&#x7528;&#x5982;&#x4E0B;&#x6846;&#x67B6;&#xFF1A;<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span>( ; ; ) { </div><div class="line">    nfds=epoll_wait(epfd, events, maxevents, timeoutMilliSec); </div><div class="line"></div><div class="line">    <span class="keyword">for</span>(i=<span class="number">0</span>;i&lt;nfds;++i){ <span class="comment">//&#x5904;&#x7406;&#x6240;&#x53D1;&#x751F;&#x7684;&#x6240;&#x6709;&#x4E8B;&#x4EF6;</span></div><div class="line">        <span class="keyword">if</span>(events[i].data.fd==listenfd){    <span class="comment">// &#x76D1;&#x542C;&#x4E8B;&#x4EF6;</span></div><div class="line">            connfd = accept(listenfd,(sockaddr *)&amp;clientaddr, &amp;clilen); </div><div class="line">            ev.data.fd = connfd;            <span class="comment">// &#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x8BFB;&#x64CD;&#x4F5C;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26; </span></div><div class="line">            ev.events = EPOLLIN | EPOLLET;  <span class="comment">// &#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x6CE8;&#x6D4B;&#x7684;&#x8BFB;&#x64CD;&#x4F5C;&#x4E8B;&#x4EF6; </span></div><div class="line">            epoll_ctl(epfd,EPOLL_CTL_ADD,connfd,&amp;ev); <span class="comment">// &#x6CE8;&#x518C;ev&#x4E8B;&#x4EF6; </span></div><div class="line">       }<span class="keyword">else</span> <span class="keyword">if</span>(events[i].events&amp;EPOLLIN){  <span class="comment">// &#x8BFB;&#x4E8B;&#x4EF6;</span></div><div class="line">            <span class="keyword">if</span> ( (sockfd = events[i].data.fd) &lt; <span class="number">0</span>) </div><div class="line">                <span class="keyword">continue</span>; </div><div class="line">            read(sockfd, line, MAXLINE);</div><div class="line"></div><div class="line">            ev.data.fd = sockfd;            <span class="comment">// &#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x5199;&#x64CD;&#x4F5C;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26; </span></div><div class="line">            ev.events = EPOLLOUT | EPOLLET; <span class="comment">// &#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x6CE8;&#x6D4B;&#x7684;&#x5199;&#x64CD;&#x4F5C;&#x4E8B;&#x4EF6; </span></div><div class="line">            epoll_ctl(epfd, EPOLL_CTL_MOD, sockfd, &amp;ev); <span class="comment">//&#x4FEE;&#x6539;sockfd&#x4E0A;&#x8981;&#x5904;&#x7406;&#x7684;&#x4E8B;&#x4EF6;&#x4E3A;EPOLLOUT </span></div><div class="line">       }<span class="keyword">else</span> <span class="keyword">if</span>(events[i].events&amp;EPOLLOUT){ <span class="comment">// &#x5199;&#x4E8B;&#x4EF6;</span></div><div class="line">            sockfd = events[i].data.fd; </div><div class="line">            write(sockfd, line, n);</div><div class="line"></div><div class="line">            ev.data.fd=sockfd;              <span class="comment">//&#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x8BFB;&#x64CD;&#x4F5C;&#x7684;&#x6587;&#x4EF6;&#x63CF;&#x8FF0;&#x7B26; </span></div><div class="line">            ev.events=EPOLLIN | EPOLLET;    <span class="comment">//&#x8BBE;&#x7F6E;&#x7528;&#x4E8E;&#x6CE8;&#x518C;&#x7684;&#x8BFB;&#x64CD;&#x4F5C;&#x4E8B;&#x4EF6; </span></div><div class="line">            epoll_ctl(epfd,EPOLL_CTL_MOD,sockfd,&amp;ev); <span class="comment">//&#x4FEE;&#x6539;sockfd&#x4E0A;&#x8981;&#x5904;&#x7406;&#x7684;&#x4E8B;&#x4EF6;&#x4E3A;EPOLIN </span></div><div class="line">        } </div><div class="line">     } </div><div class="line">  }</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/键盘消息处理学习笔记/" rel="tag">#键盘消息处理学习笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/02/2016/1002KeyboardLearning3/" rel="next" title="键盘消息处理学习笔记（三）">
+                <i class="fa fa-chevron-left"></i> 键盘消息处理学习笔记（三）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/02/2016/1002KeyboardLearning5/" rel="prev" title="键盘消息处理学习笔记（五）">
+                键盘消息处理学习笔记（五） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/02/2016/1002KeyboardLearning4/"
+           data-title="键盘消息处理学习笔记（四）" data-url="http://palanceli.github.io/2016/10/02/2016/1002KeyboardLearning4/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Looper的构造函数"><span class="nav-number">1.</span> <span class="nav-text">Looper的构造函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Looper-rebuildEpollLocked"><span class="nav-number">1.1.</span> <span class="nav-text">Looper::rebuildEpollLocked()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Looper-addFd-…"><span class="nav-number">2.</span> <span class="nav-text">Looper::addFd(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Looper-pollOnce-…"><span class="nav-number">3.</span> <span class="nav-text">Looper::pollOnce(…)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Looper-pollInner-…"><span class="nav-number">3.1.</span> <span class="nav-text">Looper::pollInner(…)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Looper-awoken"><span class="nav-number">3.2.</span> <span class="nav-text">Looper::awoken()</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Looper-wake"><span class="nav-number">4.</span> <span class="nav-text">Looper::wake()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关于epoll"><span class="nav-number">5.</span> <span class="nav-text">关于epoll</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#int-epoll-create-int-size"><span class="nav-number">5.1.</span> <span class="nav-text">int epoll_create(int size)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-epoll-ctl-int-epfd-int-op-int-fd-struct-epoll-event-event"><span class="nav-number">5.2.</span> <span class="nav-text">int epoll_ctl(int epfd, int op, int fd, struct epoll_event *event)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#int-epoll-wait-int-epfd-struct-epoll-event-events-int-maxevents-int-timeout"><span class="nav-number">5.3.</span> <span class="nav-text">int epoll_wait(int epfd, struct epoll_event * events, int maxevents, int timeout)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#epoll的使用模式"><span class="nav-number">5.4.</span> <span class="nav-text">epoll的使用模式</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

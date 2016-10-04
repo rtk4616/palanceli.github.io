@@ -1,0 +1,701 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="键盘消息处理学习笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x5728;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E00;&amp;#xFF09;&amp;#x300B;&amp;#x4E2D;&amp;#x8BA8;&amp;#x8BBA;&amp;#x4E86;InputManagerService&amp;#x7684;&amp;#x521B;&amp;#x5EFA;&amp;#x3002;&amp;#x57">
+<meta property="og:type" content="article">
+<meta property="og:title" content="键盘消息处理学习笔记（二）">
+<meta property="og:url" content="http://palanceli.github.io/2016/10/01/2016/1001KeyboardLearning2/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x5728;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E00;&amp;#xFF09;&amp;#x300B;&amp;#x4E2D;&amp;#x8BA8;&amp;#x8BBA;&amp;#x4E86;InputManagerService&amp;#x7684;&amp;#x521B;&amp;#x5EFA;&amp;#x3002;&amp;#x57">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/01/2016/1001KeyboardLearning2/img01.png">
+<meta property="og:updated_time" content="2016-10-02T02:21:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="键盘消息处理学习笔记（二）">
+<meta name="twitter:description" content="&amp;#x5728;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x4E00;&amp;#xFF09;&amp;#x300B;&amp;#x4E2D;&amp;#x8BA8;&amp;#x8BBA;&amp;#x4E86;InputManagerService&amp;#x7684;&amp;#x521B;&amp;#x5EFA;&amp;#x3002;&amp;#x57">
+<meta name="twitter:image" content="http://palanceli.github.io/2016/10/01/2016/1001KeyboardLearning2/img01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/10/01/2016/1001KeyboardLearning2/"/>
+
+  <title> 键盘消息处理学习笔记（二） | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                键盘消息处理学习笔记（二）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-01T22:28:50+08:00" content="2016-10-01">
+              2016-10-01
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/01/2016/1001KeyboardLearning2/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/01/2016/1001KeyboardLearning2/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x5728;<a href="http://http://palanceli.com/2016/10/01/2016/0904KeyboardLearning1/" target="_blank" rel="external">&#x300A;&#x952E;&#x76D8;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x4E00;&#xFF09;&#x300B;</a>&#x4E2D;&#x8BA8;&#x8BBA;&#x4E86;InputManagerService&#x7684;&#x521B;&#x5EFA;&#x3002;&#x5728;<a href="http://palanceli.com/2016/10/01/2016/0904KeyboardLearning1/#&#x603B;&#x7ED3;" target="_blank" rel="external">&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;</a>Step2&#x4E2D;&#xFF0C;&#x5B8C;&#x6210;&#x521B;&#x5EFA;&#x4E4B;&#x540E;&#xFF0C;&#x8C03;&#x7528;&#x5176;start()&#x51FD;&#x6570;&#xFF0C;&#x5B8C;&#x6210;&#x542F;&#x52A8;&#x3002;&#x672C;&#x6587;&#x5C31;&#x4EE5;&#x8BE5;start()&#x51FD;&#x6570;&#x4E3A;&#x8D77;&#x70B9;&#x8FDB;&#x5165;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;&#x3002;<br><a id="more"></a></p>
+<h1 id="Step1-InputManagerService-start"><a href="#Step1-InputManagerService-start" class="headerlink" title="Step1: InputManagerService::start()"></a>Step1: InputManagerService::start()</h1><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/services/core/java/com/android/server/input/InputService.java</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">InputManagerService</span> <span class="keyword">extends</span> <span class="title">IInputManager</span>.<span class="title">Stub</span></span></div><div class="line">        <span class="keyword">implements</span> <span class="title">Watchdog</span>.<span class="title">Monitor</span> {</div><div class="line">        ... ...</div><div class="line">    <span class="comment">// :299</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">()</span> </span>{</div><div class="line">        ... ...</div><div class="line">        nativeStart(mPtr);  <span class="comment">// &#x1F3C1;</span></div><div class="line">        ... ...</div><div class="line">    }</div><div class="line">    ... ...</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x53C2;&#x89C1;<a href="http://palanceli.com/2016/10/01/2016/0904KeyboardLearning1/#&#x603B;&#x7ED3;" target="_blank" rel="external">InputManagerService&#x76F8;&#x5173;&#x5BF9;&#x8C61;&#x5173;&#x7CFB;&#x56FE;</a>&#x53EF;&#x77E5;&#xFF0C;mPtr&#x662F;NativeInputManager&#x5BF9;&#x8C61;&#x7684;&#x6307;&#x9488;&#xFF0C;&#x662F;&#x5728;InputManagerService&#x521B;&#x5EFA;&#x8FC7;&#x7A0B;&#x7684;Step4&#x4E2D;&#x521B;&#x5EFA;&#x7684;&#x3002;</p>
+<h1 id="Step2-nativeStart-&#x2026;"><a href="#Step2-nativeStart-&#x2026;" class="headerlink" title="Step2: nativeStart(&#x2026;)"></a>Step2: nativeStart(&#x2026;)</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/services/core/jni/com_android_server_input_InputManagerService.cpp:1049</span></div><div class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">void</span> <span class="title">nativeStart</span><span class="params">(JNIEnv* env, jclass <span class="comment">/* clazz */</span>, jlong ptr)</span> </span>{</div><div class="line">    NativeInputManager* im = <span class="keyword">reinterpret_cast</span>&lt;NativeInputManager*&gt;(ptr);</div><div class="line"></div><div class="line">    <span class="keyword">status_t</span> result = im-&gt;getInputManager()-&gt;start(); <span class="comment">// &#x1F3C1;</span></div><div class="line">    ... ...</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>NativeInputManager::getInputManager()&#x8FD4;&#x56DE;&#x6210;&#x5458;&#x53D8;&#x91CF;mInputManager&#xFF0C;&#x7C7B;&#x578B;&#x4E3A;InputManager&#x3002;&#x8BE5;&#x5BF9;&#x8C61;&#x662F;&#x5728;<a href="http://palanceli.com/2016/10/01/2016/0904KeyboardLearning1/#&#x603B;&#x7ED3;" target="_blank" rel="external">InputManagerService&#x7684;&#x521B;&#x5EFA;&#x94FE;&#x6761;</a>&#x7684;Step5&#x4E2D;&#x521B;&#x5EFA;&#x7684;&#x3002;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/services/core/jni/com_android_server_input_InputManagerService.cpp: 184</span></div><div class="line"><span class="keyword">class</span> NativeInputManager : <span class="keyword">public</span> <span class="keyword">virtual</span> RefBase,</div><div class="line">    <span class="keyword">public</span> <span class="keyword">virtual</span> InputReaderPolicyInterface,</div><div class="line">    <span class="keyword">public</span> <span class="keyword">virtual</span> InputDispatcherPolicyInterface,</div><div class="line">    <span class="keyword">public</span> <span class="keyword">virtual</span> PointerControllerPolicyInterface {</div><div class="line">    ... ...</div><div class="line">    <span class="keyword">inline</span> sp&lt;InputManager&gt; getInputManager() <span class="keyword">const</span> { <span class="keyword">return</span> mInputManager; }</div><div class="line">};</div></pre></td></tr></table></figure></p>
+<h1 id="Step3-InputManager-start"><a href="#Step3-InputManager-start" class="headerlink" title="Step3: InputManager::start()"></a>Step3: InputManager::start()</h1><figure class="highlight cpp"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/servies/inputflinger/InputManager.cpp:53</span></div><div class="line"><span class="keyword">status_t</span> InputManager::start() {</div><div class="line">    <span class="keyword">status_t</span> result = mDispatcherThread-&gt;run(<span class="string">&quot;InputDispatcher&quot;</span>, PRIORITY_URGENT_DISPLAY);</div><div class="line">    ... ...</div><div class="line"></div><div class="line">    result = mReaderThread-&gt;run(<span class="string">&quot;InputReader&quot;</span>, PRIORITY_URGENT_DISPLAY);</div><div class="line">    ... ...</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x53C2;&#x89C1;<a href="http://palanceli.com/2016/10/01/2016/0904KeyboardLearning1/#&#x603B;&#x7ED3;" target="_blank" rel="external">InputManagerService&#x76F8;&#x5173;&#x5BF9;&#x8C61;&#x5173;&#x7CFB;&#x56FE;</a>&#x53EF;&#x77E5;&#xFF0C;mDispatcherThread&#x548C;mReaderThread&#x662F;InputManager&#x5728;&#x6784;&#x9020;&#x65F6;&#x521B;&#x5EFA;&#x7684;&#x4E24;&#x4E2A;&#x7EBF;&#x7A0B;&#x5BF9;&#x8C61;&#x3002;&#x4ED6;&#x4EEC;&#x5747;&#x7EE7;&#x627F;&#x81EA;Thread&#xFF0C;&#x5F53;run(&#x2026;)&#x88AB;&#x8C03;&#x7528;&#x65F6;&#xFF0C;&#x5B9E;&#x9645;&#x8FDB;&#x5165;&#x4E86;&#x5404;&#x81EA;&#x7684;&#x7EBF;&#x7A0B;&#x51FD;&#x6570;threadLoop(&#x2026;)&#x3002;</p>
+<h1 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h1><p>InputManagerService&#x7684;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;<br><img src="/2016/10/01/2016/1001KeyboardLearning2/img01.png" alt="InputManagerService&#x7684;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;"><br>&#x6240;&#x4EE5;&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x9700;&#x8981;&#x6DF1;&#x5165;&#x5230;InputDispatcherThread&#x548C;InputReaderThread&#x4E24;&#x4E2A;&#x7EBF;&#x7A0B;&#x51FD;&#x6570;&#x91CC;&#x53BB;&#x4E86;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/键盘消息处理学习笔记/" rel="tag">#键盘消息处理学习笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/01/2016/0904KeyboardLearning1/" rel="next" title="键盘消息处理学习笔记（一）">
+                <i class="fa fa-chevron-left"></i> 键盘消息处理学习笔记（一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/02/2016/1002KeyboardLearning3/" rel="prev" title="键盘消息处理学习笔记（三）">
+                键盘消息处理学习笔记（三） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/01/2016/1001KeyboardLearning2/"
+           data-title="键盘消息处理学习笔记（二）" data-url="http://palanceli.github.io/2016/10/01/2016/1001KeyboardLearning2/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">43</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Step1-InputManagerService-start"><span class="nav-number">1.</span> <span class="nav-text">Step1: InputManagerService::start()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step2-nativeStart-…"><span class="nav-number">2.</span> <span class="nav-text">Step2: nativeStart(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step3-InputManager-start"><span class="nav-number">3.</span> <span class="nav-text">Step3: InputManager::start()</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
