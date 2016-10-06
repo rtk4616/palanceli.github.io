@@ -1,0 +1,692 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="键盘消息处理学习笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x627F;&amp;#x63A5;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x5341;&amp;#xFF09;&amp;#x300B;&amp;#x5F53;InputDispatcher&amp;#x88AB;InputReader&amp;#x5524;&amp;#x9192;&amp;#x540">
+<meta property="og:type" content="article">
+<meta property="og:title" content="键盘消息处理学习笔记（十一）">
+<meta property="og:url" content="http://palanceli.github.io/2016/10/04/2016/1004KeyboardLearning11/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x627F;&amp;#x63A5;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x5341;&amp;#xFF09;&amp;#x300B;&amp;#x5F53;InputDispatcher&amp;#x88AB;InputReader&amp;#x5524;&amp;#x9192;&amp;#x540">
+<meta property="og:updated_time" content="2016-10-06T16:23:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="键盘消息处理学习笔记（十一）">
+<meta name="twitter:description" content="&amp;#x627F;&amp;#x63A5;&amp;#x300A;&amp;#x952E;&amp;#x76D8;&amp;#x6D88;&amp;#x606F;&amp;#x5904;&amp;#x7406;&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;&amp;#xFF08;&amp;#x5341;&amp;#xFF09;&amp;#x300B;&amp;#x5F53;InputDispatcher&amp;#x88AB;InputReader&amp;#x5524;&amp;#x9192;&amp;#x540">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/10/04/2016/1004KeyboardLearning11/"/>
+
+  <title> 键盘消息处理学习笔记（十一） | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                键盘消息处理学习笔记（十一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-04T18:49:17+08:00" content="2016-10-04">
+              2016-10-04
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/04/2016/1004KeyboardLearning11/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/04/2016/1004KeyboardLearning11/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x627F;&#x63A5;&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x5341;&#xFF09;&#x300B;&#x5F53;InputDispatcher&#x88AB;InputReader&#x5524;&#x9192;&#x540E;&#xFF0C;&#x542F;&#x52A8;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x5206;&#x53D1;&#x6D41;&#x7A0B;&#xFF0C;&#x6700;&#x7EC8;&#x4F1A;&#x628A;&#x5206;&#x53D1;&#x6570;&#x636E;&#x5199;&#x5165;&#x6D3B;&#x52A8;&#x7A97;&#x53E3;&#x6CE8;&#x518C;&#x8FDB;&#x6765;&#x7684;socket&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x5B8C;&#x6210;&#x4E8B;&#x4EF6;&#x5206;&#x53D1;&#x3002;&#x8FD9;&#x4F1A;&#x5BFC;&#x81F4;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x4E3B;&#x7EBF;&#x7A0B;Looper&#x88AB;&#x5524;&#x9192;&#xFF0C;&#x5E76;&#x4E14;&#x8C03;&#x7528;&#x4E0E;&#x8BE5;&#x63CF;&#x8FF0;&#x7B26;&#x5173;&#x8054;&#x7684;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#x3002;<br><a id="more"></a><br>&#x5148;&#x56DE;&#x987E;&#x4E00;&#x4E0B;&#x5F53;&#x521D;&#x662F;&#x5982;&#x4F55;&#x5728;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x4E3B;&#x7EBF;&#x7A0B;Looper&#x4E2D;&#x6CE8;&#x518C;InputChannel&#x7684;&#x5427;&#xFF0C;&#x53C2;&#x89C1;&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x516B;&#xFF09;&#x300B;&#x7684;Step5&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/jni/android_view_InputEventReceiver.cpp:145</span></div><div class="line"><span class="keyword">void</span> NativeInputEventReceiver::setFdEvents(<span class="keyword">int</span> events) {</div><div class="line">    <span class="keyword">if</span> (mFdEvents != events) {</div><div class="line">        mFdEvents = events;</div><div class="line">        <span class="keyword">int</span> fd = mInputConsumer.getChannel()-&gt;getFd();</div><div class="line">        <span class="keyword">if</span> (events) { <span class="comment">// &#x4E3A;&#x771F;</span></div><div class="line">            mMessageQueue-&gt;getLooper()-&gt;addFd(fd, <span class="number">0</span>, events, <span class="keyword">this</span>, <span class="literal">NULL</span>);</div><div class="line">        } <span class="keyword">else</span> {</div><div class="line">            mMessageQueue-&gt;getLooper()-&gt;removeFd(fd);</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>mInputConsumer.getChannel()-&gt;getFd()&#x8FD4;&#x56DE;ViewRootImpl::mInputChannel-&gt;getFd()&#xFF0C;&#x5373;Client&#x7AEF;&#x7684;InputChannel&#x7684;socket&#x63CF;&#x8FF0;&#x7B26;&#x3002;&#x9700;&#x8981;&#x6CE8;&#x610F;addFd(&#x2026;)&#x7684;&#x7B2C;&#x56DB;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x4E00;&#x4E2A;&#x56DE;&#x8C03;&#x51FD;&#x6570;&#xFF0C;&#x5176;&#x5B9E;&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x56DE;&#x8C03;&#x63A5;&#x53E3;&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x53C2;&#x89C1;&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x56DB;&#xFF09;&#x300B;&#x4E4B;<a href="http://localhost:4000/2016/10/02/2016/1002KeyboardLearning4/#Looper-pollInner-&#x2026;" target="_blank" rel="external">Looper::pollInner(&#x2026;)</a>&#xFF0C;&#x5F53;Looper&#x88AB;&#x5524;&#x9192;&#x540E;&#xFF0C;&#x5982;&#x679C;&#x6CE8;&#x518C;&#x7684;&#x63CF;&#x8FF0;&#x7B26;&#x6709;&#x56DE;&#x8C03;&#x63A5;&#x53E3;&#xFF0C;&#x5219;&#x8C03;&#x7528;&#x5176;handleEvent(&#x2026;)&#x51FD;&#x6570;&#x3002;&#x672C;&#x6587;&#x5C31;&#x4EE5;NativeInputEventReceiver::handleEvent(&#x2026;)&#x51FD;&#x6570;&#x4E3A;&#x8D77;&#x70B9;&#xFF0C;&#x6765;&#x770B;&#x8BE5;&#x4E8B;&#x4EF6;&#x5982;&#x4F55;&#x88AB;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7A97;&#x53E3;&#x5904;&#x7406;&#x3002;</p>
+<h1 id="Step1-NativeInputEventReceiver-handleEvent-&#x2026;"><a href="#Step1-NativeInputEventReceiver-handleEvent-&#x2026;" class="headerlink" title="Step1: NativeInputEventReceiver::handleEvent(&#x2026;)"></a>Step1: NativeInputEventReceiver::handleEvent(&#x2026;)</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/jni/android_view_InputEventReceiver.cpp:157</span></div><div class="line"><span class="keyword">int</span> NativeInputEventReceiver::handleEvent(<span class="keyword">int</span> receiveFd, <span class="keyword">int</span> events, <span class="keyword">void</span>* data) {</div><div class="line">    ... ...</div><div class="line">    <span class="keyword">if</span> (events &amp; ALOOPER_EVENT_INPUT) {</div><div class="line">        JNIEnv* env = AndroidRuntime::getJNIEnv();</div><div class="line">        <span class="keyword">status_t</span> status = consumeEvents(env, <span class="literal">false</span> <span class="comment">/*consumeBatches*/</span>, <span class="number">-1</span>, </div><div class="line">                                        <span class="literal">NULL</span>); <span class="comment">// &#x1F3C1;</span></div><div class="line">        mMessageQueue-&gt;raiseAndClearException(env, <span class="string">&quot;handleReceiveCallback&quot;</span>);</div><div class="line">        <span class="keyword">return</span> status == OK || status == NO_MEMORY ? <span class="number">1</span> : <span class="number">0</span>;</div><div class="line">    }</div><div class="line">    ... ...</div><div class="line">    <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="Step2-NativeInputEventReceiver-consumeEvents-&#x2026;"><a href="#Step2-NativeInputEventReceiver-consumeEvents-&#x2026;" class="headerlink" title="Step2: NativeInputEventReceiver::consumeEvents(&#x2026;)"></a>Step2: NativeInputEventReceiver::consumeEvents(&#x2026;)</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/base/core/jni/android_view_InputEventReceiver.cpp:217</span></div><div class="line"><span class="keyword">status_t</span> NativeInputEventReceiver::consumeEvents(JNIEnv* env,</div><div class="line">        <span class="keyword">bool</span> consumeBatches, <span class="keyword">nsecs_t</span> frameTime, <span class="keyword">bool</span>* outConsumedBatch) {</div><div class="line">    ... ...</div><div class="line">    ScopedLocalRef&lt;jobject&gt; receiverObj(env, <span class="literal">NULL</span>);</div><div class="line">    <span class="keyword">bool</span> skipCallbacks = <span class="literal">false</span>;</div><div class="line">    <span class="keyword">for</span> (;;) {</div><div class="line">        <span class="keyword">uint32_t</span> seq;</div><div class="line">        InputEvent* inputEvent;</div><div class="line">        <span class="comment">// &#x1F3C1;Step3: &#x5C06;InputDispatcher&#x5206;&#x53D1;&#x8FC7;&#x6765;&#x7684;&#x952E;&#x76D8;&#x4E8B;&#x4EF6;&#x8BFB;&#x53D6;&#x5230;inputEvent</span></div><div class="line">        <span class="keyword">status_t</span> status = mInputConsumer.consume(&amp;mInputEventFactory,</div><div class="line">                consumeBatches, frameTime, &amp;seq, &amp;inputEvent);</div><div class="line">        <span class="keyword">if</span> (status) {</div><div class="line">            <span class="keyword">if</span> (status == WOULD_BLOCK) {</div><div class="line">                <span class="keyword">if</span> (!skipCallbacks &amp;&amp; !mBatchedInputEventPending</div><div class="line">                        &amp;&amp; mInputConsumer.hasPendingBatch()) {</div><div class="line">                    <span class="comment">// There is a pending batch.  Come back later.</span></div><div class="line">                    <span class="keyword">if</span> (!receiverObj.get()) {</div><div class="line">                        <span class="comment">// &#x6B64;&#x5904;&#x5F97;&#x5230;&#x7684;&#x662F;java&#x5C42;InputEventReceiver&#x7684;&#x5F31;&#x5F15;&#x7528;&#x6307;&#x9488;</span></div><div class="line">                        <span class="comment">// &#x89C1;&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x516B;&#xFF09;&#x300B;Step2</span></div><div class="line">                        receiverObj.reset(jniGetReferent(env, mReceiverWeakGlobal));</div><div class="line">                        ... ...</div><div class="line">                    }</div><div class="line"></div><div class="line">                    mBatchedInputEventPending = <span class="literal">true</span>;</div><div class="line">                    ... ...</div><div class="line">                    <span class="comment">// &#x1F3C1;Step4:&#x8C03;&#x7528;java&#x5C42;</span></div><div class="line">                    <span class="comment">// InputEventReceiver::dispatchBatchedInputEventPending(...)&#x51FD;&#x6570;</span></div><div class="line">                    env-&gt;CallVoidMethod(receiverObj.get(),</div><div class="line">                            gInputEventReceiverClassInfo.dispatchBatchedInputEventPending);</div><div class="line">                    <span class="keyword">if</span> (env-&gt;ExceptionCheck()) {</div><div class="line">                        ALOGE(<span class="string">&quot;Exception dispatching batched input events.&quot;</span>);</div><div class="line">                        mBatchedInputEventPending = <span class="literal">false</span>; <span class="comment">// try again later</span></div><div class="line">                    }</div><div class="line">                }</div><div class="line">                <span class="keyword">return</span> OK;</div><div class="line">            }</div><div class="line">            ... ...</div><div class="line">            <span class="keyword">return</span> status;</div><div class="line">        }</div><div class="line">        assert(inputEvent);</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (!skipCallbacks) {</div><div class="line">            <span class="keyword">if</span> (!receiverObj.get()) {</div><div class="line">                receiverObj.reset(jniGetReferent(env, mReceiverWeakGlobal));</div><div class="line">                ... ...</div><div class="line">            }</div><div class="line"></div><div class="line">            jobject inputEventObj;</div><div class="line">            <span class="keyword">switch</span> (inputEvent-&gt;getType()) {</div><div class="line">            <span class="keyword">case</span> AINPUT_EVENT_TYPE_KEY:</div><div class="line">                ... ...</div><div class="line">                inputEventObj = android_view_KeyEvent_fromNative(env,</div><div class="line">                        <span class="keyword">static_cast</span>&lt;KeyEvent*&gt;(inputEvent));</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            ... ...</div><div class="line">            }</div><div class="line"></div><div class="line">            <span class="keyword">if</span> (inputEventObj) {</div><div class="line">                ... ...</div><div class="line">                env-&gt;CallVoidMethod(receiverObj.get(),</div><div class="line">                        gInputEventReceiverClassInfo.dispatchInputEvent, seq, inputEventObj);</div><div class="line">                <span class="keyword">if</span> (env-&gt;ExceptionCheck()) {</div><div class="line">                    ALOGE(<span class="string">&quot;Exception dispatching input event.&quot;</span>);</div><div class="line">                    skipCallbacks = <span class="literal">true</span>;</div><div class="line">                }</div><div class="line">                env-&gt;DeleteLocalRef(inputEventObj);</div><div class="line">            } <span class="keyword">else</span> {</div><div class="line">                ALOGW(<span class="string">&quot;channel &apos;%s&apos; ~ Failed to obtain event object.&quot;</span>, getInputChannelName());</div><div class="line">                skipCallbacks = <span class="literal">true</span>;</div><div class="line">            }</div><div class="line">        }</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (skipCallbacks) {</div><div class="line">            mInputConsumer.sendFinishedSignal(seq, <span class="literal">false</span>);</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="Step3-InputConsumer-consume-&#x2026;"><a href="#Step3-InputConsumer-consume-&#x2026;" class="headerlink" title="Step3: InputConsumer::consume(&#x2026;)"></a>Step3: InputConsumer::consume(&#x2026;)</h1><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// frameworks/native/libs/input/InputTransport.cpp:399</span></div><div class="line"><span class="keyword">status_t</span> InputConsumer::consume(InputEventFactoryInterface* factory,</div><div class="line">        <span class="keyword">bool</span> consumeBatches, <span class="keyword">nsecs_t</span> frameTime, <span class="keyword">uint32_t</span>* outSeq, InputEvent** outEvent) {</div><div class="line">    ... ...</div><div class="line">    *outSeq = <span class="number">0</span>;</div><div class="line">    *outEvent = <span class="literal">NULL</span>;</div><div class="line"></div><div class="line">    <span class="comment">// Fetch the next input message.</span></div><div class="line">    <span class="comment">// Loop until an event can be returned or no additional events are received.</span></div><div class="line">    <span class="keyword">while</span> (!*outEvent) {</div><div class="line">        ... ...</div><div class="line">            <span class="comment">// &#x6B64;&#x5904;&#x5E94;&#x8BE5;&#x5BF9;&#x7167;&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x5341;&#xFF09;&#x300B;&#x4E4B;Step8</span></div><div class="line">            <span class="keyword">status_t</span> result = mChannel-&gt;receiveMessage(&amp;mMsg);</div><div class="line">            <span class="keyword">if</span> (result) {</div><div class="line">                <span class="comment">// Consume the next batched event unless batches are being held for later.</span></div><div class="line">                <span class="keyword">if</span> (consumeBatches || result != WOULD_BLOCK) {</div><div class="line">                    result = consumeBatch(factory, frameTime, outSeq, outEvent);</div><div class="line">                    <span class="keyword">if</span> (*outEvent) {</div><div class="line">                        ... ...</div><div class="line">                        <span class="keyword">break</span>;</div><div class="line">                    }</div><div class="line">                }</div><div class="line">                <span class="keyword">return</span> result;</div><div class="line">            }</div><div class="line"></div><div class="line">        <span class="keyword">switch</span> (mMsg.header.type) {</div><div class="line">        <span class="keyword">case</span> InputMessage::TYPE_KEY: {</div><div class="line">            KeyEvent* keyEvent = factory-&gt;createKeyEvent();</div><div class="line">            <span class="keyword">if</span> (!keyEvent) <span class="keyword">return</span> NO_MEMORY;</div><div class="line"></div><div class="line">            initializeKeyEvent(keyEvent, &amp;mMsg);</div><div class="line">            *outSeq = mMsg.body.key.seq;</div><div class="line">            *outEvent = keyEvent;</div><div class="line">            ... ...</div><div class="line">            <span class="keyword">break</span>;</div><div class="line">        }</div><div class="line">        ... ...</div><div class="line">    }</div><div class="line">    <span class="keyword">return</span> OK;</div><div class="line">}</div></pre></td></tr></table></figure>
+<font color="red">&#x672A;&#x5B8C;&#x5F85;&#x7EED;</font>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/键盘消息处理学习笔记/" rel="tag">#键盘消息处理学习笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/04/2016/1004KeyboardLearning10/" rel="next" title="键盘消息处理学习笔记（十）InputDispatcher分发键盘事件">
+                <i class="fa fa-chevron-left"></i> 键盘消息处理学习笔记（十）InputDispatcher分发键盘事件
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/04/2016/1004KeyboardLearning11/"
+           data-title="键盘消息处理学习笔记（十一）" data-url="http://palanceli.github.io/2016/10/04/2016/1004KeyboardLearning11/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">44</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">17</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Step1-NativeInputEventReceiver-handleEvent-…"><span class="nav-number">1.</span> <span class="nav-text">Step1: NativeInputEventReceiver::handleEvent(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step2-NativeInputEventReceiver-consumeEvents-…"><span class="nav-number">2.</span> <span class="nav-text">Step2: NativeInputEventReceiver::consumeEvents(…)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Step3-InputConsumer-consume-…"><span class="nav-number">3.</span> <span class="nav-text">Step3: InputConsumer::consume(…)</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
