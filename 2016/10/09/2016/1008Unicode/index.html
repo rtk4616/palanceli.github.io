@@ -1,0 +1,707 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Unicode," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x65E9;&amp;#x4E0A;&amp;#x8001;&amp;#x677F;&amp;#x62A5;&amp;#x4E86;&amp;#x4E00;&amp;#x4E2A;&amp;#x751F;&amp;#x50FB;&amp;#x5B57;&amp;#xFF0C;&amp;#x5DE6;&amp;#x8FB9;&amp;#x5352;&amp;#xFF0C;&amp;#x53F3;&amp;#x8FB9;&amp;#x74E6;&amp;#xFF1A;&amp;#x8FD9;&amp;#x5B57;&amp;#x5728;unicode.org&amp;#x76">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unicode字符集和字形">
+<meta property="og:url" content="http://palanceli.github.io/2016/10/09/2016/1008Unicode/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x65E9;&amp;#x4E0A;&amp;#x8001;&amp;#x677F;&amp;#x62A5;&amp;#x4E86;&amp;#x4E00;&amp;#x4E2A;&amp;#x751F;&amp;#x50FB;&amp;#x5B57;&amp;#xFF0C;&amp;#x5DE6;&amp;#x8FB9;&amp;#x5352;&amp;#xFF0C;&amp;#x53F3;&amp;#x8FB9;&amp;#x74E6;&amp;#xFF1A;&amp;#x8FD9;&amp;#x5B57;&amp;#x5728;unicode.org&amp;#x76">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/09/2016/1008Unicode/img01.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/09/2016/1008Unicode/cei-Windows.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/09/2016/1008Unicode/cei-mac.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/09/2016/1008Unicode/cei-iOS.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/09/2016/1008Unicode/cei-Android.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/09/2016/1008Unicode/img02.png">
+<meta property="og:updated_time" content="2016-10-08T16:21:04.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Unicode字符集和字形">
+<meta name="twitter:description" content="&amp;#x65E9;&amp;#x4E0A;&amp;#x8001;&amp;#x677F;&amp;#x62A5;&amp;#x4E86;&amp;#x4E00;&amp;#x4E2A;&amp;#x751F;&amp;#x50FB;&amp;#x5B57;&amp;#xFF0C;&amp;#x5DE6;&amp;#x8FB9;&amp;#x5352;&amp;#xFF0C;&amp;#x53F3;&amp;#x8FB9;&amp;#x74E6;&amp;#xFF1A;&amp;#x8FD9;&amp;#x5B57;&amp;#x5728;unicode.org&amp;#x76">
+<meta name="twitter:image" content="http://palanceli.github.io/2016/10/09/2016/1008Unicode/img01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/10/09/2016/1008Unicode/"/>
+
+  <title> Unicode字符集和字形 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Unicode字符集和字形
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-09T00:21:10+08:00" content="2016-10-09">
+              2016-10-09
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/随笔笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/09/2016/1008Unicode/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/09/2016/1008Unicode/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x65E9;&#x4E0A;&#x8001;&#x677F;&#x62A5;&#x4E86;&#x4E00;&#x4E2A;&#x751F;&#x50FB;&#x5B57;&#xFF0C;&#x5DE6;&#x8FB9;&#x5352;&#xFF0C;&#x53F3;&#x8FB9;&#x74E6;&#xFF1A;<br><img src="/2016/10/09/2016/1008Unicode/img01.png" alt="&#x5352;&#x74E6;"><br>&#x8FD9;&#x5B57;&#x5728;unicode.org&#x7684;Unihan&#x4E2D;&#x5FF5;<a href="http://www.unicode.org/cgi-bin/GetUnihanData.pl?codepoint=24b62" target="_blank" rel="external">&#x201C;c&#xE8;i&#x201D;</a>&#xFF0C;&#x5728;&#x6C49;&#x5178;&#x4E2D;&#x5FF5;<a href="http://www.zdic.net/z/97/js/24B62.htm" target="_blank" rel="external">&#x201C;su&#xEC;&#x201D;</a>&#x3002;<br>&#x53EF;&#x662F;&#x8FD9;&#x5B57;&#x5728;&#x8F93;&#x5165;&#x6CD5;&#x91CC;&#x6572;&#x4E0D;&#x51FA;&#x6765;&#xFF0C;&#x5728;Windows&#x3001;macOS&#x3001;iOS&#x548C;Android&#x4E0B;&#x7684;&#x6D4F;&#x89C8;&#x5668;&#x91CC;&#xFF0C;&#x663E;&#x793A;&#x5404;&#x4E0D;&#x76F8;&#x540C;&#xFF0C;&#x8FD9;&#x662F;&#x4E3A;&#x4EC0;&#x4E48;&#x5462;&#xFF1F;<br><a id="more"></a><br>Windows&#x4E0B;&#xFF1A;<br><img src="/2016/10/09/2016/1008Unicode/cei-Windows.png" alt="cei@Windows"><br>&#x53EA;&#x6709;Windows&#x4E0B;&#x663E;&#x793A;&#x662F;&#x6B63;&#x5E38;&#x7684;&#x3002;</p>
+<p>macOS&#x4E0B;&#xFF1A;<br><img src="/2016/10/09/2016/1008Unicode/cei-mac.png" alt="cei@macOS"><br>iOS&#x4E0B;&#xFF1A;<br><img src="/2016/10/09/2016/1008Unicode/cei-iOS.png" alt="cei@iOS"><br>Android&#x4E0B;&#xFF1A;<br><img src="/2016/10/09/2016/1008Unicode/cei-Android.png" alt="cei@Android"></p>
+<p>&#x539F;&#x56E0;&#x662F;&#x8FD9;&#x6837;&#x7684;&#xFF1A;&#x8FD9;&#x4E2A;&#x5B57;&#x7684;Unicode&#x7F16;&#x7801;&#x662F;0x24B62&#xFF0C;&#x843D;&#x5728;&#x4E86;Unicode CJK&#x6269;&#x5C55;B&#x7684;&#x96C6;&#x5408;&#x4E2D;&#x3002;&#x4E0D;&#x540C;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5BF9;&#x4E8E;&#x4E0D;&#x540C;&#x7F16;&#x7801;&#x8303;&#x56F4;&#x7684;&#x5B57;&#x7B26;&#x96C6;&#x7684;&#x5B57;&#x5F62;&#x652F;&#x6301;&#x5EA6;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x5373;&#x4F7F;&#x5728;Windows&#x4E0B;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x7248;&#x672C;&#x4E5F;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#x3002;&#x4E0A;&#x9762;&#x7684;&#x622A;&#x56FE;&#x662F;&#x5728;Win7&#x4E0B;&#x622A;&#x5230;&#x7684;&#xFF0C;Win7&#x9488;&#x5BF9;&#x6269;&#x5C55;B&#x81EA;&#x5E26;&#x4E86;&#x4E00;&#x4E2A;&#x5B57;&#x5E93;&#xFF0C;&#x800C;WinXP&#x662F;&#x6CA1;&#x6709;&#x7684;&#xFF0C;&#x56E0;&#x6B64;&#x5982;&#x679C;&#x662F;&#x5728;WinXP&#x4E0B;&#x9762;&#xFF0C;&#x5C31;&#x5E94;&#x8BE5;&#x4E5F;&#x770B;&#x4E0D;&#x5230;&#x8FD9;&#x4E2A;&#x5B57;&#x3002;</p>
+<h1 id="&#x5173;&#x4E8E;Unicode&#x7684;&#x6982;&#x5FF5;"><a href="#&#x5173;&#x4E8E;Unicode&#x7684;&#x6982;&#x5FF5;" class="headerlink" title="&#x5173;&#x4E8E;Unicode&#x7684;&#x6982;&#x5FF5;"></a>&#x5173;&#x4E8E;Unicode&#x7684;&#x6982;&#x5FF5;</h1><p>Unicode&#x7684;&#x76EE;&#x7684;&#x5C31;&#x5199;&#x5728;Unicode<a href="http://www.unicode.org/" target="_blank" rel="external">&#x5B98;&#x7F51;&#x9996;&#x9875;</a>&#xFF1A;&#x8BA9;&#x4E16;&#x754C;&#x4E0A;&#x4F7F;&#x7528;&#x4EFB;&#x4F55;&#x8BED;&#x8A00;&#x7684;&#x4EBA;&#x4EEC;&#x90FD;&#x80FD;&#x4F7F;&#x7528;&#x8BA1;&#x7B97;&#x673A;&#x3002;&#x5176;&#x5B9E;&#x662F;&#x8BA9;&#x8BA1;&#x7B97;&#x673A;&#x80FD;&#x652F;&#x6301;&#x4E16;&#x754C;&#x4E0A;&#x4EFB;&#x4F55;&#x4E00;&#x79CD;&#x8BED;&#x8A00;&#x3002;</p>
+<p>&#x8BED;&#x8A00;&#x662F;&#x7531;&#x5B57;&#x6216;&#x5B57;&#x7B26;&#x7EC4;&#x6210;&#x7684;&#xFF0C;&#x62C9;&#x4E01;&#x8BED;&#x7CFB;&#x4E0B;&#x5927;&#x90E8;&#x5206;&#x8BED;&#x8A00;&#x90FD;&#x662F;&#x901A;&#x8FC7;&#x6709;&#x9650;&#x7684;&#x5B57;&#x6BCD;&#x62FC;&#x5408;&#x800C;&#x6210;&#xFF0C;&#x6240;&#x4EE5;&#x8BA1;&#x7B97;&#x673A;&#x53EA;&#x8981;&#x652F;&#x6301;&#x8FD9;&#x4E9B;&#x6709;&#x9650;&#x7684;&#x5B57;&#x6BCD;&#x5373;&#x53EF;&#x3002;&#x800C;&#x50CF;&#x6C49;&#x5B57;&#x8FD9;&#x79CD;&#x8C61;&#x5F62;&#x6587;&#x5B57;&#x5219;&#x5305;&#x542B;&#x4E86;&#x51E0;&#x4E07;&#x4E2A;&#x5B57;&#xFF0C;&#x5982;&#x679C;&#x8BA1;&#x7B97;&#x673A;&#x8981;&#x652F;&#x6301;&#x4E16;&#x754C;&#x4E0A;&#x6240;&#x6709;&#x7684;&#x8BED;&#x8A00;&#x4F53;&#x7CFB;&#xFF0C;&#x5C31;&#x5FC5;&#x987B;&#x7ED9;&#x6BCF;&#x4E2A;&#x8BED;&#x8A00;&#x4E0B;&#x7684;&#x6BCF;&#x4E2A;&#x5B57;&#x7B26;&#x7F16;&#x4E2A;&#x53F7;&#xFF0C;&#x5927;&#x5BB6;&#x90FD;&#x8BA4;&#x8FD9;&#x4E2A;&#x7F16;&#x53F7;&#x3002;&#x8FC7;&#x53BB;&#x4E0D;&#x540C;&#x56FD;&#x5BB6;&#x4F1A;&#x5236;&#x5B9A;&#x81EA;&#x5DF1;&#x7684;&#x7F16;&#x7801;&#x6807;&#x51C6;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x7ED9;&#x81EA;&#x5DF1;&#x8BED;&#x8A00;&#x4F53;&#x7CFB;&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x7F16;&#x53F7;&#xFF0C;&#x4E0D;&#x540C;&#x6807;&#x51C6;&#x4E4B;&#x95F4;&#x53EF;&#x80FD;&#x4F1A;&#x51B2;&#x7A81;&#x3002;&#x6BD4;&#x5982;&#x540C;&#x4E00;&#x4E2A;&#x53F7;&#x7801;&#x5E8F;&#x5217;&#xFF0C;&#x5728;&#x6B27;&#x6D32;&#x8868;&#x793A;&#x201C;abc&#x201D;&#xFF0C;&#x5728;&#x4E2D;&#x56FD;&#x5C31;&#x8868;&#x793A;&#x201C;&#x4F60;&#x6211;&#x4ED6;&#x201D;&#xFF0C;&#x6570;&#x636E;&#x5728;&#x76F8;&#x4E92;&#x4EA4;&#x6362;&#x4E4B;&#x524D;&#x5C31;&#x5FC5;&#x987B;&#x6307;&#x660E;&#x4E86;&#x6211;&#x7684;&#x7F16;&#x7801;&#x91C7;&#x7528;&#x7684;&#x4EC0;&#x4E48;&#x6807;&#x51C6;&#xFF0C;&#x5230;&#x4E86;&#x5BF9;&#x7AEF;&#x518D;&#x4F9D;&#x7167;&#x4E0D;&#x540C;&#x7684;&#x6807;&#x51C6;&#x505A;&#x8F6C;&#x6362;&#x3002;&#x8FD9;&#x76F8;&#x5F53;&#x4E8E;&#x7ED9;&#x8BA1;&#x7B97;&#x673A;&#x9650;&#x5B9A;&#x4E86;&#x56FD;&#x754C;&#xFF0C;&#x53EF;&#x662F;&#x4E92;&#x8054;&#x7F51;&#x662F;&#x65E0;&#x56FD;&#x754C;&#x7684;&#x3002;&#x8FD9;&#x4E0D;&#x53EA;&#x662F;&#x8DDF;&#x4E92;&#x8054;&#x7F51;&#x6587;&#x5316;&#x76F8;&#x51B2;&#x7A81;&#xFF0C;&#x4E5F;&#x7ED9;&#x8DE8;&#x533A;&#x57DF;&#x4F7F;&#x7528;&#x5E26;&#x6765;&#x4E86;&#x73B0;&#x5B9E;&#x4E0A;&#x7684;&#x4E0D;&#x4FBF;&#x3002;&#x4E3A;&#x4E86;&#x89E3;&#x51B3;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#xFF0C;Unicode&#x7EC4;&#x7EC7;&#x8BF4;&#xFF1A;&#x201C;&#x6211;&#x6765;&#x6307;&#x5B9A;&#x4E00;&#x5957;&#x89C4;&#x8303;&#xFF0C;&#x80FD;&#x8986;&#x76D6;&#x6240;&#x6709;&#x8BED;&#x8A00;&#xFF0C;&#x7ED9;&#x6240;&#x6709;&#x8BED;&#x8A00;&#x4E0B;&#x7684;&#x6240;&#x6709;&#x5B57;&#x7B26;&#x89C4;&#x5B9A;&#x4E00;&#x5957;&#x7F16;&#x7801;&#xFF0C;&#x5927;&#x5BB6;&#x90FD;&#x9075;&#x5B88;&#x6211;&#x7684;&#x7F16;&#x7801;&#x89C4;&#x8303;&#xFF0C;&#x8FD9;&#x4E2A;&#x95EE;&#x9898;&#x81EA;&#x7136;&#x5C31;&#x89E3;&#x51B3;&#x4E86;&#xFF01;&#x201D;</p>
+<h2 id="Unicode&#x7801;&#x4F4D;&#x7684;&#x7EC4;&#x7EC7;"><a href="#Unicode&#x7801;&#x4F4D;&#x7684;&#x7EC4;&#x7EC7;" class="headerlink" title="Unicode&#x7801;&#x4F4D;&#x7684;&#x7EC4;&#x7EC7;"></a>Unicode&#x7801;&#x4F4D;&#x7684;&#x7EC4;&#x7EC7;</h2><p>&#x5230;2016&#x5E74;&#x7684;Unicode 9.0&#x4E3A;&#x6B62;&#xFF0C;Unicode&#x5171;&#x4F7F;&#x7528;&#x4E86;&#x4ECE;0&#x5230;0x10FFFF&#x7684;&#x7F16;&#x7801;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;&#x6570;&#x5B57;&#x4EE3;&#x8868;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x3002;&#x4E3A;&#x4E86;&#x4FBF;&#x4E8E;&#x7406;&#x89E3;&#xFF0C;&#x5B83;&#x628A;&#x8FD9;&#x4E9B;&#x7801;&#x4F4D;&#x6309;&#x7167;&#x524D;16&#x4F4D;&#x548C;&#x540E;16&#x4F4D;&#x505A;&#x4E86;&#x903B;&#x8F91;&#x5206;&#x533A;&#xFF0C;&#x524D;16&#x4F4D;&#x6BCF;&#x4E2A;&#x7F16;&#x7801;&#x53EB;&#x505A;&#x4E00;&#x4E2A;Plane&#xFF08;&#x5E73;&#x9762;&#xFF09;&#xFF0C;&#x4E8E;&#x662F;&#x6BCF;&#x4E2A;&#x5E73;&#x9762;&#x4E0B;&#x5C31;&#x5305;&#x542B;&#x4E86;0xFFFF&#x4E2A;&#x7801;&#x4F4D;&#x3002;&#x4F8B;&#x5982;&#x524D;&#x9762;&#x8BF4;&#x7684;&#x201C;&#x5352;&#x74E6;&#x201D;&#x7684;&#x7F16;&#x7801;&#x662F;0x24B62&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5728;Plane2&#x4E0B;&#x7684;0x4B62&#x5904;&#x627E;&#x5230;&#x3002;</p>
+<h2 id="Basic-Multilingual-Plane&#xFF08;BMP&#xFF09;"><a href="#Basic-Multilingual-Plane&#xFF08;BMP&#xFF09;" class="headerlink" title="Basic Multilingual Plane&#xFF08;BMP&#xFF09;"></a>Basic Multilingual Plane&#xFF08;BMP&#xFF09;</h2><p>&#x628A;Plane0&#x4E0B;&#x5305;&#x542B;&#x7684;&#x7F16;&#x7801;&#x79F0;&#x4F5C;<strong>&#x591A;&#x8BED;&#x8A00;&#x57FA;&#x672C;&#x9762; Basic Multilingual Plane</strong>&#xFF0C;&#x7B80;&#x79F0;<strong>BMP</strong>&#x3002;Unicode&#x7684;&#x7F16;&#x7801;&#x65B9;&#x6848;&#x5728;&#x5236;&#x5B9A;&#x65F6;&#x8003;&#x8651;&#x5230;&#x4E86;&#x5404;&#x8BED;&#x8A00;&#x7684;&#x4E66;&#x5199;&#x3001;&#x4F7F;&#x7528;&#x65B9;&#x4FBF;&#xFF0C;&#x5C3D;&#x91CF;&#x628A;&#x5E38;&#x7528;&#x7684;&#x5F80;&#x524D;&#x6392;&#xFF0C;&#x7B26;&#x5408;&#x54C8;&#x592B;&#x66FC;&#x7F16;&#x7801;&#x539F;&#x5219;&#xFF1B;&#x5C3D;&#x91CF;&#x628A;&#x4E00;&#x4E2A;&#x533A;&#x57DF;&#x7684;&#x5B57;&#x7B26;&#x7F16;&#x5728;&#x76F8;&#x90BB;&#x7684;&#x4F4D;&#x7F6E;&#x3002;BMP&#x4E0B;&#x5305;&#x542B;&#x4E86;&#x4E16;&#x754C;&#x5404;&#x8BED;&#x8A00;&#x4E0B;&#x6BD4;&#x8F83;&#x5E38;&#x7528;&#x7684;&#x5B57;&#x7B26;&#xFF0C;&#x6240;&#x4EE5;&#x624D;&#x88AB;&#x79F0;&#x4E3A;&#x57FA;&#x672C;&#x9762;~&#x5728;&#x8FD9;&#x4E2A;BMP&#x4E2D;&#xFF0C;&#x5305;&#x542B;&#x4E86;<code>27,973</code>&#x4E2A;&#x6C49;&#x5B57;&#x3002;<br><img src="/2016/10/09/2016/1008Unicode/img02.png" alt="Plane"></p>
+<h2 id="Supplementary-Multilingual-Plane&#xFF08;SMP&#xFF09;"><a href="#Supplementary-Multilingual-Plane&#xFF08;SMP&#xFF09;" class="headerlink" title="Supplementary Multilingual Plane&#xFF08;SMP&#xFF09;"></a>Supplementary Multilingual Plane&#xFF08;SMP&#xFF09;</h2><p>&#x628A;Plane1&#x4E0B;&#x5305;&#x542B;&#x7684;&#x7F16;&#x7801;&#x79F0;&#x4F5C;<strong>&#x591A;&#x8BED;&#x8A00;&#x8865;&#x5145;&#x9762; Supplementary Multilingual Plane</strong>&#xFF0C;&#x7B80;&#x79F0;<strong>SMP</strong>&#x3002;&#x4F4D;&#x4E8E;&#x8FD9;&#x4E2A;&#x9762;&#x5B57;&#x7B26;&#x6216;&#x8005;&#x4E0D;&#x592A;&#x5E38;&#x7528;&#xFF0C;&#x6216;&#x8005;&#x662F;&#x4E3A;&#x4E86;&#x7279;&#x6B8A;&#x542B;&#x4E49;&#x4E13;&#x95E8;&#x9020;&#x7684;&#xFF0C;&#x6216;&#x8005;&#x662F;&#x8868;&#x610F;&#x7B26;&#x53F7;&#xFF0C;&#x6216;&#x8005;&#x662F;BMP&#x5B57;&#x7B26;&#x7684;&#x4E0D;&#x5E38;&#x7528;&#x7684;&#x53D8;&#x79CD;&#x3002;</p>
+<h2 id="Supplementary-Ideographic-Plane&#xFF08;SIP&#xFF09;"><a href="#Supplementary-Ideographic-Plane&#xFF08;SIP&#xFF09;" class="headerlink" title="Supplementary Ideographic Plane&#xFF08;SIP&#xFF09;"></a>Supplementary Ideographic Plane&#xFF08;SIP&#xFF09;</h2><p>&#x628A;Plane2&#x4E0B;&#x5305;&#x542B;&#x7684;&#x7F16;&#x7801;&#x79F0;&#x4F5C;<strong>&#x8868;&#x610F;&#x8865;&#x5145;&#x9762; Supplementary Ideographic Plane</strong>&#xFF0C;&#x7B80;&#x79F0;<strong>SIP</strong>&#x3002;&#x8FD9;&#x4E2A;&#x533A;&#x57DF;&#x4E3B;&#x8981;&#x662F;&#x4E3A;&#x4E2D;&#x65E5;&#x97E9;&#x8C61;&#x5F62;&#x6587;&#x5B57;&#x5F00;&#x8F9F;&#x7684;&#x4E00;&#x5757;&#x6269;&#x5C55;&#x7A7A;&#x95F4;&#xFF0C;&#x7528;&#x4E8E;&#x5B58;&#x653E;&#x4E0D;&#x9002;&#x5408;&#x653E;&#x5230;BMP&#x4E2D;&#x7684;&#x751F;&#x50FB;&#x5B57;&#x3002;&#x8FD9;&#x4E2A;&#x533A;&#x57DF;&#x9664;&#x4E86;&#x6709;&#x5C11;&#x91CF;&#x5E38;&#x7528;CJK&#x5B57;&#x7B26;&#x5916;&#xFF08;&#x5982;&#x5E7F;&#x4E1C;&#x8BDD;&#x91CC;&#x7684;&#x5E38;&#x7528;&#x5B57;&#xFF09;&#xFF0C;&#x7EDD;&#x5927;&#x90E8;&#x5206;&#x90FD;&#x662F;&#x975E;&#x5E38;&#x7F55;&#x89C1;&#x7684;&#x751F;&#x50FB;&#x5B57;&#x3002;</p>
+<h2 id="Supplementary-Special-purpose-Plane&#xFF08;SSP&#xFF09;"><a href="#Supplementary-Special-purpose-Plane&#xFF08;SSP&#xFF09;" class="headerlink" title="Supplementary Special-purpose Plane&#xFF08;SSP&#xFF09;"></a>Supplementary Special-purpose Plane&#xFF08;SSP&#xFF09;</h2><p>&#x628A;Plane14&#x4E0B;&#x5305;&#x542B;&#x7684;&#x7F16;&#x7801;&#x79F0;&#x4F5C;<strong>&#x7279;&#x6B8A;&#x7528;&#x9014;&#x8865;&#x5145;&#x9762; Supplementary Special-purpose Plane</strong>&#xFF0C;&#x7B80;&#x79F0;<strong>SSP</strong>&#x3002;&#x8FD9;&#x4E2A;&#x533A;&#x57DF;&#x7684;&#x5B57;&#x7B26;&#x57FA;&#x672C;&#x4E0A;&#x90FD;&#x662F;&#x66F4;&#x4E0D;&#x5E38;&#x7528;&#x7684;&#x683C;&#x5F0F;&#x63A7;&#x5236;&#x7B26;&#x3002;</p>
+<h2 id="Private-Use-Planes"><a href="#Private-Use-Planes" class="headerlink" title="Private Use Planes"></a>Private Use Planes</h2><p>&#x8FD8;&#x5269;&#x4E0B;Plane15&#x3001;Plane16&#x4E24;&#x4E2A;&#x9762;&#xFF0C;&#x7528;&#x4E8E;&#x79C1;&#x6709;&#x7528;&#x9014;&#x3002;&#x8FD9;&#x4E24;&#x4E2A;&#x533A;&#x57DF;&#x5305;&#x542B;&#x4E86;131,068&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x7528;&#x4E8E;&#x8865;&#x5145;BMP&#x4E2D;6400&#x4E2A;&#x4EE3;&#x7406;&#x53BB;&#x7801;&#x4F4D;&#xFF0C;&#x5177;&#x4F53;&#x7EC6;&#x8282;&#x5728;&#x540E;&#x9762;&#x8BB2;&#x5230;UTF-16&#x7F16;&#x7801;&#x65F6;&#x518D;&#x89E3;&#x91CA;&#x3002;</p>
+<font color="red">&#x672A;&#x5B8C;&#x5F85;&#x7EED;&#x2026;&#x2026;</font>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Unicode/" rel="tag">#Unicode</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/04/2016/1004KeyboardLearning11/" rel="next" title="键盘消息处理学习笔记（十一）">
+                <i class="fa fa-chevron-left"></i> 键盘消息处理学习笔记（十一）
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/09/2016/1008Unicode/"
+           data-title="Unicode字符集和字形" data-url="http://palanceli.github.io/2016/10/09/2016/1008Unicode/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">45</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#关于Unicode的概念"><span class="nav-number">1.</span> <span class="nav-text">关于Unicode的概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Unicode码位的组织"><span class="nav-number">1.1.</span> <span class="nav-text">Unicode码位的组织</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Basic-Multilingual-Plane（BMP）"><span class="nav-number">1.2.</span> <span class="nav-text">Basic Multilingual Plane（BMP）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supplementary-Multilingual-Plane（SMP）"><span class="nav-number">1.3.</span> <span class="nav-text">Supplementary Multilingual Plane（SMP）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supplementary-Ideographic-Plane（SIP）"><span class="nav-number">1.4.</span> <span class="nav-text">Supplementary Ideographic Plane（SIP）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Supplementary-Special-purpose-Plane（SSP）"><span class="nav-number">1.5.</span> <span class="nav-text">Supplementary Special-purpose Plane（SSP）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Private-Use-Planes"><span class="nav-number">1.6.</span> <span class="nav-text">Private Use Planes</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/vendors/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
