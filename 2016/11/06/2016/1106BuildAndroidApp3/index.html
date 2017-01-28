@@ -1,0 +1,713 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android开发环境," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x5F53;&amp;#x5DE5;&amp;#x7A0B;&amp;#x5F53;&amp;#x4E2D;&amp;#x5305;&amp;#x542B;C/C++&amp;#x4EE3;&amp;#x7801;&amp;#xFF0C;&amp;#x5C31;&amp;#x9700;&amp;#x8981;&amp;#x4F7F;&amp;#x7528;NDK&amp;#x7F16;&amp;#x8BD1;&amp;#x751F;&amp;#x6210;so&amp;#x6587;&amp;#x4EF6;&amp;#xFF0C;&amp;#x4EE5;&amp;#x4F9">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android应用程序的编译（三）——NDK编译">
+<meta property="og:url" content="http://palanceli.github.io/2016/11/06/2016/1106BuildAndroidApp3/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x5F53;&amp;#x5DE5;&amp;#x7A0B;&amp;#x5F53;&amp;#x4E2D;&amp;#x5305;&amp;#x542B;C/C++&amp;#x4EE3;&amp;#x7801;&amp;#xFF0C;&amp;#x5C31;&amp;#x9700;&amp;#x8981;&amp;#x4F7F;&amp;#x7528;NDK&amp;#x7F16;&amp;#x8BD1;&amp;#x751F;&amp;#x6210;so&amp;#x6587;&amp;#x4EF6;&amp;#xFF0C;&amp;#x4EE5;&amp;#x4F9">
+<meta property="og:image" content="http://palanceli.github.io/2016/11/06/2016/1106BuildAndroidApp3/img01.png">
+<meta property="og:updated_time" content="2016-11-06T16:46:26.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android应用程序的编译（三）——NDK编译">
+<meta name="twitter:description" content="&amp;#x5F53;&amp;#x5DE5;&amp;#x7A0B;&amp;#x5F53;&amp;#x4E2D;&amp;#x5305;&amp;#x542B;C/C++&amp;#x4EE3;&amp;#x7801;&amp;#xFF0C;&amp;#x5C31;&amp;#x9700;&amp;#x8981;&amp;#x4F7F;&amp;#x7528;NDK&amp;#x7F16;&amp;#x8BD1;&amp;#x751F;&amp;#x6210;so&amp;#x6587;&amp;#x4EF6;&amp;#xFF0C;&amp;#x4EE5;&amp;#x4F9">
+<meta name="twitter:image" content="http://palanceli.github.io/2016/11/06/2016/1106BuildAndroidApp3/img01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/11/06/2016/1106BuildAndroidApp3/"/>
+
+  <title> Android应用程序的编译（三）——NDK编译 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android应用程序的编译（三）——NDK编译
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-11-06T21:28:07+08:00" content="2016-11-06">
+              2016-11-06
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android/" itemprop="url" rel="index">
+                    <span itemprop="name">Android</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/11/06/2016/1106BuildAndroidApp3/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/11/06/2016/1106BuildAndroidApp3/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x5F53;&#x5DE5;&#x7A0B;&#x5F53;&#x4E2D;&#x5305;&#x542B;C/C++&#x4EE3;&#x7801;&#xFF0C;&#x5C31;&#x9700;&#x8981;&#x4F7F;&#x7528;NDK&#x7F16;&#x8BD1;&#x751F;&#x6210;so&#x6587;&#x4EF6;&#xFF0C;&#x4EE5;&#x4F9B;java&#x8C03;&#x7528;&#xFF0C;&#x672C;&#x6587;&#x8BB0;&#x5F55;&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x3002;<br><a id="more"></a></p>
+<h1 id="&#x5E26;&#x6709;JNI&#x7684;Android&#x5DE5;&#x7A0B;"><a href="#&#x5E26;&#x6709;JNI&#x7684;Android&#x5DE5;&#x7A0B;" class="headerlink" title="&#x5E26;&#x6709;JNI&#x7684;Android&#x5DE5;&#x7A0B;"></a>&#x5E26;&#x6709;JNI&#x7684;Android&#x5DE5;&#x7A0B;</h1><p>&#x540C;<a href="http://palanceli.com/2016/11/06/2016/1106BuildAndroidApp2/#&#x751F;&#x6210;&#x6807;&#x51C6;Android&#x5DE5;&#x7A0B;" target="_blank" rel="external">Android&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x7684;&#x7F16;&#x8BD1;&#xFF08;&#x4E8C;&#xFF09;&#x2014;&#x2014;SDK&#x7F16;&#x8BD1;</a>&#xFF0C;&#x4F7F;&#x7528;<code>android create project</code>&#x547D;&#x4EE4;&#x751F;&#x6210;&#x4E00;&#x4E2A;&#x9ED8;&#x8BA4;&#x7684;HellAndroid&#xFF0C;&#x5728;&#x5176;&#x4E2D;&#x624B;&#x52A8;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;jni&#x76EE;&#x5F55;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line">HelloAndroid</div><div class="line">&#x251C;&#x2500;&#x2500;bin</div><div class="line">&#x2502;  &#x2514;&#x2500;&#x2500;</div><div class="line">&#x251C;&#x2500;&#x2500;libs</div><div class="line">&#x2502;  &#x2514;&#x2500;&#x2500;</div><div class="line">&#x251C;&#x2500;&#x2500;res</div><div class="line">&#x2502;  &#x2514;&#x2500;&#x2500;...</div><div class="line">&#x2502;  &#x251C;&#x2500;&#x2500;layout</div><div class="line">&#x2502;  &#x2502;  &#x2514;&#x2500;&#x2500;main.xml</div><div class="line">&#x2502;  &#x2514;&#x2500;&#x2500;values</div><div class="line">&#x2502;     &#x2514;&#x2500;&#x2500;strings.xml</div><div class="line">&#x251C;&#x2500;&#x2500;jni                  # &#x624B;&#x52A8;&#x6DFB;&#x52A0;&#x6B64;&#x76EE;&#x5F55;</div><div class="line">&#x2502;  &#x251C;&#x2500;&#x2500;palance_li_hellojni_HelloJni.h</div><div class="line">&#x2502;  &#x251C;&#x2500;&#x2500;palance_li_hellojni_HelloJni.c</div><div class="line">&#x2502;  &#x251C;&#x2500;&#x2500;Android.mk</div><div class="line">&#x2502;  &#x2514;&#x2500;&#x2500;Application.mk</div><div class="line">&#x251C;&#x2500;&#x2500;src/palance/li/hello</div><div class="line">&#x2502;  &#x2514;&#x2500;&#x2500;MainActivity.java</div><div class="line">&#x251C;&#x2500;&#x2500;ant.properties</div><div class="line">&#x251C;&#x2500;&#x2500;local.properties</div><div class="line">&#x251C;&#x2500;&#x2500;project.properties</div><div class="line">&#x251C;&#x2500;&#x2500;proguard-project.txt</div><div class="line">&#x251C;&#x2500;&#x2500;AndroidManifest.xml</div><div class="line">&#x2514;&#x2500;&#x2500;build.xml</div></pre></td></tr></table></figure></p>
+<h1 id="&#x901A;&#x8FC7;javah&#x521B;&#x5EFA;-h&#x6587;&#x4EF6;"><a href="#&#x901A;&#x8FC7;javah&#x521B;&#x5EFA;-h&#x6587;&#x4EF6;" class="headerlink" title="&#x901A;&#x8FC7;javah&#x521B;&#x5EFA;.h&#x6587;&#x4EF6;"></a>&#x901A;&#x8FC7;javah&#x521B;&#x5EFA;.h&#x6587;&#x4EF6;</h1><p><code>javah</code>&#x4F1A;&#x6839;&#x636E;<code>javac</code>&#x7F16;&#x8BD1;&#x51FA;&#x7684;class&#x6587;&#x4EF6;&#x751F;&#x6210;&#x5FC5;&#x8981;&#x7684;.h&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x5728;&#x5176;&#x4E2D;&#x751F;&#x6210;&#x51FD;&#x6570;&#x58F0;&#x660E;&#x7684;&#x4EE3;&#x7801;&#x3002;&#x9996;&#x5148;&#xFF0C;&#x5728;<code>src/palance/li/hello/MainActivity.java</code>&#x4E2D;&#x6DFB;&#x52A0;native&#x51FD;&#x6570;&#x7684;&#x58F0;&#x660E;&#x548C;&#x8C03;&#x7528;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> palance.li.hello;</div><div class="line"></div><div class="line"><span class="keyword">import</span> android.app.Activity;</div><div class="line"><span class="keyword">import</span> android.os.Bundle;</div><div class="line"><span class="keyword">import</span> android.widget.TextView;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainActivity</span> <span class="keyword">extends</span> <span class="title">Activity</span></span></div><div class="line">{</div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">native</span> String <span class="title">stringFromJNI</span><span class="params">()</span></span>;  <span class="comment">// &#x58F0;&#x660E;native&#x51FD;&#x6570;</span></div><div class="line">  <span class="keyword">static</span> {</div><div class="line">    System.loadLibrary(<span class="string">&quot;libhellojni&quot;</span>);  <span class="comment">// &#x52A0;&#x8F7D;so</span></div><div class="line">  }</div><div class="line">  </div><div class="line">    <span class="comment">/** Called when the activity is first created. */</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstanceState)</span></span></div><div class="line">    {</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstanceState);</div><div class="line">        setContentView(R.layout.main);</div><div class="line">        TextView tv = (TextView)findViewById(R.id.tv); <span class="comment">// &#x901A;&#x8FC7;id&#x83B7;&#x5F97;&#x5BF9;&#x8C61;</span></div><div class="line">        tv.setText(stringFromJNI());  <span class="comment">// &#x8C03;&#x7528;native&#x51FD;&#x6570;&#xFF0C;&#x8BBE;&#x7F6E;&#x5BF9;&#x8C61;&#x6587;&#x672C;</span></div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x6B64;&#x5916;&#x8FD8;&#x8981;&#x5728;<code>layout/main.xml</code>&#x4E2D;&#x4E3A;TextView&#x6DFB;&#x52A0;id&#xFF1A;</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</div><div class="line"><span class="tag">&lt;<span class="name">LinearLayout</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></div><div class="line">    <span class="attr">android:orientation</span>=<span class="string">&quot;vertical&quot;</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">&quot;fill_parent&quot;</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">&quot;fill_parent&quot;</span>&gt;</div><div class="line"><span class="comment">&lt;!-- &#x4E3A;TextView&#x6DFB;&#x52A0;id --&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">&quot;@+id/tv&quot;</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">&quot;fill_parent&quot;</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></div><div class="line">    <span class="attr">android:text</span>=<span class="string">&quot;Hello World, MainActivity&quot;</span></div><div class="line">    /&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">LinearLayout</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>&#x7F16;&#x8BD1;java&#x6E90;&#x6587;&#x4EF6;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">$ javac -encoding utf-8 \</div><div class="line">    -source 1.6 -target 1.6 \</div><div class="line">    -bootclasspath ~/Library/Android/sdk/platforms/android-25/android.jar \</div><div class="line">    <span class="_">-d</span> bin/classes \</div><div class="line">    src/palance/li/hello/HelloAndroid.java gen/palance/li/hello/R.java</div></pre></td></tr></table></figure></p>
+<p>&#x8C03;&#x7528;javah&#x4E3A;class&#x6587;&#x4EF6;&#x751F;&#x6210;.h&#x5934;&#x6587;&#x4EF6;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ javah -classpath bin/classes \</div><div class="line">    -bootclasspath /Users/palance/Library/Android/sdk/platforms/android-25/android.jar  \</div><div class="line">    <span class="_">-d</span> jni \</div><div class="line">    palance.li.hello.MainActivity</div></pre></td></tr></table></figure></p>
+<p><code>-classpath</code> &#x6307;&#x5B9A;javah&#x7528;&#x6765;&#x67E5;&#x8BE2;&#x7C7B;&#x7684;&#x8DEF;&#x5F84;&#xFF0C;&#x5373;&#x9700;&#x8981;&#x4E3A;&#x4E4B;&#x751F;&#x6210;.h&#x6587;&#x4EF6;&#x7684;class&#x6587;&#x4EF6;&#x6240;&#x5728;&#x8DEF;&#x5F84;<br><code>-bootclasspath</code> &#x8986;&#x76D6;&#x5F15;&#x5BFC;&#x7C7B;&#x7684;&#x4F4D;&#x7F6E;<br><code>-d</code> &#x751F;&#x6210;&#x5934;&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;<br>&#x6700;&#x540E;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x7C7B;&#x540D;&#x3002;<br>&#x6211;&#x5728;&#x8C03;&#x7528;javah&#x7684;&#x65F6;&#x5019;&#x66FE;&#x7ECF;&#x9047;&#x5230;&#x5404;&#x79CD;&#x95EE;&#x9898;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;<code>&#x9519;&#x8BEF;: &#x65E0;&#x6CD5;&#x8BBF;&#x95EE;android.app.Activity</code>&#x3001;<code>&#x627E;&#x4E0D;&#x5230;android.app.Activity&#x7684;&#x7C7B;&#x6587;&#x4EF6;</code>&#x4E4B;&#x7C7B;&#x7684;&#xFF0C;&#x7F51;&#x4E0A;&#x7ED9;&#x51FA;&#x7684;&#x529E;&#x6CD5;&#x591A;&#x662F;&#x6362;&#x4E2A;&#x5F53;&#x524D;&#x8DEF;&#x5F84;&#x3002;&#x5F53;&#x660E;&#x767D;javah&#x7684;&#x5DE5;&#x4F5C;&#x673A;&#x5236;&#x4EE5;&#x540E;&#xFF0C;&#x8FD9;&#x4E9B;&#x95EE;&#x9898;&#x5C31;&#x4E0D;&#x96BE;&#x89E3;&#x51B3;&#x4E86;&#xFF1A;&#x9996;&#x5148;&#x8981;&#x5728;java&#x6E90;&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;native&#x51FD;&#x6570;&#x7684;&#x58F0;&#x660E;&#x548C;&#x8C03;&#x7528;&#xFF0C;&#x7136;&#x540E;&#x8981;&#x7F16;&#x8BD1;&#x6210;class&#x6587;&#x4EF6;&#xFF0C;&#x4E4B;&#x540E;&#x624D;&#x80FD;&#x8BA9;javah&#x6839;&#x636E;&#x8FD9;&#x4E9B;class&#x6587;&#x4EF6;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x4EE3;&#x7801;&#x3002;</p>
+<h1 id="&#x521B;&#x5EFA;-c&#x6587;&#x4EF6;"><a href="#&#x521B;&#x5EFA;-c&#x6587;&#x4EF6;" class="headerlink" title="&#x521B;&#x5EFA;.c&#x6587;&#x4EF6;"></a>&#x521B;&#x5EFA;.c&#x6587;&#x4EF6;</h1><p>jni/palance_li_hello_MainActivity.c&#xFF1A;<br><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;palance_li_hello_MainActivity.h&quot;</span></span></div><div class="line"><span class="function">JNIEXPORT jstring JNICALL <span class="title">Java_palance_li_hello_MainActivity_stringFromJNI</span><span class="params">(JNIEnv* env, jobject <span class="number">_</span><span class="keyword">this</span>)</span></span></div><div class="line">{</div><div class="line">    <span class="keyword">return</span> (*env)-&gt;NewStringUTF(env, <span class="string">&quot;This is from JNI!&quot;</span>);</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<h1 id="&#x521B;&#x5EFA;jni-Android-mk&#x6587;&#x4EF6;"><a href="#&#x521B;&#x5EFA;jni-Android-mk&#x6587;&#x4EF6;" class="headerlink" title="&#x521B;&#x5EFA;jni/Android.mk&#x6587;&#x4EF6;"></a>&#x521B;&#x5EFA;jni/Android.mk&#x6587;&#x4EF6;</h1><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">LOCAL_PATH:=<span class="variable">$(call my-dir)</span></div><div class="line">include $(CLEAR_VARS)</div><div class="line"></div><div class="line">LOCAL_MODULE := libhellojni</div><div class="line">LOCAL_SRC_FILES := \</div><div class="line">    palance_li_hello_MainActivity.c</div><div class="line"></div><div class="line">LOCAL_C_INCLUDES += \</div><div class="line">    $(JNI_H_INCLUDE)</div><div class="line"></div><div class="line">include $(BUILD_SHARED_LIBRARY)</div></pre></td></tr></table></figure>
+<h1 id="&#x901A;&#x8FC7;ndk-build&#x751F;&#x6210;so&#x6587;&#x4EF6;"><a href="#&#x901A;&#x8FC7;ndk-build&#x751F;&#x6210;so&#x6587;&#x4EF6;" class="headerlink" title="&#x901A;&#x8FC7;ndk-build&#x751F;&#x6210;so&#x6587;&#x4EF6;"></a>&#x901A;&#x8FC7;ndk-build&#x751F;&#x6210;so&#x6587;&#x4EF6;</h1><p>&#x6267;&#x884C;&#x5982;&#x4E0B;&#x547D;&#x4EE4;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> HelloAndroid</div><div class="line">$ ndk-build</div></pre></td></tr></table></figure></p>
+<p><code>ndk-build</code>&#x6765;&#x81EA;<code>$ ~/Library/Android/sdk/ndk-bundle/ndk-build</code>&#x3002;&#x5B83;&#x4F1A;&#x751F;&#x6210;&#x76EE;&#x5F55;<code>/libs</code>&#xFF0C;&#x5E76;&#x5728;&#x5176;&#x4E0B;&#x751F;&#x6210;&#x4E00;&#x5806;&#x5B50;&#x76EE;&#x5F55;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">HelloAndroid</div><div class="line">&#x251C;&#x2500;&#x2500;...</div><div class="line">&#x2514;&#x2500;&#x2500;libs</div><div class="line">   &#x251C;&#x2500;&#x2500;arm64-v8a</div><div class="line">   &#x2502;  &#x2514;&#x2500;&#x2500;libhellojni.so</div><div class="line">   &#x251C;&#x2500;&#x2500;armeabi</div><div class="line">   &#x2502;  &#x2514;&#x2500;&#x2500;libhellojni.so</div><div class="line">   &#x251C;&#x2500;&#x2500;armeabi-v7a</div><div class="line">   &#x2502;  &#x2514;&#x2500;&#x2500;libhellojni.so</div><div class="line">   &#x251C;&#x2500;&#x2500;mips</div><div class="line">   &#x2502;  &#x2514;&#x2500;&#x2500;libhellojni.so</div><div class="line">   &#x251C;&#x2500;&#x2500;mips64</div><div class="line">   &#x2502;  &#x2514;&#x2500;&#x2500;libhellojni.so</div><div class="line">   &#x251C;&#x2500;&#x2500;x86</div><div class="line">   &#x2502;  &#x2514;&#x2500;&#x2500;libhellojni.so</div><div class="line">   &#x2514;&#x2500;&#x2500;x86_64</div><div class="line">      &#x2514;&#x2500;&#x2500;libhellojni.so</div></pre></td></tr></table></figure></p>
+<p>&#x53EF;&#x4EE5;&#x653E;&#x4E00;&#x4E2A;&#x914D;&#x7F6E;&#x6587;&#x4EF6;<code>jni/Application.mk</code>&#x6765;&#x5236;&#x5B9A;&#x9700;&#x8981;&#x7684;&#x5E73;&#x53F0;&#x7C7B;&#x578B;&#xFF1A;<br><figure class="highlight makefile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">APP_ABI := armeabi-v7a x86_64</div></pre></td></tr></table></figure></p>
+<p>&#x518D;&#x6B21;&#x6267;&#x884C;<code>ndk-build</code>&#x547D;&#x4EE4;&#xFF0C;&#x5C31;&#x4F1A;&#x5728;<code>/libs</code>&#x4E0B;&#x53EA;&#x751F;&#x6210;<code>armeabi-v7a</code>&#x548C;<code>x86_64</code>&#x4E24;&#x4E2A;&#x5E73;&#x53F0;&#x7684;so&#x6587;&#x4EF6;&#x4E86;&#x3002;</p>
+<h1 id="&#x751F;&#x6210;apk"><a href="#&#x751F;&#x6210;apk" class="headerlink" title="&#x751F;&#x6210;apk"></a>&#x751F;&#x6210;apk</h1><p>&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x6253;&#x5305;&#x8FC7;&#x7A0B;&#x548C;<a href="http://palanceli.com/2016/11/06/2016/1106BuildAndroidApp2/#&#x4F7F;&#x7528;SDK&#x7F16;&#x8BD1;" target="_blank" rel="external">&#x4F7F;&#x7528;SDK&#x7F16;&#x8BD1;</a>&#x5C31;&#x4E00;&#x6A21;&#x4E00;&#x6837;&#x4E86;&#xFF0C;&#x552F;&#x4E00;&#x7684;&#x5DEE;&#x522B;&#x5728;&#x4E8E;&#x5728;&#x7B2C;4&#x6B65;&#x4E4B;&#x540E;&#x63D2;&#x5165;&#x4E00;&#x6B65;&#xFF0C;&#x628A;so&#x6587;&#x4EF6;&#x6DFB;&#x52A0;&#x5230;apk&#x91CC;&#xFF0C;&#x5B8C;&#x6574;&#x7684;&#x8FC7;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> HelloAndroid</div><div class="line"></div><div class="line"><span class="comment"># 1. &#x5C06;&#x5DE5;&#x7A0B;&#x7684;&#x8D44;&#x6E90;&#x7F16;&#x8BD1;&#x5230;R.java&#x6587;&#x4EF6;</span></div><div class="line">$ aapt package -m <span class="_">-f</span> \</div><div class="line">    -J gen \</div><div class="line">    -M AndroidManifest.xml \</div><div class="line">    -S res \</div><div class="line">    -I ~/Library/Android/sdk/platforms/android-25/android.jar</div><div class="line"></div><div class="line"><span class="comment"># 2. &#x7F16;&#x8BD1;java&#x6E90;&#x6587;&#x4EF6;</span></div><div class="line">$ javac -encoding utf-8 \</div><div class="line">    -source 1.6 -target 1.6 \</div><div class="line">    -bootclasspath ~/Library/Android/sdk/platforms/android-25/android.jar \</div><div class="line">    <span class="_">-d</span> bin/classes \</div><div class="line">    src/palance/li/hello/HelloAndroid.java gen/palance/li/hello/R.java</div><div class="line"></div><div class="line"><span class="comment"># 3. &#x5C06;&#x7F16;&#x8BD1;&#x597D;&#x7684;&#x6587;&#x4EF6;&#x6253;&#x5305;&#x6210;dex&#x683C;&#x5F0F;</span></div><div class="line">$ dx --dex --output=bin/classes.dex bin/classes</div><div class="line"></div><div class="line"><span class="comment"># 4. &#x521B;&#x5EFA;&#x672A;&#x7B7E;&#x540D;&#x7684;apk&#x6587;&#x4EF6;&#xFF0C;&#x5E76;&#x5C06;dex&#x548C;so&#x6587;&#x4EF6;&#x6DFB;&#x52A0;&#x5230;&#x8BE5;apk&#x4E2D;</span></div><div class="line">$ aapt package <span class="_">-f</span> -M AndroidManifest.xml \</div><div class="line">    -S res </div><div class="line">    -A assets </div><div class="line">    -I ~/Library/Android/sdk/platforms/android-25/android.jar </div><div class="line">    -F bin/HelloAndroid_unsigned.apk</div><div class="line">$ <span class="built_in">cd</span> bin</div><div class="line">$ aapt add HelloAndroid_unsigned.apk classes.dex</div><div class="line">$ mv libs lib</div><div class="line">$ aapt add HelloAndroid_unsigned.apk lib/x86_64/libhellojni.so</div><div class="line">$ mv lib libs</div><div class="line"></div><div class="line"><span class="comment"># 5. &#x5BF9;apk&#x6587;&#x4EF6;&#x7B7E;&#x540D;</span></div><div class="line">$ jarsigner -verbose \</div><div class="line">    -keystore ~/.android/debug.keystore \</div><div class="line">    -keypass android \</div><div class="line">    -storepass android \</div><div class="line">    -signedjar bin/HelloAndroid_signed.apk<span class="string">&quot; \</span></div><div class="line">    bin/HelloAndroid_unsigned.apk&quot; \</div><div class="line">    androiddebugkey</div><div class="line"></div><div class="line"><span class="comment"># 6. &#x5BF9;&#x7B7E;&#x540D;&#x540E;&#x7684;apk&#x505A;&#x5BF9;&#x5176;&#x4F18;&#x5316;</span></div><div class="line">$ zipalign <span class="_">-f</span> 4 bin/HelloAndroid_signed.apk bin/HelloAndroid.apk</div></pre></td></tr></table></figure></p>
+<p>&#x5176;&#x4E2D;&#x9700;&#x8981;&#x7279;&#x522B;&#x6CE8;&#x610F;&#x7684;&#x662F;&#x5728;&#x7B2C;4&#x6B65;&#xFF0C;&#x6DFB;&#x52A0;so&#x6587;&#x4EF6;&#x4E00;&#x5B9A;&#x8981;&#x5E26;&#x7740;&#x8DEF;&#x5F84;&#xFF0C;&#x800C;&#x4E14;&#x5FC5;&#x987B;&#x662F;<code>lib/&lt;&#x5E73;&#x53F0;&gt;/&lt;so&#x6587;&#x4EF6;&#x540D;&gt;</code>&#xFF0C;&#x800C;&#x4E0D;&#x662F;android&#x9ED8;&#x8BA4;&#x751F;&#x6210;&#x7684;libs&#x3002;&#x6211;&#x88AB;&#x8FD9;&#x4E2A;&#x5751;&#x641E;&#x4E86;&#x4E00;&#x4E2A;&#x591A;&#x5C0F;&#x65F6;&#xFF0C;&#x53D1;&#x73B0;apk&#x786E;&#x5B9E;&#x628A;so&#x6253;&#x8FDB;&#x53BB;&#x4E86;&#xFF0C;&#x53EF;&#x5C31;&#x662F;&#x5230;&#x6A21;&#x62DF;&#x5668;&#x91CC;&#x5B89;&#x88C5;&#x4E0D;&#x4E0A;&#x3002;&#x6B63;&#x5E38;&#x60C5;&#x51B5;&#x4E0B;&#x5B89;&#x88C5;apk&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#xFF0C;so&#x6587;&#x4EF6;&#x5E94;&#x8BE5;&#x88AB;&#x62F7;&#x8D1D;&#x5230;<code>/data/app/&lt;&#x5305;&#x540D;&gt;/lib/&lt;&#x5E73;&#x53F0;&#x540D;&gt;</code>&#x4E0B;&#x7684;&#xFF0C;&#x7ED3;&#x5408;&#x672C;&#x4F8B;&#x5C31;&#x662F;<code>/data/app/palance.li.hello/lib/x86_64</code>&#x3002;&#x5728;&#x547D;&#x4EE4;&#x884C;&#x4E2D;&#xFF0C;&#x6DFB;&#x52A0;so&#x5230;apk&#x4E4B;&#x524D;&#x6211;&#x5148;&#x628A;libs&#x76EE;&#x5F55;&#x6539;&#x540D;&#x4E3A;lib&#xFF0C;&#x6DFB;&#x52A0;&#x5B8C;&#x6210;&#x540E;&#x518D;&#x6539;&#x56DE;&#x6765;&#x3002;</p>
+<p>&#x5982;&#x679C;&#x51FA;&#x73B0;&#x4E86;&#x52A0;&#x8F7D;so&#x5931;&#x8D25;&#xFF0C;&#x53EF;&#x4EE5;&#x5148;&#x67E5;&#x770B;so&#x6587;&#x4EF6;&#x662F;&#x5426;&#x88AB;&#x6B63;&#x786E;&#x5B89;&#x88C5;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell ls /data/app/palance.li.hello-1/lib/x86_64</div></pre></td></tr></table></figure></p>
+<p>&#x5982;&#x679C;&#x8FD8;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;logcat&#x67E5;&#x770B;&#x5177;&#x4F53;&#x7684;&#x8F93;&#x51FA;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ adb shell logcat *:d</div></pre></td></tr></table></figure></p>
+<p>&#x7EC8;&#x4E8E;&#x7B97;&#x6298;&#x817E;&#x51FA;&#x7ED3;&#x679C;&#x4E86;&#xFF1A;<br><img src="/2016/11/06/2016/1106BuildAndroidApp3/img01.png" alt="&#x5E26;native&#x7684;Android&#x5E94;&#x7528;"></p>
+<p>&#x6211;&#x628A;&#x672C;&#x6587;&#x7684;&#x4EE3;&#x7801;&#x653E;&#x5230;<a href="https://github.com/palanceli/blog/tree/master/source/_posts/2016/1106BuildAndroidApp3/HelloAndroid" target="_blank" rel="external">HelloAndroid</a>&#xFF0C;&#x5E76;&#x5728;&#x5176;&#x4E0B;&#x5199;&#x4E86;&#x4E00;&#x4E2A;&#x811A;&#x672C;<a href="https://github.com/palanceli/blog/blob/master/source/_posts/2016/1106BuildAndroidApp3/HelloAndroid/build.sh" target="_blank" rel="external">build.sh</a>&#x3002;&#x7531;&#x4E8E;&#x5E26;native&#x7684;Android&#x5E94;&#x7528;&#x5728;&#x7F16;&#x8BD1;&#x7684;&#x65F6;&#x5019;&#x9700;&#x8981;&#x7A7F;&#x63D2;&#x81EA;&#x52A8;&#x548C;&#x624B;&#x52A8;&#x2014;&#x2014;&#x5148;&#x4FEE;&#x6539;java&#x4EE3;&#x7801;&#x3001;&#x7F16;&#x8BD1;&#x4E4B;&#x540E;&#x624D;&#x80FD;&#x751F;&#x6210;jni&#x7684;&#x5934;&#x6587;&#x4EF6;&#xFF0C;&#x6240;&#x4EE5;<code>build.sh</code>&#x7B97;&#x662F;&#x4E2A;&#x534A;&#x81EA;&#x52A8;&#x811A;&#x672C;&#x3002;&#x9996;&#x6B21;&#x6267;&#x884C;&#xFF0C;&#x751F;&#x6210;R.java&#x3001;&#x7F16;&#x8BD1;java&#x6E90;&#x6587;&#x4EF6;&#x3001;&#x751F;&#x6210;dex&#x6587;&#x4EF6;&#xFF1B;&#x7136;&#x540E;&#x9700;&#x8981;&#x624B;&#x52A8;&#x6267;&#x884C;ndk-build&#xFF0C;&#x751F;&#x6210;so&#xFF1B;&#x7136;&#x540E;&#x5728;&#x6267;&#x884C;&#x4E00;&#x6B21;build.sh&#x5B8C;&#x6210;&#x6253;&#x5305;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">$ <span class="built_in">cd</span> HelloAndroid</div><div class="line">$ sh build.sh</div><div class="line">$ ndk-build</div><div class="line">$ sh build.sh</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android开发环境/" rel="tag">#Android开发环境</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/11/06/2016/1106BuildAndroidApp2/" rel="next" title="Android应用程序的编译（二）——SDK编译">
+                <i class="fa fa-chevron-left"></i> Android应用程序的编译（二）——SDK编译
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/11/09/2016/1109Next404/" rel="prev" title="Hexo + Github对vendors访问404导致页面空白">
+                Hexo + Github对vendors访问404导致页面空白 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/11/06/2016/1106BuildAndroidApp3/"
+           data-title="Android应用程序的编译（三）——NDK编译" data-url="http://palanceli.github.io/2016/11/06/2016/1106BuildAndroidApp3/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">63</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">33</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#带有JNI的Android工程"><span class="nav-number">1.</span> <span class="nav-text">带有JNI的Android工程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过javah创建-h文件"><span class="nav-number">2.</span> <span class="nav-text">通过javah创建.h文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建-c文件"><span class="nav-number">3.</span> <span class="nav-text">创建.c文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#创建jni-Android-mk文件"><span class="nav-number">4.</span> <span class="nav-text">创建jni/Android.mk文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#通过ndk-build生成so文件"><span class="nav-number">5.</span> <span class="nav-text">通过ndk-build生成so文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成apk"><span class="nav-number">6.</span> <span class="nav-text">生成apk</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
