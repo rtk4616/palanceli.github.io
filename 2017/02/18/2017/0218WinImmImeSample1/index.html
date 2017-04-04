@@ -1,0 +1,735 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="输入法," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x57FA;&amp;#x4E8E;IMM&amp;#x6846;&amp;#x67B6;&amp;#x7684;&amp;#x8F93;&amp;#x5165;&amp;#x6CD5;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x6309;&amp;#x7167;&amp;#x7CFB;&amp;#x7EDF;&amp;#x8981;&amp;#x6C42;&amp;#x5BFC;&amp;#x51FA;&amp;#x5341;&amp;#x51E0;&amp;#x4E2A;&amp;#x51FD;&amp;#x6570;&amp;#x76">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Windows下创建基于IMM的输入法">
+<meta property="og:url" content="http://palanceli.github.io/2017/02/18/2017/0218WinImmImeSample1/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x57FA;&amp;#x4E8E;IMM&amp;#x6846;&amp;#x67B6;&amp;#x7684;&amp;#x8F93;&amp;#x5165;&amp;#x6CD5;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x6309;&amp;#x7167;&amp;#x7CFB;&amp;#x7EDF;&amp;#x8981;&amp;#x6C42;&amp;#x5BFC;&amp;#x51FA;&amp;#x5341;&amp;#x51E0;&amp;#x4E2A;&amp;#x51FD;&amp;#x6570;&amp;#x76">
+<meta property="og:updated_time" content="2017-03-12T13:32:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Windows下创建基于IMM的输入法">
+<meta name="twitter:description" content="&amp;#x57FA;&amp;#x4E8E;IMM&amp;#x6846;&amp;#x67B6;&amp;#x7684;&amp;#x8F93;&amp;#x5165;&amp;#x6CD5;&amp;#x662F;&amp;#x4E00;&amp;#x4E2A;&amp;#x6309;&amp;#x7167;&amp;#x7CFB;&amp;#x7EDF;&amp;#x8981;&amp;#x6C42;&amp;#x5BFC;&amp;#x51FA;&amp;#x5341;&amp;#x51E0;&amp;#x4E2A;&amp;#x51FD;&amp;#x6570;&amp;#x76">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2017/02/18/2017/0218WinImmImeSample1/"/>
+
+  <title> Windows下创建基于IMM的输入法 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Windows下创建基于IMM的输入法
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-02-18T23:33:00+08:00" content="2017-02-18">
+              2017-02-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/随笔笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">随笔笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/02/18/2017/0218WinImmImeSample1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/02/18/2017/0218WinImmImeSample1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x57FA;&#x4E8E;IMM&#x6846;&#x67B6;&#x7684;&#x8F93;&#x5165;&#x6CD5;&#x662F;&#x4E00;&#x4E2A;&#x6309;&#x7167;&#x7CFB;&#x7EDF;&#x8981;&#x6C42;&#x5BFC;&#x51FA;&#x5341;&#x51E0;&#x4E2A;&#x51FD;&#x6570;&#x7684;DLL&#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x5341;&#x51E0;&#x4E2A;&#x5BFC;&#x51FA;&#x51FD;&#x6570;&#x7684;&#x539F;&#x578B;&#x5B9A;&#x4E49;&#x4E8E;imm.h&#x6587;&#x4EF6;&#xFF0C;&#x7CFB;&#x7EDF;&#x5B9A;&#x4E49;&#x4E86;&#x5B83;&#x4EEC;&#x7684;&#x8C03;&#x7528;&#x65F6;&#x673A;&#xFF0C;&#x6BD4;&#x5982;&#x5207;&#x51FA;&#x8F93;&#x5165;&#x6CD5;&#x3001;&#x6309;&#x952E;&#x5904;&#x7406;&#x7B49;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x5C31;&#x4ECE;&#x6700;&#x6838;&#x5FC3;&#x7684;&#x8981;&#x6C42;&#x5F00;&#x59CB;&#xFF0C;&#x9010;&#x6B65;&#x5206;&#x6790;&#x57FA;&#x4E8E;IMM&#x7684;&#x8F93;&#x5165;&#x6CD5;&#x5B9E;&#x73B0;&#x6B65;&#x9AA4;&#x3002;<br><a id="more"></a><br>&#x8981;&#x786E;&#x4FDD;&#x8F93;&#x5165;&#x6CD5;&#x80FD;&#x8FD0;&#x8F6C;&#x8D77;&#x6765;&#xFF0C;&#x9700;&#x8981;&#x5177;&#x5907;&#x56DB;&#x4E2A;&#x6761;&#x4EF6;&#xFF1A;</p>
+<ol>
+<li>&#x662F;&#x4E00;&#x4E2A;DLL&#x6587;&#x4EF6;</li>
+<li>&#x4F9D;&#x7167;imm.h&#x5BFC;&#x51FA;&#x5341;&#x51E0;&#x4E2A;&#x51FD;&#x6570;</li>
+<li>&#x6709;&#x4E00;&#x4E2A;UI&#x7A97;&#x53E3;</li>
+<li>&#x6709;&#x4E00;&#x7CFB;&#x5217;&#x6269;&#x5C55;&#x7A97;&#x53E3;</li>
+<li>&#x6267;&#x884C;&#x7279;&#x5B9A;&#x7684;&#x5B89;&#x88C5;&#x8FC7;&#x7A0B;</li>
+</ol>
+<p>&#x80FD;&#x6700;&#x5C0F;&#x5316;&#x8FD0;&#x8F6C;&#x4E0D;&#x4EE3;&#x8868;&#x80FD;&#x6B63;&#x5E38;&#x4EA4;&#x4E92;&#xFF0C;&#x53EA;&#x662F;&#x6280;&#x672F;&#x8DEF;&#x5F84;&#x4E0A;&#x8DD1;&#x901A;&#x4E86;&#x3002;&#x50CF;&#x4E00;&#x4E2A;&#x5B8C;&#x5907;&#x7684;&#x8F93;&#x5165;&#x6CD5;&#x90A3;&#x6837;&#x6B63;&#x5E38;&#x4EA4;&#x4E92;&#x8D77;&#x6765;&#x8FD8;&#x8981;&#x5177;&#x5907;&#x5199;&#x4F5C;&#x7A97;&#x3001;&#x5019;&#x9009;&#x7A97;&#xFF0C;&#x8FD8;&#x8981;&#x5904;&#x7406;&#x4ECE;&#x62FC;&#x97F3;&#x5230;&#x6C49;&#x5B57;&#x3001;&#x8BCD;&#x7684;&#x8F6C;&#x5316;&#x3002;&#x672C;&#x8282;&#x5148;&#x4ECB;&#x7ECD;&#x6700;&#x5C0F;&#x5316;&#x8FD0;&#x8F6C;&#x7684;&#x5B9E;&#x73B0;&#x7EC6;&#x8282;&#x3002;</p>
+<h1 id="DLL&#x6587;&#x4EF6;"><a href="#DLL&#x6587;&#x4EF6;" class="headerlink" title="DLL&#x6587;&#x4EF6;"></a>DLL&#x6587;&#x4EF6;</h1><ol>
+<li>&#x8981;&#x5728;<code>DllMain</code>&#x7684;<code>DLL_PROCESS_ATTACH</code>&#x5206;&#x652F;&#x4E0B;&#x6CE8;&#x518C;UI&#x7A97;&#x4F53;&#x7C7B;&#xFF0C;&#x7CFB;&#x7EDF;IMM&#x6846;&#x67B6;&#x4F1A;&#x8D1F;&#x8D23;&#x521B;&#x5EFA;&#x8BE5;&#x7A97;&#x4F53;&#xFF0C;&#x5E76;&#x901A;&#x8FC7;&#x5411;&#x8BE5;&#x7A97;&#x4F53;&#x53D1;&#x6D88;&#x606F;&#x8BA9;&#x8F93;&#x5165;&#x6CD5;&#x77E5;&#x9053;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x8BE5;&#x663E;&#x793A;/&#x9690;&#x85CF;&#x5199;&#x4F5C;&#x7A97;&#xFF0C;&#x4EC0;&#x4E48;&#x65F6;&#x5019;&#x8BE5;&#x663E;&#x793A;/&#x9690;&#x85CF;&#x5019;&#x9009;&#x7A97;&#x3002;&#x5173;&#x4E8E;UI&#x7A97;&#x53E3;&#x5728;&#x4E0B;&#x6587;&#x8FD8;&#x6709;&#x8BE6;&#x7EC6;&#x4ECB;&#x7ECD;&#x3002;</li>
+<li>&#x8981;&#x5728;&#x8D44;&#x6E90;&#x6587;&#x4EF6;&#xFF08;*.rc&#xFF09;&#x4E2D;&#x8BBE;&#x7F6E;&#x51E0;&#x4E2A;key:<br><code>FILEOS</code> = <code>0x4L</code><br><code>FILETYPE</code> = <code>VFT_DRV</code><br><code>FILESUBTYPE</code> = <code>VFT2_DRV_INPUTMETHOD</code><br><code>Block Header</code> = <code>&#x4E2D;&#x6587;&#xFF08;&#x7B80;&#x4F53;&#xFF0C;&#x4E2D;&#x56FD;&#xFF09;&#xFF08;0x0404b0&#xFF09;</code> &#x9009;&#x62E9;Language&#x4E3A;<code>Chinese&#xFF08;Simplified PRC&#xFF09;</code>&#x5373;&#x4E3A;&#x6B64;&#x8BBE;&#x7F6E;&#x3002;</li>
+<li>&#x5305;&#x542B;&#x4E00;&#x4E2A;icon&#x56FE;&#x6807;&#xFF0C;&#x8BE5;&#x56FE;&#x6807;&#x7528;&#x4E8E;&#x5728;&#x7CFB;&#x7EDF;&#x8BED;&#x8A00;&#x680F;&#x663E;&#x793A;&#x521B;&#x5EFA;&#x7684;&#x8F93;&#x5165;&#x6CD5;&#x3002;</li>
+</ol>
+<h1 id="&#x5BFC;&#x51FA;&#x51FD;&#x6570;"><a href="#&#x5BFC;&#x51FA;&#x51FD;&#x6570;" class="headerlink" title="&#x5BFC;&#x51FA;&#x51FD;&#x6570;"></a>&#x5BFC;&#x51FA;&#x51FD;&#x6570;</h1><h2 id="&#x5F15;&#x5165;imm-h&#x6587;&#x4EF6;"><a href="#&#x5F15;&#x5165;imm-h&#x6587;&#x4EF6;" class="headerlink" title="&#x5F15;&#x5165;imm.h&#x6587;&#x4EF6;"></a>&#x5F15;&#x5165;<code>imm.h</code>&#x6587;&#x4EF6;</h2><p>&#x8FD9;&#x4E9B;&#x51FD;&#x6570;&#x539F;&#x578B;&#x5B9A;&#x4E49;&#x5728;<code>imm.h</code>&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x8BE5;&#x6587;&#x4EF6;&#x6709;&#x4E24;&#x4EFD;&#x5B9A;&#x4E49;&#xFF0C;&#x4E00;&#x4EFD;&#x6765;&#x81EA;DDK&#xFF0C;&#x4E00;&#x4EFD;&#x6765;&#x81EA;SDK&#x3002;&#x5F00;&#x53D1;&#x8F93;&#x5165;&#x6CD5;&#x65F6;&#x5E94;&#x4F7F;&#x7528;DDK&#x7248;&#x672C;&#x3002;&#x8FD9;&#x4E2A;&#x6587;&#x4EF6;&#xFF0C;&#x5728;&#x4E0D;&#x540C;&#x7684;Windows DDK&#x7248;&#x672C;&#x4E2D;&#x547D;&#x540D;&#x53D1;&#x751F;&#x8FC7;&#x53D8;&#x5316;&#xFF0C;&#x6700;&#x65E9;&#x662F;<code>imm.h</code>&#xFF0C;&#x5728;win2kDDK&#x7684;&#x67D0;&#x4E2A;&#x7248;&#x672C;&#x4E2D;&#x5C31;&#x53D8;&#x6210;&#x4E86;<code>immdev.h</code>&#xFF0C;&#x540E;&#x6765;&#x7684;Windows DDK&#x4E00;&#x76F4;&#x6CBF;&#x7528;<code>immdev.h</code>&#x3002;</p>
+<p>&#x4F7F;&#x7528;<code>imm.h</code>&#x4F1A;&#x5BFC;&#x81F4;&#x548C;SDK&#x7248;&#x672C;&#x91CD;&#x540D;&#xFF0C;&#x786E;&#x5B9E;&#x4E0D;&#x65B9;&#x4FBF;&#x3002;&#x8FD9;&#x8981;&#x6C42;&#x5305;&#x542B;&#x8BE5;&#x6587;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x5FC5;&#x987B;&#x8FD9;&#x4E48;&#x5199;&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta"># <span class="meta-keyword">define</span> NOIME</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;windows.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&quot;imm.h&quot;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> _DDKIMM_H_</span></div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p><code>windows.h</code>&#x5FC5;&#x987B;&#x5199;&#x5728;<code>imm.h</code>&#x524D;&#x9762;&#xFF0C;&#x56E0;&#x4E3A;<code>imm.h</code>&#x4F9D;&#x8D56;<code>windows.h</code>&#xFF0C;&#x53EF;&#x662F;&#x5728;<code>windows.h</code>&#x4E2D;&#x53C8;&#x5305;&#x542B;&#x4E86;SDK&#x7248;&#x672C;&#x7684;<code>imm.h</code>&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// windows.h</span></div><div class="line">...</div><div class="line"><span class="meta">#<span class="meta-keyword">ifndef</span> NOIME</span></div><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;imm.h&gt;</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div><div class="line">...</div></pre></td></tr></table></figure></p>
+<p>&#x56E0;&#x6B64;&#xFF0C;&#x6211;&#x4EEC;&#x5728;<code>#include &lt;windows.h&gt;</code>&#x524D;&#x5FC5;&#x987B;&#x5148;&#x5B9A;&#x4E49;<code>NOIME</code>&#xFF0C;&#x8BA9;windows.h&#x4E2D;&#x7684;imm.h&#x65E0;&#x6548;&#x3002;<br>&#x5982;&#x679C;&#x4F7F;&#x7528;<code>immdev.h</code>&#xFF0C;&#x5219;&#x4E0D;&#x5B58;&#x5728;&#x5934;&#x6587;&#x4EF6;&#x547D;&#x540D;&#x51B2;&#x7A81;&#x7684;&#x95EE;&#x9898;&#x3002;&#x4E0D;&#x8FC7;&#x6211;&#x5728;&#x7F16;&#x5199;&#x8F93;&#x5165;&#x6CD5;&#x65F6;&#xFF0C;&#x8FD8;&#x662F;&#x4F7F;&#x7528;&#x8001;&#x7248;&#x672C;&#x7684;<code>imm.h</code>&#xFF0C;&#x56E0;&#x4E3A;&#x4E0D;&#x786E;&#x5B9A;&#x4F7F;&#x7528;<code>immdev.h</code>&#x80FD;&#x5426;&#x5B8C;&#x5168;&#x4E0E;&#x8001;&#x7684;Windows&#x7CFB;&#x7EDF;&#x517C;&#x5BB9;&#x3002;</p>
+<h2 id="&#x5B9A;&#x4E49;&#x5341;&#x4E94;&#x4E2A;&#x5BFC;&#x51FA;&#x51FD;&#x6570;"><a href="#&#x5B9A;&#x4E49;&#x5341;&#x4E94;&#x4E2A;&#x5BFC;&#x51FA;&#x51FD;&#x6570;" class="headerlink" title="&#x5B9A;&#x4E49;&#x5341;&#x4E94;&#x4E2A;&#x5BFC;&#x51FA;&#x51FD;&#x6570;"></a>&#x5B9A;&#x4E49;&#x5341;&#x4E94;&#x4E2A;&#x5BFC;&#x51FA;&#x51FD;&#x6570;</h2><p>&#x5173;&#x4E8E;&#x8FD9;&#x4E9B;&#x51FD;&#x6570;&#x7684;&#x4ECB;&#x7ECD;&#xFF0C;&#x53EF;&#x4EE5;&#x53C2;&#x89C1;win2kddk&#xFF0C;&#x8FD9;&#x4E2A;&#x7248;&#x672C;&#x7684;DDK&#x5728;Ntddk/src/ime/docs&#x76EE;&#x5F55;&#x4E0B;&#x6709;&#x4E24;&#x4EFD;&#x8F93;&#x5165;&#x6CD5;&#x5F00;&#x53D1;&#x6587;&#x6863;&#xFF0C;&#x8FD9;&#x4E5F;&#x662F;&#x4E3A;&#x6570;&#x4E0D;&#x591A;&#x7684;&#x5FAE;&#x8F6F;&#x53D1;&#x5E03;&#x7684;&#x8F93;&#x5165;&#x6CD5;&#x5F00;&#x53D1;&#x5B98;&#x65B9;&#x6587;&#x6863;&#x3002;&#x6211;&#x4EEC;&#x53EA;&#x6311;&#x6700;&#x5FC5;&#x987B;&#x7684;&#x6587;&#x4EF6;&#x91CD;&#x70B9;&#x4ECB;&#x7ECD;&#x3002;</p>
+<h2 id="ImeInquire"><a href="#ImeInquire" class="headerlink" title="ImeInquire"></a>ImeInquire</h2><p>&#x8BE5;&#x51FD;&#x6570;&#x5728;&#x8F93;&#x5165;&#x6CD5;&#x9996;&#x6B21;&#x5207;&#x51FA;&#x65F6;&#x88AB;&#x8C03;&#x7528;&#xFF0C;&#x8D1F;&#x8D23;&#x5904;&#x7406;&#x8F93;&#x5165;&#x6CD5;&#x7684;&#x521D;&#x59CB;&#x5316;&#xFF0C;&#x5B83;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A;<code>IMEINFO</code>&#x7ED3;&#x6784;&#x4F53;&#x4EE5;&#x53CA;&#x8F93;&#x5165;&#x6CD5;&#x7684;UI&#x7A97;&#x4F53;&#x7C7B;&#x540D;&#x3002;&#x8FD9;&#x91CC;&#x7684;&#x5B9E;&#x73B0;&#x8FC7;&#x7A0B;&#x4E3A;&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="function">BOOL WINAPI <span class="title">ImeInquire</span><span class="params">(LPIMEINFO lpImeInfo, LPTSTR lpszUIClass, LPCTSTR lpszOptions)</span></span></div><div class="line">{</div><div class="line">  <span class="comment">// &#x5982;&#x679C;&#x5BBF;&#x4E3B;&#x8FDB;&#x7A0B;&#x4E3A;Winlogon&#xFF0C;&#x5219;&#x76F4;&#x63A5;&#x9000;&#x51FA;</span></div><div class="line">  <span class="keyword">if</span>((DWORD_PTR)lpszOptions &amp; IME_SYSINFO_WINLOGON )</div><div class="line">    <span class="keyword">return</span> FALSE;</div><div class="line"></div><div class="line">  lpImeInfo-&gt;dwPrivateDataSize  = <span class="number">0</span>; <span class="comment">//sizeof(t_uiExtra);</span></div><div class="line"></div><div class="line">  lpImeInfo-&gt;fdwProperty  = IME_PROP_COMPLETE_ON_UNSELECT | </div><div class="line">    IME_PROP_SPECIAL_UI | IME_PROP_CANDLIST_START_FROM_1 |</div><div class="line">    IME_PROP_UNICODE | IME_PROP_KBD_CHAR_FIRST;                 <span class="comment">// &#x8F93;&#x5165;&#x6CD5;&#x5C5E;&#x6027;</span></div><div class="line"></div><div class="line">  lpImeInfo-&gt;fdwConversionCaps  = IME_CMODE_SYMBOL | </div><div class="line">    IME_CMODE_SOFTKBD | IME_CMODE_FULLSHAPE;                    <span class="comment">// &#x8F6C;&#x6362;&#x6A21;&#x5F0F;</span></div><div class="line">  lpImeInfo-&gt;fdwSentenceCaps    = IME_SMODE_NONE;               <span class="comment">// &#x53E5;&#x5B50;&#x6A21;&#x5F0F;</span></div><div class="line">  lpImeInfo-&gt;fdwUICaps          = UI_CAP_SOFTKBD| UI_CAP_2700;  <span class="comment">// UI&#x6807;&#x8BB0;</span></div><div class="line">  lpImeInfo-&gt;fdwSCSCaps         = <span class="number">0x00000000</span>;</div><div class="line">  lpImeInfo-&gt;fdwSelectCaps      = <span class="number">0x00000000</span>;</div><div class="line"></div><div class="line">  <span class="comment">// &#x7A97;&#x4F53;&#x7C7B;&#x540D;</span></div><div class="line">  <span class="number">_</span>tcscpy_s(lpszUIClass, MAX_CLASSNAME_UI, UIWnd::GetUIWndClassName());</div><div class="line"></div><div class="line">  <span class="keyword">return</span> TRUE;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x7CFB;&#x7EDF;&#x901A;&#x8FC7;&#x8BE5;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x7684;&#x7A97;&#x4F53;&#x7C7B;&#x540D;&#x521B;&#x5EFA;&#x8F93;&#x5165;&#x6CD5;UI&#x7A97;&#x4F53;&#x3002;</p>
+<h2 id="ImeProcessKey"><a href="#ImeProcessKey" class="headerlink" title="ImeProcessKey"></a>ImeProcessKey</h2><p>&#x6BCF;&#x5F53;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x6309;&#x952E;&#x64CD;&#x4F5C;&#xFF0C;IMM&#x4F1A;&#x8C03;&#x7528;&#x8BE5;&#x51FD;&#x6570;&#xFF0C;&#x8F93;&#x5165;&#x6CD5;&#x6839;&#x636E;&#x6309;&#x952E;&#x9884;&#x5224;&#x65AD;&#x662F;&#x5426;&#x8981;&#x5904;&#x7406;&#xFF0C;&#x5982;&#x679C;&#x5904;&#x7406;&#x8FD4;&#x56DE;TRUE&#xFF1B;&#x5426;&#x5219;&#x8FD4;&#x56DE;FALSE&#x3002;&#x8FD9;&#x91CC;&#x6211;&#x4EEC;&#x53EA;&#x5904;&#x7406;&#x5B57;&#x7B26;A~Z&#x4EE5;&#x53CA;&#x56DE;&#x8F66;&#x3001;&#x7A7A;&#x683C;&#x548C;ESC&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function">BOOL WINAPI <span class="title">ImeProcessKey</span><span class="params">(HIMC hImc, UINT unVirtKey, DWORD unScanCode, CONST LPBYTE achKeyState)</span></span></div><div class="line">{</div><div class="line">  <span class="function">ImcHandle <span class="title">imcHandle</span><span class="params">(hImc)</span></span>;</div><div class="line">  Comp* pComp = imcHandle.GetComp();</div><div class="line">  LPTSTR szCompString = pComp-&gt;GetCompString();</div><div class="line">  <span class="keyword">if</span> (unVirtKey &gt;= <span class="number">0x41</span> &amp;&amp; unVirtKey &lt;= <span class="number">0x5A</span>) {</div><div class="line">    <span class="keyword">return</span> TRUE;    <span class="comment">// &#x4ECE;A&#x5230;Z</span></div><div class="line">  }</div><div class="line">  <span class="keyword">if</span> (<span class="number">_</span>tcslen(szCompString) &gt; <span class="number">0</span> &amp;&amp;(unVirtKey == VK_RETURN || unVirtKey == VK_SPACE || unVirtKey == VK_ESCAPE)) {</div><div class="line">    <span class="keyword">return</span> TRUE;  <span class="comment">// &#x5F53;&#x6709;&#x5199;&#x4F5C;&#x4E32;&#x4E14;&#x5F53;&#x524D;&#x6309;&#x952E;&#x4E3A;&#x56DE;&#x8F66;&#x3001;&#x7A7A;&#x683C;&#x6216;ESC</span></div><div class="line">  }</div><div class="line">  <span class="keyword">return</span> FALSE;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<h2 id="ImeToAsciiEx"><a href="#ImeToAsciiEx" class="headerlink" title="ImeToAsciiEx"></a>ImeToAsciiEx</h2><p>&#x5982;&#x679C;&#x7ECF;&#x8FC7;&#x4E0A;&#x4E00;&#x6B65;&#x7684;&#x8F93;&#x5165;&#x6CD5;&#x9884;&#x5224;&#x65AD;&#xFF0C;&#x9700;&#x8981;&#x5904;&#x7406;&#xFF0C;IMM&#x5219;&#x7EE7;&#x7EED;&#x8C03;&#x7528;&#x8BE5;&#x51FD;&#x6570;&#x8FDB;&#x5165;&#x5904;&#x7406;&#x903B;&#x8F91;&#xFF1B;&#x5982;&#x679C;&#x4E0D;&#x9700;&#x8981;&#x5904;&#x7406;&#xFF0C;&#x5219;&#x4E0D;&#x4F1A;&#x8C03;&#x7528;&#x8BE5;&#x51FD;&#x6570;&#xFF0C;&#x800C;&#x662F;&#x76F4;&#x63A5;&#x628A;&#x6309;&#x952E;&#x4EE5;WM_KEYDOWN/WM_KEYUP&#x7684;&#x5F62;&#x5F0F;&#x53D1;&#x7ED9;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x3002;&#x8FD9;&#x91CC;&#x7684;&#x5904;&#x7406;&#x5206;&#x4E09;&#x4E2A;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ol>
+<li>&#x5904;&#x7406;&#x6309;&#x952E;&#xFF0C;&#x901A;&#x5E38;&#x8981;&#x8FFD;&#x52A0;&#x5F53;&#x524D;&#x7684;&#x8F93;&#x5165;&#x5185;&#x5BB9;&#x8FDB;&#x5165;&#x5199;&#x4F5C;&#x4E32;&#xFF1B;</li>
+<li>&#x5B8C;&#x6210;&#x8F6C;&#x6362;&#xFF0C;&#x8FD9;&#x662F;&#x8F93;&#x5165;&#x6CD5;&#x6700;&#x6838;&#x5FC3;&#x7684;&#x90E8;&#x5206;&#xFF0C;&#x6839;&#x636E;&#x5199;&#x4F5C;&#x4E32;&#x91CC;&#x7684;&#x62FC;&#x97F3;&#x8F6C;&#x6210;&#x6C49;&#x5B57;&#xFF1B;</li>
+<li>&#x5B8C;&#x6210;&#x754C;&#x9762;&#x7684;&#x66F4;&#x65B0;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x7EC4;&#x88C5;&#x76F8;&#x5E94;&#x7684;&#x6D88;&#x606F;&#x5230;lpdwTransBuf&#x6307;&#x5411;&#x7684;&#x6570;&#x7EC4;&#x4E2D;&#xFF0C;IMM&#x4F1A;&#x628A;&#x8FD9;&#x4E9B;&#x6D88;&#x606F;&#x53D1;&#x9001;&#x7ED9;&#x8F93;&#x5165;&#x6CD5;UI&#x7A97;&#x53E3;&#xFF0C;&#x7531;UI&#x7A97;&#x53E3;&#x7EE7;&#x7EED;&#x5B8C;&#x6210;&#x754C;&#x9762;&#x7684;&#x5904;&#x7406;&#x3002;<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div></pre></td><td class="code"><pre><div class="line"><span class="function">UINT WINAPI <span class="title">ImeToAsciiEx</span><span class="params">(UINT unKey, UINT unScanCode, CONST LPBYTE achKeyState, LPDWORD lpdwTransBuf, UINT fuState, HIMC hImc)</span></span></div><div class="line">{ </div><div class="line">  </div><div class="line">  <span class="function">ImcHandle <span class="title">imcHandle</span><span class="params">(hImc)</span></span>;</div><div class="line">  Comp* pComp = imcHandle.GetComp();</div><div class="line">  LPTSTR szCompString = pComp-&gt;GetCompString();</div><div class="line">  COMPOSITIONSTRING&amp; compCore = pComp-&gt;GetCore();</div><div class="line">  <span class="keyword">size_t</span> ccOriginCompLen = <span class="number">_</span>tcslen(szCompString);</div><div class="line"></div><div class="line">  <span class="keyword">if</span> (HIWORD(unKey) &gt;= <span class="string">&apos;a&apos;</span> &amp;&amp; HIWORD(unKey) &lt;= <span class="string">&apos;z&apos;</span>) {</div><div class="line">    TCHAR szKey[<span class="number">2</span>] = { HIWORD(unKey), <span class="number">0</span> };</div><div class="line">    <span class="number">_</span>tcscat_s(szCompString, Comp::c_MaxCompString, szKey);  <span class="comment">// &#x5C06;&#x5B57;&#x7B26;&#x8FFD;&#x52A0;&#x5230;&#x5199;&#x4F5C;&#x4E32;</span></div><div class="line">    compCore.dwCompStrLen = (DWORD)<span class="number">_</span>tcslen(szCompString);</div><div class="line">  }</div><div class="line"></div><div class="line">  <span class="keyword">const</span> DWORD dwBufLen = *lpdwTransBuf;</div><div class="line">  lpdwTransBuf += <span class="keyword">sizeof</span>(<span class="keyword">size_t</span>) / <span class="keyword">sizeof</span>(DWORD);</div><div class="line">  UINT cMsg = <span class="number">0</span>;</div><div class="line">  LPTRANSMSG lpTransMsg = (LPTRANSMSG)lpdwTransBuf;</div><div class="line">  <span class="keyword">if</span>(ccOriginCompLen == <span class="number">0</span>){  <span class="comment">// &#x6CA1;&#x6709;&#x5199;&#x4F5C;&#x4E32;</span></div><div class="line">    <span class="keyword">if</span>(HIWORD(unKey) &gt;= <span class="string">&apos;a&apos;</span> &amp;&amp; HIWORD(unKey) &lt;= <span class="string">&apos;z&apos;</span>){</div><div class="line">      lpTransMsg[<span class="number">0</span>].message = WM_IME_STARTCOMPOSITION;  <span class="comment">// &#x6253;&#x5F00;&#x5199;&#x4F5C;&#x7A97;</span></div><div class="line">      lpTransMsg[<span class="number">0</span>].wParam = <span class="number">0</span>;</div><div class="line">      lpTransMsg[<span class="number">0</span>].lParam = <span class="number">0</span>;</div><div class="line">      cMsg++;</div><div class="line"></div><div class="line">      lpTransMsg[<span class="number">1</span>].message = WM_IME_COMPOSITION; <span class="comment">// &#x66F4;&#x65B0;&#x5199;&#x4F5C;&#x7A97;</span></div><div class="line">      lpTransMsg[<span class="number">1</span>].wParam = <span class="number">0</span>;</div><div class="line">      lpTransMsg[<span class="number">1</span>].lParam = GCS_COMPSTR | GCS_CURSORPOS | GCS_COMPATTR;</div><div class="line">      cMsg++;</div><div class="line"></div><div class="line">      lpTransMsg[<span class="number">2</span>].message = WM_IME_NOTIFY;      <span class="comment">// &#x6253;&#x5F00;&#x5019;&#x9009;&#x7A97;</span></div><div class="line">      lpTransMsg[<span class="number">2</span>].wParam = IMN_OPENCANDIDATE;</div><div class="line">      lpTransMsg[<span class="number">2</span>].lParam = <span class="number">1</span>;</div><div class="line">      cMsg++;</div><div class="line"></div><div class="line">      lpTransMsg[<span class="number">3</span>].message = WM_IME_NOTIFY;      <span class="comment">// &#x66F4;&#x65B0;&#x5019;&#x9009;&#x7A97;</span></div><div class="line">      lpTransMsg[<span class="number">3</span>].wParam = IMN_CHANGECANDIDATE;</div><div class="line">      lpTransMsg[<span class="number">3</span>].lParam = <span class="number">1</span>;</div><div class="line">      cMsg++;</div><div class="line">      <span class="keyword">return</span> cMsg;</div><div class="line">    }</div><div class="line">  }<span class="keyword">else</span>{ <span class="comment">// _tcslen(szCompString) &gt; 0     // &#x6709;&#x5199;&#x4F5C;&#x4E32;</span></div><div class="line">    <span class="keyword">if</span>(HIWORD(unKey) &gt;= <span class="string">&apos;a&apos;</span> &amp;&amp; HIWORD(unKey) &lt;= <span class="string">&apos;z&apos;</span>){</div><div class="line">      <span class="comment">// &#x66F4;&#x65B0;&#x5199;&#x4F5C;&#x7A97;</span></div><div class="line">      ...</div><div class="line">      <span class="comment">// &#x66F4;&#x65B0;&#x5019;&#x9009;&#x7A97;</span></div><div class="line">      ...</div><div class="line">      <span class="keyword">return</span> cMsg;</div><div class="line">    }<span class="keyword">else</span> <span class="keyword">if</span>(HIWORD(unKey) == VK_RETURN || HIWORD(unKey) == VK_SPACE){ <span class="comment">// &#x56DE;&#x8F66;&#x6216;&#x7A7A;&#x683C;</span></div><div class="line">      LPTSTR szResultString = pComp-&gt;GetResultString();</div><div class="line">      <span class="number">_</span>tcscpy_s(szResultString, Comp::c_MaxResultString, szCompString); <span class="comment">// &#x5C06;&#x5199;&#x4F5C;&#x4E32;&#x62F7;&#x5165;&#x7ED3;&#x679C;&#x4E32;</span></div><div class="line">      compCore.dwResultStrLen = (DWORD)<span class="number">_</span>tcslen(szResultString);</div><div class="line">      <span class="built_in">memset</span>(szCompString, <span class="number">0</span>, <span class="keyword">sizeof</span>(TCHAR) * Comp::c_MaxCompString);   <span class="comment">// &#x6E05;&#x7A7A;&#x5199;&#x4F5C;&#x4E32;</span></div><div class="line">      compCore.dwCompStrLen = <span class="number">0</span>;</div><div class="line">      <span class="comment">// &#x66F4;&#x65B0;&#x5199;&#x4F5C;&#x7A97;</span></div><div class="line">      ...</div><div class="line">      <span class="comment">// &#x5173;&#x95ED;&#x5199;&#x4F5C;&#x7A97;</span></div><div class="line">      ...</div><div class="line">      <span class="comment">// &#x5173;&#x95ED;&#x5019;&#x9009;&#x7A97;</span></div><div class="line">      ...</div><div class="line">      <span class="keyword">return</span> cMsg;</div><div class="line">    }<span class="keyword">else</span> <span class="keyword">if</span>(HIWORD(unKey) == VK_ESCAPE){ <span class="comment">// ESC</span></div><div class="line">      <span class="built_in">memset</span>(szCompString, <span class="number">0</span>, <span class="keyword">sizeof</span>(TCHAR) * Comp::c_MaxCompString);</div><div class="line">      compCore.dwCompStrLen = <span class="number">0</span>;</div><div class="line">      <span class="comment">// &#x66F4;&#x65B0;&#x5199;&#x4F5C;&#x7A97;</span></div><div class="line">      ...</div><div class="line">      <span class="comment">// &#x5173;&#x95ED;&#x5199;&#x4F5C;&#x7A97;</span></div><div class="line">      ...</div><div class="line">      <span class="comment">// &#x5173;&#x95ED;&#x5019;&#x9009;&#x7A97;</span></div><div class="line">      ...</div><div class="line">      <span class="keyword">return</span> cMsg;</div><div class="line">    }</div><div class="line">  }</div><div class="line">  <span class="keyword">return</span> cMsg;</div><div class="line">}</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&#x4EE5;&#x4E0A;&#x5C31;&#x662F;&#x8F93;&#x5165;&#x6CD5;&#x6700;&#x6700;&#x5173;&#x952E;&#x7684;&#x4E09;&#x4E2A;&#x5BFC;&#x51FA;&#x51FD;&#x6570;&#xFF0C;&#x5373;&#x4F7F;&#x4E00;&#x4E2A;&#x4E30;&#x6EE1;&#x7684;&#x8F93;&#x5165;&#x6CD5;&#xFF0C;&#x4E3B;&#x8981;&#x903B;&#x8F91;&#x4E5F;&#x662F;&#x5728;&#x8FD9;&#x51E0;&#x4E2A;&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x5C24;&#x5176;&#x662F;<code>ImeProcessKey</code>&#x548C;<code>ImeToAsciiEx</code>&#x4E2D;&#x3002;<br><strong> &#x7279;&#x522B;&#x6CE8;&#x610F; </strong><br>&#x5728;DDK&#x7684;<code>immdev.h</code>&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x6570;&#x636E;&#x7C7B;&#x578B;<code>LPTRANSMSGLIST</code>&#x662F;&#x9519;&#x8BEF;&#x7684;&#xFF0C;&#x5B83;&#x5B9A;&#x4E49;&#x7F13;&#x51B2;&#x533A;&#x957F;&#x5EA6;<code>TRANSMSGLIST::uMsgCount</code>&#x7684;&#x7C7B;&#x578B;&#x4E3A;UINT&#xFF0C;&#x5176;&#x5B9E;&#x8BE5;&#x5B57;&#x6BB5;&#x7684;&#x957F;&#x5EA6;&#x5728;32&#x4F4D;&#x548C;64&#x4F4D;&#x7CFB;&#x7EDF;&#x4E0B;&#x4E0D;&#x4E00;&#x6837;&#xFF0C;32&#x4F4D;&#x4E0B;&#x662F;4&#x5B57;&#x8282;&#xFF0C;64&#x4F4D;&#x4E0B;&#x662F;8&#x5B57;&#x8282;&#x3002;&#x56E0;&#x6B64;&#x5728;&#x4E0A;&#x9762;&#x4EE3;&#x7801;&#x4E2D;&#x6709;&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">lpdwTransBuf += <span class="keyword">sizeof</span>(<span class="keyword">size_t</span>) / <span class="keyword">sizeof</span>(DWORD);</div></pre></td></tr></table></figure></p>
+<h1 id="UI&#x7A97;&#x53E3;"><a href="#UI&#x7A97;&#x53E3;" class="headerlink" title="UI&#x7A97;&#x53E3;"></a>UI&#x7A97;&#x53E3;</h1><h2 id="&#x6982;&#x8FF0;"><a href="#&#x6982;&#x8FF0;" class="headerlink" title="&#x6982;&#x8FF0;"></a>&#x6982;&#x8FF0;</h2><p>&#x8F93;&#x5165;&#x6CD5;&#x53EF;&#x5206;&#x4E3A;&#x6846;&#x67B6;&#x5C42;&#x548C;&#x903B;&#x8F91;&#x5C42;&#xFF0C;&#x6846;&#x67B6;&#x5C42;&#x5B9A;&#x4E49;&#x4E86;&#x63A7;&#x5236;&#x6D41;&#x3001;&#x6570;&#x636E;&#x6D41;&#x7684;&#x6D41;&#x8F6C;&#x8DEF;&#x5F84;&#xFF0C;&#x4EE5;&#x53CA;&#x63A7;&#x5236;&#x7C7B;&#x578B;&#x3002;&#x6BD4;&#x5982;&#xFF0C;&#x5F53;&#x4E00;&#x4E2A;&#x6309;&#x952E;&#x88AB;&#x6309;&#x4E0B;&#xFF0C;&#x9996;&#x5148;&#x7531;&#x5BFC;&#x51FA;&#x51FD;&#x6570;ImeProcessKey&#x3001;ImeToAsciiEx&#x5904;&#x7406;&#xFF0C;&#x4E4B;&#x540E;&#x518D;&#x901A;&#x8FC7;IMM&#x6D88;&#x606F;&#x901A;&#x77E5;UI&#x7A97;&#x53E3;&#xFF0C;&#x8FD9;&#x4E9B;&#x90FD;&#x5C5E;&#x4E8E;&#x63A7;&#x5236;&#x6D41;&#x3002;&#x901A;&#x77E5;UI&#x7A97;&#x53E3;&#x7684;&#x6D88;&#x606F;&#x5219;&#x5C5E;&#x4E8E;&#x63A7;&#x5236;&#x7C7B;&#x578B;&#xFF0C;&#x6BD4;&#x5982;&#x663E;&#x793A;/&#x9690;&#x85CF;&#x5199;&#x4F5C;&#x7A97;&#x3001;&#x663E;&#x793A;/&#x9690;&#x85CF;&#x5019;&#x9009;&#x7A97;&#x3002;&#x4EE5;&#x4E0A;&#x8FD9;&#x4E9B;&#x90FD;&#x662F;&#x6846;&#x67B6;&#x5C42;&#x7684;&#x5DE5;&#x4F5C;&#xFF0C;&#x800C;&#x5728;&#x4E1A;&#x52A1;&#x5C42;&#x5219;&#x8D1F;&#x8D23;&#x5904;&#x7406;&#x5177;&#x4F53;&#x6536;&#x5230;&#x663E;&#x793A;/&#x9690;&#x85CF;&#x5199;&#x4F5C;&#x7A97;&#x7684;&#x65F6;&#x5019;&#x600E;&#x4E48;&#x663E;&#x793A;&#xFF0C;&#x663E;&#x793A;&#x5728;&#x54EA;&#xFF0C;&#x7B49;&#x7B49;&#x3002;</p>
+<p>&#x901A;&#x5E38;&#x6211;&#x4EEC;&#x80FD;&#x770B;&#x5230;&#x7684;&#x8F93;&#x5165;&#x6CD5;&#x7A97;&#x53E3;&#x90FD;&#x5C5E;&#x4E8E;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x5C42;&#x7684;&#x8303;&#x7574;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x6846;&#x67B6;&#x5C42;&#x3002;&#x5B83;&#x4EEC;&#x90FD;&#x662F;UI&#x7A97;&#x53E3;&#x7684;&#x5B50;&#x7A97;&#x53E3;&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x81EA;&#x5DF1;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x7684;&#x9700;&#x8981;&#x51B3;&#x5B9A;&#x521B;&#x5EFA;&#x591A;&#x5C11;&#x4E2A;&#x5B50;&#x7A97;&#x53E3;&#xFF0C;&#x5E76;&#x51B3;&#x5B9A;&#x600E;&#x4E48;&#x663E;&#x793A;&#x5B83;&#x4EEC;&#x3002;</p>
+<p>UI&#x7A97;&#x53E3;&#x662F;&#x6846;&#x67B6;&#x5C42;&#x548C;&#x4E1A;&#x52A1;&#x5C42;&#x7684;&#x6865;&#x6881;&#x2014;&#x2014;&#x6846;&#x67B6;&#x5C42;&#x628A;&#x6D88;&#x606F;&#x53D1;&#x9001;&#x7ED9;UI&#x7A97;&#x53E3;&#xFF0C;&#x7531;&#x5B83;&#x51B3;&#x5B9A;&#x8981;&#x4E0D;&#x8981;&#x544A;&#x8BC9;&#x4E1A;&#x52A1;&#x5C42;&#x7684;&#x5B50;&#x7A97;&#x4F53;&#xFF0C;&#x4E5F;&#x7531;&#x5B83;&#x6765;&#x63A7;&#x5236;&#x8981;&#x4E0D;&#x8981;&#x663E;&#x793A;&#x6216;&#x9690;&#x85CF;&#x8FD9;&#x4E9B;&#x7A97;&#x4F53;&#x3002;</p>
+<h2 id="&#x6CE8;&#x518C;&#x7A97;&#x4F53;&#x7C7B;"><a href="#&#x6CE8;&#x518C;&#x7A97;&#x4F53;&#x7C7B;" class="headerlink" title="&#x6CE8;&#x518C;&#x7A97;&#x4F53;&#x7C7B;"></a>&#x6CE8;&#x518C;&#x7A97;&#x4F53;&#x7C7B;</h2><p>&#x65E2;&#x7136;&#x662F;Windows&#x7A97;&#x4F53;&#xFF0C;&#x5FC5;&#x7136;&#x5305;&#x542B;&#x6CE8;&#x518C;&#x7A97;&#x4F53;&#x7C7B;&#x3001;&#x521B;&#x5EFA;&#x7A97;&#x4F53;&#x3001;&#x6267;&#x884C;&#x7A97;&#x4F53;&#x51FD;&#x6570;&#x8FD9;&#x4E09;&#x4E2A;&#x5173;&#x952E;&#x6B65;&#x9AA4;&#x3002;&#x6CE8;&#x518C;&#x7A97;&#x4F53;&#x7C7B;&#x662F;&#x5728;<code>DllMain</code>&#x51FD;&#x6570;&#x7684;<code>DLL_PROCESS_ATTACH</code>&#x5206;&#x652F;&#x4E2D;&#x5B8C;&#x6210;&#xFF0C;&#x5728;<code>DLL_PROCESS_DETACH</code>&#x5206;&#x652F;&#x5B8C;&#x6210;&#x6CE8;&#x9500;&#x7A97;&#x4F53;&#x7C7B;&#x3002;&#x548C;&#x666E;&#x901A;&#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x7A97;&#x4F53;&#x7C7B;&#x4E0D;&#x540C;&#x5728;&#x4E8E;<code>style</code>&#x5B57;&#x6BB5;&#x548C;<code>cbWndExtra</code>&#x5B57;&#x6BB5;&#xFF1A;<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">void</span> UIWnd::RegisterUIWndClass(HINSTANCE hInstance)</div><div class="line">{</div><div class="line">  WNDCLASSEX wc = { <span class="number">0</span> };</div><div class="line">  wc.cbSize = <span class="keyword">sizeof</span>(WNDCLASSEX);</div><div class="line">  wc.style = CS_IME;  <span class="comment">// &#x6CE8;&#x610F;1</span></div><div class="line">  wc.lpfnWndProc = UIWndProc;</div><div class="line">  wc.cbClsExtra = <span class="number">0</span>;</div><div class="line">  wc.cbWndExtra = <span class="number">2</span> * <span class="keyword">sizeof</span>(LONG_PTR); <span class="comment">// &#x6CE8;&#x610F;2&#xFF1A;&#x7CFB;&#x7EDF;&#x8981;&#x5B58;&#x653E;IMMGWL_IMC &#x548C; IMMGWL_PRIVATE</span></div><div class="line">  wc.hInstance = hInstance;</div><div class="line">  wc.hCursor = <span class="literal">NULL</span>;</div><div class="line">  wc.hIcon = <span class="literal">NULL</span>;</div><div class="line">  wc.lpszMenuName = <span class="literal">NULL</span>;</div><div class="line">  wc.lpszClassName = GetUIWndClassName();</div><div class="line">  wc.hbrBackground = <span class="literal">NULL</span>;</div><div class="line">  wc.hIconSm = <span class="literal">NULL</span>;</div><div class="line">  ATOM atomUi = RegisterClassEx(&amp;wc);</div><div class="line">  mhInstance = hInstance;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<h2 id="&#x521B;&#x5EFA;&#x7A97;&#x4F53;"><a href="#&#x521B;&#x5EFA;&#x7A97;&#x4F53;" class="headerlink" title="&#x521B;&#x5EFA;&#x7A97;&#x4F53;"></a>&#x521B;&#x5EFA;&#x7A97;&#x4F53;</h2><p>&#x8F93;&#x5165;&#x6CD5;UI&#x7A97;&#x4F53;&#x548C;&#x666E;&#x901A;&#x81EA;&#x5B9A;&#x4E49;&#x7A97;&#x4F53;&#x6700;&#x4E0D;&#x540C;&#x4E4B;&#x5904;&#x5728;&#x4E8E;&#x7A97;&#x4F53;&#x7684;&#x521B;&#x5EFA;&#xFF0C;&#x81EA;&#x5B9A;&#x4E49;&#x7A97;&#x4F53;&#x8981;&#x901A;&#x8FC7;&#x8C03;&#x7528;<code>CreateWindow(...)</code>&#x51FD;&#x6570;&#x6765;&#x5B8C;&#x6210;&#x521B;&#x5EFA;&#xFF0C;&#x4F46;&#x8F93;&#x5165;&#x6CD5;UI&#x7A97;&#x4F53;&#x5219;&#x662F;&#x7531;&#x7CFB;&#x7EDF;&#x8D1F;&#x8D23;&#x521B;&#x5EFA;&#x7684;&#x3002;&#x8BE5;&#x51FD;&#x6570;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x8981;&#x4F20;&#x5165;&#x7A97;&#x4F53;&#x7C7B;&#x540D;&#xFF0C;&#x7CFB;&#x7EDF;&#x600E;&#x4E48;&#x77E5;&#x9053;&#x7A97;&#x4F53;&#x7C7B;&#x540D;&#x7684;&#x5462;&#xFF1F;&#x524D;&#x9762;&#x5DF2;&#x7ECF;&#x8BB2;&#x8FC7;&#xFF1A;&#x5728;&#x5BFC;&#x51FA;&#x51FD;&#x6570;<code>ImeInquire</code>&#x90A3;&#x91CC;&#x3002;</p>
+<h2 id="&#x7A97;&#x4F53;&#x51FD;&#x6570;"><a href="#&#x7A97;&#x4F53;&#x51FD;&#x6570;" class="headerlink" title="&#x7A97;&#x4F53;&#x51FD;&#x6570;"></a>&#x7A97;&#x4F53;&#x51FD;&#x6570;</h2><p>&#x7A97;&#x4F53;&#x51FD;&#x6570;&#x4E2D;&#x8981;&#x6CE8;&#x610F;&#xFF1A;&#x4E0D;&#x8981;&#x8BA9;WM_IME_xxx&#x7C7B;&#x7684;&#x6D88;&#x606F;&#x4EA4;&#x7ED9;<code>DefWindowProc</code>&#x51FD;&#x6570;&#x6765;&#x5904;&#x7406;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4F1A;&#x628A;&#x8FD9;&#x7C7B;&#x6D88;&#x606F;&#x518D;&#x4EA4;&#x7ED9;&#x8F93;&#x5165;&#x6CD5;&#x7A97;&#x53E3;&#xFF0C;&#x8FD9;&#x4F1A;&#x5BFC;&#x81F4;&#x6B7B;&#x5FAA;&#x73AF;&#x3002;&#x5BF9;&#x4E8E;&#x4E0D;&#x5904;&#x7406;&#x7684;WM_IME_xxx&#x6D88;&#x606F;&#xFF0C;&#x8FD4;&#x56DE;0&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x4E0E;&#x666E;&#x901A;&#x7528;&#x6237;&#x7A97;&#x4F53;&#x7684;&#x4E0D;&#x540C;&#x4E4B;&#x5904;&#x5728;&#x4E8E;&#x4ED6;&#x8981;&#x5904;&#x7406;&#x4E00;&#x7CFB;&#x5217;&#x7684;WM_IME_xxx&#x6D88;&#x606F;&#xFF0C;&#x4EE5;&#x54CD;&#x5E94;&#x6765;&#x81EA;<code>ImeToAsciiEx</code>&#x7684;&#x6D88;&#x606F;&#x2014;&#x2014;&#x663E;&#x793A;&#x6216;&#x9690;&#x85CF;&#x5199;&#x4F5C;&#x7A97;&#x3001;&#x5019;&#x9009;&#x7A97;&#x3001;&#x72B6;&#x6001;&#x680F;&#x4EE5;&#x53CA;&#x66F4;&#x65B0;&#x5B83;&#x4EEC;&#x3002;&#x672C;&#x6587;&#x6211;&#x4EEC;&#x5148;&#x4E0D;&#x7740;&#x6025;&#x5F15;&#x5165;&#x8FD9;&#x4E9B;&#x7A97;&#x53E3;&#xFF0C;&#x4F60;&#x4F1A;&#x770B;&#x5230;&#x5F53;&#x6572;&#x5B57;&#x6BCD;&#x952E;&#x7684;&#x65F6;&#x5019;&#x6CA1;&#x6709;&#x53CD;&#x5E94;&#xFF0C;&#x800C;&#x5B9E;&#x9645;&#x4E0A;&#x8F93;&#x5165;&#x6CD5;&#x628A;&#x8FD9;&#x4E9B;&#x5B57;&#x6BCD;&#x201C;&#x5403;&#x6389;&#x201D;&#x4E86;&#xFF0C;&#x518D;&#x6309;&#x7A7A;&#x683C;&#x6216;&#x56DE;&#x8F66;&#x4F1A;&#x4E00;&#x6B21;&#x4E0A;&#x5C4F;&#xFF0C;&#x6309;ESC&#x5219;&#x6E05;&#x7A7A;&#x201C;&#x5403;&#x6389;&#x201D;&#x7684;&#x5B57;&#x6BCD;&#xFF0C;&#x8FDB;&#x5165;&#x91CD;&#x65B0;&#x8F93;&#x5165;&#x7684;&#x72B6;&#x6001;&#x3002;</p>
+<h1 id="&#x6269;&#x5C55;&#x7A97;&#x53E3;"><a href="#&#x6269;&#x5C55;&#x7A97;&#x53E3;" class="headerlink" title="&#x6269;&#x5C55;&#x7A97;&#x53E3;"></a>&#x6269;&#x5C55;&#x7A97;&#x53E3;</h1><p>&#x6269;&#x5C55;&#x7A97;&#x53E3;&#x5305;&#x62EC;&#x5199;&#x4F5C;&#x7A97;&#x3001;&#x5019;&#x9009;&#x7A97;&#x3001;&#x72B6;&#x6001;&#x680F;&#x7B49;&#x3002;&#x8FD9;&#x4E9B;&#x7A97;&#x53E3;&#x9700;&#x8981;&#x5177;&#x5907;&#x4E00;&#x4E9B;&#x5171;&#x540C;&#x7684;&#x7279;&#x5F81;&#xFF1A;</p>
+<ol>
+<li>&#x5173;&#x4E8E;&#x7A97;&#x4F53;&#x7C7B;&#x98CE;&#x683C;&#xFF0C;&#x9700;&#x8981;&#x6307;&#x5B9A;CS_IME&#x6807;&#x8BB0;&#x3002;&#x4F46;&#x6211;&#x89C9;&#x5F97;&#x5176;&#x5B9E;&#x53EA;&#x6709;&#x8F93;&#x5165;&#x6CD5;UI&#x7A97;&#x53E3;&#x7528;&#x8BE5;&#x98CE;&#x683C;&#xFF0C;&#x5176;&#x4F59;&#x7684;&#x6269;&#x5C55;&#x7A97;&#x53E3;&#x5E94;&#x8BE5;&#x4E0D;&#x7528;&#xFF0C;&#x56E0;&#x4E3A;&#x5B83;&#x4EEC;&#x7684;&#x521B;&#x5EFA;&#x662F;&#x7531;&#x5F00;&#x53D1;&#x8005;&#x521B;&#x5EFA;&#x7684;&#x3002;</li>
+<li>&#x5728;&#x521B;&#x5EFA;&#x8F93;&#x5165;&#x6CD5;&#x7A97;&#x4F53;&#x7684;&#x65F6;&#x5019;&#xFF0C;<strong>&#x5FC5;&#x987B;</strong>&#x6307;&#x5B9A;&#x7A97;&#x4F53;&#x98CE;&#x683C;&#x4E3A;<strong>WS_DISABLED</strong>&#x3002;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;&#x8F93;&#x5165;&#x6CD5;&#x7A97;&#x4F53;&#x4E0D;&#x80FD;&#x63A5;&#x53D7;&#x8F93;&#x5165;&#x7126;&#x70B9;&#xFF0C;&#x5426;&#x5219;&#x5C31;&#x53C8;&#x4F1A;&#x6FC0;&#x6D3B;&#x8F93;&#x5165;&#x6CD5;&#xFF0C;&#x8F93;&#x5165;&#x903B;&#x8F91;&#x5C31;&#x5D4C;&#x5957;&#x4E86;&#x3002;</li>
+<li>&#x8FD9;&#x4E9B;&#x7A97;&#x53E3;&#x53EF;&#x4EE5;&#x5728;&#x8F93;&#x5165;&#x6CD5;UI&#x7A97;&#x53E3;&#x7684;WM_CREATE&#x51FD;&#x6570;&#x4E2D;&#x5B8C;&#x6210;&#x6CE8;&#x518C;&#x548C;&#x521B;&#x5EFA;&#x3002;</li>
+<li>&#x8FD9;&#x4E9B;&#x7A97;&#x53E3;&#x91CC;&#x8981;&#x73B0;&#x5B9E;&#x7684;&#x5185;&#x5BB9;&#x9700;&#x8981;&#x4F5C;&#x4E3A;IMCC&#x5728;IMC&#x4E2D;&#x521B;&#x5EFA;&#x3002;IMC&#x4E2D;&#x6709;&#x4E00;&#x4E9B;&#x9ED8;&#x8BA4;&#x7684;IMCC&#x662F;&#x4E0D;&#x9700;&#x8981;&#x5728;&#x6B64;&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;<figure class="highlight c++"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> tagINPUTCONTEXT { </div><div class="line">  ...</div><div class="line">  HIMCC   hCompStr; </div><div class="line">  HIMCC   hCandInfo; </div><div class="line">  HIMCC   hGuideLine; </div><div class="line">  HIMCC   hPrivate; </div><div class="line">  ...</div><div class="line">} INPUTCONTEXT, *PINPUTCONTEXT, NEAR *NPINPUTCONTEXT, FAR *LPINPUTCONTEXT;</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>&#x5728;<code>ImeSelect</code>&#x51FD;&#x6570;&#x4E2D;&#x9996;&#x6B21;&#x83B7;&#x5F97;IMC&#xFF0C;&#x4F60;&#x53EF;&#x4EE5;&#x5C1D;&#x8BD5;&#x83B7;&#x5F97;&#x8FD9;&#x4E9B;IMCC&#x7684;&#x5C3A;&#x5BF8;&#xFF0C;&#x53D1;&#x73B0;&#x662F;&#x975E;0&#x7684;&#xFF0C;&#x8BF4;&#x660E;&#x8FD9;&#x4E9B;IMCC&#x5DF2;&#x7ECF;&#x5B58;&#x5728;&#x4E86;&#x3002;&#x4F46;&#x662F;&#x4E3A;&#x4E86;&#x9002;&#x914D;&#x81EA;&#x5DF1;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#xFF0C;&#x6211;&#x5728;<code>ImeSelect</code>&#x4E2D;&#x521D;&#x59CB;&#x5316;IMC&#xFF0C;&#x8C03;&#x7528;<code>ImmReSizeIMCC(m_pContext-&gt;hCompStr, sizeof(Comp));</code>&#xFF0C;&#x7528;&#x81EA;&#x5DF1;&#x7684;Comp&#x7C7B;&#x66FF;&#x6362;&#x6389;&#x4E86;&#x539F;&#x5148;&#x7684;hCompStr&#x3002;</p>
+<h1 id="&#x5B89;&#x88C5;"><a href="#&#x5B89;&#x88C5;" class="headerlink" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</h1><p>&#x8F93;&#x5165;&#x6CD5;&#x7684;&#x5B89;&#x88C5;&#x8981;&#x505A;&#x4E24;&#x4EF6;&#x4E8B;&#xFF1A;1&#x3001;&#x5C06;ime&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;Windows/System32&#x76EE;&#x5F55;&#x4E0B;&#xFF1B;2&#x3001;&#x8C03;&#x7528;<code>ImmInstallIME</code>&#x6CE8;&#x518C;&#x8BE5;&#x8F93;&#x5165;&#x6CD5;&#x3002;<br>&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF0C;&#x5728;64&#x4F4D;&#x673A;&#x5668;&#x4E0B;&#xFF0C;&#x5E94;&#x8BE5;&#x4E3A;32&#x4F4D;&#x548C;64&#x4F4D;&#x751F;&#x6210;&#x4E24;&#x4EFD;ime&#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x6837;&#x5728;64&#x4F4D;&#x548C;32&#x4F4D;&#x7684;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x91CC;&#x624D;&#x80FD;&#x5206;&#x522B;&#x5207;&#x51FA;&#x5BF9;&#x5E94;&#x7684;&#x8F93;&#x5165;&#x6CD5;&#x3002;64&#x4F4D;ime&#x6587;&#x4EF6;&#x653E;&#x5728;Windows/System32&#x4E0B;&#xFF0C;32&#x4F4D;&#x653E;&#x5728;Windows/SysWOW64&#x4E0B;&#x3002; </p>
+<p>&#x901A;&#x5E38;&#x8FD9;&#x4E9B;&#x6D3B;&#x662F;&#x7531;NSIS&#x811A;&#x672C;&#x5E72;&#x7684;&#xFF0C;&#x6B64;&#x5904;&#x6211;&#x5199;&#x4E86;&#x4E00;&#x4E2A;ImeInstall&#x7A0B;&#x5E8F;&#x6765;&#x505A;&#xFF0C;&#x6CE8;&#x610F;&#xFF1A;&#x56E0;&#x4E3A;&#x8981;&#x5F80;Windows/System32&#x4E0B;&#x5199;&#x6587;&#x4EF6;&#xFF0C;&#x8BE5;&#x7A0B;&#x5E8F;&#x5FC5;&#x987B;&#x5177;&#x5907;&#x7BA1;&#x7406;&#x5458;&#x6743;&#x9650;&#xFF0C;&#x56E0;&#x6B64;&#x5728;CMake&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x94FE;&#x63A5;&#x9009;&#x9879;&#xFF1A;<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SET_TARGET_PROPERTIES</span>(ImeInstaller PROPERTIES LINK_FLAGS <span class="string">&quot;/level=&apos;requireAdministrator&apos; /uiAccess=&apos;false&apos;&quot;</span>)</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>&#x672C;&#x6587;&#x4EE3;&#x7801;&#x5DF2;&#x63D0;&#x4EA4;&#x81F3;<a href="https://github.com/palanceli/WinImmImeSample" target="_blank" rel="external">WinImmImeSample-MiniIme</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/输入法/" rel="tag">#输入法</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/11/2017/0211CMakeDemo2/" rel="next" title="CMake Demo （二）带GoogleTest的多项目构建">
+                <i class="fa fa-chevron-left"></i> CMake Demo （二）带GoogleTest的多项目构建
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/19/2017/0218CMake/" rel="prev" title="使用CMake+Boost中遇到的几个问题">
+                使用CMake+Boost中遇到的几个问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/02/18/2017/0218WinImmImeSample1/"
+           data-title="Windows下创建基于IMM的输入法" data-url="http://palanceli.github.io/2017/02/18/2017/0218WinImmImeSample1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">83</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">40</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#DLL文件"><span class="nav-number">1.</span> <span class="nav-text">DLL文件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#导出函数"><span class="nav-number">2.</span> <span class="nav-text">导出函数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#引入imm-h文件"><span class="nav-number">2.1.</span> <span class="nav-text">引入imm.h文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定义十五个导出函数"><span class="nav-number">2.2.</span> <span class="nav-text">定义十五个导出函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ImeInquire"><span class="nav-number">2.3.</span> <span class="nav-text">ImeInquire</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ImeProcessKey"><span class="nav-number">2.4.</span> <span class="nav-text">ImeProcessKey</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ImeToAsciiEx"><span class="nav-number">2.5.</span> <span class="nav-text">ImeToAsciiEx</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#UI窗口"><span class="nav-number">3.</span> <span class="nav-text">UI窗口</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#概述"><span class="nav-number">3.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#注册窗体类"><span class="nav-number">3.2.</span> <span class="nav-text">注册窗体类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建窗体"><span class="nav-number">3.3.</span> <span class="nav-text">创建窗体</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#窗体函数"><span class="nav-number">3.4.</span> <span class="nav-text">窗体函数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#扩展窗口"><span class="nav-number">4.</span> <span class="nav-text">扩展窗口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#安装"><span class="nav-number">5.</span> <span class="nav-text">安装</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
