@@ -1,0 +1,715 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="BNRG笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x7B2C;&amp;#x4E03;&amp;#x7AE0;&amp;#x5B9E;&amp;#x73B0;app&amp;#x7684;&amp;#x672C;&amp;#x5730;&amp;#x5316;&amp;#xFF0C;&amp;#x5F53;&amp;#x4FEE;&amp;#x6539;&amp;#x4E86;&amp;#x7CFB;&amp;#x7EDF;&amp;#x8BED;&amp;#x8A00;&amp;#x540E;&amp;#xFF0C;app&amp;#x65E0;&amp;#x9700;&amp;#x91CD;&amp;#x65B0;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《iOS Programming BNRG》笔记七">
+<meta property="og:url" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x7B2C;&amp;#x4E03;&amp;#x7AE0;&amp;#x5B9E;&amp;#x73B0;app&amp;#x7684;&amp;#x672C;&amp;#x5730;&amp;#x5316;&amp;#xFF0C;&amp;#x5F53;&amp;#x4FEE;&amp;#x6539;&amp;#x4E86;&amp;#x7CFB;&amp;#x7EDF;&amp;#x8BED;&amp;#x8A00;&amp;#x540E;&amp;#xFF0C;app&amp;#x65E0;&amp;#x9700;&amp;#x91CD;&amp;#x65B0;&amp;#">
+<meta property="og:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img01.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img02.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img03.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img04.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img05.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img06.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img07.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img08.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img09.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img10.png">
+<meta property="og:updated_time" content="2017-08-26T02:04:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《iOS Programming BNRG》笔记七">
+<meta name="twitter:description" content="&amp;#x7B2C;&amp;#x4E03;&amp;#x7AE0;&amp;#x5B9E;&amp;#x73B0;app&amp;#x7684;&amp;#x672C;&amp;#x5730;&amp;#x5316;&amp;#xFF0C;&amp;#x5F53;&amp;#x4FEE;&amp;#x6539;&amp;#x4E86;&amp;#x7CFB;&amp;#x7EDF;&amp;#x8BED;&amp;#x8A00;&amp;#x540E;&amp;#xFF0C;app&amp;#x65E0;&amp;#x9700;&amp;#x91CD;&amp;#x65B0;&amp;#">
+<meta name="twitter:image" content="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/img01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/"/>
+
+  <title> 《iOS Programming BNRG》笔记七 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《iOS Programming BNRG》笔记七
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-07-27T23:00:00+08:00" content="2017-07-27">
+              2017-07-27
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS-Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/07/27/2017/0727iOSProgrammingBNRG07/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/07/27/2017/0727iOSProgrammingBNRG07/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x7B2C;&#x4E03;&#x7AE0;&#x5B9E;&#x73B0;app&#x7684;&#x672C;&#x5730;&#x5316;&#xFF0C;&#x5F53;&#x4FEE;&#x6539;&#x4E86;&#x7CFB;&#x7EDF;&#x8BED;&#x8A00;&#x540E;&#xFF0C;app&#x65E0;&#x9700;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;&#x80FD;&#x81EA;&#x52A8;&#x9002;&#x914D;&#x3002;&#x672C;&#x7AE0;&#x8981;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>Localization&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;</li>
+<li>&#x63A7;&#x4EF6;&#x5C3A;&#x5BF8;&#x6821;&#x9A8C;<a id="more"></a>
+</li>
+</ul>
+<h1 id="1-&#x672C;&#x5730;&#x5316;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;"><a href="#1-&#x672C;&#x5730;&#x5316;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;" class="headerlink" title="1 &#x672C;&#x5730;&#x5316;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;"></a>1 &#x672C;&#x5730;&#x5316;&#x7684;&#x57FA;&#x672C;&#x6982;&#x5FF5;</h1><h2 id="1-1-&#x672C;&#x5730;&#x5316;&#x90FD;&#x5305;&#x542B;&#x4EC0;&#x4E48;&#xFF1F;"><a href="#1-1-&#x672C;&#x5730;&#x5316;&#x90FD;&#x5305;&#x542B;&#x4EC0;&#x4E48;&#xFF1F;" class="headerlink" title="1.1 &#x672C;&#x5730;&#x5316;&#x90FD;&#x5305;&#x542B;&#x4EC0;&#x4E48;&#xFF1F;"></a>1.1 &#x672C;&#x5730;&#x5316;&#x90FD;&#x5305;&#x542B;&#x4EC0;&#x4E48;&#xFF1F;</h2><ul>
+<li>&#x8D27;&#x5E01;&#x3001;&#x6570;&#x5B57;&#x3001;&#x6587;&#x5B57;&#x65B9;&#x5411;&#x7B49;&#x8D70;&#x5411;&#x7684;&#x5DEE;&#x5F02;&#x3002;&#x6BD4;&#x5982;&#x6709;&#x7684;&#x56FD;&#x5BB6;&#x5C0F;&#x6570;&#x70B9;&#x7528;<code>.</code>&#xFF0C;&#x5343;&#x5206;&#x7B26;&#x7528;<code>,</code>&#xFF0C;&#x6709;&#x7684;&#x56FD;&#x5BB6;&#x521A;&#x597D;&#x76F8;&#x53CD;&#xFF1B;&#x5404;&#x56FD;&#x6709;&#x5404;&#x81EA;&#x7684;&#x8D27;&#x5E01;&#x7B26;&#x53F7;&#xFF0C;&#x7B49;&#x7B49;&#x3002;&#x8FD9;&#x4E9B;&#x4FE1;&#x606F;&#x90FD;&#x88AB;Locale&#x5C01;&#x88C5;&#x8D77;&#x6765;&#x4E86;&#xFF0C;&#x4F7F;&#x7528;Locale&#x7684;&#x5B9E;&#x4F8B;&#x53EF;&#x4EE5;&#x843D;&#x5B9E;&#x8FD9;&#x4E9B;&#x6982;&#x5FF5;&#x7684;&#x5177;&#x4F53;&#x503C;&#x3002;</li>
+<li>Interface Builder&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x5728;1.3&#x4E2D;&#x4F1A;&#x5177;&#x4F53;&#x8BB2;&#x3002;</li>
+<li>&#x4EE3;&#x7801;&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x786C;&#x7F16;&#x7801;&#x5B57;&#x7B26;&#x4E32;&#x3002;&#x5728;1.4&#x4E2D;&#x4F1A;&#x5177;&#x4F53;&#x8BB2;&#x3002;</li>
+</ul>
+<h2 id="1-2-iOS&#x89E3;&#x51B3;&#x672C;&#x5730;&#x5316;&#x95EE;&#x9898;&#x7684;&#x57FA;&#x672C;&#x539F;&#x7406;"><a href="#1-2-iOS&#x89E3;&#x51B3;&#x672C;&#x5730;&#x5316;&#x95EE;&#x9898;&#x7684;&#x57FA;&#x672C;&#x539F;&#x7406;" class="headerlink" title="1.2 iOS&#x89E3;&#x51B3;&#x672C;&#x5730;&#x5316;&#x95EE;&#x9898;&#x7684;&#x57FA;&#x672C;&#x539F;&#x7406;"></a>1.2 iOS&#x89E3;&#x51B3;&#x672C;&#x5730;&#x5316;&#x95EE;&#x9898;&#x7684;&#x57FA;&#x672C;&#x539F;&#x7406;</h2><p>Xcode&#x6784;&#x5EFA;&#x4E00;&#x4E2A;target&#x65F6;&#xFF0C;&#x4F1A;&#x628A;&#x5B83;&#x6240;&#x6709;&#x53EF;&#x6267;&#x884C;&#x6587;&#x4EF6;&#x548C;&#x76F8;&#x5173;&#x7684;&#x8D44;&#x6E90;&#x6587;&#x4EF6;&#x6253;&#x6210;&#x4E00;&#x4E2A;&#x5305;&#x3002;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x4E00;&#x4E2A;Bundle&#x5B9E;&#x4F8B;main bundle&#x6765;&#x8BBF;&#x95EE;&#x8FD9;&#x4E2A;&#x5305;&#x91CC;&#x7684;&#x6240;&#x6709;&#x6570;&#x636E;&#x3002;&#x5C06;&#x4E00;&#x4EFD;&#x8D44;&#x6E90;&#x672C;&#x5730;&#x5316;&#x5C31;&#x662F;&#x5C06;&#x8FD9;&#x4EFD;&#x8D44;&#x6E90;&#x7684;&#x672C;&#x5730;&#x5316;&#x526F;&#x672C;&#x62F7;&#x8D1D;&#x5230;&#x5305;&#x91CC;&#xFF0C;&#x8FD9;&#x4E9B;&#x8D44;&#x6E90;&#x6309;&#x7167;&#x8BED;&#x8A00;&#x540D;&#x79F0;&#xFF08;&#x4EE5;lproj&#x547D;&#x540D;&#xFF09;&#x7EC4;&#x7EC7;&#x76EE;&#x5F55;&#x540D;&#x3002;<br>&#x5F53;&#x8BBF;&#x95EE;&#x5305;&#x91CC;&#x7684;&#x67D0;&#x4E2A;&#x8D44;&#x6E90;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x4F1A;&#x5148;&#x53BB;&#x5305;&#x91CC;&#x7684;&#x6839;&#x76EE;&#x5F55;&#x67E5;&#x627E;&#x8BE5;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x627E;&#x5230;&#x4F1A;&#x518D;&#x6839;&#x636E;&#x8BBE;&#x5907;&#x7684;&#x8BED;&#x8A00;/&#x533A;&#x57DF;&#x8BBE;&#x7F6E;&#x67E5;&#x627E;lproj&#x76EE;&#x5F55;&#xFF0C;&#x901A;&#x8FC7;&#x8FD9;&#x79CD;&#x65B9;&#x5F0F;&#x8BA9;&#x8BED;&#x8A00;&#x76F8;&#x5173;&#x7684;&#x8D44;&#x6E90;&#x548C;&#x4EE3;&#x7801;&#x76F8;&#x5206;&#x79BB;&#xFF0C;&#x5B9E;&#x73B0;&#x672C;&#x5730;&#x5316;&#x3002;</p>
+<h2 id="1-2-Interface-Builder&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x672C;&#x5730;&#x5316;&#xFF1F;"><a href="#1-2-Interface-Builder&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x672C;&#x5730;&#x5316;&#xFF1F;" class="headerlink" title="1.2 Interface Builder&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x672C;&#x5730;&#x5316;&#xFF1F;"></a>1.2 Interface Builder&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x672C;&#x5730;&#x5316;&#xFF1F;</h2><p>&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x5728;PROJECT &gt; INFO &gt; Localization&#x6DFB;&#x52A0;&#x5F85;&#x652F;&#x6301;&#x7684;&#x8BED;&#x8A00;&#xFF1A;<br><img src="/2017/07/27/2017/0727iOSProgrammingBNRG07/img01.png" alt=""><br>&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x5728;File Inspector&#x4E2D;&#x52FE;&#x9009;&#x8BE5;&#x8BED;&#x8A00;&#xFF0C;&#x5B83;&#x4F1A;&#x4E3A;&#x8BE5;storyboard&#x751F;&#x6210;&#x5BF9;&#x5E94;&#x7684;&#x8BED;&#x79CD;&#x6587;&#x4EF6;&#xFF1A;<br><img src="/2017/07/27/2017/0727iOSProgrammingBNRG07/img02.png" alt=""><br>&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x8BE5;&#x6587;&#x4EF6;&#x4F1A;&#x4E3A;storyboard&#x4E2D;&#x4F7F;&#x7528;&#x7684;&#x6240;&#x6709;&#x6587;&#x672C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x628A;&#x6BCF;&#x4E2A;&#x53D8;&#x91CF;&#x7684;&#x503C;&#x4FEE;&#x6539;&#x4E3A;&#x6307;&#x5B9A;&#x8BED;&#x8A00;&#x4E0B;&#x7684;&#x6587;&#x672C;&#xFF1A;<br><img src="/2017/07/27/2017/0727iOSProgrammingBNRG07/img03.png" alt=""><br>&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#xFF0C;&#x5982;&#x679C;&#x7CFB;&#x7EDF;&#x8BED;&#x8A00;&#x8BBE;&#x7F6E;&#x4E3A;&#x4E2D;&#x6587;&#xFF0C;app&#x4E3B;&#x754C;&#x9762;&#x5C31;&#x662F;&#xFF1A;<br><img src="/2017/07/27/2017/0727iOSProgrammingBNRG07/img04.png" alt=""><br>&#x628A;&#x7CFB;&#x7EDF;&#x8BED;&#x8A00;&#x4FEE;&#x6539;&#x4E3A;&#x82F1;&#x6587;&#xFF0C;app&#x4E0D;&#x9700;&#x8981;&#x4FEE;&#x6539;&#xFF0C;&#x4E3B;&#x754C;&#x9762;&#x5C31;&#x53D8;&#x6210;&#x4E86;&#xFF1A;<br><img src="/2017/07/27/2017/0727iOSProgrammingBNRG07/img05.png" alt=""><br><strong>&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF1A;&#x672C;&#x5730;&#x5316;&#x7684;&#x5DE5;&#x4F5C;&#x5E94;&#x8BE5;&#x505A;&#x5728;&#x5DE5;&#x7A0B;&#x7684;&#x6700;&#x7EC8;&#x9636;&#x6BB5;&#x3002;&#x56E0;&#x4E3A;&#x5982;&#x679C;&#x5B8C;&#x6210;&#x672C;&#x5730;&#x5316;&#x5DE5;&#x4F5C;&#x4EE5;&#x540E;&#xFF0C;&#x518D;&#x5728;storyboard&#x4E2D;&#x6DFB;&#x52A0;&#x65B0;&#x7684;&#x6587;&#x672C;&#x63A7;&#x4EF6;&#xFF0C;Xcode&#x662F;&#x4E0D;&#x4F1A;&#x81EA;&#x52A8;&#x5728;&#x8BED;&#x8A00;&#x5305;&#x91CC;&#x4E3A;&#x5B83;&#x6DFB;&#x52A0;&#x53D8;&#x91CF;&#x7684;&#x3002;&#x53EA;&#x80FD;&#x91CD;&#x65B0;&#x5728;File Inspector&#x4E2D;&#x91CD;&#x65B0;&#x52FE;&#x6389;/&#x52FE;&#x9009;&#x8BE5;&#x8BED;&#x8A00;&#xFF0C;&#x91CD;&#x65B0;&#x751F;&#x6210;&#x8BED;&#x8A00;&#x5305;&#x3002;</strong></p>
+<h2 id="1-3-&#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x672C;&#x5730;&#x5316;&#xFF1F;"><a href="#1-3-&#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x672C;&#x5730;&#x5316;&#xFF1F;" class="headerlink" title="1.3 &#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x672C;&#x5730;&#x5316;&#xFF1F;"></a>1.3 &#x4EE3;&#x7801;&#x4E2D;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x600E;&#x4E48;&#x5B9E;&#x73B0;&#x672C;&#x5730;&#x5316;&#xFF1F;</h2><p>&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;&#x4F7F;&#x7528;NSLocalizedString(_:comment:)&#x6784;&#x9020;&#x9700;&#x8981;&#x672C;&#x5730;&#x5316;&#x7684;&#x5B57;&#x7B26;&#x4E32;&#xFF1A;<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">let standardString = <span class="built_in">NSLocalizedString</span>(<span class="string">&quot;Standard&quot;</span>, comment: <span class="string">&quot;Standard map view&quot;</span>)</div><div class="line">let hybridString = <span class="built_in">NSLocalizedString</span>(<span class="string">&quot;Hybrid&quot;</span>, comment: <span class="string">&quot;Hybrid map view&quot;</span>)</div><div class="line">let satelliteString = <span class="built_in">NSLocalizedString</span>(<span class="string">&quot;satellite&quot;</span>, comment: <span class="string">&quot;satellite map view&quot;</span>)</div><div class="line">        </div><div class="line">let segmentedControl = <span class="built_in">UISegmentedControl</span>(items: [standardString, hybridString, satelliteString])</div></pre></td></tr></table></figure></p>
+<p>&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x5BF9;&#x5305;&#x542B;&#x672C;&#x5730;&#x5316;&#x5B57;&#x7B26;&#x7684;&#x6587;&#x4EF6;&#x751F;&#x6210;&#x8BED;&#x8A00;&#x5305;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ genstrings MapViewController.swift</div></pre></td></tr></table></figure></p>
+<p>&#x5B83;&#x4F1A;&#x751F;&#x6210;&#x4E00;&#x4E2A;Localizable.strings&#x6587;&#x4EF6;&#xFF0C;&#x628A;&#x5B83;&#x6DFB;&#x52A0;&#x5230;&#x5DE5;&#x7A0B;&#x91CC;&#xFF0C;&#x7136;&#x540E;&#x6309;&#x7167;&#x5982;&#x4E0B;&#x6B65;&#x9AA4;&#x4E3A;&#x5B83;&#x751F;&#x6210;&#x8BED;&#x8A00;&#x5305;&#xFF1A;<br><img src="/2017/07/27/2017/0727iOSProgrammingBNRG07/img06.png" alt=""></p>
+<p>&#x5B83;&#x4F1A;&#x5728;&#x5BF9;&#x5E94;&#x7684;lproj&#x76EE;&#x5F55;&#x4E2D;&#x751F;&#x6210;Localizable.strings&#x6587;&#x4EF6;&#xFF0C;&#x628A;&#x6BCF;&#x4E2A;&#x5B57;&#x7B26;&#x4E32;&#x4FEE;&#x6539;&#x6210;&#x6307;&#x5B9A;&#x8BED;&#x8A00;&#x3002;<br>&#x641E;&#x5B9A;&#xFF01;&#x65E0;&#x9700;&#x4FEE;&#x6539;app&#x4EE3;&#x7801;&#xFF0C;&#x5728;&#x7CFB;&#x7EDF;&#x6307;&#x5B9A;&#x8BED;&#x8A00;&#x4E0B;&#xFF0C;app&#x5C31;&#x4F1A;&#x4F7F;&#x7528;&#x6307;&#x5B9A;&#x8BED;&#x8A00;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x8BED;&#x8A00;&#x5305;&#x6765;&#x663E;&#x793A;&#x5B57;&#x7B26;&#x4E32;&#x3002;</p>
+<h2 id="1-4-&#x600E;&#x6837;&#x8BBE;&#x7F6E;app&#x8C03;&#x8BD5;&#x8FD0;&#x884C;&#x7684;&#x8BED;&#x8A00;-&#x533A;&#x57DF;"><a href="#1-4-&#x600E;&#x6837;&#x8BBE;&#x7F6E;app&#x8C03;&#x8BD5;&#x8FD0;&#x884C;&#x7684;&#x8BED;&#x8A00;-&#x533A;&#x57DF;" class="headerlink" title="1.4 &#x600E;&#x6837;&#x8BBE;&#x7F6E;app&#x8C03;&#x8BD5;&#x8FD0;&#x884C;&#x7684;&#x8BED;&#x8A00;-&#x533A;&#x57DF;"></a>1.4 &#x600E;&#x6837;&#x8BBE;&#x7F6E;app&#x8C03;&#x8BD5;&#x8FD0;&#x884C;&#x7684;&#x8BED;&#x8A00;-&#x533A;&#x57DF;</h2><p><img src="/2017/07/27/2017/0727iOSProgrammingBNRG07/img07.png" alt=""><br><img src="/2017/07/27/2017/0727iOSProgrammingBNRG07/img08.png" alt=""><br>&#x8BBE;&#x7F6E;Application Language&#x548C;Application Region&#xFF0C;&#x518D;run&#x8D77;app&#x65F6;&#xFF0C;&#x5B83;&#x5C31;&#x628A;&#x8BE5;&#x8BBE;&#x7F6E;&#x5F53;&#x505A;app&#x7684;&#x9ED8;&#x8BA4;&#x8BED;&#x8A00;&#x533A;&#x57DF;&#x8BBE;&#x7F6E;&#x3002;</p>
+<h1 id="2-&#x63A7;&#x4EF6;&#x5C3A;&#x5BF8;&#x6821;&#x9A8C;"><a href="#2-&#x63A7;&#x4EF6;&#x5C3A;&#x5BF8;&#x6821;&#x9A8C;" class="headerlink" title="2 &#x63A7;&#x4EF6;&#x5C3A;&#x5BF8;&#x6821;&#x9A8C;"></a>2 &#x63A7;&#x4EF6;&#x5C3A;&#x5BF8;&#x6821;&#x9A8C;</h1><h2 id="2-1-&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x4E3A;&#x6587;&#x672C;&#x63A7;&#x4EF6;&#x6821;&#x9A8C;&#x7EA6;&#x675F;&#xFF1F;"><a href="#2-1-&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x4E3A;&#x6587;&#x672C;&#x63A7;&#x4EF6;&#x6821;&#x9A8C;&#x7EA6;&#x675F;&#xFF1F;" class="headerlink" title="2.1 &#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x4E3A;&#x6587;&#x672C;&#x63A7;&#x4EF6;&#x6821;&#x9A8C;&#x7EA6;&#x675F;&#xFF1F;"></a>2.1 &#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x4E3A;&#x6587;&#x672C;&#x63A7;&#x4EF6;&#x6821;&#x9A8C;&#x7EA6;&#x675F;&#xFF1F;</h2><p>&#x5728;&#x5B9E;&#x65BD;&#x672C;&#x5730;&#x5316;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x6587;&#x672C;&#x76F8;&#x5173;&#x7684;&#x63A7;&#x4EF6;&#xFF08;&#x6BD4;&#x5982;Label&#xFF09;&#xFF0C;&#x5176;&#x5185;&#x5BB9;&#x4F1A;&#x6839;&#x636E;&#x8BED;&#x8A00;/&#x533A;&#x57DF;&#x8BBE;&#x7F6E;&#x7684;&#x53D8;&#x5316;&#x800C;&#x53D8;&#x5316;&#xFF0C;&#x8FD9;&#x5C31;&#x9700;&#x8981;&#x4E3A;&#x63A7;&#x4EF6;&#x8BBE;&#x7F6E;&#x5408;&#x9002;&#x7684;&#x7EA6;&#x675F;&#x3002;&#x5982;&#x679C;&#x7ED9;Label&#x7684;&#x5BBD;&#x5EA6;&#x8BBE;&#x7F6E;&#x4E00;&#x4E2A;&#x5B9A;&#x957F;&#x7EA6;&#x675F;&#xFF0C;&#x5219;&#x4F1A;&#x5728;&#x6587;&#x672C;&#x53D8;&#x957F;&#x65F6;&#x5BFC;&#x81F4;&#x663E;&#x793A;&#x4E0D;&#x5168;&#x3002;&#x56E0;&#x6B64;&#xFF0C;Xcode&#x63D0;&#x4F9B;&#x4E86;&#x4E00;&#x79CD;&#x673A;&#x5236;&#xFF0C;&#x8BA9;story board&#x91CC;&#x7684;&#x6587;&#x5B57;&#x77AC;&#x95F4;&#x7FFB;&#x500D;&#xFF0C;&#x7528;&#x6765;&#x68C0;&#x67E5;&#x662F;&#x4E0D;&#x662F;&#x6240;&#x6709;&#x7684;&#x63A7;&#x4EF6;&#x90FD;&#x8BBE;&#x7F6E;&#x4E86;&#x6B63;&#x786E;&#x7684;&#x7EA6;&#x675F;&#x3002;&#x4EE5;&#x65B9;&#x4FBF;&#x5F00;&#x53D1;&#x8005;&#x66F4;&#x597D;&#x5730;&#x672C;&#x5730;&#x5316;&#x3002;</p>
+<h2 id="2-2-&#x600E;&#x4E48;&#x6821;&#x9A8C;&#x6587;&#x672C;&#x63A7;&#x4EF6;&#x7684;&#x7EA6;&#x675F;&#xFF1F;"><a href="#2-2-&#x600E;&#x4E48;&#x6821;&#x9A8C;&#x6587;&#x672C;&#x63A7;&#x4EF6;&#x7684;&#x7EA6;&#x675F;&#xFF1F;" class="headerlink" title="2.2 &#x600E;&#x4E48;&#x6821;&#x9A8C;&#x6587;&#x672C;&#x63A7;&#x4EF6;&#x7684;&#x7EA6;&#x675F;&#xFF1F;"></a>2.2 &#x600E;&#x4E48;&#x6821;&#x9A8C;&#x6587;&#x672C;&#x63A7;&#x4EF6;&#x7684;&#x7EA6;&#x675F;&#xFF1F;</h2><p>&#x4E00;&#x3001;&#x6253;&#x5F00;Assistant Editor<br>&#x4E8C;&#x3001;&#x5728;&#x6253;&#x5F00;&#x7684;&#x65B0;&#x89C6;&#x56FE;&#x4E0A;&#x90E8;&#x9009;&#x62E9;Automatic &gt; Preview &gt; &#x9009;&#x62E9;&#x9884;&#x89C8;&#x8981;&#x68C0;&#x67E5;&#x7684;&#x754C;&#x9762;<br><img src="/2017/07/27/2017/0727iOSProgrammingBNRG07/img09.png" alt=""><br>&#x4E09;&#x3001;&#x9009;&#x62E9;Double-Lenght Pseudolanguage&#xFF0C;&#x5B83;&#x4F1A;&#x628A;&#x754C;&#x9762;&#x4E2D;&#x6240;&#x6709;&#x6587;&#x5B57;Double&#x4E00;&#x904D;<br><img src="/2017/07/27/2017/0727iOSProgrammingBNRG07/img10.png" alt=""><br>&#x6B64;&#x65F6;&#xFF0C;&#x5BF9;&#x4E8E;&#x7EA6;&#x675F;&#x8BBE;&#x7F6E;&#x4E0D;&#x6B63;&#x786E;&#x7684;&#x63A7;&#x4EF6;&#xFF0C;&#x4F60;&#x5C31;&#x80FD;&#x53D1;&#x73B0;&#x8BF8;&#x5982;&#x201C;&#x6587;&#x5B57;&#x5C55;&#x73B0;&#x4E0D;&#x5168;&#x201D;&#x6216;&#x201C;&#x6587;&#x5B57;&#x51FA;&#x754C;&#x201D;&#x7B49;&#x95EE;&#x9898;&#x4E86;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/BNRG笔记/" rel="tag">#BNRG笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/26/2017/0726iOSProgrammingBNRG06/" rel="next" title="《iOS Programming BNRG》笔记六">
+                <i class="fa fa-chevron-left"></i> 《iOS Programming BNRG》笔记六
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/28/2017/0727iOSProgrammingBNRG08/" rel="prev" title="《iOS Programming BNRG》笔记八">
+                《iOS Programming BNRG》笔记八 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/07/27/2017/0727iOSProgrammingBNRG07/"
+           data-title="《iOS Programming BNRG》笔记七" data-url="http://palanceli.github.io/2017/07/27/2017/0727iOSProgrammingBNRG07/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-本地化的基本概念"><span class="nav-text">1 本地化的基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-本地化都包含什么？"><span class="nav-text">1.1 本地化都包含什么？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-iOS解决本地化问题的基本原理"><span class="nav-text">1.2 iOS解决本地化问题的基本原理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Interface-Builder中的字符串怎么实现本地化？"><span class="nav-text">1.2 Interface Builder中的字符串怎么实现本地化？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-代码中的字符串怎么实现本地化？"><span class="nav-text">1.3 代码中的字符串怎么实现本地化？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-怎样设置app调试运行的语言-区域"><span class="nav-text">1.4 怎样设置app调试运行的语言-区域</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-控件尺寸校验"><span class="nav-text">2 控件尺寸校验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-为什么要为文本控件校验约束？"><span class="nav-text">2.1 为什么要为文本控件校验约束？</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-怎么校验文本控件的约束？"><span class="nav-text">2.2 怎么校验文本控件的约束？</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

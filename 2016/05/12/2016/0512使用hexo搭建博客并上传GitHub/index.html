@@ -83,7 +83,7 @@
 <meta property="og:url" content="http://palanceli.github.io/2016/05/12/2016/0512使用hexo搭建博客并上传GitHub/index.html">
 <meta property="og:site_name" content="Palance's Blog">
 <meta property="og:description" content="&amp;#x4E4B;&amp;#x524D;&amp;#x5728;&amp;#x535A;&amp;#x5BA2;&amp;#x56ED;&amp;#x3001;&amp;#x7B80;&amp;#x4E66;&amp;#x3001;CSDN&amp;#x7B49;&amp;#x5730;&amp;#x513F;&amp;#x90FD;&amp;#x5F00;&amp;#x8FC7;&amp;#x535A;&amp;#xFF0C;&amp;#x4E00;&amp;#x7BC7;&amp;#x6587;&amp;#x7AE0;&amp;#x5199;&amp;#x597D;&amp;#x4">
-<meta property="og:updated_time" content="2016-08-13T16:34:14.000Z">
+<meta property="og:updated_time" content="2017-07-10T15:14:10.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用hexo搭建博客并上传GitHub">
 <meta name="twitter:description" content="&amp;#x4E4B;&amp;#x524D;&amp;#x5728;&amp;#x535A;&amp;#x5BA2;&amp;#x56ED;&amp;#x3001;&amp;#x7B80;&amp;#x4E66;&amp;#x3001;CSDN&amp;#x7B49;&amp;#x5730;&amp;#x513F;&amp;#x90FD;&amp;#x5F00;&amp;#x8FC7;&amp;#x535A;&amp;#xFF0C;&amp;#x4E00;&amp;#x7BC7;&amp;#x6587;&amp;#x7AE0;&amp;#x5199;&amp;#x597D;&amp;#x4">
@@ -336,7 +336,7 @@
 <h1 id="&#x5173;&#x8054;GitHub"><a href="#&#x5173;&#x8054;GitHub" class="headerlink" title="&#x5173;&#x8054;GitHub"></a>&#x5173;&#x8054;GitHub</h1><p>&#x5B89;&#x88C5;hexo-delopyer-git&#xFF1A;<br><code>$ npm install hexo-deployer-git --save</code></p>
 <p>&#x5728;<code>blog/_config.yml</code>&#x4E2D;&#x6DFB;&#x52A0;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">deploy:</div><div class="line">  type: git</div><div class="line">  repository: https://github.com/palanceli/palanceli.github.io.git</div><div class="line">  branch: master</div></pre></td></tr></table></figure></p>
 <h1 id="&#x5176;&#x5B83;"><a href="#&#x5176;&#x5B83;" class="headerlink" title="&#x5176;&#x5B83;"></a>&#x5176;&#x5B83;</h1><h2 id="&#x56FE;&#x7247;"><a href="#&#x56FE;&#x7247;" class="headerlink" title="&#x56FE;&#x7247;"></a>&#x56FE;&#x7247;</h2><p>&#x9996;&#x5148;&#x786E;&#x8BA4;_config.yml&#x4E2D;&#x6709;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">post_asset_folder: true</div></pre></td></tr></table></figure></p>
-<p>&#x7136;&#x540E;&#x5728;blog-dev/&#x4E0B;&#x6267;&#x884C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</div></pre></td></tr></table></figure></p>
+<p>&#x7136;&#x540E;&#x5728;blog/&#x4E0B;&#x6267;&#x884C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install https://github.com/CodeFalling/hexo-asset-image --save</div></pre></td></tr></table></figure></p>
 <p>&#x786E;&#x4FDD;&#x5728;blog-dev/source/_posts&#x4E0B;&#x521B;&#x5EFA;&#x548C;md&#x6587;&#x4EF6;&#x540C;&#x540D;&#x7684;&#x76EE;&#x5F55;&#xFF0C;&#x5728;&#x91CC;&#x9762;&#x653E;&#x8BE5;md&#x9700;&#x8981;&#x7684;&#x56FE;&#x7247;&#xFF0C;&#x7136;&#x540E;&#x5728;md&#x4E2D;&#x63D2;&#x5165;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![](&#x76EE;&#x5F55;&#x540D;/&#x6587;&#x4EF6;&#x540D;.png)</div></pre></td></tr></table></figure></p>
 <p>&#x5373;&#x53EF;&#x5728;hexo generate&#x65F6;&#x6B63;&#x786E;&#x751F;&#x6210;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x3002;&#x6BD4;&#x5982;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">_posts</div><div class="line">    |- post1.md</div><div class="line">    |_ post1</div><div class="line">        |- pic1.png</div></pre></td></tr></table></figure></p>
 <p>&#x5728;md&#x6587;&#x4EF6;&#x4E2D;&#x63D2;&#x5165;&#x56FE;&#x7247;&#x65F6;&#x53EA;&#x9700;&#x5199;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">![](post1/pic1.png)</div></pre></td></tr></table></figure></p>
@@ -458,7 +458,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -466,7 +466,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -475,7 +475,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -542,7 +542,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装环境"><span class="nav-number">1.</span> <span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建站"><span class="nav-number">2.</span> <span class="nav-text">建站</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关联GitHub"><span class="nav-number">3.</span> <span class="nav-text">关联GitHub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其它"><span class="nav-number">4.</span> <span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图片"><span class="nav-number">4.1.</span> <span class="nav-text">图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频"><span class="nav-number">4.2.</span> <span class="nav-text">视频</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐藏文件"><span class="nav-number">4.3.</span> <span class="nav-text">隐藏文件</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装环境"><span class="nav-text">安装环境</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建站"><span class="nav-text">建站</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#关联GitHub"><span class="nav-text">关联GitHub</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#图片"><span class="nav-text">图片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#视频"><span class="nav-text">视频</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#隐藏文件"><span class="nav-text">隐藏文件</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

@@ -488,7 +488,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -496,7 +496,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -505,7 +505,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -572,7 +572,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#binder-open-…-都干了什么？"><span class="nav-number">1.</span> <span class="nav-text">binder_open(…)都干了什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-proc"><span class="nav-number">1.1.</span> <span class="nav-text">struct binder_proc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binder-proc中的链表"><span class="nav-number">1.2.</span> <span class="nav-text">binder_proc中的链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#INIT-LIST-HEAD-amp-proc-gt-todo"><span class="nav-number">1.3.</span> <span class="nav-text">INIT_LIST_HEAD(&proc->todo)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-waitqueue-head-amp-proc-gt-wait"><span class="nav-number">1.4.</span> <span class="nav-text">init_waitqueue_head(&proc->wait)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hlist-add-head-amp-proc-gt-proc-node-amp-binder-procs"><span class="nav-number">1.5.</span> <span class="nav-text">hlist_add_head(&proc->proc_node, &binder_procs)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#binder-mmap-…-都干了什么？"><span class="nav-number">2.</span> <span class="nav-text">binder_mmap(…)都干了什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#binder-update-page-range-…-做了什么"><span class="nav-number">2.1.</span> <span class="nav-text">binder_update_page_range(…)做了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-buffer"><span class="nav-number">2.2.</span> <span class="nav-text">struct binder_buffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-add-amp-buffer-gt-entry-amp-proc-gt-buffers"><span class="nav-number">2.3.</span> <span class="nav-text">list_add(&buffer->entry, &proc->buffers)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数binder-insert-free-buffer-…"><span class="nav-number">2.4.</span> <span class="nav-text">函数binder_insert_free_buffer(…)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从服务端addService触发的binder-transaction"><span class="nav-number">3.</span> <span class="nav-text">从服务端addService触发的binder_transaction(...)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-transaction"><span class="nav-number">3.1.</span> <span class="nav-text">struct binder_transaction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-work"><span class="nav-number">3.2.</span> <span class="nav-text">struct binder_work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-node"><span class="nav-number">3.3.</span> <span class="nav-text">struct binder_node</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-ref"><span class="nav-number">3.4.</span> <span class="nav-text">struct binder_ref</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#binder-open-…-都干了什么？"><span class="nav-text">binder_open(…)都干了什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-proc"><span class="nav-text">struct binder_proc</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#binder-proc中的链表"><span class="nav-text">binder_proc中的链表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#INIT-LIST-HEAD-amp-proc-gt-todo"><span class="nav-text">INIT_LIST_HEAD(&proc->todo)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#init-waitqueue-head-amp-proc-gt-wait"><span class="nav-text">init_waitqueue_head(&proc->wait)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#hlist-add-head-amp-proc-gt-proc-node-amp-binder-procs"><span class="nav-text">hlist_add_head(&proc->proc_node, &binder_procs)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#binder-mmap-…-都干了什么？"><span class="nav-text">binder_mmap(…)都干了什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#binder-update-page-range-…-做了什么"><span class="nav-text">binder_update_page_range(…)做了什么</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-buffer"><span class="nav-text">struct binder_buffer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#list-add-amp-buffer-gt-entry-amp-proc-gt-buffers"><span class="nav-text">list_add(&buffer->entry, &proc->buffers)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#函数binder-insert-free-buffer-…"><span class="nav-text">函数binder_insert_free_buffer(…)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#从服务端addService触发的binder-transaction"><span class="nav-text">从服务端addService触发的binder_transaction(...)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-transaction"><span class="nav-text">struct binder_transaction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-work"><span class="nav-text">struct binder_work</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-node"><span class="nav-text">struct binder_node</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#struct-binder-ref"><span class="nav-text">struct binder_ref</span></a></li></ol></li></ol></div>
             
           </div>
         </section>

@@ -1,0 +1,775 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="BNRG笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x5728;&amp;#x8BE6;&amp;#x60C5;&amp;#x754C;&amp;#x9762;&amp;#x4E2D;&amp;#x6DFB;&amp;#x52A0;&amp;#x4E86;&amp;#x9009;&amp;#x62E9;&amp;#x7167;&amp;#x7247;&amp;#x7684;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x5F15;&amp;#x5165;&amp;#x4E86;UIImageView&amp;#xFF1A;&amp;#x67">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《iOS Programming BNRG》笔记十五">
+<meta property="og:url" content="http://palanceli.github.io/2017/08/03/2017/0803iOSProgrammingBNRG15/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x5728;&amp;#x8BE6;&amp;#x60C5;&amp;#x754C;&amp;#x9762;&amp;#x4E2D;&amp;#x6DFB;&amp;#x52A0;&amp;#x4E86;&amp;#x9009;&amp;#x62E9;&amp;#x7167;&amp;#x7247;&amp;#x7684;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x5F15;&amp;#x5165;&amp;#x4E86;UIImageView&amp;#xFF1A;&amp;#x67">
+<meta property="og:image" content="http://palanceli.github.io/2017/08/03/2017/0803iOSProgrammingBNRG15/img01.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/08/03/2017/0803iOSProgrammingBNRG15/img02.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/08/03/2017/0803iOSProgrammingBNRG15/img03.png">
+<meta property="og:updated_time" content="2017-08-26T02:04:37.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《iOS Programming BNRG》笔记十五">
+<meta name="twitter:description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x5728;&amp;#x8BE6;&amp;#x60C5;&amp;#x754C;&amp;#x9762;&amp;#x4E2D;&amp;#x6DFB;&amp;#x52A0;&amp;#x4E86;&amp;#x9009;&amp;#x62E9;&amp;#x7167;&amp;#x7247;&amp;#x7684;&amp;#x529F;&amp;#x80FD;&amp;#xFF0C;&amp;#x5F15;&amp;#x5165;&amp;#x4E86;UIImageView&amp;#xFF1A;&amp;#x67">
+<meta name="twitter:image" content="http://palanceli.github.io/2017/08/03/2017/0803iOSProgrammingBNRG15/img01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2017/08/03/2017/0803iOSProgrammingBNRG15/"/>
+
+  <title> 《iOS Programming BNRG》笔记十五 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《iOS Programming BNRG》笔记十五
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-08-03T23:00:00+08:00" content="2017-08-03">
+              2017-08-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/iOS-Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">iOS Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/08/03/2017/0803iOSProgrammingBNRG15/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/08/03/2017/0803iOSProgrammingBNRG15/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x672C;&#x7AE0;&#x5728;&#x8BE6;&#x60C5;&#x754C;&#x9762;&#x4E2D;&#x6DFB;&#x52A0;&#x4E86;&#x9009;&#x62E9;&#x7167;&#x7247;&#x7684;&#x529F;&#x80FD;&#xFF0C;&#x5F15;&#x5165;&#x4E86;UIImageView&#xFF1A;<br><img src="/2017/08/03/2017/0803iOSProgrammingBNRG15/img01.png" alt=""><br>&#x672C;&#x7AE0;&#x8981;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>UIImageView<a id="more"></a>
+</li>
+</ul>
+<h1 id="1-UIImageView"><a href="#1-UIImageView" class="headerlink" title="1 UIImageView"></a>1 UIImageView</h1><h2 id="1-1-&#x600E;&#x4E48;&#x63A7;&#x5236;UIImageView&#x663E;&#x793A;&#x56FE;&#x7247;&#x7684;&#x7F29;&#x653E;&#x65B9;&#x5F0F;"><a href="#1-1-&#x600E;&#x4E48;&#x63A7;&#x5236;UIImageView&#x663E;&#x793A;&#x56FE;&#x7247;&#x7684;&#x7F29;&#x653E;&#x65B9;&#x5F0F;" class="headerlink" title="1.1 &#x600E;&#x4E48;&#x63A7;&#x5236;UIImageView&#x663E;&#x793A;&#x56FE;&#x7247;&#x7684;&#x7F29;&#x653E;&#x65B9;&#x5F0F;"></a>1.1 &#x600E;&#x4E48;&#x63A7;&#x5236;UIImageView&#x663E;&#x793A;&#x56FE;&#x7247;&#x7684;&#x7F29;&#x653E;&#x65B9;&#x5F0F;</h2><p>&#x6839;&#x636E;<code>contentMode</code>&#x5C5E;&#x6027;&#xFF1A;</p>
+<style>
+table th:nth-of-type(1){
+    width: 80px;
+}
+table th:nth-of-type(2){
+    width: 300px;
+}
+</style>
+
+<table>
+<thead>
+<tr>
+<th>contentMode</th>
+<th>&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scaleToFill</td>
+<td>&#x7F29;&#x653E;&#x56FE;&#x7247;&#x4F7F;&#x4E4B;&#x5145;&#x6EE1;&#x5BB9;&#x5668;&#xFF0C;&#x53EF;&#x80FD;&#x4F1A;&#x5BFC;&#x81F4;&#x56FE;&#x7247;&#x53D8;&#x5F62;</td>
+</tr>
+<tr>
+<td>AspectFill</td>
+<td>&#x4FDD;&#x6301;&#x56FE;&#x7247;&#x5BBD;&#x9AD8;&#x6BD4;&#x7684;&#x524D;&#x63D0;&#x4E0B;&#x7F29;&#x653E;&#x56FE;&#x7247;&#xFF0C;&#x4F7F;&#x4E4B;&#x5145;&#x6EE1;&#x5BB9;&#x5668;</td>
+</tr>
+<tr>
+<td>Aspect Fit</td>
+<td>&#x4FDD;&#x6301;&#x56FE;&#x7247;&#x5BBD;&#x9AD8;&#x6BD4;&#x7684;&#x524D;&#x63D0;&#x4E0B;&#x7F29;&#x653E;&#x56FE;&#x7247;&#xFF0C;&#x4F7F;&#x56FE;&#x7247;&#x5728;&#x5BB9;&#x5668;&#x5185;&#x5B8C;&#x6574;&#x663E;&#x793A;&#x51FA;&#x6765;</td>
+</tr>
+<tr>
+<td>Aspect</td>
+<td>&#x4FDD;&#x6301;&#x56FE;&#x7247;&#x7684;&#x5BBD;&#x9AD8;&#x6BD4;</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-2-UIToolBar&#x7684;&#x7279;&#x70B9;"><a href="#1-2-UIToolBar&#x7684;&#x7279;&#x70B9;" class="headerlink" title="1.2 UIToolBar&#x7684;&#x7279;&#x70B9;"></a>1.2 UIToolBar&#x7684;&#x7279;&#x70B9;</h2><p>&#x672C;&#x7AE0;&#x4F7F;&#x7528;UIToolBar&#x6765;&#x5C55;&#x73B0;&#x5DE6;&#x4E0B;&#x89D2;&#x7684;&#x76F8;&#x673A;&#x56FE;&#x6807;&#xFF0C;UIToolBar&#x548C;UINavigationBar&#x975E;&#x5E38;&#x76F8;&#x4F3C;&#xFF0C;&#x4E0D;&#x540C;&#x4E4B;&#x5904;&#x5728;&#x4E8E;&#x5728;&#x5B83;&#x4E0A;&#x9762;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x591A;&#x4E2A;&#x6309;&#x94AE;&#x9879;&#xFF0C;&#x53EA;&#x8981;&#x5C4F;&#x5E55;&#x653E;&#x5F97;&#x4E0B;&#x3002;</p>
+<h2 id="1-3-&#x9009;&#x53D6;&#x7167;&#x7247;&#x90FD;&#x6709;&#x54EA;&#x51E0;&#x79CD;&#x5F62;&#x5F0F;"><a href="#1-3-&#x9009;&#x53D6;&#x7167;&#x7247;&#x90FD;&#x6709;&#x54EA;&#x51E0;&#x79CD;&#x5F62;&#x5F0F;" class="headerlink" title="1.3 &#x9009;&#x53D6;&#x7167;&#x7247;&#x90FD;&#x6709;&#x54EA;&#x51E0;&#x79CD;&#x5F62;&#x5F0F;"></a>1.3 &#x9009;&#x53D6;&#x7167;&#x7247;&#x90FD;&#x6709;&#x54EA;&#x51E0;&#x79CD;&#x5F62;&#x5F0F;</h2><p>&#x7CFB;&#x7EDF;&#x7684;&#x76F8;&#x673A;&#x548C;&#x9009;&#x53D6;&#x7167;&#x7247;&#x7684;&#x754C;&#x9762;&#x662F;&#x540C;&#x4E00;&#x4E2A;&#x63A7;&#x4EF6;<code>UIImagePickerController</code>&#xFF0C;&#x901A;&#x8FC7;&#x8BBE;&#x7F6E;&#x8BE5;&#x63A7;&#x4EF6;&#x7684;<code>sourceType</code>&#x5C5E;&#x6027;&#x53EF;&#x4EE5;&#x63A7;&#x5236;&#x5177;&#x4F53;&#x4F7F;&#x7528;&#x54EA;&#x4E00;&#x4E2A;:</p>
+<table>
+<thead>
+<tr>
+<th>sourceType</th>
+<th>&#x542B;&#x4E49;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>camera</td>
+<td>&#x8C03;&#x8D77;&#x62CD;&#x7167;&#x754C;&#x9762;&#xFF0C;&#x62CD;&#x6444;&#x65B0;&#x7167;&#x7247;</td>
+</tr>
+<tr>
+<td>photoLibrary</td>
+<td>&#x63D0;&#x793A;&#x7528;&#x6237;&#x4ECE;&#x76F8;&#x518C;&#x91CC;&#x9009;&#x53D6;&#x7167;&#x7247;</td>
+</tr>
+<tr>
+<td>savedPhotosAlbum</td>
+<td>&#x63D0;&#x793A;&#x7528;&#x6237;&#x4ECE;&#x6700;&#x8FD1;&#x7684;&#x62CD;&#x6444;&#x91CC;&#x9009;&#x53D6;&#x7167;&#x7247;</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/2017/08/03/2017/0803iOSProgrammingBNRG15/img02.png" alt=""></p>
+<h2 id="1-4-&#x600E;&#x6837;&#x547C;&#x51FA;&#x7CFB;&#x7EDF;&#x76F8;&#x673A;&#x548C;&#x7167;&#x7247;&#x754C;&#x9762;"><a href="#1-4-&#x600E;&#x6837;&#x547C;&#x51FA;&#x7CFB;&#x7EDF;&#x76F8;&#x673A;&#x548C;&#x7167;&#x7247;&#x754C;&#x9762;" class="headerlink" title="1.4 &#x600E;&#x6837;&#x547C;&#x51FA;&#x7CFB;&#x7EDF;&#x76F8;&#x673A;&#x548C;&#x7167;&#x7247;&#x754C;&#x9762;"></a>1.4 &#x600E;&#x6837;&#x547C;&#x51FA;&#x7CFB;&#x7EDF;&#x76F8;&#x673A;&#x548C;&#x7167;&#x7247;&#x754C;&#x9762;</h2><ol>
+<li>&#x5224;&#x65AD;&#x8BBE;&#x5907;&#x662F;&#x5426;&#x6709;&#x62CD;&#x7167;&#x529F;&#x80FD;&#xFF0C;&#x8BBE;&#x7F6E;&#x9009;&#x53D6;&#x7167;&#x7247;&#x7684;&#x5F62;&#x5F0F;</li>
+<li>&#x4E3A;<code>UIImagePickerController</code>&#x53D8;&#x91CF;&#x6307;&#x5B9A;&#x4E00;&#x4E2A;&#x59D4;&#x6258;&#x4EE3;&#x7406;&#x3002;<br>&#x5F53;&#x7528;&#x6237;&#x9009;&#x62E9;&#x4E86;&#x7167;&#x7247;&#xFF0C;&#x4F1A;&#x5411;&#x4EE3;&#x7406;&#x53D1;&#x9001;<code>imagePickerController(_:didFinishPickingMediaWithInfo:)</code>&#x6D88;&#x606F;&#x3002;<br>&#x5982;&#x679C;&#x7528;&#x6237;&#x9009;&#x62E9;&#x53D6;&#x6D88;&#xFF0C;&#x5219;&#x4F1A;&#x5411;&#x4EE3;&#x7406;&#x53D1;&#x9001;<code>imagePickerControllerDidCancel(_:)</code>&#x6D88;&#x606F;&#x3002;<br>&#x663E;&#x7136;&#x8FD9;&#x4E2A;&#x4EE3;&#x7406;&#x8FD8;&#x662F;&#x5E94;&#x5F53;&#x7531;UIImagePickerController&#x6240;&#x5728;&#x7684;VC&#xFF0C;&#x5728;&#x672C;&#x7AE0;&#x4E2D;&#x5373;DetailViewController&#x3002;<br>&#x4F46;&#x662F;&#x5728;&#x4E66;&#x4E2D;&#x6B64;&#x5904;&#x8BA9;<code>DetailViewController</code>&#x9075;&#x5B88;&#x4E86;&#x4EE3;&#x7406;&#x534F;&#x8BAE;&#xFF1A;<code>UINavigationControllerDelegate</code> &#x548C;<code>UIImagePickerControllerDelegate</code>&#x3002;<font color="red">&#x4E66;&#x4E2D;&#x7684;&#x89E3;&#x91CA;&#x662F;&#xFF1A;<code>UIImagePickerController</code>&#x7684;&#x4EE3;&#x7406;&#x5C5E;&#x6027;&#x5B9E;&#x9645;&#x4E0A;&#x662F;&#x4ECE;&#x5B83;&#x7684;&#x57FA;&#x7C7B;<code>UINavigationController</code>&#x7EE7;&#x627F;&#x7684;&#xFF0C;<code>UIImagePickerController</code>&#x6709;&#x5B83;&#x81EA;&#x5DF1;&#x7684;&#x4EE3;&#x7406;&#x534F;&#x8BAE;&#xFF0C;&#x5B83;&#x7EE7;&#x627F;&#x6765;&#x7684;&#x4EE3;&#x7406;&#x5C5E;&#x6027;&#x6307;&#x5411;&#x4E00;&#x4E2A;&#x9075;&#x5B88;<code>UINavigationControllerDelegate</code>&#x7684;&#x5BF9;&#x8C61;&#x3002;&#x8FD9;&#x53E5;&#x8BDD;&#x6CA1;&#x770B;&#x61C2;&#xFF08;P441&#xFF09;</font></li>
+<li>&#x8C03;&#x7528;<code>present</code>&#x51FD;&#x6570;&#xFF0C;&#x663E;&#x793A;&#x9009;&#x53D6;&#x56FE;&#x7247;&#x7684;&#x754C;&#x9762;&#x3002;</li>
+<li>&#x5728;&#x9879;&#x76EE;&#x5C5E;&#x6027;&#x4E2D;&#x58F0;&#x660E;Custom iOS Target Properties&#x3002;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x8FD9;&#x4E00;&#x6B65;&#xFF0C;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#x4F1A;&#x5D29;&#x6E83;&#xFF0C;&#x56E0;&#x4E3A;&#x8BBF;&#x95EE;&#x76F8;&#x673A;&#x6216;&#x8005;&#x76F8;&#x518C;&#x65F6;&#xFF0C;iOS&#x4F1A;&#x5F39;&#x51FA;&#x63D0;&#x793A;&#x95EE;&#x7528;&#x6237;&#x662F;&#x5426;&#x540C;&#x610F;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x83B7;&#x53D6;&#x8BBF;&#x95EE;&#x6743;&#x9650;&#x3002;&#x9700;&#x8981;&#x5728;&#x9879;&#x76EE;&#x914D;&#x7F6E;&#x4E2D;&#x586B;&#x5199;&#x7533;&#x8BF7;&#x8BBF;&#x95EE;&#x76F8;&#x673A;/&#x76F8;&#x518C;&#x7684;&#x63D0;&#x793A;&#x8BED;&#x3002;</li>
+</ol>
+<p>&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// &#x2461; &#x8BA9;VC&#x9075;&#x5FAA;&#x59D4;&#x6258;&#x4EE3;&#x7406;&#x534F;&#x8BAE;</span></div><div class="line"><span class="keyword">class</span> DetailViewController: <span class="built_in">UIViewController</span>, <span class="built_in">UITextFieldDelegate</span>, <span class="built_in">UIImagePickerControllerDelegate</span>, <span class="built_in">UINavigationControllerDelegate</span> {</div><div class="line">    &#x2026;&#x2026;</div><div class="line">    @IBAction func takePicture(_ sender: <span class="built_in">UIBarButtonItem</span>) {</div><div class="line">        let imagePicker = <span class="built_in">UIImagePickerController</span>()</div><div class="line">        <span class="comment">// &#x2460; &#x5224;&#x65AD;&#x8BBE;&#x5907;&#x662F;&#x5426;&#x6709;&#x62CD;&#x6444;&#x529F;&#x80FD;&#xFF0C;&#x5E76;&#x8BBE;&#x7F6E;&#x9009;&#x53D6;&#x7167;&#x7247;&#x7684;&#x5F62;&#x5F0F;</span></div><div class="line">        <span class="keyword">if</span> <span class="built_in">UIImagePickerController</span>.isSourceTypeAvailable(.camera){	</div><div class="line">            imagePicker.sourceType = .camera</div><div class="line">        }<span class="keyword">else</span>{</div><div class="line">            imagePicker.sourceType = .photoLibrary</div><div class="line">        }</div><div class="line">        </div><div class="line">        imagePicker.delegate = <span class="keyword">self</span> <span class="comment">// &#x2461;&#x8BBE;&#x7F6E;&#x59D4;&#x6258;&#x4EE3;&#x7406;</span></div><div class="line">        <span class="comment">// &#x2462; &#x663E;&#x793A;&#x9009;&#x53D6;&#x7167;&#x7247;&#x754C;&#x9762;</span></div><div class="line">        present(imagePicker, animated: <span class="literal">true</span>, completion: <span class="literal">nil</span>)   </div><div class="line">    }</div><div class="line">    &#x2026;&#x2026;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x2463; &#x8BBE;&#x7F6E;&#x9879;&#x76EE;&#x7684;&#x6743;&#x9650;&#x7533;&#x8BF7;&#x63D0;&#x793A;&#x8BED;<br><img src="/2017/08/03/2017/0803iOSProgrammingBNRG15/img03.png" alt=""></p>
+<font color="red">&#x95EE;&#x9898;&#xFF1A;&#x5F53;&#x8C03;&#x7528;&#x4E86;present&#x4E4B;&#x540E;&#xFF0C;&#x63A7;&#x5236;&#x6743;&#x5728;&#x54EA;&#x91CC;&#xFF1F;&#x6839;&#x636E;&#x5982;&#x4F55;&#x83B7;&#x5F97;&#x7167;&#x7247;&#x7684;&#x65B9;&#x6CD5;&#xFF0C;&#x6211;&#x5224;&#x65AD;present&#x7ACB;&#x5373;&#x8FD4;&#x56DE;&#x4E86;&#xFF0C;&#x8FD4;&#x56DE;&#x7ED9;&#x8C01;&#x4E86;&#x5462;&#xFF1F;</font>
+
+<h2 id="1-5-&#x5982;&#x4F55;&#x83B7;&#x5F97;-&#x4FDD;&#x5B58;&#x7167;&#x7247;"><a href="#1-5-&#x5982;&#x4F55;&#x83B7;&#x5F97;-&#x4FDD;&#x5B58;&#x7167;&#x7247;" class="headerlink" title="1.5 &#x5982;&#x4F55;&#x83B7;&#x5F97;/&#x4FDD;&#x5B58;&#x7167;&#x7247;"></a>1.5 &#x5982;&#x4F55;&#x83B7;&#x5F97;/&#x4FDD;&#x5B58;&#x7167;&#x7247;</h2><p>&#x5E38;&#x89C4;&#x7684;&#x60F3;&#x6CD5;&#x662F;&#x5728;present&#x8C03;&#x7528;&#x4E4B;&#x540E;&#x83B7;&#x53D6;imagePicker&#x7684;&#x56FE;&#x7247;&#x5C5E;&#x6027;&#xFF0C;&#x5F97;&#x5230;&#x7167;&#x7247;&#x3002;&#x5B9E;&#x9645;&#x4E0D;&#x662F;&#x8FD9;&#x4E48;&#x5B8C;&#x6210;&#x7684;&#xFF0C;&#x800C;&#x662F;&#x5728;&#x4EE3;&#x7406;&#x534F;&#x8BAE;<code>UIImagePickerControllerDelegate</code>&#x7684;<code>imagePickerController(_:didFinishPickingMediaWithInfo:)</code>&#x51FD;&#x6570;&#x4E2D;&#x83B7;&#x53D6;&#x7167;&#x7247;&#xFF1A;<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">func imagePickerController(_ picker: <span class="built_in">UIImagePickerController</span>, didFinishPickingMediaWithInfo info: [String : Any]) {</div><div class="line">    <span class="comment">// &#x83B7;&#x53D6;&#x88AB;&#x9009;&#x4E2D;&#x7684;&#x7167;&#x7247;</span></div><div class="line">    let image = info[<span class="built_in">UIImagePickerControllerOriginalImage</span>] as! <span class="built_in">UIImage</span>	</div><div class="line">    imageView.image = image</div><div class="line">    </div><div class="line">    dismiss(animated: <span class="literal">true</span>, completion: <span class="literal">nil</span>)</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>&#x4E66;&#x4E2D;P448<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">func setImage(_ image: <span class="built_in">UIImage</span>, forKey key: String) { </div><div class="line">    cache.setObject(image, forKey: key as <span class="built_in">NSString</span>)	<span class="comment">// &#x4E3A;&#x4EC0;&#x4E48;&#x8F6C;&#x6362;&#x5462;&#xFF1F;</span></div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>key&#x5728;setImage&#x51FD;&#x6570;&#x4F20;&#x5165;&#x7684;&#x65F6;&#x5019;&#x662F;String&#xFF0C;&#x518D;&#x4F20;&#x5165;caceh.setObjet&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x5B83;&#x63A5;&#x53D7;&#x7684;&#x662F;NSString&#x53C2;&#x6570;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x505A;&#x4E2A;&#x8F6C;&#x6362;&#x3002;NSString&#x662F;class&#xFF0C;String&#x662F;Struct&#x3002;</p>
+</blockquote>
+<h1 id="2-&#x5F15;&#x5165;imageStore"><a href="#2-&#x5F15;&#x5165;imageStore" class="headerlink" title="2 &#x5F15;&#x5165;imageStore"></a>2 &#x5F15;&#x5165;imageStore</h1><h2 id="2-1-&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5F15;&#x5165;imageStore"><a href="#2-1-&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5F15;&#x5165;imageStore" class="headerlink" title="2.1 &#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5F15;&#x5165;imageStore"></a>2.1 &#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5F15;&#x5165;imageStore</h2><p>&#x7528;&#x6237;&#x9009;&#x62E9;&#x7684;&#x7167;&#x7247;&#x901A;&#x5E38;&#x662F;&#x8F83;&#x5927;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x90FD;&#x5B58;&#x5165;item&#x7ED3;&#x6784;&#x4F53;&#x5185;&#x4F1A;&#x6D88;&#x8017;&#x5DE8;&#x5927;&#x7684;&#x5185;&#x5B58;&#x3002;&#x6BD4;&#x8F83;&#x597D;&#x7684;&#x505A;&#x6CD5;&#x662F;&#x628A;&#x6570;&#x636E;&#x4FDD;&#x5B58;&#x5230;&#x6587;&#x4EF6;&#xFF0C;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x53EA;&#x7F13;&#x5B58;&#x4E00;&#x5C0F;&#x90E8;&#x5206;&#xFF0C;&#x9700;&#x8981;&#x7684;&#x65F6;&#x5019;&#x52A0;&#x8F7D;&#x5230;&#x7F13;&#x5B58;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x6216;&#x8005;&#x6536;&#x5230;&#x4F4E;&#x5185;&#x5B58;&#x8B66;&#x544A;&#x7684;&#x65F6;&#x5019;&#x91CA;&#x653E;&#x5185;&#x5B58;&#x3002;&#x8FD9;&#x5C31;&#x662F;imageStore&#x505A;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x5B83;&#x7ED9;&#x6BCF;&#x4E00;&#x4E2A;&#x56FE;&#x7247;&#x751F;&#x6210;&#x4E00;&#x4E2A;UUID&#xFF0C;&#x5728;item&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E2D;&#x4EC5;&#x4FDD;&#x5B58;&#x6B64;UUID&#xFF0C;&#x5B83;&#x5BF9;&#x5E94;&#x7684;&#x56FE;&#x7247;&#x5C06;&#x88AB;&#x6C38;&#x4E45;&#x4FDD;&#x5B58;&#x5230;&#x6587;&#x4EF6;&#x3002;</p>
+<h2 id="2-2-&#x5F15;&#x5165;imageStore&#x7684;&#x6B65;&#x9AA4;"><a href="#2-2-&#x5F15;&#x5165;imageStore&#x7684;&#x6B65;&#x9AA4;" class="headerlink" title="2.2 &#x5F15;&#x5165;imageStore&#x7684;&#x6B65;&#x9AA4;"></a>2.2 &#x5F15;&#x5165;imageStore&#x7684;&#x6B65;&#x9AA4;</h2><p>&#x4E00;&#x3001;&#x521B;&#x5EFA;ImageStore&#xFF0C;&#x7528;&#x4E8E;&#x6839;&#x636E;key&#x5230;&#x56FE;&#x7247;&#x7684;&#x589E;&#x3001;&#x5220;&#x3001;&#x6539;&#x3001;&#x67E5;&#xFF0C;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">import <span class="built_in">UIKit</span></div><div class="line"></div><div class="line"><span class="keyword">class</span> ImageStore {</div><div class="line">    let cache = <span class="built_in">NSCache</span>&lt;<span class="built_in">NSString</span>, <span class="built_in">UIImage</span>&gt;()</div><div class="line">    </div><div class="line">    func setImage(_ image: <span class="built_in">UIImage</span>, forKey key: String){</div><div class="line">        cache.setObject(image, forKey: key as <span class="built_in">NSString</span>)</div><div class="line">    }</div><div class="line">    </div><div class="line">    func image(forKey key: String) -&gt; <span class="built_in">UIImage</span>?{</div><div class="line">        <span class="keyword">return</span> cache.object(forKey: key as <span class="built_in">NSString</span>)</div><div class="line">    }</div><div class="line">    </div><div class="line">    func deleteImage(forKey key: String){</div><div class="line">        cache.removeObject(forKey: key as <span class="built_in">NSString</span>)</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x4E8C;&#x3001;&#x5728;AppDelegate&#x4E2D;&#x521B;&#x5EFA;ImageStore&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x5C06;&#x8BE5;&#x5B9E;&#x4F8B;&#x4F20;&#x5165;ItemViewController&#x548C;DetailViewController<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> AppDelegate: <span class="built_in">UIResponder</span>, <span class="built_in">UIApplicationDelegate</span> {</div><div class="line">   &#x2026;&#x2026;</div><div class="line">    func application(_ application: <span class="built_in">UIApplication</span>, didFinishLaunchingWithOptions launchOptions: [<span class="built_in">UIApplicationLaunchOptionsKey</span>: Any]?) -&gt; Bool {</div><div class="line">        let itemStore = ItemStore()</div><div class="line">        let imageStore = ImageStore()	<span class="comment">// &#x521B;&#x5EFA;ImageStore&#x5B9E;&#x4F8B;</span></div><div class="line">        </div><div class="line">        let navigationController = window!.rootViewController as! <span class="built_in">UINavigationController</span></div><div class="line">        let itemsController = navigationController.topViewController as! ItemsViewController</div><div class="line">        itemsController.itemStore = itemStore</div><div class="line">        itemsController.imageStore = imageStore <span class="comment">// &#x4F20;&#x5165;ItemViewController</span></div><div class="line">        <span class="keyword">return</span> <span class="literal">true</span></div><div class="line">    }</div><div class="line">    &#x2026;&#x2026;</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">class</span> ItemsViewController: <span class="built_in">UITableViewController</span> {</div><div class="line">    var itemStore: ItemStore!</div><div class="line">    var imageStore: ImageStore!	<span class="comment">// &#x7528;&#x6765;&#x63A5;&#x6536;&#x4F20;&#x5165;&#x7684;ImageStore</span></div><div class="line">    &#x2026;&#x2026;</div><div class="line">    <span class="comment">// &#x70B9;&#x51FB;&#x67D0;&#x4E2A;Item&#x5F15;&#x53D1;&#x8F6C;&#x573A;</span></div><div class="line">    override func prepare(<span class="keyword">for</span> segue: <span class="built_in">UIStoryboardSegue</span>, sender: Any?) {</div><div class="line">       </div><div class="line">        <span class="keyword">switch</span> segue.identifier {</div><div class="line">        <span class="keyword">case</span> <span class="string">&quot;showItem&quot;</span>?:</div><div class="line">            <span class="keyword">if</span> let row = tableView.indexPathForSelectedRow?.row{</div><div class="line">                let item = itemStore.allItems[row]</div><div class="line">                let detailViewController = segue.destination as! DetailViewController</div><div class="line">                detailViewController.item = item</div><div class="line">                <span class="comment">// &#x5F53;&#x70B9;&#x51FB;&#x6570;&#x636E;&#x9879;&#x65F6;&#xFF0C;&#x4F20;&#x5165;imageStore</span></div><div class="line">                detailViewController.imageStore = imageStore	 </div><div class="line">            }</div><div class="line">        <span class="keyword">default</span>:</div><div class="line">            preconditionFailure(<span class="string">&quot;Unexpected segue identifier.&quot;</span>)</div><div class="line">        }</div><div class="line">    }</div><div class="line">    &#x2026;&#x2026;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x4E09;&#x3001;&#x5728;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x65B0;Item&#x65F6;&#xFF0C;&#x751F;&#x6210;UUID&#xFF1A;<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> Item: <span class="built_in">NSObject</span> {</div><div class="line">    &#x2026;&#x2026;</div><div class="line">    let itemKey: String	<span class="comment">// &#x4FDD;&#x5B58;UUID</span></div><div class="line">    </div><div class="line">    init(name: String, serialNumber: String?, valueInDollars: Int){</div><div class="line">        &#x2026;&#x2026;</div><div class="line">        <span class="keyword">self</span>.itemKey = UUID().uuidString</div><div class="line">    </div><div class="line">        <span class="keyword">super</span>.init()</div><div class="line">    }</div><div class="line">    &#x2026;&#x2026;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x56DB;&#x3001;&#x5728;DetailViewController&#x4E2D;&#xFF0C;&#x52A0;&#x8F7D;&#x65F6;&#x6839;&#x636E;key&#x663E;&#x793A;&#x7167;&#x7247;&#xFF0C;&#x9009;&#x62E9;&#x4E86;&#x4E00;&#x5F20;&#x7167;&#x7247;&#x540E;&#x66F4;&#x65B0;key&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> DetailViewController: <span class="built_in">UIViewController</span>, <span class="built_in">UITextFieldDelegate</span>, <span class="built_in">UIImagePickerControllerDelegate</span>, <span class="built_in">UINavigationControllerDelegate</span> {</div><div class="line">&#x2026;&#x2026;</div><div class="line">    </div><div class="line">    override func viewDidLoad() {</div><div class="line">        <span class="keyword">super</span>.viewDidLoad()</div><div class="line"></div><div class="line">        &#x2026;&#x2026;</div><div class="line">        <span class="comment">// &#x52A0;&#x8F7D;&#x65F6;&#x663E;&#x793A;key&#x5BF9;&#x5E94;&#x7684;&#x56FE;&#x7247;</span></div><div class="line">        let key = item.itemKey</div><div class="line">        let imageToDisplay = imageStore.image(forKey: key)</div><div class="line">        imageView.image = imageToDisplay</div><div class="line">    }</div><div class="line"></div><div class="line">    &#x2026;&#x2026;</div><div class="line">    func imagePickerController(_ picker: <span class="built_in">UIImagePickerController</span>, didFinishPickingMediaWithInfo info: [String : Any]) {</div><div class="line">        let image = info[<span class="built_in">UIImagePickerControllerOriginalImage</span>] as! <span class="built_in">UIImage</span></div><div class="line">        <span class="comment">// &#x4FEE;&#x6539;&#x4E86;&#x56FE;&#x7247;&#xFF0C;&#x66F4;&#x65B0;imageStore</span></div><div class="line">        imageStore.setImage(image, forKey: item.itemKey)    </div><div class="line">        imageView.image = image</div><div class="line">        </div><div class="line">        dismiss(animated: <span class="literal">true</span>, completion: <span class="literal">nil</span>)</div><div class="line">    }</div><div class="line">&#x2026;&#x2026;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x4E94;&#x3001;&#x5220;&#x9664;&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#x65F6;&#xFF0C;&#x8BB0;&#x5F97;&#x5220;&#x9664;&#x5B83;&#x5BF9;&#x5E94;&#x7684;&#x6570;&#x636E;<br><figure class="highlight objc"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">class</span> ItemsViewController: <span class="built_in">UITableViewController</span> {</div><div class="line">&#x2026;&#x2026;</div><div class="line"></div><div class="line">    <span class="comment">// Override to support editing the table view.</span></div><div class="line">    override func tableView(_ tableView: <span class="built_in">UITableView</span>, commit editingStyle: <span class="built_in">UITableViewCellEditingStyle</span>, forRowAt indexPath: IndexPath) {</div><div class="line">        <span class="keyword">if</span> editingStyle == .delete {</div><div class="line">            <span class="comment">// Delete the row from the data source</span></div><div class="line">            let item = itemStore.allItems[indexPath.row]</div><div class="line">            </div><div class="line">            let title = <span class="string">&quot;Delete \(item.name)?&quot;</span></div><div class="line">            let message = <span class="string">&quot;Are you sure you want to delete this item?&quot;</span></div><div class="line">            let ac = <span class="built_in">UIAlertController</span>(title: title, message:message, preferredStyle:.actionSheet)</div><div class="line">            </div><div class="line">            let cancelAction = <span class="built_in">UIAlertAction</span>(title: <span class="string">&quot;Cancel&quot;</span>, style: .cancel, handler: <span class="literal">nil</span>)</div><div class="line">            ac.addAction(cancelAction)</div><div class="line">            </div><div class="line">            let deleteAction = <span class="built_in">UIAlertAction</span>(title: <span class="string">&quot;Delete&quot;</span>, style: .destructive, handler: {(action) -&gt; Void <span class="keyword">in</span></div><div class="line">                <span class="keyword">self</span>.itemStore.removeItem(item)</div><div class="line">                <span class="keyword">self</span>.imageStore.deleteImage(forKey: item.itemKey)		<span class="comment">// &#x5220;&#x9664;&#x56FE;&#x7247;&#x6570;&#x636E;</span></div><div class="line">                <span class="keyword">self</span>.tableView.deleteRows(at: [indexPath], with: .automatic)</div><div class="line">            })</div><div class="line">            ac.addAction(deleteAction)</div><div class="line">            </div><div class="line">            present(ac, animated: <span class="literal">true</span>, completion: <span class="literal">nil</span>)</div><div class="line">        } <span class="keyword">else</span> <span class="keyword">if</span> editingStyle == .insert {</div><div class="line">            <span class="comment">// Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view</span></div><div class="line">        }    </div><div class="line">    }</div><div class="line">&#x2026;&#x2026;</div><div class="line">}</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/BNRG笔记/" rel="tag">#BNRG笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/08/02/2017/0802iOSProgrammingBNRG14/" rel="next" title="《iOS Programming BNRG》笔记十四">
+                <i class="fa fa-chevron-left"></i> 《iOS Programming BNRG》笔记十四
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/04/2017/0804iOSProgrammingBNRG16/" rel="prev" title="《iOS Programming BNRG》笔记十六">
+                《iOS Programming BNRG》笔记十六 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/08/03/2017/0803iOSProgrammingBNRG15/"
+           data-title="《iOS Programming BNRG》笔记十五" data-url="http://palanceli.github.io/2017/08/03/2017/0803iOSProgrammingBNRG15/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">114</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">47</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-UIImageView"><span class="nav-text">1 UIImageView</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-怎么控制UIImageView显示图片的缩放方式"><span class="nav-text">1.1 怎么控制UIImageView显示图片的缩放方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-UIToolBar的特点"><span class="nav-text">1.2 UIToolBar的特点</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-选取照片都有哪几种形式"><span class="nav-text">1.3 选取照片都有哪几种形式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-怎样呼出系统相机和照片界面"><span class="nav-text">1.4 怎样呼出系统相机和照片界面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-如何获得-保存照片"><span class="nav-text">1.5 如何获得/保存照片</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-引入imageStore"><span class="nav-text">2 引入imageStore</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-为什么要引入imageStore"><span class="nav-text">2.1 为什么要引入imageStore</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-引入imageStore的步骤"><span class="nav-text">2.2 引入imageStore的步骤</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

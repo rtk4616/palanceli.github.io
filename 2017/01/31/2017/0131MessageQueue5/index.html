@@ -404,8 +404,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/01/30/2017/0130MessageQueue3/" rel="next" title="Android应用消息队列（三）——发送消息">
-                <i class="fa fa-chevron-left"></i> Android应用消息队列（三）——发送消息
+              <a href="/2017/01/30/2017/0130MessageQueue4/" rel="next" title="Android应用消息队列（四）——消息处理">
+                <i class="fa fa-chevron-left"></i> Android应用消息队列（四）——消息处理
               </a>
             
           </div>
@@ -486,7 +486,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">85</span>
+              <span class="site-state-item-count">114</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -494,7 +494,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
@@ -503,7 +503,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">41</span>
+                <span class="site-state-item-count">47</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -570,7 +570,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#带有消息循环的子线程-HandlerThread"><span class="nav-number">1.</span> <span class="nav-text">带有消息循环的子线程 HandlerThread</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建DataThread"><span class="nav-number">1.1.</span> <span class="nav-text">创建DataThread</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向DataThread发送消息"><span class="nav-number">1.2.</span> <span class="nav-text">向DataThread发送消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装成消息的数据请求"><span class="nav-number">1.3.</span> <span class="nav-text">封装成消息的数据请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可更新主线程UI的子线程-AsyncTask"><span class="nav-number">2.</span> <span class="nav-text">可更新主线程UI的子线程 AsyncTask</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step0-定义和启动AsyncTask"><span class="nav-number">2.1.</span> <span class="nav-text">Step0 定义和启动AsyncTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step1-AsyncTask的创建AsyncTask"><span class="nav-number">2.2.</span> <span class="nav-text">Step1 AsyncTask的创建AsyncTask()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step2-AsyncTask的执行execute-…"><span class="nav-number">2.3.</span> <span class="nav-text">Step2 AsyncTask的执行execute(…)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step3-AsyncTask-executeOnExecutor-…"><span class="nav-number">2.4.</span> <span class="nav-text">Step3 AsyncTask::executeOnExecutor(…)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step4-SerialExecutor"><span class="nav-number">2.5.</span> <span class="nav-text">Step4 SerialExecutor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step5-THREAD-POOL-EXECUTOR"><span class="nav-number">2.6.</span> <span class="nav-text">Step5 THREAD_POOL_EXECUTOR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step6-AsyncTask-postResult-…"><span class="nav-number">2.7.</span> <span class="nav-text">Step6 AsyncTask::postResult(…)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-7-AsyncTask-sHandler"><span class="nav-number">2.8.</span> <span class="nav-text">Step 7 AsyncTask::sHandler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">2.9.</span> <span class="nav-text">总结</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#带有消息循环的子线程-HandlerThread"><span class="nav-text">带有消息循环的子线程 HandlerThread</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建DataThread"><span class="nav-text">创建DataThread</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向DataThread发送消息"><span class="nav-text">向DataThread发送消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#封装成消息的数据请求"><span class="nav-text">封装成消息的数据请求</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可更新主线程UI的子线程-AsyncTask"><span class="nav-text">可更新主线程UI的子线程 AsyncTask</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Step0-定义和启动AsyncTask"><span class="nav-text">Step0 定义和启动AsyncTask</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step1-AsyncTask的创建AsyncTask"><span class="nav-text">Step1 AsyncTask的创建AsyncTask()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step2-AsyncTask的执行execute-…"><span class="nav-text">Step2 AsyncTask的执行execute(…)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step3-AsyncTask-executeOnExecutor-…"><span class="nav-text">Step3 AsyncTask::executeOnExecutor(…)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step4-SerialExecutor"><span class="nav-text">Step4 SerialExecutor</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step5-THREAD-POOL-EXECUTOR"><span class="nav-text">Step5 THREAD_POOL_EXECUTOR</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step6-AsyncTask-postResult-…"><span class="nav-text">Step6 AsyncTask::postResult(…)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Step-7-AsyncTask-sHandler"><span class="nav-text">Step 7 AsyncTask::sHandler</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></li></ol></div>
             
           </div>
         </section>
