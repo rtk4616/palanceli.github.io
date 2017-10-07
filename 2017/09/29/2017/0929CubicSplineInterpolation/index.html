@@ -1,0 +1,724 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="技术随笔," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x5E38;&amp;#x89C1;&amp;#x7684;&amp;#x4E00;&amp;#x7EF4;&amp;#x63D2;&amp;#x503C;&amp;#x65B9;&amp;#x6CD5;&amp;#x6709;&amp;#xFF1A;
+
+&amp;#x591A;&amp;#x9879;&amp;#x5F0F;&amp;#x63D2;&amp;#x503C;&amp;#xFF08;polynormal interpolation&amp;#xFF09;
+&amp;#x5206;&amp;#x6BB5;&amp;#x7EBF;&amp;#x60">
+<meta property="og:type" content="article">
+<meta property="og:title" content="三次样条插值（Cubic Spline Interpolation）">
+<meta property="og:url" content="http://palanceli.github.io/2017/09/29/2017/0929CubicSplineInterpolation/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x5E38;&amp;#x89C1;&amp;#x7684;&amp;#x4E00;&amp;#x7EF4;&amp;#x63D2;&amp;#x503C;&amp;#x65B9;&amp;#x6CD5;&amp;#x6709;&amp;#xFF1A;
+
+&amp;#x591A;&amp;#x9879;&amp;#x5F0F;&amp;#x63D2;&amp;#x503C;&amp;#xFF08;polynormal interpolation&amp;#xFF09;
+&amp;#x5206;&amp;#x6BB5;&amp;#x7EBF;&amp;#x60">
+<meta property="og:image" content="http://palanceli.github.io/2017/09/29/2017/0929CubicSplineInterpolation/img01.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/09/29/2017/0929CubicSplineInterpolation/img02.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/09/29/2017/0929CubicSplineInterpolation/img03.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/09/29/2017/0929CubicSplineInterpolation/img01.png">
+<meta property="og:updated_time" content="2017-09-30T14:55:09.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="三次样条插值（Cubic Spline Interpolation）">
+<meta name="twitter:description" content="&amp;#x5E38;&amp;#x89C1;&amp;#x7684;&amp;#x4E00;&amp;#x7EF4;&amp;#x63D2;&amp;#x503C;&amp;#x65B9;&amp;#x6CD5;&amp;#x6709;&amp;#xFF1A;
+
+&amp;#x591A;&amp;#x9879;&amp;#x5F0F;&amp;#x63D2;&amp;#x503C;&amp;#xFF08;polynormal interpolation&amp;#xFF09;
+&amp;#x5206;&amp;#x6BB5;&amp;#x7EBF;&amp;#x60">
+<meta name="twitter:image" content="http://palanceli.github.io/2017/09/29/2017/0929CubicSplineInterpolation/img01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2017/09/29/2017/0929CubicSplineInterpolation/"/>
+
+  <title> 三次样条插值（Cubic Spline Interpolation） | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                三次样条插值（Cubic Spline Interpolation）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-09-29T23:30:00+08:00" content="2017-09-29">
+              2017-09-29
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/技术随笔/" itemprop="url" rel="index">
+                    <span itemprop="name">技术随笔</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/09/29/2017/0929CubicSplineInterpolation/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/09/29/2017/0929CubicSplineInterpolation/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x5E38;&#x89C1;&#x7684;&#x4E00;&#x7EF4;&#x63D2;&#x503C;&#x65B9;&#x6CD5;&#x6709;&#xFF1A;</p>
+<ul>
+<li>&#x591A;&#x9879;&#x5F0F;&#x63D2;&#x503C;&#xFF08;polynormal interpolation&#xFF09;</li>
+<li>&#x5206;&#x6BB5;&#x7EBF;&#x6027;&#x63D2;&#x503C;&#xFF08;piecewise linear interpolation&#xFF09;</li>
+<li>3&#x6B21;&#x6837;&#x6761;&#x63D2;&#x503C;&#xFF08;cubic spline interpolation&#xFF09;</li>
+</ul>
+<p>&#x672C;&#x6587;&#x63A8;&#x6F14;&#x4E00;&#x904D;3&#x6B21;&#x6837;&#x6761;&#x63D2;&#x503C;&#x7684;&#x8BA1;&#x7B97;&#x8FC7;&#x7A0B;&#x3002;<br><a id="more"></a></p>
+<h1 id="&#x5B9A;&#x4E49;"><a href="#&#x5B9A;&#x4E49;" class="headerlink" title="&#x5B9A;&#x4E49;"></a>&#x5B9A;&#x4E49;</h1><p>&#x6709;&#x8282;&#x70B9;&#x5E8F;&#x5217;&#xFF1A;(x<sub>0</sub>, y<sub>0</sub>),(x<sub>1</sub>, y<sub>1</sub>),&#x2026;&#x2026;(x<sub>n</sub>, y<sub>n</sub>)&#xFF0C;&#x5176;&#x4E2D;a=x<sub>0</sub> &lt; x<sub>1</sub> &lt; &#x2026; &lt; x<sub>n</sub> = b<br>&#x5728;&#x6BCF;&#x4E2A;&#x5206;&#x6BB5;&#x533A;&#x95F4;[x<sub>i</sub>, x<sub>i+1</sub>]&#xFF0C;&#x6837;&#x6761;&#x66F2;&#x7EBF;S<sub>i</sub>(x)&#x90FD;&#x662F;&#x4E00;&#x4E2A;&#x4E09;&#x6B21;&#x591A;&#x9879;&#x5F0F;&#xFF1B;S(x)&#x3001;S&#x2019;(x)&#x3001;S&#x201D;(x)&#x5728;&#x533A;&#x95F4;[a, b]&#x4E0A;&#x662F;&#x8FDE;&#x7EED;&#x7684;&#xFF0C;&#x5373;S(x)&#x66F2;&#x7EBF;&#x662F;&#x5149;&#x6ED1;&#x7684;&#x3002;<br>S<sub>i</sub>&#x53EF;&#x4EE5;&#x5199;&#x4F5C;&#xFF1A;<br>S<sub>i</sub>(x) = a<sub>i</sub> + b<sub>i</sub>(x - x<sub>i</sub>) + c<sub>i</sub>(x - x<sub>i</sub>)<super>2</super> + d<sub>i</sub>(x - x<sub>i</sub>)<super>3</super>  &#x5176;&#x4E2D;i = 0, 1, &#x2026;, n-1<br>a<sub>i</sub>&#x3001;b<sub>i</sub>&#x3001;c<sub>i</sub>&#x3001;d<sub>i</sub>&#x662F;&#x672A;&#x77E5;&#x7CFB;&#x6570;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x9700;&#x8981;&#x6C42;&#x89E3;&#x5B83;&#x4EEC;&#x3002;</p>
+<h1 id="&#x6C42;&#x89E3;"><a href="#&#x6C42;&#x89E3;" class="headerlink" title="&#x6C42;&#x89E3;"></a>&#x6C42;&#x89E3;</h1><p>&#x6BCF;&#x4E00;&#x6BB5;&#x6837;&#x6761;&#x66F2;&#x7EBF;&#x7684;&#x8282;&#x70B9;&#x4E0E;&#x5DF2;&#x77E5;&#x5E8F;&#x5217;&#x91CD;&#x5408;&#xFF0C;&#x6545;&#xFF1A;<br>S<sub>i</sub>(x<sub>i</sub>) = y<sub>i</sub><br>S<sub>i</sub>(x<sub>i+1</sub>) = y<sub>i+1</sub>  &#x3000;&#x3000;&#x3000;&#x5176;&#x4E2D;i=0, 1, &#x2026;, n-1<br>&#x76F8;&#x90BB;&#x7684;&#x4E24;&#x6BB5;&#x6837;&#x6761;&#x66F2;&#x7EBF;&#x5728;&#x63A5;&#x7F1D;&#x5904;&#x662F;&#x5E73;&#x6ED1;&#x7684;&#xFF0C;&#x6545;&#xFF1A;<br>S&#x2019;<sub>i</sub>(x<sub>i+1</sub>) = S&#x2019;<sub>i+1</sub>(x<sub>i+1</sub>)<br>S&#x201D;<sub>i</sub>(x<sub>i+1</sub>) = S&#x201D;<sub>i+1</sub>(x<sub>i+1</sub>) &#x3000;&#x3000;&#x3000;&#x5176;&#x4E2D;i=0, 1, &#x2026;, n-2<br>&#x6837;&#x6761;&#x66F2;&#x7EBF;&#x65B9;&#x7A0B;&#x53CA;&#x5FAE;&#x5206;&#x65B9;&#x7A0B;&#xFF1A;<br>S<sub>i</sub>(x) = a<sub>i</sub> + b<sub>i</sub>(x - x<sub>i</sub>) + c<sub>i</sub>(x - x<sub>i</sub>)<sup>2</sup> + d<sub>i</sub>(x - x<sub>i</sub>)<sup>3</sup>  &#x3000;&#x3000;&#x3000;&#x2026;&#x2460;<br>S&#x2019;<sub>i</sub>(x) = b<sub>i</sub> + 2c<sub>i</sub>(x - x<sub>i</sub>) + 3d<sub>i</sub>(x - x<sub>i</sub>)<sup>2</sup>  &#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x2026;&#x2461;<br>S&#x201D;<sub>i</sub>(x) = 2c<sub>i</sub> + 6d<sub>i</sub>(x - x<sub>i</sub>)  &#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x2026;&#x2462;</p>
+<p>&#x5C06;S<sub>i</sub>(x<sub>i</sub>) = y<sub>i</sub>&#x4EE3;&#x5165;&#x2460;&#x5F97;&#xFF1A;<br>a<sub>i</sub> = y<sub>i</sub>&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x2026;&#x2465;</p>
+<p>&#x5C06;S<sub>i</sub>(x<sub>i+1</sub>) = y<sub>i+1</sub>&#x4EE3;&#x5165;&#x2460;&#x5F97;&#xFF1A;<br>a<sub>i</sub> + b<sub>i</sub>(x<sub>i+1</sub> - x<sub>i</sub>) + c<sub>i</sub>(x<sub>i+1</sub> - x<sub>i</sub>)<sup>2</sup> + d<sub>i</sub>(x<sub>i+1</sub> - x<sub>i</sub>)<sup>3</sup> = y<sub>i+1</sub><br>&#x4EE4;h<sub>i</sub> = x<sub>i+1</sub> - x<sub>i</sub>&#x4E3A;&#x6B65;&#x957F;&#xFF0C;&#x4EE3;&#x5165;&#x4E0A;&#x5F0F;&#x5F97;&#xFF1A;<br>a<sub>i</sub> + b<sub>i</sub>h<sub>i</sub> + c<sub>i</sub>h<sub>i</sub><sup>2</sup> + d<sub>i</sub>h<sub>i</sub><sup>3</sup> = y<sub>i+1</sub>&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x2026;&#x2466;</p>
+<p>&#x5C06;S&#x2019;<sub>i</sub>(x<sub>i+1</sub>) = S&#x2019;<sub>i+1</sub>(x<sub>i+1</sub>)&#x4EE3;&#x5165;&#x2461;&#x5F97;&#xFF1A;<br>b<sub>i</sub> - b<sub>i+1</sub> + 2c<sub>i</sub>(x<sub>i+1</sub> - x<sub>i</sub>) + 3d<sub>i</sub>(x<sub>i+1</sub> - x<sub>i</sub>)<sup>2</sup> = 0<br>&#x5373;&#xFF1A;b<sub>i</sub> - b<sub>i+1</sub> + 2c<sub>i</sub>h<sub>i</sub> + 3d<sub>i</sub>h<sub>i</sub><sup>2</sup> = 0&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x2026;&#x2467;</p>
+<p>&#x5C06;S&#x201D;<sub>i</sub>(x<sub>i+1</sub>) = S&#x201D;<sub>i+1</sub>(x<sub>i+1</sub>)&#x4EE3;&#x5165;&#x2462;&#x5F97;&#xFF1A;<br>2(c<sub>i</sub> - c<sub>i+1</sub>) + 6d<sub>i</sub>(x<sub>i+1</sub> - x<sub>i</sub>) = 0<br>=&gt; 2(c<sub>i</sub> - c<sub>i+1</sub>) + 6d<sub>i</sub>h<sub>i</sub> = 0<br>=&gt; d<sub>i</sub> = 2(c<sub>i</sub> - c<sub>i+1</sub>)/6h<sub>i</sub><br>&#x4EE4; m<sub>i</sub> = S&#x201D;<sub>i</sub>(x<sub>i</sub>) = 2c<sub>i</sub><br>=&gt; c<sub>i</sub> = m<sub>i</sub> / 2&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x2026;&#x2463;<br>=&gt; d<sub>i</sub> = (m<sub>i+1</sub> - m<sub>i</sub>)/6h<sub>i</sub>&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x2026;&#x2464;</p>
+<p>&#x5C06;&#x2463;&#x2464;&#x2465;&#x4EE3;&#x5165;&#x2466;&#xFF1A;<br>y<sub>i</sub> + b<sub>i</sub>h<sub>i</sub> + m<sub>i</sub>h<sub>i</sub><sup>2</sup>/2 + (m<sub>i+1</sub> - m<sub>i</sub>)h<sub>i</sub><sup>3</sup>/6h<sub>i</sub> = y<sub>i+1</sub><br>=&gt; b<sub>i</sub>h<sub>i</sub> = (y<sub>i+1</sub> - y<sub>i</sub>) - m<sub>i</sub>h<sub>i</sub><sup>2</sup>/2 - (m<sub>i+1</sub> - m<sub>i</sub>)h<sub>i</sub><sup>2</sup> / 6<br>=&gt; b<sub>i</sub> = (y<sub>i+1</sub> - y<sub>i</sub>)/h<sub>i</sub> - m<sub>i</sub>h<sub>i</sub>/2 - (m<sub>i+1</sub> - m<sub>i</sub>)h<sub>i</sub>/6&#x3000;&#x3000;&#x3000;&#x2026;&#x2468;</p>
+<p>&#x5C06;&#x2463;&#x2464;&#x2468;&#x4EE3;&#x5165;&#x2467;&#xFF1A;<br>(y<sub>i+1</sub> - y<sub>i</sub>)/h<sub>i</sub> - m<sub>i</sub>h<sub>i</sub>/2 - (m<sub>i+1</sub> - m<sub>i</sub>)h<sub>i</sub>/6 - (y<sub>i+2</sub> - y<sub>i+1</sub>)/h<sub>i+1</sub> + m<sub>i+1</sub>h<sub>i+1</sub>/2 + (m<sub>i+2</sub> - m<sub>i+1</sub>)h<sub>i+1</sub>/6 + m<sub>i</sub>h<sub>i</sub> + (m<sub>i+1</sub> - m<sub>i</sub>)h<sub>i</sub>/2 = 0<br>=&gt; h<sub>i</sub>m<sub>i</sub> + 2(h<sub>i</sub>+h<sub>i+1</sub>)m<sub>i+1</sub> + h<sub>i+1</sub>m<sub>i+2</sub> = 6((y<sub>i+2</sub> - y<sub>i+1</sub>)/h<sub>i+1</sub> - (y<sub>i+1</sub> - y<sub>i</sub>)/h<sub>i</sub>)&#x3000;&#x3000;&#x3000;&#x2026;&#x2469;</p>
+<p>&#x5BF9;&#x4E8E;&#x4E24;&#x4E2A;&#x7AEF;&#x70B9;&#x53EF;&#x4EE5;&#x5F15;&#x5165;&#x7EA6;&#x675F;&#xFF0C;&#x5E38;&#x7528;&#x7684;&#x6709;&#x4E09;&#x79CD;&#xFF1A;</p>
+<ul>
+<li><p>&#x81EA;&#x7531;&#x8FB9;&#x754C;&#xFF08;Natual)&#x3002;&#x4EE4;&#xFF1A;S&#x201D;=0 &#x5373;&#xFF1A;m<sub>0</sub>=0,m<sub>n</sub>=0<br>&#x4E8E;&#x662F;&#x2469;&#x53EF;&#x4EE5;&#x5199;&#x4F5C;&#xFF1A;<br><img src="/2017/09/29/2017/0929CubicSplineInterpolation/img01.png" alt=""></p>
+</li>
+<li><p>&#x56FA;&#x5B9A;&#x8FB9;&#x754C;&#xFF08;Claped&#xFF09;&#x3002;&#x6307;&#x5B9A;S&#x2019;<sub>0</sub>(x<sub>0</sub>)=A, S&#x2019;<sub>n-1</sub>(x<sub>n</sub>)=B<br>=&gt;b<sub>0</sub>=A&#xFF0C;b<sub>n-1</sub>=B&#xFF0C;&#x4EE3;&#x5165;&#x2468;&#xFF1A;<br>2h<sub>0</sub>m<sub>0</sub> + h<sub>0</sub>m<sub>1</sub> = 6((y<sub>1</sub> - y<sub>0</sub>)/h<sub>0</sub> - A)<br>h<sub>n-1</sub>m<sub>n-1</sub> + 2h<sub>n-1</sub>m<sub>0</sub> = 6(B - (y<sub>n</sub> - y<sub>n-1</sub>)/h<sub>n-1</sub>)<br><img src="/2017/09/29/2017/0929CubicSplineInterpolation/img02.png" alt=""></p>
+</li>
+<li><p>&#x975E;&#x8282;&#x70B9;&#x8FB9;&#x754C;&#xFF08;Not-A-Knot&#xFF09;&#x3002;&#x4EE4;&#xFF1A;<br>S&#x2019;&#x2019;&#x2019;<sub>0</sub>(x<sub>1</sub>) = S&#x2019;&#x2019;&#x2019;<sub>1</sub>(x<sub>1</sub>)&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x2026;&#x246A;<br>S&#x2019;&#x2019;&#x2019;<sub>n-2</sub>(x<sub>n-1</sub>) = S&#x2019;&#x2019;&#x2019;<sub>n-1</sub>(x<sub>n-1</sub>)&#x3000;&#x3000;&#x2026;&#x246B;<br>&#x7531;&#x2462;&#x5F97;&#xFF1A;S&#x2019;&#x2019;&#x2019;<sub>i</sub>(x)=6d<sub>i</sub><br>&#x7531;&#x2464;&#x5F97;&#xFF1A;S&#x2019;&#x2019;&#x2019;<sub>i</sub>(x)=6d<sub>i</sub> = (m<sub>i+1</sub> - m<sub>i</sub>)/h<sub>i</sub>&#x3000;&#x3000;&#x2026;&#x246C;<br>&#x5C06;&#x246C;&#x4EE3;&#x5165;&#x246A;&#x246B;&#x5F97;&#xFF1A;<br>h<sub>1</sub>(m<sub>1</sub>-m<sub>0</sub>) = h<sub>0</sub>(m<sub>2</sub>-m<sub>1</sub>)<br>h<sub>n-1</sub>(m<sub>n-1</sub>-m<sub>n-2</sub>) = h<sub>n-2</sub>(m<sub>n</sub>-m<sub>n-1</sub>)<br><img src="/2017/09/29/2017/0929CubicSplineInterpolation/img03.png" alt=""></p>
+</li>
+</ul>
+<p>&#x4E0D;&#x540C;&#x7684;&#x8FB9;&#x754C;&#x70B9;&#x7EA6;&#x675F;&#x5F71;&#x54CD;&#x7684;&#x662F;&#x6837;&#x6761;&#x66F2;&#x7EBF;&#x51FD;&#x6570;&#x7684;&#x9996;&#x672B;&#x4E24;&#x884C;&#x3002;</p>
+<h1 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h1><p>&#x5DF2;&#x77E5;n&#x683C;&#x6570;&#x636E;&#x70B9;&#xFF1A;(x<sub>0</sub>, y<sub>0</sub>), (x<sub>1</sub>, y<sub>1</sub>), &#x2026;, (x<sub>n</sub>, y<sub>n</sub>)&#xFF0C;&#x4EE4;h<sub>i</sub>=x<sub>i+1</sub>-x<sub>i</sub>&#x4E3A;&#x6B65;&#x957F;&#xFF0C;&#x4EE3;&#x5165;&#x77E9;&#x9635;&#x65B9;&#x7A0B;&#xFF08;&#x6B64;&#x5904;&#x91C7;&#x7528;&#x81EA;&#x7531;&#x8FB9;&#x754C;&#x7EA6;&#x675F;&#xFF09;&#xFF1A;<br><img src="/2017/09/29/2017/0929CubicSplineInterpolation/img01.png" alt=""><br>&#x8BA1;&#x7B97;&#x6837;&#x6761;&#x7CFB;&#x6570;&#xFF1A;<br>a<sub>i</sub>=y<sub>i</sub><br>b<sub>i</sub>=(y<sub>i+1</sub>-y<sub>i</sub>)/h<sub>i</sub> - m<sub>i</sub>h<sub>i</sub>/2 - (m<sub>i+1</sub>-m<sub>i</sub>)h<sub>i</sub>/6<br>c<sub>i</sub>=m<sub>i</sub>/2<br>d<sub>i</sub>=(m<sub>i+1</sub>-m<sub>i</sub>)/6h<sub>i</sub><br>&#x5728;&#x6BCF;&#x4E2A;&#x533A;&#x95F4;x&#x2208;[x<sub>i</sub>, x<sub>i+1</sub>]&#x521B;&#x5EFA;&#x6837;&#x6761;&#x66F2;&#x7EBF;&#x65B9;&#x7A0B;g<sub>i</sub>(x) = a<sub>i</sub> + b<sub>i</sub>(x-x<sub>i</sub>) + c<sub>i</sub>(x-x<sub>i</sub>)<sup>2</sup> + d<sub>i</sub>(x - x<sub>i</sub>)<sup>3</sup></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/技术随笔/" rel="tag">#技术随笔</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/29/2017/0929numpy/" rel="next" title="numpy使用">
+                <i class="fa fa-chevron-left"></i> numpy使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/01/2017/1001opencvpy/" rel="prev" title="opencv python的使用">
+                opencv python的使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/09/29/2017/0929CubicSplineInterpolation/"
+           data-title="三次样条插值（Cubic Spline Interpolation）" data-url="http://palanceli.github.io/2017/09/29/2017/0929CubicSplineInterpolation/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">121</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">48</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#定义"><span class="nav-text">定义</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#求解"><span class="nav-text">求解</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
