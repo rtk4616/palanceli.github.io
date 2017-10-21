@@ -1,0 +1,713 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android BNRG笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x52A0;&amp;#x5165;&amp;#x4E86;&amp;#x95EE;&amp;#x7B54;&amp;#x9898;&amp;#x76EE;&amp;#x5217;&amp;#x8868;&amp;#xFF0C;&amp;#x70B9;&amp;#x51FB;Next&amp;#x4F1A;&amp;#x8F6E;&amp;#x8BE2;&amp;#x95EE;&amp;#x9898;&amp;#x3002;&amp;#x672C;&amp;#x7AE0;&amp;#x8981;&amp;#x70B9;&amp;#xF">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Android Programming BNRG》笔记二">
+<meta property="og:url" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x52A0;&amp;#x5165;&amp;#x4E86;&amp;#x95EE;&amp;#x7B54;&amp;#x9898;&amp;#x76EE;&amp;#x5217;&amp;#x8868;&amp;#xFF0C;&amp;#x70B9;&amp;#x51FB;Next&amp;#x4F1A;&amp;#x8F6E;&amp;#x8BE2;&amp;#x95EE;&amp;#x9898;&amp;#x3002;&amp;#x672C;&amp;#x7AE0;&amp;#x8981;&amp;#x70B9;&amp;#xF">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img12.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img01.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img02.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img03.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img04.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img05.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img06.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img07.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img08.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img09.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img10.png">
+<meta property="og:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img11.png">
+<meta property="og:updated_time" content="2017-10-21T16:07:20.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Android Programming BNRG》笔记二">
+<meta name="twitter:description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x52A0;&amp;#x5165;&amp;#x4E86;&amp;#x95EE;&amp;#x7B54;&amp;#x9898;&amp;#x76EE;&amp;#x5217;&amp;#x8868;&amp;#xFF0C;&amp;#x70B9;&amp;#x51FB;Next&amp;#x4F1A;&amp;#x8F6E;&amp;#x8BE2;&amp;#x95EE;&amp;#x9898;&amp;#x3002;&amp;#x672C;&amp;#x7AE0;&amp;#x8981;&amp;#x70B9;&amp;#xF">
+<meta name="twitter:image" content="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/img12.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/"/>
+
+  <title> 《Android Programming BNRG》笔记二 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《Android Programming BNRG》笔记二
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-16T20:00:00+08:00" content="2016-10-16">
+              2016-10-16
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android-Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Android Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/16/2017/1016AndroidProgrammingBNRG02/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/16/2017/1016AndroidProgrammingBNRG02/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x672C;&#x7AE0;&#x52A0;&#x5165;&#x4E86;&#x95EE;&#x7B54;&#x9898;&#x76EE;&#x5217;&#x8868;&#xFF0C;&#x70B9;&#x51FB;Next&#x4F1A;&#x8F6E;&#x8BE2;&#x95EE;&#x9898;&#x3002;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img12.png" alt=""><br>&#x672C;&#x7AE0;&#x8981;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>AndroidStudio&#x7684;&#x4E00;&#x4E9B;&#x57FA;&#x7840;&#x64CD;&#x4F5C;</li>
+<li>&#x4ECB;&#x7ECD;Android&#x7684;MVC&#x7ED3;&#x6784;</li>
+<li>&#x4E3A;&#x4E0D;&#x540C;&#x5BC6;&#x5EA6;&#x5C4F;&#x6DFB;&#x52A0;&#x8D44;&#x6E90;<a id="more"></a>
+</li>
+</ul>
+<h1 id="AndroidStudio&#x7684;&#x57FA;&#x7840;&#x64CD;&#x4F5C;"><a href="#AndroidStudio&#x7684;&#x57FA;&#x7840;&#x64CD;&#x4F5C;" class="headerlink" title="AndroidStudio&#x7684;&#x57FA;&#x7840;&#x64CD;&#x4F5C;"></a>AndroidStudio&#x7684;&#x57FA;&#x7840;&#x64CD;&#x4F5C;</h1><h2 id="&#x6DFB;&#x52A0;Java&#x7C7B;&#x7684;&#x6B65;&#x9AA4;"><a href="#&#x6DFB;&#x52A0;Java&#x7C7B;&#x7684;&#x6B65;&#x9AA4;" class="headerlink" title="&#x6DFB;&#x52A0;Java&#x7C7B;&#x7684;&#x6B65;&#x9AA4;"></a>&#x6DFB;&#x52A0;Java&#x7C7B;&#x7684;&#x6B65;&#x9AA4;</h2><p>&#x5728;<code>app/java/[&#x5305;&#x540D;]</code>&#x53F3;&#x952E;&#xFF0C;<code>New &gt; Java Class</code><br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img01.png" alt=""><br>&#x5728;&#x5F39;&#x51FA;&#x7684;&#x7A97;&#x53E3;&#x4E2D;&#x586B;&#x5199;&#x65B0;&#x521B;&#x5EFA;&#x7684;java&#x7C7B;&#x7684;&#x76F8;&#x5173;&#x4FE1;&#x606F;&#xFF1A;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img02.png" alt=""></p>
+<h2 id="&#x8BA9;AS&#x81EA;&#x52A8;&#x751F;&#x6210;getter-setter"><a href="#&#x8BA9;AS&#x81EA;&#x52A8;&#x751F;&#x6210;getter-setter" class="headerlink" title="&#x8BA9;AS&#x81EA;&#x52A8;&#x751F;&#x6210;getter/setter"></a>&#x8BA9;AS&#x81EA;&#x52A8;&#x751F;&#x6210;getter/setter</h2><p>&#x5728;&#x8981;&#x751F;&#x6210;&#x4EE3;&#x7801;&#x7684;&#x5730;&#x65B9;&#x53F3;&#x952E;&#xFF0C;&#x9009;&#x62E9;Generate&#x2026;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img03.png" alt=""><br>&#x9009;&#x62E9;Getter/Setter&#xFF1A;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img04.png" alt=""><br>&#x9009;&#x62E9;&#x8981;&#x751F;&#x6210;&#x7684;&#x6210;&#x5458;&#x53D8;&#x91CF;&#xFF1A;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img05.png" alt=""><br>AndroidStudio&#x9ED8;&#x8BA4;&#x4F1A;&#x4E3A;mTextResId&#x751F;&#x6210;getMTextResID()&#x3002;<br>&#x53EF;&#x4EE5;&#x5728;AndroidStudio&#x8BBE;&#x7F6E;&#x4E2D;&#x544A;&#x8BC9;&#x5B83;&#x6210;&#x5458;&#x51FD;&#x6570;&#x7684;&#x524D;&#x7F00;&#xFF0C;&#x8FD9;&#x6837;&#x5728;&#x751F;&#x6210;getter/setter&#x51FD;&#x6570;&#x7684;&#x65F6;&#x5019;&#x5C31;&#x4F1A;&#x5FFD;&#x7565;&#x8BE5;&#x524D;&#x7F00;&#x4E86;&#xFF1A;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img06.png" alt=""><br>&#x518D;&#x6267;&#x884C;&#x4E0A;&#x9762;&#x7684;&#x64CD;&#x4F5C;&#xFF0C;AndroidStudio&#x4F1A;&#x7ED9;mTextResId&#x751F;&#x6210;getTextResID()&#xFF0C;&#x800C;&#x4E0D;&#x662F;getmTextResID()&#x4E86;&#x3002;</p>
+<h1 id="Android&#x4E0B;&#x7684;MVC&#x7ED3;&#x6784;&#x4EE5;&#x53CA;&#x548C;iOS&#x7684;&#x5DEE;&#x5F02;"><a href="#Android&#x4E0B;&#x7684;MVC&#x7ED3;&#x6784;&#x4EE5;&#x53CA;&#x548C;iOS&#x7684;&#x5DEE;&#x5F02;" class="headerlink" title="Android&#x4E0B;&#x7684;MVC&#x7ED3;&#x6784;&#x4EE5;&#x53CA;&#x548C;iOS&#x7684;&#x5DEE;&#x5F02;"></a>Android&#x4E0B;&#x7684;MVC&#x7ED3;&#x6784;&#x4EE5;&#x53CA;&#x548C;iOS&#x7684;&#x5DEE;&#x5F02;</h1><p>&#x8FD9;&#x662F;&#x672C;&#x7AE0;&#x5E94;&#x7528;&#x7684;MVC&#x7ED3;&#x6784;&#xFF0C;M&#x548C;V&#x4E0E;iOS&#x4E0B;&#x6CA1;&#x6709;&#x533A;&#x522B;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x662F;C&#x5728;Android&#x4E0B;&#x662F;Activity&#xFF0C;&#x5728;iOS&#x4E0B;&#x662F;Controller&#x3002;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img07.png" alt=""><br>&#x4E66;&#x4E2D;&#x63D0;&#x5230;Model&#x53EB;&#x505A;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#xFF08;business logic&#xFF09;&#xFF0C;Controller&#x53EB;&#x505A;&#x5E94;&#x7528;&#x903B;&#x8F91;&#xFF08;application logic&#xFF09;&#xFF0C;&#x6211;&#x89C9;&#x5F97;&#x5F88;&#x6709;&#x9053;&#x7406;&#x3002;&#x4EE5;&#x524D;&#x6211;&#x628A;Controller&#x53EB;&#x505A;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#xFF0C;&#x5B83;&#x5305;&#x542B;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#xFF0C;&#x4F46;&#x6BD4;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x66F4;&#x5E7F;&#x6CDB;&#xFF0C;&#x5B83;&#x8FD8;&#x5305;&#x542B;&#x4EA4;&#x4E92;&#x903B;&#x8F91;&#xFF0C;&#x6BD4;&#x5982;&#x6309;&#x4E0B;&#x4EC0;&#x4E48;&#x6309;&#x94AE;&#x5BFC;&#x81F4;&#x4EC0;&#x4E48;&#x7A97;&#x4F53;&#x5982;&#x4F55;&#x54CD;&#x5E94;&#xFF0C;&#x8FD9;&#x5176;&#x5B9E;&#x662F;&#x72EC;&#x7ACB;&#x4E8E;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x7684;&#x3002;Model&#x662F;&#x66F4;&#x7EAF;&#x7CB9;&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x3002;</p>
+<p>&#x6269;&#x5C55;&#x5230;&#x66F4;&#x5E7F;&#x6CDB;&#x7684;Android&#x5E94;&#x7528;&#xFF0C;MVC&#x8868;&#x8FF0;&#x5982;&#x4E0B;&#xFF0C;&#x8FD9;&#x5F20;&#x56FE;&#x548C;iOS&#x7684;&#x5F88;&#x50CF;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img08.png" alt=""></p>
+<h1 id="&#x5176;&#x5B83;"><a href="#&#x5176;&#x5B83;" class="headerlink" title="&#x5176;&#x5B83;"></a>&#x5176;&#x5B83;</h1><h2 id="&#x6253;&#x5F00;&#x8C03;&#x8BD5;&#x6A21;&#x5F0F;"><a href="#&#x6253;&#x5F00;&#x8C03;&#x8BD5;&#x6A21;&#x5F0F;" class="headerlink" title="&#x6253;&#x5F00;&#x8C03;&#x8BD5;&#x6A21;&#x5F0F;"></a>&#x6253;&#x5F00;&#x8C03;&#x8BD5;&#x6A21;&#x5F0F;</h2><p>Android&#x8BBE;&#x5907;&#x9700;&#x8981;&#x6253;&#x5F00;USB&#x8C03;&#x8BD5;&#x6A21;&#x5F0F;&#x540E;&#x624D;&#x80FD;&#x5728;&#x4E0A;&#x9762;&#x8C03;&#x8BD5;&#x5E94;&#x7528;&#x3002;&#x5177;&#x4F53;&#x6B65;&#x9AA4;&#xFF1A;<br>&#x5148;&#x8BA9;&#x5F00;&#x53D1;&#x8005;&#x9009;&#x9879;&#x53EF;&#x89C1;&#xFF1A;&#x8FDB;&#x5165;&#x7CFB;&#x7EDF;&#x8BBE;&#x7F6E; &gt; &#x5173;&#x4E8E; &#x8FDE;&#x51FB;7&#x6B21;Build&#x53F7;&#xFF0C;&#x4E4B;&#x540E;&#x5C31;&#x80FD;&#x770B;&#x5230;&#x5F00;&#x53D1;&#x8005;&#x9009;&#x9879;&#xFF0C;&#x8FDB;&#x5165;&#x540E;&#x6253;&#x5F00;USB&#x8C03;&#x8BD5;&#x6A21;&#x5F0F;&#x3002;</p>
+<h1 id="&#x4E0D;&#x540C;&#x5BC6;&#x5EA6;&#x5C4F;&#x7684;&#x663E;&#x793A;"><a href="#&#x4E0D;&#x540C;&#x5BC6;&#x5EA6;&#x5C4F;&#x7684;&#x663E;&#x793A;" class="headerlink" title="&#x4E0D;&#x540C;&#x5BC6;&#x5EA6;&#x5C4F;&#x7684;&#x663E;&#x793A;"></a>&#x4E0D;&#x540C;&#x5BC6;&#x5EA6;&#x5C4F;&#x7684;&#x663E;&#x793A;</h1><h2 id="dpi&#x7684;&#x542B;&#x4E49;"><a href="#dpi&#x7684;&#x542B;&#x4E49;" class="headerlink" title="?dpi&#x7684;&#x542B;&#x4E49;"></a>?dpi&#x7684;&#x542B;&#x4E49;</h2><p>&#x5728;res/&#x4E0B;&#xFF0C;&#x548C;&#x5C4F;&#x5E55;&#x5206;&#x8FA8;&#x7387;&#x76F8;&#x5173;&#x7684;&#x8D44;&#x6E90;&#x4F1A;&#x540E;&#x7F00;-mdpi&#x3001;-hdpi&#x3001;-xhdpi&#x548C;-xxhdpi&#xFF0C;&#x4ED6;&#x4EEC;&#x8868;&#x793A;&#xFF1A;<br>-mdpi        &#x4E2D;&#x5BC6;&#x5EA6;&#x5C4F;&#xFF08;dedium-density screens&#xFF09;~160dpi<br>-hdpi        &#x9AD8;&#x5BC6;&#x5EA6;&#x5C4F;&#xFF08;high-density screens&#xFF09; ~240dip<br>-xhdpi        &#x8D85;&#x9AD8;&#x5BC6;&#x5EA6;&#x5C4F;&#xFF08;extra-high-density screens&#xFF09;~320dpi<br>-xxhdpi    &#x8D85;&#x8D85;&#x9AD8;&#x5BC6;&#x5EA6;&#x5C4F;&#xFF08;extra-extra-high-density screens&#xFF09;~480dpi<br>&#x5E94;&#x7528;&#x5728;&#x8FD0;&#x884C;&#x65F6;&#xFF0C;Android&#x7CFB;&#x7EDF;&#x4F1A;&#x6839;&#x636E;&#x8BBE;&#x5907;&#x7684;&#x60C5;&#x51B5;&#x9009;&#x62E9;&#x6700;&#x5339;&#x914D;&#x7684;&#x8D44;&#x6E90;&#x3002;</p>
+<h2 id="&#x5982;&#x4F55;&#x6DFB;&#x52A0;&#x4E0D;&#x540C;&#x5BC6;&#x5EA6;&#x5C4F;&#x7684;&#x8D44;&#x6E90;"><a href="#&#x5982;&#x4F55;&#x6DFB;&#x52A0;&#x4E0D;&#x540C;&#x5BC6;&#x5EA6;&#x5C4F;&#x7684;&#x8D44;&#x6E90;" class="headerlink" title="&#x5982;&#x4F55;&#x6DFB;&#x52A0;&#x4E0D;&#x540C;&#x5BC6;&#x5EA6;&#x5C4F;&#x7684;&#x8D44;&#x6E90;"></a>&#x5982;&#x4F55;&#x6DFB;&#x52A0;&#x4E0D;&#x540C;&#x5BC6;&#x5EA6;&#x5C4F;&#x7684;&#x8D44;&#x6E90;</h2><p>&#x4EE5;drawable-?dpi&#x4E3A;&#x4F8B;&#xFF0C;&#x5728;Project Files&#x89C6;&#x56FE;&#x4E2D;&#xFF0C;app/src/main/res&#x4E2D;&#x521B;&#x5EFA;drawable-?dpi&#x6587;&#x4EF6;&#x5939;&#xFF0C;&#x628A;&#x5BF9;&#x5E94;&#x7684;&#x6587;&#x4EF6;&#x62F7;&#x8D1D;&#x5230;&#x8FD9;&#x91CC;&#xFF0C;&#x5982;&#x4E0B;&#xFF1A;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img09.png" alt=""><br>&#x5728;Android&#x89C6;&#x56FE;&#x91CC;&#xFF0C;&#x4F1A;&#x4F53;&#x73B0;&#x5728;app/res/drawable&#x4E0B;&#xFF0C;&#x9690;&#x85CF;&#x4E86;&#x4E0D;&#x540C;&#x5BC6;&#x5EA6;&#x5C4F;&#x7684;&#x4FE1;&#x606F;&#xFF1A;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img10.png" alt=""><br>&#x6DFB;&#x52A0;&#x4E86;&#x8D44;&#x6E90;&#x540E;&#xFF0C;AndroidStudio&#x4F1A;&#x81EA;&#x52A8;&#x4E3A;&#x8D44;&#x6E90;&#x5206;&#x914D;ID&#xFF0C;&#x4F46;&#x662F;&#x9700;&#x8981;&#x6CE8;&#x610F;&#xFF1A;&#x6587;&#x4EF6;&#x540D;&#x5FC5;&#x987B;&#x4E3A;&#x5C0F;&#x5199;&#x4E14;&#x4E0D;&#x5E26;&#x7A7A;&#x683C;&#x3002;&#x81EA;&#x52A8;&#x5206;&#x914D;&#x7684;ID&#x548C;&#x5C4F;&#x5BC6;&#x5EA6;&#x65E0;&#x5173;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x5199;&#x4EE3;&#x7801;&#x7684;&#x65F6;&#x5019;&#x4E0D;&#x7528;&#x5173;&#x5FC3;&#x8BBE;&#x5907;&#x7684;&#x9002;&#x914D;&#x95EE;&#x9898;&#x3002;</p>
+<h1 id="&#x5982;&#x4F55;&#x4E3A;&#x6309;&#x94AE;&#x6DFB;&#x52A0;&#x56FE;&#x7247;"><a href="#&#x5982;&#x4F55;&#x4E3A;&#x6309;&#x94AE;&#x6DFB;&#x52A0;&#x56FE;&#x7247;" class="headerlink" title="&#x5982;&#x4F55;&#x4E3A;&#x6309;&#x94AE;&#x6DFB;&#x52A0;&#x56FE;&#x7247;"></a>&#x5982;&#x4F55;&#x4E3A;&#x6309;&#x94AE;&#x6DFB;&#x52A0;&#x56FE;&#x7247;</h1><p>&#x5728;xml&#x6587;&#x4EF6;&#x7684;Button&#x5B9A;&#x4E49;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x4E3A;&#x4E4B;&#x8BBE;&#x7F6E;<code>android:drawableRight</code>&#x548C;<code>android:drawablePadding</code>&#x5C5E;&#x6027;&#xFF1A;<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">Button</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">&quot;@+id/next_button&quot;</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></div><div class="line">    <span class="attr">android:text</span>=<span class="string">&quot;@string/next_button&quot;</span></div><div class="line">    <span class="attr">android:drawableRight</span>=<span class="string">&quot;@drawable/arrow_right&quot;</span></div><div class="line">    <span class="attr">android:drawablePadding</span>=<span class="string">&quot;4dp&quot;</span></div><div class="line">    <span class="attr">app:layout_constraintStart_toStartOf</span>=<span class="string">&quot;parent&quot;</span></div><div class="line">    <span class="attr">app:layout_constraintEnd_toEndOf</span>=<span class="string">&quot;parent&quot;</span></div><div class="line">    <span class="attr">app:layout_constraintTop_toBottomOf</span>=<span class="string">&quot;@id/false_button&quot;</span>/&gt;</div></pre></td></tr></table></figure></p>
+<p>&#x6309;&#x94AE;&#x5F20;&#x8FD9;&#x6837;&#xFF1A;<br><img src="/2016/10/16/2017/1016AndroidProgrammingBNRG02/img11.png" alt=""></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android-BNRG笔记/" rel="tag">#Android BNRG笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/09/2016/1008Unicode/" rel="next" title="Unicode字符集和字形">
+                <i class="fa fa-chevron-left"></i> Unicode字符集和字形
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/16/2017/1016AndroidProgrammingBNRG03/" rel="prev" title="《Android Programming BNRG》笔记三">
+                《Android Programming BNRG》笔记三 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/16/2017/1016AndroidProgrammingBNRG02/"
+           data-title="《Android Programming BNRG》笔记二" data-url="http://palanceli.github.io/2016/10/16/2017/1016AndroidProgrammingBNRG02/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">129</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">51</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#AndroidStudio的基础操作"><span class="nav-text">AndroidStudio的基础操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#添加Java类的步骤"><span class="nav-text">添加Java类的步骤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#让AS自动生成getter-setter"><span class="nav-text">让AS自动生成getter/setter</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Android下的MVC结构以及和iOS的差异"><span class="nav-text">Android下的MVC结构以及和iOS的差异</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#其它"><span class="nav-text">其它</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#打开调试模式"><span class="nav-text">打开调试模式</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#不同密度屏的显示"><span class="nav-text">不同密度屏的显示</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#dpi的含义"><span class="nav-text">?dpi的含义</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#如何添加不同密度屏的资源"><span class="nav-text">如何添加不同密度屏的资源</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#如何为按钮添加图片"><span class="nav-text">如何为按钮添加图片</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
