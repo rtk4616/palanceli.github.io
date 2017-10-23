@@ -1,0 +1,707 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android BNRG笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x5B8C;&amp;#x6210;&amp;#x4E86;&amp;#x70B9;&amp;#x51FB;list&amp;#x5143;&amp;#x7D20;&amp;#x5F39;&amp;#x51FA;details&amp;#x7684;&amp;#x4E1A;&amp;#x52A1;&amp;#x903B;&amp;#x8F91;&amp;#x3002;&amp;#x548C;Activity&amp;#x542F;&amp;#x52A8;&amp;#x53E6;&amp;#x4E00;&amp;#x4E">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Android Programming BNRG》笔记十">
+<meta property="og:url" content="http://palanceli.github.io/2016/10/21/2017/1021AndroidProgrammingBNRG10/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x5B8C;&amp;#x6210;&amp;#x4E86;&amp;#x70B9;&amp;#x51FB;list&amp;#x5143;&amp;#x7D20;&amp;#x5F39;&amp;#x51FA;details&amp;#x7684;&amp;#x4E1A;&amp;#x52A1;&amp;#x903B;&amp;#x8F91;&amp;#x3002;&amp;#x548C;Activity&amp;#x542F;&amp;#x52A8;&amp;#x53E6;&amp;#x4E00;&amp;#x4E">
+<meta property="og:updated_time" content="2017-10-23T15:45:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Android Programming BNRG》笔记十">
+<meta name="twitter:description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x5B8C;&amp;#x6210;&amp;#x4E86;&amp;#x70B9;&amp;#x51FB;list&amp;#x5143;&amp;#x7D20;&amp;#x5F39;&amp;#x51FA;details&amp;#x7684;&amp;#x4E1A;&amp;#x52A1;&amp;#x903B;&amp;#x8F91;&amp;#x3002;&amp;#x548C;Activity&amp;#x542F;&amp;#x52A8;&amp;#x53E6;&amp;#x4E00;&amp;#x4E">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2016/10/21/2017/1021AndroidProgrammingBNRG10/"/>
+
+  <title> 《Android Programming BNRG》笔记十 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《Android Programming BNRG》笔记十
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-21T20:00:00+08:00" content="2016-10-21">
+              2016-10-21
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android-Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Android Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/21/2017/1021AndroidProgrammingBNRG10/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/21/2017/1021AndroidProgrammingBNRG10/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x672C;&#x7AE0;&#x5B8C;&#x6210;&#x4E86;&#x70B9;&#x51FB;list&#x5143;&#x7D20;&#x5F39;&#x51FA;details&#x7684;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x3002;&#x548C;Activity&#x542F;&#x52A8;&#x53E6;&#x4E00;&#x4E2A;Activity&#x975E;&#x5E38;&#x76F8;&#x4F3C;&#xFF0C;&#x7A0D;&#x6709;&#x4E0D;&#x540C;&#x7684;&#x662F;Fragment&#x7684;Arguments&#x673A;&#x5236;&#x3002;</p>
+<p>&#x672C;&#x7AE0;&#x8981;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x5728;Fragment&#x4E2D;&#x542F;&#x52A8;Activity</li>
+<li>&#x5728;Fragment&#x4E4B;&#x95F4;&#x4F20;&#x9012;&#x6570;&#x636E;</li>
+</ul>
+<a id="more"></a>
+<h1 id="&#x5728;Fragment&#x4E2D;&#x542F;&#x52A8;&#x53E6;&#x4E00;&#x4E2A;Activity"><a href="#&#x5728;Fragment&#x4E2D;&#x542F;&#x52A8;&#x53E6;&#x4E00;&#x4E2A;Activity" class="headerlink" title="&#x5728;Fragment&#x4E2D;&#x542F;&#x52A8;&#x53E6;&#x4E00;&#x4E2A;Activity"></a>&#x5728;Fragment&#x4E2D;&#x542F;&#x52A8;&#x53E6;&#x4E00;&#x4E2A;Activity</h1><p>&#x548C;Activity&#x542F;&#x52A8;&#x53E6;&#x4E00;&#x4E2A;Activity&#x4E00;&#x6837;&#xFF0C;Fragment&#x542F;&#x52A8;&#x53E6;&#x4E00;&#x4E2A;Activity&#x4E5F;&#x662F;&#x8C03;&#x7528;startActivity(Intent intent)&#xFF0C;&#x4F20;&#x53C2;&#x7684;&#x65B9;&#x5F0F;&#x4E5F;&#x662F;&#x7C7B;&#x4F3C;&#x7684;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CrimeActivity &#x6309;&#x7167;&#x4F9D;&#x8D56;&#x5012;&#x7F6E;&#x539F;&#x5219;&#xFF0C;&#x88AB;&#x542F;&#x52A8;&#x65B9;&#x8D1F;&#x8D23;&#x521B;&#x5EFA;Intent</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrimeActivity</span> <span class="keyword">extends</span> <span class="title">SingleFragmentActivity</span> </span>{</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String EXTRA_CRIME_ID = <span class="string">&quot;com.bnrg.bnrg07.crime_id&quot;</span>;</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Intent <span class="title">newIntent</span><span class="params">(Context packageContext, UUID crimeId)</span></span>{</div><div class="line">        Intent intent = <span class="keyword">new</span> Intent(packageContext, CrimeActivity.class);</div><div class="line">        intent.putExtra(EXTRA_CRIME_ID, crimeId);</div><div class="line">        <span class="keyword">return</span> intent;</div><div class="line">    }</div><div class="line">    ...</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CrimeListFragment.java</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrimeListFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>{</div><div class="line">    ...</div><div class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">CrimeHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span></span></div><div class="line">    <span class="keyword">implements</span> <span class="title">View</span>.<span class="title">OnClickListener</span>{</div><div class="line">        ...</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View view)</span></span>{</div><div class="line">            <span class="comment">// &#x542F;&#x52A8;Activity&#x5E76;&#x4F20;&#x5165;crimeId</span></div><div class="line">            Intent intent = CrimeActivity.newIntent(getActivity(), mCrime.getId());</div><div class="line">            startActivity(intent);</div><div class="line">        }</div><div class="line">     ...</div><div class="line">    }</div><div class="line">    ...</div><div class="line">}</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CrimeFragment.java</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrimeFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>{</div><div class="line">    ...</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstance)</span></span>{</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstance);</div><div class="line">        <span class="comment">// &#x63A5;&#x6536;&#x3001;&#x89E3;&#x6790;crimeId&#xFF0C;&#x5E76;&#x7531;&#x6B64;&#x521B;&#x5EFA;crime</span></div><div class="line">        UUID crimeId = (UUID)getActivity().getIntent().getSerializableExtra(CrimeActivity.EXTRA_CRIME_ID);</div><div class="line">        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);</div><div class="line">    }</div><div class="line">    ...</div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="&#x89E3;&#x9664;Fragment-&#x5BF9;Activity&#x7684;&#x4F9D;&#x8D56;"><a href="#&#x89E3;&#x9664;Fragment-&#x5BF9;Activity&#x7684;&#x4F9D;&#x8D56;" class="headerlink" title="&#x89E3;&#x9664;Fragment &#x5BF9;Activity&#x7684;&#x4F9D;&#x8D56;"></a>&#x89E3;&#x9664;Fragment &#x5BF9;Activity&#x7684;&#x4F9D;&#x8D56;</h1><p>&#x5728;&#x4E0A;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x4E2D;&#xFF0C;Fragment&#x542F;&#x52A8;&#x540E;&#x4F1A;&#x5411;&#x53D1;&#x8D77;&#x65B9;Activity&#x8BF7;&#x6C42;Extra&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x4F1A;&#x5BFC;&#x81F4;Fragment&#x4F9D;&#x8D56;&#x4E8E;Activity&#xFF0C;&#x4F7F;&#x5F97;Fragment&#x65E0;&#x6CD5;&#x88C5;&#x914D;&#x7ED9;&#x4EFB;&#x610F;&#x7684;&#x7684;Activity&#x3002;&#x89E3;&#x8026;&#x7684;&#x65B9;&#x6848;&#x662F;&#x5728;&#x521B;&#x5EFA;Fragment&#x7684;&#x65F6;&#x5019;&#x4E3A;&#x5B83;&#x8BBE;&#x5B9A;Argument&#xFF0C;&#x628A;&#x4F20;&#x5165;&#x7684;&#x53C2;&#x6570;&#x585E;&#x5165;Argument&#x4E2D;&#x3002;Argument&#x5176;&#x5B9E;&#x662F;Bundle&#x5B9E;&#x4F8B;&#xFF0C;&#x5B83;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Bundle args = <span class="keyword">new</span> Bundle()          <span class="comment">// &#x521B;&#x5EFA;Bundle&#x5B9E;&#x4F8B;</span></div><div class="line">args.putSerializable(key, value);   <span class="comment">// &#x585E;&#x5165;key-value&#x6570;&#x636E;&#x5BF9;</span></div><div class="line">...</div><div class="line">fragment.setArguments(args);        <span class="comment">// &#x8BBE;&#x7F6E;&#x7ED9;Fragment</span></div></pre></td></tr></table></figure></p>
+<p>&#x672C;&#x8282;&#x7684;&#x64CD;&#x4F5C;&#x6B65;&#x9AA4;&#x662F;&#xFF1A;&#x2460;&#x5728;CrimeFragment&#x4E2D;&#x521B;&#x5EFA;<code>newInstance(UUID crimeId)</code>&#x51FD;&#x6570;&#xFF0C;&#x7528;&#x6765;&#x521B;&#x5EFA;&#x81EA;&#x8EAB;&#x5E76;&#x4F20;&#x5165;Argument&#x53C2;&#x6570;&#xFF1B;&#x2461;&#x5728;CrimeActivity&#x4E2D;&#x7684;<code>createFragment()</code>&#x51FD;&#x6570;&#x4E2D;&#x8C03;&#x7528;<code>CrimeFragment::newInstance(...)</code>&#x751F;&#x6210;Fragment&#xFF1B;&#x2462;&#x5728;<code>CrimeFragment::onCreate(...)</code>&#x51FD;&#x6570;&#x4E2D;&#x89E3;&#x6790;Argument&#x53C2;&#x6570;</p>
+<p>&#x542F;&#x52A8;Fragment&#x7684;&#x4E00;&#x65B9;&#x603B;&#x662F;&#x9700;&#x8981;&#x4F20;&#x5165;crimeId&#xFF0C;&#x5982;&#x679C;&#x542F;&#x52A8;&#x65B9;&#x662F;Activity&#xFF0C;&#x4ED6;&#x8FD8;&#x662F;&#x9700;&#x8981;&#x77E5;&#x9053;&#x4F20;&#x5165;&#x4EC0;&#x4E48;&#x53C2;&#x6570;&#xFF0C;&#x8FD9;&#x662F;&#x542F;&#x52A8;&#x65B9;&#x5FC5;&#x987B;&#x77E5;&#x9053;&#x7684;&#x7EC6;&#x8282;&#x3002;&#x4F46;&#x548C;&#x524D;&#x4E00;&#x79CD;&#x542F;&#x52A8;&#x65B9;&#x6848;&#x76F8;&#x6BD4;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x6848;&#x7684;&#x597D;&#x5904;&#x662F;Fragment&#x4E0D;&#x5FC5;&#x518D;&#x53CD;&#x8FC7;&#x6765;&#x4F9D;&#x8D56;Activity&#x4E86;&#x3002;</p>
+<p>&#x5177;&#x4F53;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CrimeFragment.java</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrimeFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>{</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ARG_CRIME_ID = <span class="string">&quot;crime_id&quot;</span>;</div><div class="line">    ...</div><div class="line">    <span class="comment">//</span></div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onCreate</span><span class="params">(Bundle savedInstance)</span></span>{</div><div class="line">        <span class="keyword">super</span>.onCreate(savedInstance);</div><div class="line">        <span class="comment">// &#x2462; &#x4ECE;&#x81EA;&#x8EAB;&#x7684;Argument&#x4E2D;&#x8981;&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x4E0D;&#x518D;&#x95EE;Activity</span></div><div class="line">        UUID crimeId = (UUID)getArguments().getSerializable(ARG_CRIME_ID);</div><div class="line">        mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);</div><div class="line">    }</div><div class="line">    ...</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> CrimeFragment <span class="title">newInstance</span><span class="params">(UUID crimeId)</span></span>{  <span class="comment">// &#x2460;</span></div><div class="line">	<span class="comment">// &#x6839;&#x636E;crimeId&#x521B;&#x5EFA;Argument&#xFF0C;&#x5E76;&#x7F6E;&#x5165;Fragment</span></div><div class="line">    Bundle args = <span class="keyword">new</span> Bundle();	</div><div class="line">    args.putSerializable(ARG_CRIME_ID, crimeId);</div><div class="line">    CrimeFragment fragment = <span class="keyword">new</span> CrimeFragment();</div><div class="line">    fragment.setArguments(args);</div><div class="line">    <span class="keyword">return</span> fragment;</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CrimeActivity.java</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrimeActivity</span> <span class="keyword">extends</span> <span class="title">SingleFragmentActivity</span> </span>{</div><div class="line">    ...</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">protected</span> Fragment <span class="title">createFragment</span><span class="params">()</span></span>{    <span class="comment">// &#x2461;</span></div><div class="line">        UUID crimeId = (UUID)getIntent().getSerializableExtra(EXTRA_CRIME_ID);</div><div class="line">        <span class="keyword">return</span> CrimeFragment.newInstance(crimeId); <span class="comment">// &#x8C03;&#x7528;&#x65B0;&#x7684;&#x65B9;&#x6848;&#x521B;&#x5EFA;Fragment</span></div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h1 id="&#x9000;&#x51FA;details&#x540E;&#x66F4;&#x65B0;list"><a href="#&#x9000;&#x51FA;details&#x540E;&#x66F4;&#x65B0;list" class="headerlink" title="&#x9000;&#x51FA;details&#x540E;&#x66F4;&#x65B0;list"></a>&#x9000;&#x51FA;details&#x540E;&#x66F4;&#x65B0;list</h1><p>&#x5728;<a href="http://localhost:4000/2016/10/16/2017/1016AndroidProgrammingBNRG05/#&#x4ECE;&#x542F;&#x52A8;&#x7684;Activity&#x8FD4;&#x56DE;&#x6570;&#x636E;" target="_blank" rel="external">&#x7B14;&#x8BB0;&#x4E94;&#xB7;&#x4ECE;&#x542F;&#x52A8;&#x7684;Activity&#x8FD4;&#x56DE;&#x6570;&#x636E;</a>&#x4E2D;&#xFF0C;&#x8BB2;&#x5230;&#x4E86;Activity&#x542F;&#x52A8;Activity&#x65F6;&#xFF0C;&#x901A;&#x8FC7;<code>startActivityForResult(...)</code>&#x542F;&#x52A8;Activity&#xFF0C;&#x88AB;&#x542F;&#x52A8;&#x65B9;&#x8C03;&#x7528;<code>setResult(...)</code>&#x8BBE;&#x7F6E;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#xFF0C;&#x542F;&#x52A8;&#x65B9;&#x6536;&#x5230;&#x56DE;&#x8C03;<code>onActivityResult(...)</code>&#x63A5;&#x6536;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x5728;&#x4F20;&#x9012;&#x6570;&#x636E;&#x7684;&#x673A;&#x5236;&#x4E0A;&#xFF0C;Fragment&#x548C;Activity&#x53EA;&#x6709;&#x4E00;&#x70B9;&#x70B9;&#x4E0D;&#x540C;&#xFF0C;Fragment&#x6709;<code>Fragment::startActivityForResult(...)</code>&#x548C;<code>Fragment::onActivityResult(...)</code>&#xFF0C;&#x4F46;&#x662F;&#x6CA1;&#x6709;<code>setResult(...)</code>&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x9700;&#x8981;&#x8C03;&#x7528;&#x5B83;&#x6240;&#x5728;&#x7684;Activity&#x7684;&#x8BE5;&#x51FD;&#x6570;&#x6765;&#x8BBE;&#x7F6E;&#x8FD4;&#x56DE;&#x503C;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrimeFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span></span>{</div><div class="line">    ...</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">returnResult</span><span class="params">()</span></span>{</div><div class="line">        getActivity().setResult(Activty.RESULT_OK, <span class="keyword">null</span>);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x800C;&#x5728;&#x672C;&#x8282;&#xFF0C;&#x5176;&#x5B9E;&#x5E76;&#x6CA1;&#x6709;&#x9700;&#x8981;&#x8FD4;&#x56DE;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x56E0;&#x4E3A;&#x542F;&#x52A8;Activity&#x65F6;&#x4F20;&#x5165;&#x7684;&#x53EA;&#x662F;crimeId&#xFF0C;&#x88AB;&#x542F;&#x52A8;&#x7684;Fragment&#x662F;&#x5728;&#x5176;onCreateView(&#x2026;)&#x51FD;&#x6570;&#x5185;&#x83B7;&#x5F97;&#x4E86;crimeId&#x5BF9;&#x5E94;&#x7684;Crime&#x5BF9;&#x8C61;&#xFF0C;&#x5728;Fragment&#x4E0A;&#x90FD;&#x662F;&#x76F4;&#x63A5;&#x4FEE;&#x6539;CrimeLab&#x5355;&#x4F53;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#xFF0C;&#x4E5F;&#x5C31;&#x662F;&#x76F4;&#x63A5;&#x66F4;&#x65B0;&#x4E86;Model&#x5C42;&#x3002;&#x56E0;&#x6B64;&#x5F53;&#x5728;Fragment&#x6309;&#x4E0B;Back&#x800C;&#x8FD4;&#x56DE;&#x65F6;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x901A;&#x77E5;&#x542F;&#x52A8;&#x65B9;&#xFF0C;&#x4EE4;&#x5176;&#x66F4;&#x65B0;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x4E66;&#x4E2D;&#x662F;&#x5728;<code>CrimeListFragment::onResume()</code>&#x56DE;&#x8C03;&#x4E2D;&#x5237;&#x65B0;&#x4E86;&#x754C;&#x9762;&#x3002;&#x5F53;&#x70B9;&#x51FB;list&#x4E2D;&#x7684;&#x67D0;&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5F39;&#x51FA;CrimeActivity&#xFF0C;CrimeListActivity&#x88AB;&#x538B;&#x6808;&#x8FDB;&#x5165;Paused&#x72B6;&#x6001;&#xFF1B;&#x5728;CrimeActivity&#x70B9;&#x51FB;Back&#x540E;&#xFF0C;&#x8BE5;Activity&#x88AB;&#x9500;&#x6BC1;&#xFF0C;CrimeListActivity&#x53C8;&#x6210;&#x4E3A;&#x6808;&#x9876;&#x7EC4;&#x4EF6;&#x800C;&#x8FDB;&#x5165;Resumed&#x72B6;&#x6001;&#xFF0C;&#x56E0;&#x6B64;&#x4F1A;&#x56DE;&#x8C03;&#x5B83;&#x7684;onResume()&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x5728;&#x8C03;&#x7528;&#x5176;&#x5185;&#x90E8;Fragment&#x7684;<code>onResume()</code>&#x51FD;&#x6570;&#x3002;</p>
+<p>&#x5177;&#x4F53;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CrimeListFragment.java</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrimeListFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>{</div><div class="line">    ...</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onResume</span><span class="params">()</span></span>{</div><div class="line">        <span class="keyword">super</span>.onResume();</div><div class="line">        updateUI();	<span class="comment">// &#x66F4;&#x65B0;&#x754C;&#x9762;</span></div><div class="line">    }</div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateUI</span><span class="params">()</span></span>{</div><div class="line">        CrimeLab crimeLab = CrimeLab.get(getActivity());</div><div class="line">        List&lt;Crime&gt; crimes = crimeLab.getCrimes();</div><div class="line">        <span class="keyword">if</span>(mAdapter == <span class="keyword">null</span>) {</div><div class="line">            mAdapter = <span class="keyword">new</span> CrimeAdapter(crimes);</div><div class="line">            mCrimeRecyclerView.setAdapter(mAdapter);</div><div class="line">        }<span class="keyword">else</span>{</div><div class="line">            mAdapter.notifyDataSetChanged();</div><div class="line">        }</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x5728;updateUI()&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x9996;&#x6B21;&#x66F4;&#x65B0;&#x9700;&#x8981;&#x521B;&#x5EFA;mAdapter&#x5B9E;&#x4F8B;&#xFF0C;&#x4E4B;&#x540E;&#x518D;&#x66F4;&#x65B0;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x8C03;&#x7528;&#x5B83;&#x7684;<code>notifyDataSetChanged()</code>&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x4F1A;&#x901A;&#x77E5;&#x6BCF;&#x4E00;&#x4E2A;&#x201C;&#x96C6;&#x88C5;&#x7BB1;&#x201D;&#x66F4;&#x65B0;&#x6570;&#x636E;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;activity&#x4ECE;&#x65E0;&#x5230;&#x6709;&#x518D;&#x5230;&#x5C55;&#x73B0;&#xFF0C;&#x7ECF;&#x5386;&#x4E86;Nonexistent &gt; Stopped &gt; Paused &gt; Resumed&#x56DB;&#x4E2A;&#x72B6;&#x6001;&#xFF0C;&#x5982;&#x679C;Activity&#x662F;&#x88AB;&#x5176;&#x5B83;&#x7684;Activity&#x8986;&#x76D6;&#xFF0C;&#x5B83;&#x4F1A;&#x8FDB;&#x5165;&#x5230;Paused&#x72B6;&#x6001;&#xFF0C;&#x800C;&#x672A;&#x5FC5;&#x8FDB;&#x5165;Stopped&#x72B6;&#x6001;&#xFF0C;&#x6240;&#x4EE5;&#x5728;<code>onResume()</code>&#x4E2D;&#x66F4;&#x65B0;&#x754C;&#x9762;&#x662F;&#x4E2A;&#x6BD4;&#x8F83;&#x5B89;&#x5168;&#x7684;&#x65F6;&#x673A;&#x3002;</p>
+<h1 id="&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;Arguments&#x800C;&#x4E0D;&#x662F;&#x4F20;&#x53C2;&#xFF1F;"><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;Arguments&#x800C;&#x4E0D;&#x662F;&#x4F20;&#x53C2;&#xFF1F;" class="headerlink" title="&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;Arguments&#x800C;&#x4E0D;&#x662F;&#x4F20;&#x53C2;&#xFF1F;"></a>&#x4E3A;&#x4EC0;&#x4E48;&#x4F7F;&#x7528;Arguments&#x800C;&#x4E0D;&#x662F;&#x4F20;&#x53C2;&#xFF1F;</h1><p>&#x5728;<a href="http://localhost:4000/2016/10/18/2017/1018AndroidProgrammingBNRG07/#&#x5411;&#x521B;&#x5EFA;&#x7684;Fragment&#x4F20;&#x5165;&#x53C2;&#x6570;" target="_blank" rel="external">&#x7B14;&#x8BB0;&#x4E03;&#xB7;&#x5411;&#x521B;&#x5EFA;&#x7684;Fragment&#x4F20;&#x5165;&#x53C2;&#x6570;</a>&#x4E2D;&#x5DF2;&#x7ECF;&#x63D0;&#x5230;&#x8FC7;&#x4E86;&#x3002;&#x6211;&#x4EEC;&#x5728;&#x521B;&#x5EFA;Fragment&#x5B9E;&#x4F8B;&#x65F6;&#xFF0C;&#x5E76;&#x6CA1;&#x6709;&#x5728;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4E2D;&#x4F20;&#x5165;crimeId&#x53C2;&#x6570;&#xFF0C;&#x800C;&#x662F;&#x5728;&#x5B9E;&#x4F8B;&#x6784;&#x9020;&#x5B8C;&#x6210;&#x540E;&#x901A;&#x8FC7;&#x8C03;&#x7528;<code>setArguments(...)</code>&#x4F20;&#x5165;crimeId&#x7684;&#x4E3B;&#x8981;&#x539F;&#x56E0;&#x662F;&#xFF1A;&#x5F53;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;&#x53D1;&#x751F;&#x53D8;&#x5316;&#x6216;&#x8005;&#x7531;&#x4E8E;&#x4F4E;&#x5185;&#x5B58;&#x800C;&#x5F15;&#x53D1;&#x5185;&#x5B58;&#x56DE;&#x6536;&#x65F6;&#xFF0C;&#x4F1A;&#x5BFC;&#x81F4;fragment&#x91CD;&#x5EFA;&#x3002;&#x4F7F;&#x7528;&#x6784;&#x9020;&#x51FD;&#x6570;&#x4F20;&#x53C2;&#xFF0C;&#x628A;&#x53C2;&#x6570;&#x4FDD;&#x5B58;&#x5728;&#x6210;&#x5458;&#x53D8;&#x91CF;&#x4E2D;&#x7684;&#x505A;&#x6CD5;&#x4F1A;&#x5BFC;&#x81F4;&#x5728;&#x91CD;&#x5EFA;&#x65F6;&#xFF0C;&#x8BE5;&#x6570;&#x636E;&#x4E22;&#x5931;&#xFF0C;&#x9664;&#x975E;&#x4F60;&#x59CB;&#x7EC8;&#x8BB0;&#x5F97;&#x5728;fragment&#x7684;<code>onSaveInstanceState(...)</code>&#x51FD;&#x6570;&#x4E2D;&#x56DE;&#x5199;&#xFF0C;&#x5728;<code>onCreate(...)</code>&#x51FD;&#x6570;&#x4E2D;&#x8BFB;&#x5165;&#xFF0C;&#x8FD9;&#x6837;&#x5F88;&#x9EBB;&#x70E6;&#xFF1B;&#x800C;&#x4F7F;&#x7528;Arguments&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x4F1A;&#x5728;&#x91CD;&#x5EFA;&#x65F6;&#xFF0C;&#x81EA;&#x52A8;&#x4FDD;&#x5B58;/&#x8BFB;&#x5165;&#x53C2;&#x6570;&#x6570;&#x636E;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android-BNRG笔记/" rel="tag">#Android BNRG笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/10/21/2016/10DayDayUp/" rel="next" title="2016年10月DayDayUp">
+                <i class="fa fa-chevron-left"></i> 2016年10月DayDayUp
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/10/23/2016/1015Installer1/" rel="prev" title="Android App安装过程学习笔记（一）">
+                Android App安装过程学习笔记（一） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/10/21/2017/1021AndroidProgrammingBNRG10/"
+           data-title="《Android Programming BNRG》笔记十" data-url="http://palanceli.github.io/2016/10/21/2017/1021AndroidProgrammingBNRG10/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#在Fragment中启动另一个Activity"><span class="nav-text">在Fragment中启动另一个Activity</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解除Fragment-对Activity的依赖"><span class="nav-text">解除Fragment 对Activity的依赖</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#退出details后更新list"><span class="nav-text">退出details后更新list</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#为什么使用Arguments而不是传参？"><span class="nav-text">为什么使用Arguments而不是传参？</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
