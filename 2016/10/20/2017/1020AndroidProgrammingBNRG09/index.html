@@ -88,7 +88,7 @@
 <meta property="og:image" content="http://palanceli.github.io/2016/10/20/2017/1020AndroidProgrammingBNRG09/img03.png">
 <meta property="og:image" content="http://palanceli.github.io/2016/10/20/2017/1020AndroidProgrammingBNRG09/img04.png">
 <meta property="og:image" content="http://palanceli.github.io/2016/10/20/2017/1020AndroidProgrammingBNRG09/img05.png">
-<meta property="og:updated_time" content="2017-10-22T12:25:03.000Z">
+<meta property="og:updated_time" content="2017-10-28T07:39:41.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="《Android Programming BNRG》笔记九">
 <meta name="twitter:description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x5F15;&amp;#x5165;&amp;#x4E86;ConstraintLayout&amp;#x5E03;&amp;#x5C40;&amp;#xFF0C;&amp;#x540C;&amp;#x65F6;&amp;#x4ECB;&amp;#x7ECD;&amp;#x4E86;AndroidStudio&amp;#x7684;Design&amp;#x7F16;&amp;#x8F91;&amp;#x5668;&amp;#xFF0C;&amp;#x5728;&amp;#x4E0A;&amp;#x4E">
@@ -427,6 +427,8 @@ table th:nth-of-type(1){
 <p>&#x4F60;&#x53EF;&#x4EE5;&#x5B9A;&#x4E49;&#x81EA;&#x5DF1;&#x7684;style&#x3002;</p>
 <p>theme&#x5219;&#x662F;style&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x5B83;&#x7684;&#x5C5E;&#x6027;&#x6307;&#x5411;&#x5176;&#x5B83;&#x7684;style&#x3002;Android&#x63D0;&#x4F9B;&#x4E86;&#x5E73;&#x53F0;themes&#x4F9B;app&#x4F7F;&#x7528;&#x3002;&#x6BD4;&#x5982;&#x5728;&#x672C;&#x8282;&#x7684;fragment_crime.xml&#x4E2D;&#x63CF;&#x8FF0;TextView&#xFF1A;<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">TextView</span></span></div><div class="line"><span class="attr">...</span></div><div class="line"><span class="attr">style</span>=<span class="string">&quot;?android:listSeparatorTextViewStyle&quot;</span></div><div class="line"><span class="attr">...</span></div><div class="line">/&gt;</div></pre></td></tr></table></figure></p>
 <p>&#x8FD9;&#x662F;&#x5E26;&#x6709;&#x4E00;&#x4E2A;&#x5206;&#x5272;&#x7EBF;&#x7684;TextView&#xFF0C;&#x6BCF;&#x4E2A;Android theme&#x90FD;&#x5305;&#x542B;listSeparatorTextViewStyle&#xFF0C;&#x4ED6;&#x4EEC;&#x63CF;&#x8FF0;&#x4E86;&#x4E0D;&#x540C;&#x7684;&#x5206;&#x5272;&#x7EBF;&#x5916;&#x89C2;&#x3002;</p>
+<p>&#x4E00;&#x4E2A;app&#x7684;theme&#x5B9A;&#x4E49;&#x5728;<code>AndrodiManifest.xml</code>&#x6587;&#x4EF6;&#x4E2D;&#xFF1A;<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">manifest</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span> <span class="attr">...</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">application</span></span></div><div class="line">        <span class="attr">...</span></div><div class="line">        <span class="attr">android:theme</span>=<span class="string">&quot;@style/AppTheme&quot;</span>&gt;</div><div class="line">        ...</div><div class="line">    <span class="tag">&lt;/<span class="name">application</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">manifest</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>&#x8BE5;theme&#x7684;&#x5C5E;&#x6027;&#x503C;&#x5B9A;&#x4E49;&#x5728;<code>res/values/styles.xml</code>&#x3002;</p>
 
       
     </div>
@@ -540,7 +542,7 @@ table th:nth-of-type(1){
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">131</span>
+              <span class="site-state-item-count">136</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
