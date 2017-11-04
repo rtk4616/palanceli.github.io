@@ -1,0 +1,704 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android BNRG笔记," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x5728;Details&amp;#x754C;&amp;#x9762;&amp;#x4E2D;&amp;#x70B9;&amp;#x51FB;&amp;#x4E86;&amp;#x65E5;&amp;#x671F;&amp;#x540E;&amp;#xFF0C;&amp;#x5F39;&amp;#x51FA;&amp;#x9009;&amp;#x62E9;&amp;#x65E5;&amp;#x671F;&amp;#x7684;DatePicker Dialog&amp;#x3002;&amp;#x672C;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="《Android Programming BNRG》笔记十二">
+<meta property="og:url" content="http://palanceli.github.io/2017/10/23/2017/1023AndroidProgrammingBNRG12/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x5728;Details&amp;#x754C;&amp;#x9762;&amp;#x4E2D;&amp;#x70B9;&amp;#x51FB;&amp;#x4E86;&amp;#x65E5;&amp;#x671F;&amp;#x540E;&amp;#xFF0C;&amp;#x5F39;&amp;#x51FA;&amp;#x9009;&amp;#x62E9;&amp;#x65E5;&amp;#x671F;&amp;#x7684;DatePicker Dialog&amp;#x3002;&amp;#x672C;">
+<meta property="og:image" content="http://palanceli.github.io/2017/10/23/2017/1023AndroidProgrammingBNRG12/img02.png">
+<meta property="og:image" content="http://palanceli.github.io/2017/10/23/2017/1023AndroidProgrammingBNRG12/img01.png">
+<meta property="og:updated_time" content="2017-11-04T15:45:31.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="《Android Programming BNRG》笔记十二">
+<meta name="twitter:description" content="&amp;#x672C;&amp;#x7AE0;&amp;#x5728;Details&amp;#x754C;&amp;#x9762;&amp;#x4E2D;&amp;#x70B9;&amp;#x51FB;&amp;#x4E86;&amp;#x65E5;&amp;#x671F;&amp;#x540E;&amp;#xFF0C;&amp;#x5F39;&amp;#x51FA;&amp;#x9009;&amp;#x62E9;&amp;#x65E5;&amp;#x671F;&amp;#x7684;DatePicker Dialog&amp;#x3002;&amp;#x672C;">
+<meta name="twitter:image" content="http://palanceli.github.io/2017/10/23/2017/1023AndroidProgrammingBNRG12/img02.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2017/10/23/2017/1023AndroidProgrammingBNRG12/"/>
+
+  <title> 《Android Programming BNRG》笔记十二 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                《Android Programming BNRG》笔记十二
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-10-23T20:00:00+08:00" content="2017-10-23">
+              2017-10-23
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android-Programming/" itemprop="url" rel="index">
+                    <span itemprop="name">Android Programming</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/10/23/2017/1023AndroidProgrammingBNRG12/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/10/23/2017/1023AndroidProgrammingBNRG12/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x672C;&#x7AE0;&#x5728;Details&#x754C;&#x9762;&#x4E2D;&#x70B9;&#x51FB;&#x4E86;&#x65E5;&#x671F;&#x540E;&#xFF0C;&#x5F39;&#x51FA;&#x9009;&#x62E9;&#x65E5;&#x671F;&#x7684;DatePicker Dialog&#x3002;<br><img src="/2017/10/23/2017/1023AndroidProgrammingBNRG12/img02.png" alt=""><br>&#x672C;&#x7AE0;&#x8981;&#x70B9;&#xFF1A;</p>
+<ul>
+<li>&#x521B;&#x5EFA;&#x548C;&#x8C03;&#x8D77;Dialog</li>
+<li>&#x5728;&#x540C;&#x4E00;&#x4E2A;Activity&#x5185;&#x7684;&#x4E0D;&#x540C;Fragment&#x4E4B;&#x95F4;&#x4F20;&#x9012;&#x6570;&#x636E;<a id="more"></a>
+</li>
+</ul>
+<h1 id="&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x548C;&#x4F7F;&#x7528;Dialog"><a href="#&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x548C;&#x4F7F;&#x7528;Dialog" class="headerlink" title="&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x548C;&#x4F7F;&#x7528;Dialog"></a>&#x5982;&#x4F55;&#x521B;&#x5EFA;&#x548C;&#x4F7F;&#x7528;Dialog</h1><h2 id="&#x521B;&#x5EFA;Dialog"><a href="#&#x521B;&#x5EFA;Dialog" class="headerlink" title="&#x521B;&#x5EFA;Dialog"></a>&#x521B;&#x5EFA;Dialog</h2><p>&#x6D3E;&#x751F;DialogFragment&#x5B50;&#x7C7B;&#xFF0C;&#x5E76;&#x5B9E;&#x73B0;<code>onCreateDialog(Bundle savedInstanceState)</code>&#x65B9;&#x6CD5;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// DatePickerFragment</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DatePickerFragment</span> <span class="keyword">extends</span> <span class="title">DialogFragment</span> </span>{</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Dialog <span class="title">onCreateDialog</span><span class="params">(Bundle savedInstanceState)</span></span>{</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> android.support.v7.app.AlertDialog.Builder(getActivity())</div><div class="line">            .setTitle(R.string.date_picker_title)</div><div class="line">            .setPositiveButton(android.R.string.ok, <span class="keyword">null</span>)</div><div class="line">            .create();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x5F53;Activity&#x9700;&#x8981;&#x5C06;Dialog&#x5C55;&#x73B0;&#x5728;&#x5C4F;&#x5E55;&#x4E0A;&#x65F6;&#xFF0C;&#x4F1A;&#x8C03;&#x7528;&#x6B64;&#x65B9;&#x6CD5;&#x3002;&#x5E94;&#x8BE5;&#x5728;&#x6B64;&#x65B9;&#x6CD5;&#x5185;&#x521B;&#x5EFA;&#x5E76;&#x5C55;&#x73B0;Dialog&#x3002;</p>
+<h2 id="&#x663E;&#x793A;Dialog"><a href="#&#x663E;&#x793A;Dialog" class="headerlink" title="&#x663E;&#x793A;Dialog"></a>&#x663E;&#x793A;Dialog</h2><p>&#x8C03;&#x7528;DialogFragment&#x7684;&#x4E0B;&#x9762;&#x4E24;&#x4E2A;&#x65B9;&#x6CD5;&#xFF1A;<br><code>public void show(FragmentManager manager, String tag)</code><br><code>public void show(FragmentTransaction transaction, String tag)</code><br>&#x5B83;&#x4EEC;&#x90FD;&#x80FD;&#x663E;&#x793A;Dialog&#x3002;<br>&#x53C2;&#x6570;<code>tag</code>&#x662F;DialogFragment&#x5B9E;&#x4F8B;&#x7684;&#x552F;&#x4E00;&#x6807;&#x8BC6;&#xFF1B;<br>&#x5982;&#x679C;&#x4F20;&#x5165;&#x53C2;&#x6570;<code>FragmentTransaction</code>&#xFF0C;&#x4F60;&#x9700;&#x8981;&#x8D1F;&#x8D23;&#x521B;&#x5EFA;&#x548C;&#x63D0;&#x4EA4;transaction&#xFF1B;<br>&#x5982;&#x679C;&#x4F20;&#x5165;&#x53C2;&#x6570;<code>FragmentManager</code>&#xFF0C;manager&#x4F1A;&#x8D1F;&#x8D23;&#x521B;&#x5EFA;&#x548C;&#x63D0;&#x4EA4;transaction&#x3002;<br>&#x70B9;&#x51FB;details&#x4E2D;&#x65E5;&#x671F;&#x6309;&#x94AE;&#x7684;&#x54CD;&#x5E94;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CrimeFragment.java</span></div><div class="line">mDateButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span>{</div><div class="line">        FragmentManager manager = getFragmentManager();</div><div class="line">        DatePickerFragment dialog = <span class="keyword">new</span> DatePickerFragment();</div><div class="line">        dialog.show(manager, DIALOG_DATE);</div><div class="line">    }</div><div class="line">});</div></pre></td></tr></table></figure></p>
+<p>&#x6B64;&#x65F6;&#x5F39;&#x51FA;&#x7684;Dialog&#x5982;&#x4E0B;&#xFF1A;<br><img src="/2017/10/23/2017/1023AndroidProgrammingBNRG12/img01.png" alt=""></p>
+<h2 id="&#x5B9A;&#x5236;Dialog&#x7684;UI"><a href="#&#x5B9A;&#x5236;Dialog&#x7684;UI" class="headerlink" title="&#x5B9A;&#x5236;Dialog&#x7684;UI"></a>&#x5B9A;&#x5236;Dialog&#x7684;UI</h2><p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x8C03;&#x7528;AlertDialog.Build&#x7684;<code>setView(View v)</code>&#x65B9;&#x6CD5;&#x6765;&#x5B9A;&#x5236;Dialog&#x7684;&#x9876;&#x90E8;&#x6807;&#x9898;&#x5230;&#x5E95;&#x90E8;&#x6309;&#x94AE;&#x4E4B;&#x95F4;&#x7684;UI&#x3002;&#x5177;&#x4F53;&#x6B65;&#x9AA4;&#x8FD8;&#x662F;xml+&#x4EE3;&#x7801;&#xFF1A;<br>dialog_date.xml<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">DatePicker</span> <span class="attr">xmlns:android</span>=<span class="string">&quot;http://schemas.android.com/apk/res/android&quot;</span></span></div><div class="line">    <span class="attr">android:id</span>=<span class="string">&quot;@+id/dialog_date_picker&quot;</span></div><div class="line">    <span class="attr">android:layout_width</span>=<span class="string">&quot;wrap_content&quot;</span></div><div class="line">    <span class="attr">android:layout_height</span>=<span class="string">&quot;wrap_content&quot;</span></div><div class="line">    <span class="attr">android:calendarViewShown</span>=<span class="string">&quot;false&quot;</span>&gt;</div><div class="line"><span class="tag">&lt;/<span class="name">DatePicker</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// DatePickerFragment.java</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DatePickerFragment</span> <span class="keyword">extends</span> <span class="title">DialogFragment</span> </span>{</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Dialog <span class="title">onCreateDialog</span><span class="params">(Bundle savedInstanceState)</span></span>{</div><div class="line">        View v = LayoutInflater.from(getActivity()) </div><div class="line">            .inflate(R.layout.dialog_date, <span class="keyword">null</span>);		<span class="comment">// &#x52A0;&#x8F7D;&#x5E03;&#x5C40;</span></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> android.support.v7.app.AlertDialog.Builder(getActivity())</div><div class="line">            .setView(v)							<span class="comment">// &#x5B9A;&#x5236;UI</span></div><div class="line">            .setTitle(R.string.date_picker_title)</div><div class="line">            .setPositiveButton(android.R.string.ok, <span class="keyword">null</span>)</div><div class="line">            .create();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h2 id="&#x5411;DialogFragment&#x4F20;&#x5165;&#x53C2;&#x6570;"><a href="#&#x5411;DialogFragment&#x4F20;&#x5165;&#x53C2;&#x6570;" class="headerlink" title="&#x5411;DialogFragment&#x4F20;&#x5165;&#x53C2;&#x6570;"></a>&#x5411;DialogFragment&#x4F20;&#x5165;&#x53C2;&#x6570;</h2><p>&#x4F20;&#x5165;&#x53C2;&#x6570;&#x548C;<a href="http://localhost:4000/2016/10/18/2017/1018AndroidProgrammingBNRG07/#&#x5411;&#x521B;&#x5EFA;&#x7684;Fragment&#x4F20;&#x5165;&#x53C2;&#x6570;" target="_blank" rel="external">&#x7B14;&#x8BB0;&#x4E03;&#xB7; &#x5411;&#x521B;&#x5EFA;&#x7684;Fragment&#x4F20;&#x5165;&#x53C2;&#x6570;</a>&#x5B8C;&#x5168;&#x4E00;&#x81F4;&#xFF0C;&#x4F7F;&#x7528;Argument&#x3002;&#x2460; &#x628A;&#x521B;&#x5EFA;&#x5B9E;&#x4F8B;&#x7684;&#x4EE3;&#x7801;&#x5C01;&#x88C5;&#x5230;DatePickerFragment&#x7C7B;&#x7684;&#x5185;&#x90E8;&#xFF1B;&#x2461; &#x5728;<code>onCreateDialog(...)</code>&#x4E2D;&#x89E3;&#x6790;&#x4F20;&#x5165;&#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x66F4;&#x65B0;UI&#x3002;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// DatePickerFragment.java</span></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DatePickerFragment</span> <span class="keyword">extends</span> <span class="title">DialogFragment</span> </span>{</div><div class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String ARG_DATE = <span class="string">&quot;date&quot;</span>;</div><div class="line">    <span class="keyword">private</span> DatePicker mDatePicker;</div><div class="line"></div><div class="line">    <span class="comment">// &#x521B;&#x5EFA;DatePickerFragment&#x5B9E;&#x4F8B;&#xFF0C;&#x5E76;&#x4F20;&#x5165;Date&#x53C2;&#x6570;</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DatePickerFragment <span class="title">newInstance</span><span class="params">(Date date)</span> </span>{</div><div class="line">        Bundle args = <span class="keyword">new</span> Bundle();</div><div class="line">        args.putSerializable(ARG_DATE, date);</div><div class="line"></div><div class="line">        DatePickerFragment fragment = <span class="keyword">new</span> DatePickerFragment();</div><div class="line">        fragment.setArguments(args);</div><div class="line">        <span class="keyword">return</span> fragment;</div><div class="line">    }</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Dialog <span class="title">onCreateDialog</span><span class="params">(Bundle savedInstanceState)</span></span>{</div><div class="line">        <span class="comment">// &#x89E3;&#x6790;&#x8F93;&#x5165;&#x53C2;&#x6570;&#xFF0C;&#x5E76;&#x5C55;&#x73B0;&#x5230;UI</span></div><div class="line">        Date date = (Date)getArguments().getSerializable(ARG_DATE);</div><div class="line">        Calendar calendar = Calendar.getInstance();</div><div class="line">        calendar.setTime(date);</div><div class="line">        <span class="keyword">int</span> year = calendar.get(Calendar.YEAR);</div><div class="line">        <span class="keyword">int</span> month = calendar.get(Calendar.MONTH);</div><div class="line">        <span class="keyword">int</span> day = calendar.get(Calendar.DAY_OF_MONTH);</div><div class="line"></div><div class="line">        View v = LayoutInflater.from(getActivity())</div><div class="line">                .inflate(R.layout.dialog_date, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">        mDatePicker = (DatePicker) v.findViewById(R.id.dialog_date_picker);</div><div class="line">        mDatePicker.init(year, month, day, <span class="keyword">null</span>);</div><div class="line"></div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> android.support.v7.app.AlertDialog.Builder(getActivity())</div><div class="line">                .setView(v)</div><div class="line">                .setTitle(R.string.date_picker_title)</div><div class="line">                .setPositiveButton(android.R.string.ok, <span class="keyword">null</span>)</div><div class="line">                .create();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure></p>
+<p>&#x539F;&#x5148;&#x54CD;&#x5E94;Date&#x6309;&#x94AE;&#x70B9;&#x51FB;&#xFF0C;&#x521B;&#x5EFA;&#x548C;&#x663E;&#x793A;DatePickerFragment&#x7684;&#x4EE3;&#x7801;&#x4FEE;&#x6539;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CrimeFragment.java</span></div><div class="line">    mDateButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span>{</div><div class="line">            FragmentManager manager = getFragmentManager();</div><div class="line">            <span class="comment">// &#x521B;&#x5EFA;DatePickerFragment&#xFF0C;&#x5E76;&#x4F20;&#x5165;Date&#x53C2;&#x6570;</span></div><div class="line">            DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());</div><div class="line">            dialog.show(manager, DIALOG_DATE);</div><div class="line">        }</div><div class="line">    });</div></pre></td></tr></table></figure></p>
+<h2 id="&#x4ECE;DialogFragment&#x8FD4;&#x56DE;&#x6570;&#x636E;"><a href="#&#x4ECE;DialogFragment&#x8FD4;&#x56DE;&#x6570;&#x636E;" class="headerlink" title="&#x4ECE;DialogFragment&#x8FD4;&#x56DE;&#x6570;&#x636E;"></a>&#x4ECE;DialogFragment&#x8FD4;&#x56DE;&#x6570;&#x636E;</h2><p>&#x5728;&#x672C;&#x8282;&#x4E2D;CrimeFragment&#x548C;DatePickerFragment&#x540C;&#x5728;CrimeActivity&#x4E4B;&#x4E2D;&#xFF0C;CrimeFragment&#x542F;&#x52A8;DatePickerFragment&#x4E4B;&#x540E;&#x600E;&#x4E48;&#x4ECE;DatePickerFragment&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x5462;&#xFF1F;<br>&#x2460; &#x628A;CrimeFragment&#x8BBE;&#x7F6E;&#x4E3A;DatePickerFragment&#x7684;TargetFragment&#xFF1A;<br><code>public void setTargetFragment(Fragment fragment, int requestCode)</code><br>TargetFragment&#x5C06;&#x6839;&#x636E;requestCode&#x6765;&#x5206;&#x8FA8;&#x4ECE;&#x54EA;&#x4E2A;Fragment&#x8FD4;&#x56DE;&#x3002;<br>&#x2461; DatePickerFragment&#x8C03;&#x7528;<code>CrimeFragment.onActivityResult(int, Intent)</code>&#x5C06;&#x8FD4;&#x56DE;&#x503C;&#x4F20;&#x9012;&#x7ED9;CrimeFragment&#x3002;&#x5728;<a href="http://localhost:4000/2016/10/16/2017/1016AndroidProgrammingBNRG05/#&#x4ECE;&#x542F;&#x52A8;&#x7684;Activity&#x8FD4;&#x56DE;&#x6570;&#x636E;" target="_blank" rel="external">&#x7B14;&#x8BB0;&#x4E94;&#xB7;&#x4ECE;&#x542F;&#x52A8;&#x7684;Activity&#x8FD4;&#x56DE;&#x6570;&#x636E;</a>&#x4E2D;&#x8BB2;&#x5230;&#xFF0C;&#x5728;Activity&#x4E4B;&#x95F4;&#x8FD4;&#x56DE;&#x6570;&#x636E;&#x65F6;&#xFF0C;&#x7531;ActivityManager&#x8D1F;&#x8D23;&#x8C03;&#x7528;<code>Activity.onActivityResult(int, Intent)</code>&#xFF0C;Activity&#x5728;&#x6536;&#x5230;&#x6B64;&#x56DE;&#x8C03;&#x540E;&#xFF0C;&#x5176;FragmentManager&#x4F1A;&#x8C03;&#x7528;&#x81EA;&#x5DF1;&#x6BCF;&#x4E2A;Fragment&#x7684;<code>Fragment.onActivityResult(int, Intent)</code>&#x3002;<br>&#x6B64;&#x5904;&#x5728;Fragment&#x8FD4;&#x56DE;&#x7ED9;Fragment&#x65F6;&#xFF0C;&#x6211;&#x4EEC;&#x501F;&#x7528;&#x6B64;&#x673A;&#x5236;&#x3002;<br>&#x2462; &#x7ED9;DatePickerFragment&#x7684;OK&#x6309;&#x94AE;&#x8BBE;&#x7F6E;ClickListener&#xFF0C;&#x5F53;&#x70B9;&#x51FB;OK&#x65F6;&#x6267;&#x884C;&#x2461;&#x4E2D;&#x7684;&#x56DE;&#x4F20;&#x3002;<br>&#x2463; &#x5B9E;&#x73B0;<code>CrimeFragment.onActivityResult(int, Intent)</code>&#x4EE4;&#x5176;&#x66F4;&#x65B0;&#x754C;&#x9762;&#x3002;</p>
+<p>&#x5177;&#x4F53;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// CrimeFragment.java</span></div><div class="line">    mDateButton.setOnClickListener(<span class="keyword">new</span> View.OnClickListener(){</div><div class="line">        <span class="meta">@Override</span></div><div class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(View v)</span></span>{</div><div class="line">            FragmentManager manager = getFragmentManager();</div><div class="line">            DatePickerFragment dialog = DatePickerFragment.newInstance(mCrime.getDate());</div><div class="line">            dialog.setTargetFragment(CrimeFragment.<span class="keyword">this</span>, REQUEST_DATE); <span class="comment">// &#x2460;</span></div><div class="line">            dialog.show(manager, DIALOG_DATE);</div><div class="line">        }</div><div class="line">    });</div></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DatePickerFragment</span> <span class="keyword">extends</span> <span class="title">DialogFragment</span> </span>{</div><div class="line">    ...</div><div class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> String EXTRA_DATE = <span class="string">&quot;com.bnrg.bnrg07.date&quot;</span>;</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sendResult</span><span class="params">(<span class="keyword">int</span> resultCode, Date date)</span></span>{ <span class="comment">// &#x2461;</span></div><div class="line">        <span class="keyword">if</span>(getTargetFragment() == <span class="keyword">null</span>)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line"></div><div class="line">        Intent intent = <span class="keyword">new</span> Intent();</div><div class="line">        intent.putExtra(EXTRA_DATE, date);</div><div class="line">        getTargetFragment().onActivityResult(getTargetRequestCode(), resultCode, intent);</div><div class="line">    }</div><div class="line"></div><div class="line">    ...</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> Dialog <span class="title">onCreateDialog</span><span class="params">(Bundle savedInstanceState)</span></span>{</div><div class="line">        ...</div><div class="line">        <span class="keyword">return</span> <span class="keyword">new</span> android.support.v7.app.AlertDialog.Builder(getActivity())</div><div class="line">                .setView(v)</div><div class="line">                .setTitle(R.string.date_picker_title)</div><div class="line">                .setPositiveButton(android.R.string.ok, <span class="keyword">new</span> DialogInterface.OnClickListener(){</div><div class="line">                    <span class="meta">@Override</span></div><div class="line">                    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onClick</span><span class="params">(DialogInterface dialog, <span class="keyword">int</span> which)</span></span>{ <span class="comment">// &#x2462;</span></div><div class="line">                        <span class="keyword">int</span> year = mDatePicker.getYear();</div><div class="line">                        <span class="keyword">int</span> month = mDatePicker.getMonth();</div><div class="line">                        <span class="keyword">int</span> day = mDatePicker.getDayOfMonth();</div><div class="line">                        Date date = <span class="keyword">new</span> GregorianCalendar(year, month, day).getTime();</div><div class="line">                        sendResult(Activity.RESULT_OK, date);</div><div class="line">                    }</div><div class="line">                })</div><div class="line">                .create();</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">CrimeFragment</span> <span class="keyword">extends</span> <span class="title">Fragment</span> </span>{</div><div class="line">    ...</div><div class="line">    <span class="meta">@Override</span></div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onActivityResult</span><span class="params">(<span class="keyword">int</span> requestCode, <span class="keyword">int</span> resultCode, Intent data)</span></span>{ <span class="comment">// &#x2463;</span></div><div class="line">        <span class="keyword">if</span>(resultCode != Activity.RESULT_OK)</div><div class="line">            <span class="keyword">return</span>;</div><div class="line">        </div><div class="line">        <span class="keyword">if</span>(requestCode == REQUEST_DATE){</div><div class="line">            Date date = (Date)data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);</div><div class="line">            mCrime.setDate(date);</div><div class="line">            updateDate();</div><div class="line">        }</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">updateDate</span><span class="params">()</span> </span>{</div><div class="line">        mDateButton.setText(mCrime.getDate().toString());</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android-BNRG笔记/" rel="tag">#Android BNRG笔记</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/22/2017/1022AndroidProgrammingBNRG11/" rel="next" title="《Android Programming BNRG》笔记十一">
+                <i class="fa fa-chevron-left"></i> 《Android Programming BNRG》笔记十一
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/24/2017/1024AndroidProgrammingBNRG13/" rel="prev" title="《Android Programming BNRG》笔记十三">
+                《Android Programming BNRG》笔记十三 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/10/23/2017/1023AndroidProgrammingBNRG12/"
+           data-title="《Android Programming BNRG》笔记十二" data-url="http://palanceli.github.io/2017/10/23/2017/1023AndroidProgrammingBNRG12/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">138</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">18</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">50</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#如何创建和使用Dialog"><span class="nav-text">如何创建和使用Dialog</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建Dialog"><span class="nav-text">创建Dialog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#显示Dialog"><span class="nav-text">显示Dialog</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#定制Dialog的UI"><span class="nav-text">定制Dialog的UI</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#向DialogFragment传入参数"><span class="nav-text">向DialogFragment传入参数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从DialogFragment返回数据"><span class="nav-text">从DialogFragment返回数据</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
