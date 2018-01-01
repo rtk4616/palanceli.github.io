@@ -1,0 +1,854 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="git," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6700;&amp;#x8FD1;&amp;#x5728;&amp;#x51E0;&amp;#x53F0;&amp;#x673A;&amp;#x5668;&amp;#x4E0A;&amp;#x9891;&amp;#x7E41;clone dlib-android&amp;#x548C;dlib-android-app&amp;#xFF0C;&amp;#x8FD9;&amp;#x4E24;&amp;#x4E2A;&amp;#x5E93;&amp;#x90FD;&amp;#x5DE8;&amp;#x5927;&amp;#xFF0C;&amp;#x517">
+<meta property="og:type" content="article">
+<meta property="og:title" content="git瘦身">
+<meta property="og:url" content="http://palanceli.github.io/2017/12/18/2017/1218GitReduceSize/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x6700;&amp;#x8FD1;&amp;#x5728;&amp;#x51E0;&amp;#x53F0;&amp;#x673A;&amp;#x5668;&amp;#x4E0A;&amp;#x9891;&amp;#x7E41;clone dlib-android&amp;#x548C;dlib-android-app&amp;#xFF0C;&amp;#x8FD9;&amp;#x4E24;&amp;#x4E2A;&amp;#x5E93;&amp;#x90FD;&amp;#x5DE8;&amp;#x5927;&amp;#xFF0C;&amp;#x517">
+<meta property="og:updated_time" content="2017-12-19T15:49:58.043Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="git瘦身">
+<meta name="twitter:description" content="&amp;#x6700;&amp;#x8FD1;&amp;#x5728;&amp;#x51E0;&amp;#x53F0;&amp;#x673A;&amp;#x5668;&amp;#x4E0A;&amp;#x9891;&amp;#x7E41;clone dlib-android&amp;#x548C;dlib-android-app&amp;#xFF0C;&amp;#x8FD9;&amp;#x4E24;&amp;#x4E2A;&amp;#x5E93;&amp;#x90FD;&amp;#x5DE8;&amp;#x5927;&amp;#xFF0C;&amp;#x517">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2017/12/18/2017/1218GitReduceSize/"/>
+
+  <title> git瘦身 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '1Grug_XAD_ps3zyBywoo','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                git瘦身
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-12-18T20:00:00+08:00" content="2017-12-18">
+              2017-12-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/git/" itemprop="url" rel="index">
+                    <span itemprop="name">git</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/12/18/2017/1218GitReduceSize/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/18/2017/1218GitReduceSize/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x6700;&#x8FD1;&#x5728;&#x51E0;&#x53F0;&#x673A;&#x5668;&#x4E0A;&#x9891;&#x7E41;clone <a href="https://github.com/palanceli/dlib-android" target="_blank" rel="external">dlib-android</a>&#x548C;<a href="https://github.com/palanceli/dlib-android-app" target="_blank" rel="external">dlib-android-app</a>&#xFF0C;&#x8FD9;&#x4E24;&#x4E2A;&#x5E93;&#x90FD;&#x5DE8;&#x5927;&#xFF0C;&#x5176;&#x4E2D;&#x56E0;&#x4E3A;&#x6709;&#x4E00;&#x4E2A;99M&#x7684;&#x4EBA;&#x8138;&#x8BC6;&#x522B;&#x6A21;&#x578B;&#x6587;&#x4EF6;&#xFF0C;&#x6211;&#x81EA;&#x5DF1;&#x8BAD;&#x7EC3;&#x4E00;&#x4E2A;16.6M&#x7684;&#x5C0F;&#x6A21;&#x578B;&#xFF0C;&#x66FF;&#x6362;&#x540E;&#x53D1;&#x73B0;&#x4E24;&#x4E2A;git&#x76EE;&#x5F55;&#x5C3A;&#x5BF8;&#x5E76;&#x6CA1;&#x6709;&#x51CF;&#x5C0F;&#x3002;&#x539F;&#x56E0;&#x662F;.git&#x8FD9;&#x4E2A;&#x76EE;&#x5F55;&#x91CC;&#x8BB0;&#x5F55;&#x4E86;&#x6240;&#x6709;&#x5386;&#x53F2;&#x6570;&#x636E;&#xFF0C;&#x672C;&#x6587;&#x8BB0;&#x5F55;&#x8BE5;&#x76EE;&#x5F55;&#x7684;&#x7626;&#x8EAB;&#x8FC7;&#x7A0B;&#x3002;</p>
+<a id="more"></a>
+<p>&#x5148;&#x8BF4;&#x4E00;&#x4E0B;&#x9020;&#x6210;git&#x81C3;&#x80BF;&#x7684;&#x539F;&#x56E0;&#xFF1A;&#x5386;&#x53F2;&#x4E0A;&#x53EF;&#x80FD;&#x8BEF;&#x63D0;&#x4EA4;&#x8FC7;&#x4E00;&#x4E9B;&#x5927;&#x6587;&#x4EF6;&#xFF0C;&#x6216;&#x8005;&#x4E00;&#x6279;&#x672C;&#x4E0D;&#x8BE5;&#x63D0;&#x4EA4;&#x7684;&#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x4F1A;&#x5BFC;&#x81F4;&#x5386;&#x53F2;&#x8BB0;&#x5F55;&#x88AB;&#x6C38;&#x4E45;&#x4FDD;&#x5B58;&#x5230;.git&#x91CC;&#xFF0C;&#x8FD9;&#x90E8;&#x5206;&#x5386;&#x53F2;&#x8BB0;&#x5F55;&#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x610F;&#x4E49;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x901A;&#x8FC7;&#x5220;&#x9664;&#x8FD9;&#x4E9B;&#x5783;&#x573E;&#x8BB0;&#x5F55;&#x662F;&#x6709;&#x5FC5;&#x8981;&#x7684;&#x3002;&#x672C;&#x6587;&#x4E3B;&#x8981;&#x4E5F;&#x662F;&#x9488;&#x5BF9;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x53D1;&#x73B0;&#x4F5C;&#x8005;&#x66FE;&#x7ECF;&#x628A;&#x5927;&#x91CF;&#x7684;.a&#x3001;.so&#x7B49;&#x672C;&#x6765;&#x53EF;&#x901A;&#x8FC7;&#x7F16;&#x8BD1;&#x751F;&#x6210;&#x7684;&#x6587;&#x4EF6;&#x4E5F;&#x63D0;&#x4EA4;git&#x4E86;&#x3002;</p>
+<h1 id="&#x7626;&#x8EAB;&#x65B9;&#x6CD5;"><a href="#&#x7626;&#x8EAB;&#x65B9;&#x6CD5;" class="headerlink" title="&#x7626;&#x8EAB;&#x65B9;&#x6CD5;"></a>&#x7626;&#x8EAB;&#x65B9;&#x6CD5;</h1><p>&#x7F51;&#x4E0A;&#x6709;&#x4E0D;&#x5C11;&#x6587;&#x7AE0;&#x4ECB;&#x7ECD;git&#x7684;&#x7626;&#x8EAB;&#x65B9;&#x6CD5;&#xFF0C;&#x4F46;&#x5728;&#x6211;&#x8FD9;&#x91CC;&#x90FD;&#x4E0D;&#x751F;&#x6548;&#xFF0C;&#x6216;&#x8005;&#x751F;&#x6548;&#x4E86;&#x4E5F;&#x65E0;&#x6CD5;push&#x5230;&#x8FDC;&#x7AEF;&#x7684;&#x4ED3;&#x5E93;&#x3002;&#x7ECF;&#x8FC7;&#x591A;&#x6B21;&#x8BD5;&#x9A8C;&#xFF0C;&#x53D1;&#x73B0;&#x672C;&#x5730;&#x7626;&#x8EAB;&#x7684;&#x65B9;&#x6CD5;&#x6CA1;&#x4EC0;&#x4E48;&#x95EE;&#x9898;&#xFF1A;</p>
+<h2 id="&#x67E5;&#x627E;&#x5220;&#x9664;&#x5927;&#x7D22;&#x5F15;&#x6587;&#x4EF6;"><a href="#&#x67E5;&#x627E;&#x5220;&#x9664;&#x5927;&#x7D22;&#x5F15;&#x6587;&#x4EF6;" class="headerlink" title="&#x67E5;&#x627E;&#x5220;&#x9664;&#x5927;&#x7D22;&#x5F15;&#x6587;&#x4EF6;"></a>&#x67E5;&#x627E;&#x5220;&#x9664;&#x5927;&#x7D22;&#x5F15;&#x6587;&#x4EF6;</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x67E5;&#x627E;&#x5927;&#x6587;&#x4EF6;</span></div><div class="line">$ git rev-list --objects --all | grep <span class="string">&quot;<span class="variable">$(git verify-pack -v .git/objects/pack/*.idx | sort -k 3 -n | tail -5 | awk &apos;{print$1}&apos;)</span>&quot;</span></div><div class="line"></div><div class="line">e759ec9c69f570834b6b078614261744a6f035f4 data/lena.bmp</div><div class="line">...</div><div class="line">f06aa74a57ce3a4129340<span class="built_in">cd</span>4407ef3c0558e3193 &lt;some-big-file-path&gt;</div><div class="line"></div><div class="line"><span class="comment"># &#x5220;&#x9664;&#x6307;&#x5B9A;&#x7684;&#x6587;&#x4EF6;&#x53CA;&#x76F8;&#x5173;&#x8BB0;&#x5F55;</span></div><div class="line">$ git filter-branch --force --index-filter <span class="string">&apos;git rm -rf --cached --ignore-unmatch &lt;some-big-file-path&gt;&apos;</span> --prune-empty --tag-name-filter cat -- --all</div></pre></td></tr></table></figure>
+<p>&#x4F7F;&#x7528;&#x547D;&#x4EE4;<code>git rev-list --objects --all</code>&#x5217;&#x51FA;&#x6240;&#x6709;&#x66FE;&#x7ECF;&#x63D0;&#x4EA4;&#x8FC7;&#x7684;&#x6587;&#x4EF6;&#x53CA;hash&#x503C;&#xFF0C;&#x8FD9;&#x4E2A;&#x547D;&#x4EE4;&#x5728;&#x6B64;&#x540E;&#x8FD8;&#x4F1A;&#x7528;&#x5230;&#x3002;&#x5982;&#x679C;&#x66FE;&#x7ECF;&#x63D0;&#x4EA4;&#x8FC7;&#x5C11;&#x6570;&#x51E0;&#x4E2A;&#x5927;&#x6587;&#x4EF6;&#xFF0C;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x5F88;&#x5FEB;&#x7626;&#x8EAB;&#x3002;</p>
+<h2 id="&#x5220;&#x9664;&#x4E00;&#x6279;&#x788E;&#x6587;&#x4EF6;"><a href="#&#x5220;&#x9664;&#x4E00;&#x6279;&#x788E;&#x6587;&#x4EF6;" class="headerlink" title="&#x5220;&#x9664;&#x4E00;&#x6279;&#x788E;&#x6587;&#x4EF6;"></a>&#x5220;&#x9664;&#x4E00;&#x6279;&#x788E;&#x6587;&#x4EF6;</h2><p>&#x8FD8;&#x6709;&#x4E00;&#x79CD;&#x60C5;&#x51B5;&#x662F;&#xFF1A;&#x63D0;&#x4EA4;&#x8FC7;&#x4E00;&#x6279;&#x788E;&#x6587;&#x4EF6;&#xFF0C;&#x518D;&#x7528;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x5C31;&#x5F88;&#x9EBB;&#x70E6;&#x4E86;&#xFF0C;&#x53EF;&#x4EE5;&#x5148;&#x53EA;&#x7528;<code>git rev-list --objects --all</code>&#x547D;&#x4EE4;&#x627E;&#x5230;&#x8FD9;&#x7C7B;&#x6587;&#x4EF6;&#xFF0C;&#x518D;&#x901A;&#x8FC7;&#x901A;&#x914D;&#x7B26;&#x5220;&#x9664;&#x8FD9;&#x4E9B;&#x6587;&#x4EF6;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x5217;&#x51FA;&#x66FE;&#x7ECF;&#x63D0;&#x4EA4;&#x8FC7;&#x7684;&#x6240;&#x6709;&#x6587;&#x4EF6;</span></div><div class="line">$ git rev-list --objects --all</div><div class="line">ea026732036637ce181e487a56f7ff9ad055d56a jni/tests</div><div class="line">a7a11e6eb9d4d15de46c91a30bcbbb5f290bac55 jni/tests/Android.mk</div><div class="line">6022a20f24bf1bbd6a9<span class="built_in">fc</span>993c35475081f4de0e3 jni/tests/README.md</div><div class="line">a6f141e3626348c81f714acb6f83459d105bb584 jni/tests/TestSelectiveSearch.cpp</div><div class="line">d49af47035339a1bcb19ccaa7619d613fbf84a17 jni/tests/face_landmark_detection_ex.cpp</div><div class="line">...</div><div class="line"></div><div class="line"><span class="comment"># &#x5047;&#x8BBE;jni/tests/&#x76EE;&#x5F55;&#x662F;&#x672C;&#x4E0D;&#x8BE5;&#x63D0;&#x4EA4;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x5220;&#x9664;&#x8BE5;&#x76EE;&#x5F55;</span></div><div class="line">$ git filter-branch --force --index-filter <span class="string">&apos;git rm -rf --cached --ignore-unmatch jni/tests/*&apos;</span> --prune-empty --tag-name-filter cat -- --all</div></pre></td></tr></table></figure></p>
+<p>&#x9700;&#x8981;&#x6307;&#x51FA;&#x672C;&#x6587;&#x7626;&#x8EAB;&#x53EA;&#x9002;&#x7528;&#x4E8E;&#x5783;&#x573E;&#x7C7B;&#x5386;&#x53F2;&#x8BB0;&#x5F55;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x6709;&#x610F;&#x4E49;&#x7684;&#x63D0;&#x4EA4;&#x8BB0;&#x5F55;&#xFF0C;&#x6700;&#x597D;&#x4FDD;&#x7559;&#x3002;&#x7406;&#x8BBA;&#x4E0A;&#x6765;&#x8BF4;&#xFF0C;&#x5B83;&#x4EEC;&#x4E5F;&#x4E0D;&#x5E94;&#x8BE5;&#x592A;&#x5927;&#x3002;</p>
+<h2 id="&#x538B;&#x7F29;&#x5E76;&#x63D0;&#x4EA4;"><a href="#&#x538B;&#x7F29;&#x5E76;&#x63D0;&#x4EA4;" class="headerlink" title="&#x538B;&#x7F29;&#x5E76;&#x63D0;&#x4EA4;"></a>&#x538B;&#x7F29;&#x5E76;&#x63D0;&#x4EA4;</h2><p>&#x9700;&#x8981;&#x6267;&#x884C;reflog&#x548C;gc&#x538B;&#x7F29;&#x624D;&#x80FD;&#x770B;&#x5230;&#x7626;&#x8EAB;&#x540E;&#x7684;&#x6548;&#x679C;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git reflog expire --expire=now --all &amp;&amp; git gc --prune=now --aggressive</div><div class="line">$ git push --mirror</div></pre></td></tr></table></figure></p>
+<p>&#x6700;&#x540E;&#x4E00;&#x6B65;&#x63D0;&#x4EA4;&#x4E00;&#x5B9A;&#x8981;&#x5E26;&#x4E0A;&#x2013;mirror&#x53C2;&#x6570;&#xFF0C;&#x5426;&#x5219;.git&#x76EE;&#x5F55;&#x7684;&#x7626;&#x8EAB;&#x59CB;&#x7EC8;&#x4E0D;&#x4F1A;&#x88AB;&#x63D0;&#x4EA4;&#x5230;&#x8FDC;&#x7AEF;&#x670D;&#x52A1;&#x5668;&#xFF0C;&#x8FD9;&#x662F;&#x5927;&#x90E8;&#x5206;&#x7F51;&#x4E0A;&#x7684;&#x6587;&#x7AE0;&#x6CA1;&#x63D0;&#x5230;&#x7684;&#x3002;&#x6211;&#x5728;&#x8FD9;&#x4E00;&#x6B65;&#x4E0A;&#x6298;&#x817E;&#x7684;&#x4E5F;&#x662F;&#x6700;&#x591A;&#x7684;&#xFF0C;&#x6700;&#x540E;&#x8FD8;&#x662F;&#x770B;&#x4E86;BFG&#x5DE5;&#x5177;&#x7684;&#x4F8B;&#x5B50;&#xFF0C;&#x624D;&#x53D7;&#x5230;&#x542F;&#x53D1;&#x3002;</p>
+<h1 id="&#x53C2;&#x8003;"><a href="#&#x53C2;&#x8003;" class="headerlink" title="&#x53C2;&#x8003;"></a>&#x53C2;&#x8003;</h1><p><a href="http://harttle.land/2016/03/22/purge-large-files-in-gitrepo.html" target="_blank" rel="external">&#x5BFB;&#x627E;&#x5E76;&#x5220;&#x9664;Git&#x8BB0;&#x5F55;&#x4E2D;&#x7684;&#x5927;&#x6587;&#x4EF6;</a><br><a href="https://rtyley.github.io/bfg-repo-cleaner/" target="_blank" rel="external">BFG Repo-Cleaner</a><br><a href="https://www.awaimai.com/2202.html" target="_blank" rel="external">&#x4F7F;&#x7528;BFG&#x79FB;&#x9664;git&#x5E93;&#x4E2D;&#x7684;&#x5927;&#x6587;&#x4EF6;&#x6216;&#x6C61;&#x70B9;&#x63D0;&#x4EA4;</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/git/" rel="tag">#git</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/12/2017/1212dlib/" rel="next" title="dlib提取人脸关键点的性能">
+                <i class="fa fa-chevron-left"></i> dlib提取人脸关键点的性能
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/01/2018/0101HappyNewYear/" rel="prev" title="走进2018">
+                走进2018 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/12/18/2017/1218GitReduceSize/"
+           data-title="git瘦身" data-url="http://palanceli.github.io/2017/12/18/2017/1218GitReduceSize/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">160</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#瘦身方法"><span class="nav-text">瘦身方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#查找删除大索引文件"><span class="nav-text">查找删除大索引文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#删除一批碎文件"><span class="nav-text">删除一批碎文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#压缩并提交"><span class="nav-text">压缩并提交</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
