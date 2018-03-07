@@ -291,6 +291,130 @@
             
               
                 
+                <a class="post-title-link" href="/2016/10/03/2016/1002KeyboardLearning8/" itemprop="url">
+                  键盘消息处理学习笔记（八）注册Client端InputChannel
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-10-03T22:01:23+08:00" content="2016-10-03">
+              2016-10-03
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Android学习笔记/" itemprop="url" rel="index">
+                    <span itemprop="name">Android学习笔记</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/10/03/2016/1002KeyboardLearning8/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/10/03/2016/1002KeyboardLearning8/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>&#x627F;&#x63A5;<a href="http://palanceli.com/2016/10/02/2016/1002KeyboardLearning5/">&#x300A;&#x952E;&#x76D8;&#x6D88;&#x606F;&#x5904;&#x7406;&#x5B66;&#x4E60;&#x7B14;&#x8BB0;&#xFF08;&#x4E94;&#xFF09;&#x300B;</a>Step1&#xFF1A;<br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// &#x1F3C1;&#x5C06;mInputChannel&#x6CE8;&#x518C;&#x5230;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;Activity&#x6240;&#x5728;&#x8FDB;&#x7A0B;&#x7684;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E2D;</span></div><div class="line">mInputEventReceiver = <span class="keyword">new</span> WindowInputEventReceiver(mInputChannel,</div><div class="line">                            Looper.myLooper());</div></pre></td></tr></table></figure></p>
+<p>mInputChannel&#x662F;&#x5728;ViewRootImpl::setView(&#x2026;)&#x4E2D;&#x521B;&#x5EFA;&#x7684;Client&#x7AEF;InputChannel&#xFF0C;&#x5E76;&#x4E14;&#x88AB;transferTo&#x5230;InputDispatcher&#x521B;&#x5EFA;&#x7684;Client&#x7AEF;InputChannel&#x3002;<br>&#x901A;&#x8FC7;&#x6784;&#x9020;WindowInputEventReceiver&#xFF0C;&#x5C06;&#x8BE5;InputChannel&#x6CE8;&#x518C;&#x5230;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;Activity&#x6240;&#x5728;&#x4E3B;&#x7EBF;&#x7A0B;&#x4E2D;&#xFF0C;&#x672C;&#x6587;&#x7EE7;&#x7EED;&#x6DF1;&#x5165;WindowInputEventReceiver&#x3002;</p>
+<p>&#x5728;&#x6DF1;&#x5165;&#x8BA8;&#x8BBA;&#x4E4B;&#x524D;&#xFF0C;&#x5148;&#x629B;&#x51FA;&#x6211;&#x7684;&#x4E00;&#x4E2A;&#x7591;&#x95EE;&#xFF1A;&#x5728;ViewRootImpl::setView(&#x2026;)&#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x76F8;&#x4E92;&#x8FDE;&#x63A5;&#x7684;InputChannel&#x5BF9;&#x662F;&#x5728;WindowManagerService&#x8FDB;&#x7A0B;&#x4E2D;&#x521B;&#x5EFA;&#x7684;&#xFF0C;&#x901A;&#x8FC7;&#x51FD;&#x6570;<code>mWindowSession.addToDisplay(...)</code>&#x5728;&#x8FDC;&#x7A0B;&#x5B8C;&#x6210;&#xFF0C;&#x51FD;&#x6570;&#x8FD4;&#x56DE;&#x540E;mInputChannel&#x4E2D;&#x4FDD;&#x5B58;&#x7684;&#x662F;WindowManagerService&#x4E2D;&#x521B;&#x5EFA;&#x7684;socket&#x63CF;&#x8FF0;&#x7B26;&#xFF0C;&#x5728;&#x672C;&#x5730;&#x662F;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x6CE8;&#x518C;&#x53C8;&#x7528;&#x5230;&#x4E86;mInputChannel&#xFF0C;&#x53F7;&#x79F0;&#x8981;&#x628A;&#x5B83;&#x6CE8;&#x518C;&#x5230;&#x6B63;&#x5728;&#x542F;&#x52A8;&#x7684;Activity&#x4E2D;&#xFF0C;&#x8FD9;&#x4E0D;&#x4F1A;&#x6709;&#x5371;&#x9669;&#x5417;&#xFF1F;<br></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/10/03/2016/1002KeyboardLearning8/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
                 <a class="post-title-link" href="/2016/10/03/2016/1002KeyboardLearning7/" itemprop="url">
                   键盘消息处理学习笔记（七）——创建新窗口在InputDispatcher更新的注册信息
                 </a>
@@ -2597,133 +2721,11 @@
 
 
     
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/07/2016/0807DissectingBinder3/" itemprop="url">
-                  深度探索Binder（三）查找服务
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-07T16:40:56+08:00" content="2016-08-07">
-              2016-08-07
-            </time>
-          </span>
-
-          
-            <span class="post-category" >
-              &nbsp; | &nbsp;
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
-                  <a href="/categories/Android学习笔记/" itemprop="url" rel="index">
-                    <span itemprop="name">Android学习笔记</span>
-                  </a>
-                </span>
-
-                
-                
-
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                &nbsp; | &nbsp;
-                <a href="/2016/08/07/2016/0807DissectingBinder3/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/08/07/2016/0807DissectingBinder3/" itemprop="commentsCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="&#x67E5;&#x627E;&#x670D;&#x52A1;"><a href="#&#x67E5;&#x627E;&#x670D;&#x52A1;" class="headerlink" title="&#x67E5;&#x627E;&#x670D;&#x52A1;"></a>&#x67E5;&#x627E;&#x670D;&#x52A1;</h1><p>&#x67E5;&#x627E;&#x670D;&#x52A1;&#x7684;&#x8D77;&#x70B9;&#x5728;Client&#x7AEF; <a href="https://github.com/palanceli/androidex/blob/master/external-testservice/TestClient.cpp">TestClient.cpp</a>&#x3002;&#x5BA2;&#x6237;&#x628A;&#x94F6;&#x884C;&#x5361;&#x63D2;&#x5230;&#x53D6;&#x6B3E;&#x673A;&#xFF0C;&#x53D6;&#x6B3E;&#x673A;&#x8D1F;&#x8D23;&#x6839;&#x636E;&#x524D;&#x9762;&#x7684;&#x6CE8;&#x518C;&#x627E;&#x5230;&#x5339;&#x914D;&#x7684;&#x670D;&#x52A1;&#x3002;<br></p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/07/2016/0807DissectingBinder3/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2764,7 +2766,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">160</span>
+              <span class="site-state-item-count">161</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -2781,7 +2783,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">54</span>
+                <span class="site-state-item-count">55</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

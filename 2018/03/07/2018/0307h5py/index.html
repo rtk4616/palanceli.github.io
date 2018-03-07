@@ -1,0 +1,850 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="随笔," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x6982;&amp;#x5FF5;h5py&amp;#x662F;&amp;#x7528;&amp;#x6765;&amp;#x64CD;&amp;#x4F5C;HDF5&amp;#x683C;&amp;#x5F0F;&amp;#x7684;Python&amp;#x5E93;&amp;#x3002;HDF5&amp;#x683C;&amp;#x5F0F;&amp;#x7528;&amp;#x6765;&amp;#x5B58;&amp;#x50A8;&amp;#x7528;&amp;#x4E8E;&amp;#x673A;&amp;#x5668;&amp;#x5B6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="h5py">
+<meta property="og:url" content="http://palanceli.github.io/2018/03/07/2018/0307h5py/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x6982;&amp;#x5FF5;h5py&amp;#x662F;&amp;#x7528;&amp;#x6765;&amp;#x64CD;&amp;#x4F5C;HDF5&amp;#x683C;&amp;#x5F0F;&amp;#x7684;Python&amp;#x5E93;&amp;#x3002;HDF5&amp;#x683C;&amp;#x5F0F;&amp;#x7528;&amp;#x6765;&amp;#x5B58;&amp;#x50A8;&amp;#x7528;&amp;#x4E8E;&amp;#x673A;&amp;#x5668;&amp;#x5B6">
+<meta property="og:updated_time" content="2018-03-07T15:56:01.371Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="h5py">
+<meta name="twitter:description" content="&amp;#x6982;&amp;#x5FF5;h5py&amp;#x662F;&amp;#x7528;&amp;#x6765;&amp;#x64CD;&amp;#x4F5C;HDF5&amp;#x683C;&amp;#x5F0F;&amp;#x7684;Python&amp;#x5E93;&amp;#x3002;HDF5&amp;#x683C;&amp;#x5F0F;&amp;#x7528;&amp;#x6765;&amp;#x5B58;&amp;#x50A8;&amp;#x7528;&amp;#x4E8E;&amp;#x673A;&amp;#x5668;&amp;#x5B6">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2018/03/07/2018/0307h5py/"/>
+
+  <title> h5py | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '1Grug_XAD_ps3zyBywoo','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                h5py
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-03-07T10:00:00+08:00" content="2018-03-07">
+              2018-03-07
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/03/07/2018/0307h5py/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/07/2018/0307h5py/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="&#x6982;&#x5FF5;"><a href="#&#x6982;&#x5FF5;" class="headerlink" title="&#x6982;&#x5FF5;"></a>&#x6982;&#x5FF5;</h1><p>h5py&#x662F;&#x7528;&#x6765;&#x64CD;&#x4F5C;HDF5&#x683C;&#x5F0F;&#x7684;Python&#x5E93;&#x3002;HDF5&#x683C;&#x5F0F;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x7528;&#x4E8E;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7684;&#x6D77;&#x91CF;&#x6570;&#x636E;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x4E8C;&#x8FDB;&#x5236;&#x683C;&#x5F0F;&#x7684;&#x6587;&#x4EF6;&#x3002;&#x5176;&#x4E2D;&#x5305;&#x62EC;&#x4E24;&#x7C7B;&#x5BF9;&#x8C61;&#xFF1A;dataset&#x548C;group&#xFF0C;dataset&#x662F;&#x7C7B;&#x4F3C;&#x4E8E;&#x6570;&#x7EC4;&#x7684;&#x6570;&#x636E;&#x96C6;&#xFF0C;group&#x662F;&#x7C7B;&#x4F3C;&#x6587;&#x4EF6;&#x5939;&#x7684;&#x5BB9;&#x5668;&#x3002;</p>
+<a id="more"></a>
+<h1 id="HDF5&#x7684;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;"><a href="#HDF5&#x7684;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;" class="headerlink" title="HDF5&#x7684;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;"></a>HDF5&#x7684;&#x8BFB;&#x5199;&#x64CD;&#x4F5C;</h1><h2 id="&#x521B;&#x5EFA;dataset"><a href="#&#x521B;&#x5EFA;dataset" class="headerlink" title="&#x521B;&#x5EFA;dataset"></a>&#x521B;&#x5EFA;dataset</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> h5py</div><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> os</div><div class="line"></div><div class="line"><span class="keyword">if</span> os.path.exists(<span class="string">&apos;test.h5&apos;</span>):</div><div class="line">    os.remove(<span class="string">&apos;test.h5&apos;</span>)</div><div class="line">    </div><div class="line">f = h5py.File(<span class="string">&apos;test.h5&apos;</span>, <span class="string">&apos;w&apos;</span>)  <span class="comment"># &#x521B;&#x5EFA;&#x6587;&#x4EF6;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x65B9;&#x5F0F;&#x2460;</span></div><div class="line">d1 = f.create_dataset(<span class="string">&apos;dataset1&apos;</span>, (<span class="number">5</span>, ), <span class="string">&apos;i&apos;</span>) <span class="comment"># &#x521B;&#x5EFA;dataset&#xFF0C;&#x4E09;&#x4E2A;&#x53C2;&#x6570;&#x5206;&#x522B;&#x4E3A;&#xFF1A;&#x540D;&#x79F0;, shape, &#x7C7B;&#x578B;</span></div><div class="line">d1[...] = np.arange(<span class="number">5</span>)     <span class="comment"># &#x8D4B;&#x503C;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x65B9;&#x5F0F;&#x2461;</span></div><div class="line">f[<span class="string">&apos;dataset2&apos;</span>] = np.arange(<span class="number">8</span>).reshape(<span class="number">4</span>, <span class="number">2</span>) <span class="comment"># &#x521B;&#x5EFA; + &#x8D4B;&#x503C;</span></div><div class="line"></div><div class="line"><span class="comment"># &#x65B9;&#x5F0F;&#x2462;</span></div><div class="line">f.create_dataset(<span class="string">&apos;dataset3&apos;</span>, data = np.arange(<span class="number">4</span>))</div><div class="line"></div><div class="line"><span class="keyword">for</span> key <span class="keyword">in</span> f.keys():</div><div class="line">    print(key)</div><div class="line">    print(f[key].name)</div><div class="line">    print(f[key].shape)</div><div class="line">    print(f[key].value)</div></pre></td></tr></table></figure>
+<p>&#x6267;&#x884C;&#x7ED3;&#x679C;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">dataset1</div><div class="line">/dataset1</div><div class="line">(5,)</div><div class="line">[0 1 2 3 4]</div><div class="line">dataset2</div><div class="line">/dataset2</div><div class="line">(4, 2)</div><div class="line">[[0 1]</div><div class="line"> [2 3]</div><div class="line"> [4 5]</div><div class="line"> [6 7]]</div><div class="line">dataset3</div><div class="line">/dataset3</div><div class="line">(4,)</div><div class="line">[0 1 2 3]</div></pre></td></tr></table></figure></p>
+<h2 id="&#x521B;&#x5EFA;group"><a href="#&#x521B;&#x5EFA;group" class="headerlink" title="&#x521B;&#x5EFA;group"></a>&#x521B;&#x5EFA;group</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">g1 = f.create_group(<span class="string">&apos;group1&apos;</span>) <span class="comment"># &#x521B;&#x5EFA;group</span></div><div class="line"></div><div class="line">g1[<span class="string">&apos;dataset1&apos;</span>] = np.arange(<span class="number">8</span>).reshape(<span class="number">2</span>, <span class="number">4</span>) <span class="comment"># &#x5728;group&#x5185;&#x521B;&#x5EFA;dataset</span></div><div class="line">d = g1.create_dataset(<span class="string">&apos;dataset2&apos;</span>, data = np.arange(<span class="number">5</span>))</div><div class="line"></div><div class="line"><span class="keyword">for</span> key <span class="keyword">in</span> g1.keys():</div><div class="line">    print(g1[key].name)</div><div class="line">    print(g1[key].value)</div></pre></td></tr></table></figure>
+<p>&#x6267;&#x884C;&#x7ED3;&#x679C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/group1/dataset1</div><div class="line">[[0 1 2 3]</div><div class="line"> [4 5 6 7]]</div><div class="line">/group1/dataset2</div><div class="line">[0 1 2 3 4]</div></pre></td></tr></table></figure></p>
+<h2 id="&#x8BFB;&#x6587;&#x4EF6;"><a href="#&#x8BFB;&#x6587;&#x4EF6;" class="headerlink" title="&#x8BFB;&#x6587;&#x4EF6;"></a>&#x8BFB;&#x6587;&#x4EF6;</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">h5 = h5py.File(<span class="string">&apos;test.h5&apos;</span>, <span class="string">&apos;r&apos;</span>)</div><div class="line"><span class="keyword">for</span> key <span class="keyword">in</span> h5.keys():</div><div class="line">    <span class="keyword">if</span> isinstance(h5[key], h5py.Group): <span class="comment"># &#x5982;&#x679C;&#x662F;group&#xFF0C;&#x518D;&#x904D;&#x5386;&#x5668;&#x5185;&#x90E8;&#x6570;&#x636E;</span></div><div class="line">        group = h5[key]</div><div class="line">        <span class="keyword">for</span> childkey <span class="keyword">in</span> group.keys():</div><div class="line">            print(group[childkey].name)</div><div class="line">            print(group[childkey].value)</div><div class="line">    <span class="keyword">else</span>:                              <span class="comment"># &#x5982;&#x679C;&#x662F;dataset&#xFF0C;&#x76F4;&#x63A5;&#x6253;&#x5370;&#x7ED3;&#x679C;</span></div><div class="line">        dataset = h5[key]</div><div class="line">        print(dataset.name)</div><div class="line">        print(dataset.shape)</div><div class="line">        print(dataset.value)</div></pre></td></tr></table></figure>
+<p>&#x6267;&#x884C;&#x7ED3;&#x679C;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">/dataset1</div><div class="line">(5,)</div><div class="line">[0 1 2 3 4]</div><div class="line">/dataset2</div><div class="line">(4, 2)</div><div class="line">[[0 1]</div><div class="line"> [2 3]</div><div class="line"> [4 5]</div><div class="line"> [6 7]]</div><div class="line">/dataset3</div><div class="line">(4,)</div><div class="line">[0 1 2 3]</div><div class="line">/group1/dataset1</div><div class="line">[[0 1 2 3]</div><div class="line"> [4 5 6 7]]</div><div class="line">/group1/dataset2</div><div class="line">[0 1 2 3 4]</div></pre></td></tr></table></figure></p>
+<blockquote>
+<p>&#x53C2;&#x8003;&#x8D44;&#x6599;&#xFF1A;<br><a href="http://docs.h5py.org/en/latest/index.html" target="_blank" rel="external">HDF5 for Python</a><br><a href="https://github.com/palanceli/MachineLearningSample/blob/master/packages/h5py.ipynb" target="_blank" rel="external">&#x672C;&#x6587;@github</a></p>
+</blockquote>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/随笔/" rel="tag">#随笔</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/01/2018/0101HappyNewYear/" rel="next" title="走进2018">
+                <i class="fa fa-chevron-left"></i> 走进2018
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/03/07/2018/0307h5py/"
+           data-title="h5py" data-url="http://palanceli.github.io/2018/03/07/2018/0307h5py/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#概念"><span class="nav-text">概念</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HDF5的读写操作"><span class="nav-text">HDF5的读写操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#创建dataset"><span class="nav-text">创建dataset</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#创建group"><span class="nav-text">创建group</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读文件"><span class="nav-text">读文件</span></a></li></ol></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+
+</body>
+</html>
