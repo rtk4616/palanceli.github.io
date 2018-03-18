@@ -356,11 +356,13 @@
 
       
         <p>Looger&#x662F;&#x548C;&#x8C03;&#x8BD5;&#x65B9;&#x6CD5;&#x540C;&#x7B49;&#x91CD;&#x8981;&#x7684;&#x7F16;&#x7A0B;&#x8F85;&#x52A9;&#x5229;&#x5668;&#xFF0C;&#x51FA;&#x9053;&#x4EE5;&#x6765;&#xFF0C;&#x7EF4;&#x62A4;&#x6700;&#x4E45;&#x7684;&#x6A21;&#x5757;&#x5C31;&#x662F;&#x81EA;&#x5DF1;&#x7684;Logger&#x3002;&#x6700;&#x521D;&#x662F;&#x628A;&#x5B83;&#x505A;&#x5F97;&#x65E0;&#x6BD4;&#x5F3A;&#x5927;&#xFF0C;&#x652F;&#x6301;&#x591A;&#x7EBF;&#x7A0B;&#x3001;&#x652F;&#x6301;&#x591A;&#x7EA7;&#x522B;&#xFF0C;&#x5F15;&#x5165;Singleton&#x8BA9;&#x8C03;&#x7528;&#x7B80;&#x5355;&#x3002;&#x540E;&#x6765;&#x53D1;&#x73B0;&#x51E0;&#x4E4E;&#x90FD;&#x7528;&#x4E0D;&#x7740;&#xFF0C;&#x6700;&#x5927;&#x7684;&#x8BC9;&#x6C42;&#x662F;&#x63A5;&#x53E3;&#x7B80;&#x5355;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x6BCF;&#x6B21;&#x7528;&#x4E4B;&#x524D;&#x590D;&#x4E60;&#x3002;&#x4EE3;&#x7801;&#x6700;&#x597D;&#x80FD;&#x7B80;&#x6D01;&#xFF0C;&#x6700;&#x597D;&#x5C31;&#x4E00;&#x4E2A;&#x6587;&#x4EF6;&#x3002;</p>
-<p>&#x524D;&#x5929;&#x627E;&#x5230;&#x4E00;&#x79CD;&#x4E00;&#x53E5;&#x8BDD;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#x7684;C&#x7248;&#x7684;Logger&#xFF0C;&#x5FC5;&#x987B;&#x8BB0;&#x5F55;&#x4E0B;&#x6765;&#xFF0C;&#x4EE5;&#x540E;&#x5C31;&#x5B83;&#x4E86;&#xFF1A;<br><a id="more"></a></p>
-<h1 id="Logger-C&#x7248;"><a href="#Logger-C&#x7248;" class="headerlink" title="Logger C&#x7248;"></a>Logger C&#x7248;</h1><figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">if</span> 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG(format, ...) printf(<span class="meta-string">&quot;[%-12s:%-4d ] &quot;</span>format<span class="meta-string">&quot;\n&quot;</span>, __FILE__, __LINE__, ##__VA_ARGS__)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG(format, ...) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure>
+<p>&#x524D;&#x5929;&#x627E;&#x5230;&#x4E00;&#x79CD;&#x4E00;&#x53E5;&#x8BDD;&#x89E3;&#x51B3;&#x95EE;&#x9898;&#x7684;C&#x7248;&#x7684;Logger&#xFF0C;&#x5FC5;&#x987B;&#x8BB0;&#x5F55;&#x4E0B;&#x6765;&#xFF0C;&#x4EE5;&#x540E;&#x5C31;&#x5B83;&#x4E86;&#xFF1A; <a id="more"></a> # Logger C&#x7248; <figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">if</span> 1</span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG(format, ...) printf(<span class="meta-string">&quot;[%-12s:%-4d ] &quot;</span>format<span class="meta-string">&quot;\n&quot;</span>, __FILE__, __LINE__, ##__VA_ARGS__)</span></div><div class="line"><span class="meta">#<span class="meta-keyword">else</span></span></div><div class="line"><span class="meta">#<span class="meta-keyword">define</span> LOG(format, ...) </span></div><div class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></div></pre></td></tr></table></figure></p>
 <p>&#x7B80;&#x6D01;&#x5427;~ &#x5728;Linux&#x4E0B;&#x4F7F;&#x7528;&#x5F88;&#x65B9;&#x4FBF;&#xFF0C;Windows&#x9700;&#x8981;&#x505A;&#x4E00;&#x4E2A;Unicode&#x5B57;&#x4E32;&#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x4EE5;&#x540E;&#x7528;&#x5F97;&#x7740;&#x65F6;&#x518D;&#x66F4;&#x65B0;&#x5427;&#x3002;</p>
-<h1 id="Logger-Python&#x7248;"><a href="#Logger-Python&#x7248;" class="headerlink" title="Logger Python&#x7248;"></a>Logger Python&#x7248;</h1><p>&#x987A;&#x9053;&#x628A;&#x5176;&#x4ED6;&#x7248;&#x672C;&#x7684;&#x4E5F;&#x5907;&#x5FD8;&#x4E00;&#x4E0B;&#xFF0C;python&#x7684;logger&#x673A;&#x5236;&#x505A;&#x5F97;&#x5F88;&#x987A;&#x624B;&#x4E86;&#xFF0C;&#x53EA;&#x662F;&#x5728;&#x4F7F;&#x7528;&#x4E4B;&#x524D;&#xFF0C;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x914D;&#x7F6E;&#x4E00;&#x4E0B;log&#x683C;&#x5F0F;&#xFF1A;<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> logging</div><div class="line"></div><div class="line">......</div><div class="line">loggingFormat = <span class="string">&apos;%(asctime)s %(lineno)4d %(levelname)-8s %(message)s&apos;</span></div><div class="line">logging.basicConfig(level=logging.DEBUG, format=loggingFormat, datefmt=<span class="string">&apos;%H:%M&apos;</span>)</div><div class="line"></div><div class="line">logging.debug(<span class="string">&apos;hello word!&apos;</span>)</div></pre></td></tr></table></figure></p>
-<h1 id="Logger-objective-c&#x7248;"><a href="#Logger-objective-c&#x7248;" class="headerlink" title="Logger objective-c&#x7248;"></a>Logger objective-c&#x7248;</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#if DEBUG</div><div class="line">#define NSLog(FORMAT, ...) fprintf(stderr,&quot;[%s:%d]\t%s\n&quot;,[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])</div><div class="line">#else</div><div class="line">#define NSLog(FORMAT, ...) nil</div><div class="line">#endif</div></pre></td></tr></table></figure>
+<h1 id="logger-python&#x7248;">Logger Python&#x7248;</h1>
+<p>&#x987A;&#x9053;&#x628A;&#x5176;&#x4ED6;&#x7248;&#x672C;&#x7684;&#x4E5F;&#x5907;&#x5FD8;&#x4E00;&#x4E0B;&#xFF0C;python&#x7684;logger&#x673A;&#x5236;&#x505A;&#x5F97;&#x5F88;&#x987A;&#x624B;&#x4E86;&#xFF0C;&#x53EA;&#x662F;&#x5728;&#x4F7F;&#x7528;&#x4E4B;&#x524D;&#xFF0C;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x914D;&#x7F6E;&#x4E00;&#x4E0B;log&#x683C;&#x5F0F;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> logging</div><div class="line"></div><div class="line">......</div><div class="line">loggingFormat = <span class="string">&apos;%(asctime)s %(lineno)4d %(levelname)-8s %(message)s&apos;</span></div><div class="line">logging.basicConfig(level=logging.DEBUG, format=loggingFormat, datefmt=<span class="string">&apos;%H:%M&apos;</span>)</div><div class="line"></div><div class="line">logging.debug(<span class="string">&apos;hello word!&apos;</span>)</div></pre></td></tr></table></figure></p>
+<h1 id="logger-objective-c&#x7248;">Logger objective-c&#x7248;</h1>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">#if DEBUG</div><div class="line">#define NSLog(FORMAT, ...) fprintf(stderr,&quot;[%s:%d]\t%s\n&quot;,[[[NSString stringWithUTF8String:__FILE__] lastPathComponent] UTF8String], __LINE__, [[NSString stringWithFormat:FORMAT, ##__VA_ARGS__] UTF8String])</div><div class="line">#else</div><div class="line">#define NSLog(FORMAT, ...) nil</div><div class="line">#endif</div></pre></td></tr></table></figure>
+
       
     </div>
 
@@ -473,7 +475,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">161</span>
+              <span class="site-state-item-count">165</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -557,7 +559,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Logger-C版"><span class="nav-text">Logger C版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logger-Python版"><span class="nav-text">Logger Python版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Logger-objective-c版"><span class="nav-text">Logger objective-c版</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#logger-python版"><span class="nav-text">Logger Python版</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#logger-objective-c版"><span class="nav-text">Logger objective-c版</span></a></li></ol></div>
             
           </div>
         </section>
@@ -839,6 +841,26 @@
 
 
   
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
 
   
 

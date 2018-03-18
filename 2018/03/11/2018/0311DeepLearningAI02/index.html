@@ -1,0 +1,977 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="随笔," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x7F51;&amp;#x4E0A;&amp;#x5173;&amp;#x4E8E;&amp;#x795E;&amp;#x7ECF;&amp;#x7F51;&amp;#x7EDC;&amp;#x548C;&amp;#x6DF1;&amp;#x5EA6;&amp;#x5B66;&amp;#x4E60;&amp;#x7684;&amp;#x7B14;&amp;#x8BB0;&amp;#x3001;&amp;#x4F5C;&amp;#x4E1A;&amp;#x5F88;&amp;#x591A;&amp;#xFF0C;&amp;#x4E5F;&amp;#x5F88;&amp;#x6709;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="DeepLearning.ai笔记（一）">
+<meta property="og:url" content="http://palanceli.github.io/2018/03/11/2018/0311DeepLearningAI02/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x7F51;&amp;#x4E0A;&amp;#x5173;&amp;#x4E8E;&amp;#x795E;&amp;#x7ECF;&amp;#x7F51;&amp;#x7EDC;&amp;#x548C;&amp;#x6DF1;&amp;#x5EA6;&amp;#x5B66;&amp;#x4E60;&amp;#x7684;&amp;#x7B14;&amp;#x8BB0;&amp;#x3001;&amp;#x4F5C;&amp;#x4E1A;&amp;#x5F88;&amp;#x591A;&amp;#xFF0C;&amp;#x4E5F;&amp;#x5F88;&amp;#x6709;">
+<meta property="og:image" content="http://palanceli.github.io/2018/03/11/2018/0311DeepLearningAI02/sigmoid.png">
+<meta property="og:image" content="http://palanceli.github.io/2018/03/11/2018/0311DeepLearningAI02/GradientDescent.png">
+<meta property="og:image" content="http://palanceli.github.io/2018/03/11/2018/0311DeepLearningAI02/img01.png">
+<meta property="og:updated_time" content="2018-03-12T15:53:24.107Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="DeepLearning.ai笔记（一）">
+<meta name="twitter:description" content="&amp;#x7F51;&amp;#x4E0A;&amp;#x5173;&amp;#x4E8E;&amp;#x795E;&amp;#x7ECF;&amp;#x7F51;&amp;#x7EDC;&amp;#x548C;&amp;#x6DF1;&amp;#x5EA6;&amp;#x5B66;&amp;#x4E60;&amp;#x7684;&amp;#x7B14;&amp;#x8BB0;&amp;#x3001;&amp;#x4F5C;&amp;#x4E1A;&amp;#x5F88;&amp;#x591A;&amp;#xFF0C;&amp;#x4E5F;&amp;#x5F88;&amp;#x6709;">
+<meta name="twitter:image" content="http://palanceli.github.io/2018/03/11/2018/0311DeepLearningAI02/sigmoid.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2018/03/11/2018/0311DeepLearningAI02/"/>
+
+  <title> DeepLearning.ai笔记（一） | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '1Grug_XAD_ps3zyBywoo','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                DeepLearning.ai笔记（一）
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-03-11T10:00:00+08:00" content="2018-03-11">
+              2018-03-11
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/03/11/2018/0311DeepLearningAI02/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/03/11/2018/0311DeepLearningAI02/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x7F51;&#x4E0A;&#x5173;&#x4E8E;<a href="http://mooc.study.163.com/course/2001281002#/info" target="_blank" rel="external">&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#x548C;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;</a>&#x7684;&#x7B14;&#x8BB0;&#x3001;&#x4F5C;&#x4E1A;&#x5F88;&#x591A;&#xFF0C;&#x4E5F;&#x5F88;&#x6709;&#x4EF7;&#x503C;&#x3002;&#x8FD9;&#x7248;&#x7B14;&#x8BB0;&#x8FD9;&#x662F;&#x9488;&#x5BF9;&#x6211;&#x81EA;&#x5DF1;&#x5B66;&#x4E60;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x611F;&#x609F;&#x3001;&#x91CD;&#x70B9;&#x505A;&#x4E2A;&#x8BB0;&#x5F55;&#xFF0C;&#x4FBF;&#x4E8E;&#x81EA;&#x5DF1;&#x5FEB;&#x901F;&#x67E5;&#x9605;&#x3002;&#x672C;&#x6587;&#x7684;&#x6807;&#x9898;&#x53F7;&#x548C;&#x8BFE;&#x7A0B;&#x53F7;&#x4FDD;&#x6301;&#x4E00;&#x81F4;&#xFF0C;&#x4EE5;&#x65B9;&#x4FBF;&#x67E5;&#x9605;&#x3002; <a id="more"></a></p>
+<h1 id="&#x6837;&#x672C;&#x7684;&#x8868;&#x793A;">2.1 &#x6837;&#x672C;&#x7684;&#x8868;&#x793A;</h1>
+<p>&#x9898;&#x76EE;&#x7684;&#x76EE;&#x6807;&#x662F;&#x5224;&#x65AD;&#x56FE;&#x7247;&#x4E2D;&#x662F;&#x5426;&#x6709;&#x732B;&#xFF0C;&#x5047;&#x8BBE;&#x4E00;&#x5F20;&#x56FE;&#x662F;64&#xD7;64&#x50CF;&#x7D20;&#xFF0C;3&#x901A;&#x9053;&#xFF0C;&#x5373;R&#x3001;G&#x3001;B&#x5206;&#x522B;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;64&#xD7;64&#x7684;&#x77E9;&#x9635;&#xFF1A;</p>
+<p>R = <span class="math inline">\(\left\lgroup \matrix{R_{1\,1} &amp; R_{1\,2} &amp; ... &amp; R_{1\,64} \cr R_{2\,1} &amp; R_{2\,2} &amp; ... &amp; R_{2\,64} \cr ... &amp; ... &amp; ... \cr R_{64\,1} &amp; R_{64\,2} &amp; ... &amp; R_{64\,64} } \right \rgroup\)</span> <span class="math inline">\(\;\)</span> G = <span class="math inline">\(\left\lgroup \matrix{G_{1\,1} &amp; G_{1\,2} &amp; ... &amp; G_{1\,64} \cr G_{2\,1} &amp; G_{2\,2} &amp; ... &amp; G_{2\,64} \cr ... &amp; ... &amp; ... \cr G_{64\,1} &amp; G_{64\,2} &amp; ... &amp; G_{64\,64} } \right \rgroup\)</span> <span class="math inline">\(\;\)</span> B = <span class="math inline">\(\left\lgroup \matrix{B_{1\,1} &amp; B_{1\,2} &amp; ... &amp; B_{1\,64} \cr B_{2\,1} &amp; B_{2\,2} &amp; ... &amp; B_{2\,64} \cr ... &amp; ... &amp; ... \cr B_{64\,1} &amp; B_{64\,2} &amp; ... &amp; B_{64\,64} } \right \rgroup\)</span></p>
+<p>&#x9700;&#x8981;&#x5C06;&#x8BE5;&#x6837;&#x672C;&#x8F6C;&#x6362;&#x6210;&#x4E00;&#x4E2A;&#x4E00;&#x7EF4;&#x6570;&#x7EC4;&#xFF0C;&#x4EE5;&#x65B9;&#x4FBF;&#x540E;&#x9762;&#x7684;&#x8FD0;&#x7B97;&#x3002;&#x56E0;&#x6B64;&#x5C06;&#x8BE5;&#x6837;&#x672C;&#x8F6C;&#x6362;&#x6210;&#xFF1A;</p>
+<p>x = <span class="math inline">\(\left\lgroup \matrix{R_{1\,1} \cr R_{1\,2} \cr ... \cr R_{2\,1} \cr R_{2\,2} \cr ... \cr G_{1\,1} \cr G_{1\,2} \cr ... \cr B_{1\,1} \cr B_{1\,2} \cr ... } \right \rgroup\)</span> &#x5B83;&#x5305;&#x542B;64&#xD7;64&#xD7;3=12288&#x4E2A;&#x5143;&#x7D20;&#xFF0C;&#x5199;&#x4F5C;n=<span class="math inline">\(n_{x}\)</span>=12288&#xFF0C;&#x8FD9;&#x662F;&#x6837;&#x672C;&#x7684;&#x7EF4;&#x6570;&#x3002;</p>
+<p>&#x5047;&#x8BBE;&#x5171;&#x6709;m&#x4E2A;&#x6837;&#x672C;&#xFF0C;&#x6837;&#x672C;&#x7A7A;&#x95F4;&#x53EF;&#x4EE5;&#x5199;&#x4F5C;&#xFF1A;</p>
+<p><span class="math inline">\(X=\begin{bmatrix}\mid&amp;\mid&amp;&amp;\mid\\x^{(1)}&amp;x^{(2)}&amp;\cdots&amp;x^{(m)}\\ \mid&amp;\mid&amp;&amp;\mid\end{bmatrix} , Y=[y^{(1)} y^{(2)} ... y^{(m)}] \;\)</span></p>
+<p>&#x5176;&#x4E2D;: <span class="math inline">\(x^{(i)}\in \mathbb{R}^{n_{x}}&#xFF0C;y^{(i)}\in \{0, 1\}; X\in\mathbb{R}^{n_{x}&#xD7;m}&#xFF0C;X.shape=(n_{x}, m); Y\in \mathbb{R}&#xFF0C; Y.shape=(1, m)\)</span></p>
+<h1 id="&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x95EE;&#x9898;">2.2 &#x903B;&#x8F91;&#x56DE;&#x5F52;&#x95EE;&#x9898;</h1>
+<p>&#x5BF9;&#x4E00;&#x5F20;&#x56FE;&#x7247;&#x5224;&#x732B;&#x7684;&#x95EE;&#x9898;&#x662F;&#x4E00;&#x4E2A;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x95EE;&#x9898;&#xFF0C;&#x5373;&#x7ED9;&#x5B9A;x&#xFF0C;&#x6C42;&#x89E3;&#x177;=P(y=1|x)&#xFF0C;&#x5373;y=1&#x7684;&#x6982;&#x7387;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x56FE;&#x7247;<span class="math inline">\(x\in(n_{x}, 1)\)</span>&#xFF0C;&#x53EF;&#x4EE4;<span class="math inline">\(&#x177;=&#x3C3;(w^{T}x+b)\)</span>&#xFF0C; &#x5176;&#x4E2D;<span class="math inline">\(w\in\mathbb{R}^{n_{x}}, b\in\mathbb{R}\)</span></p>
+<p>&#x8BE5;&#x51FD;&#x6570;&#x5C06;&#x56FE;&#x7247;&#x4E2D;&#x7684;&#x50CF;&#x7D20;&#x70B9;&#x6620;&#x5C04;&#x4E3A;&#x4ECB;&#x4E8E;(0, 1)&#x4E4B;&#x95F4;&#x7684;&#x4E00;&#x4E2A;&#x6570;&#x5B57;&#xFF0C;&#x8BE5;&#x6570;&#x5B57;&#x5C31;&#x8868;&#x793A;&#x5176;&#x4E2D;&#x662F;&#x5426;&#x5305;&#x542B;&#x732B;&#x7684;&#x6982;&#x7387;&#xFF0C;&#x51FD;&#x6570;&#x7684;&#x56FE;&#x50CF;&#x5982;&#x4E0B;&#xFF1A; <img src="/2018/03/11/2018/0311DeepLearningAI02/sigmoid.png"> &#x5176;&#x4E2D;<span class="math inline">\(z=w^{T}x+b &#xFF0C;\; \; \; &#x3C3;(z)=\frac{1}{1+e^{-z}}\)</span></p>
+<p>&#x5F53;<span class="math inline">\(z-&gt;+\infty, \; &#x3C3;(z)&#x2248;\frac{1}{1+0}=1\)</span></p>
+<p>&#x5F53;<span class="math inline">\(z-&gt;-\infty, \; &#x3C3;(z)&#x2248;\frac{1}{1+\infty}=0\)</span></p>
+<p>&#x4E8E;&#x662F;&#x672C;&#x8282;&#x9898;&#x76EE;&#x5C31;&#x662F;&#x8981;&#x627E;&#x5230;&#x5408;&#x9002;&#x7684;w&#x548C;b&#x4F7F;&#x5F97;&#x5BF9;&#x4E8E;&#x6240;&#x6709;&#x6837;&#x672C;x&#xFF0C;&#x8BA1;&#x7B97;&#x51FA;&#x7684;&#x177;&#x90FD;&#x80FD;&#x903C;&#x8FD1;y&#x3002;</p>
+<h1 id="&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x7684;&#x635F;&#x5931;&#x51FD;&#x6570;&#x548C;&#x6210;&#x672C;&#x51FD;&#x6570;">2.3 &#x903B;&#x8F91;&#x56DE;&#x5F52;&#x7684;&#x635F;&#x5931;&#x51FD;&#x6570;&#x548C;&#x6210;&#x672C;&#x51FD;&#x6570;</h1>
+<p>&#x5BF9;&#x4E8E;&#x7ED9;&#x5B9A;&#x6837;&#x672C;<span class="math inline">\(&#x177;=&#x3C3;(w^{T}x+b) \;, where \, &#x3C3;(z)=\frac{1}{1+e^{-z}}\)</span>&#x5B9A;&#x4E49;&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF1A;</p>
+<p><span class="math inline">\(L(&#x177;, y)=\frac{1}{2}(&#x177;-y)^{2}\)</span></p>
+<p>&#x53EA;&#x9700;&#x8981;&#x627E;&#x5230;&#x4EE4;&#x6210;&#x672C;&#x51FD;&#x6570;&#x503C;&#x6700;&#x5C0F;&#x7684;w&#x548C;b&#x5373;&#x53EF;&#x3002;&#x4F46;&#x7531;&#x4E8E;&#x8BE5;&#x51FD;&#x6570;&#x662F;&#x4E2A;&#x975E;&#x51F8;&#x51FD;&#x6570;&#xFF0C;&#x627E;&#x5B83;&#x7684;&#x5168;&#x5C40;&#x6700;&#x4F18;&#x89E3;&#x6BD4;&#x8F83;&#x56F0;&#x96BE;&#xFF0C;&#x901A;&#x5E38;&#x91C7;&#x7528;&#x53D8;&#x901A;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x4EE4;&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF1A;</p>
+<p><span class="math inline">\(L(&#x177;, y)=-(y\log&#x177; + (1-y)\log(1-&#x177;))\)</span></p>
+<p>&#x5F53;y=1&#x65F6;<span class="math inline">\(L(&#x177;, y)=-\log&#x177;\)</span>&#xFF0C; &#x5E0C;&#x671B;L(&#x177;, y)&#x975E;&#x5E38;&#x5C0F;&#xFF0C;&#x8FD9;&#x5C31;&#x8981;&#x6C42;<span class="math inline">\(\log&#x177;\)</span>&#x8DB3;&#x591F;&#x5927;&#xFF0C;&#x8FD9;&#x8981;&#x6C42;&#x177;&#x8DB3;&#x591F;&#x5927;&#xFF0C;&#x4F46;&#x177;&#x662F;&#x3C3;&#x51FD;&#x6570;&#xFF0C;&#x6700;&#x5927;&#x4E5F;&#x5C31;&#x65E0;&#x9650;&#x63A5;&#x8FD1;1&#xFF1B;</p>
+<p>&#x5F53;y=0&#x65F6;<span class="math inline">\(L(&#x177;, y)=-\log(1-&#x177;)\)</span>&#xFF0C; &#x5E0C;&#x671B;L(&#x177;, y)&#x975E;&#x5E38;&#x5C0F;&#xFF0C;&#x8FD9;&#x5C31;&#x8981;&#x6C42;<span class="math inline">\(\log(1-&#x177;)\)</span>&#x8DB3;&#x591F;&#x5927;&#xFF0C;&#x8FD9;&#x8981;&#x6C42;&#x177;&#x8DB3;&#x591F;&#x5C0F;&#xFF0C;&#x4F46;&#x177;&#x662F;&#x3C3;&#x51FD;&#x6570;&#xFF0C;&#x6700;&#x5927;&#x4E5F;&#x5C31;&#x65E0;&#x9650;&#x63A5;&#x8FD1;0&#xFF1B;</p>
+<p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x8D8B;&#x52BF;&#x5206;&#x6790;&#x4E0A;&#x6765;&#x770B;&#xFF0C;&#x201C;&#x177;&#x65E0;&#x9650;&#x63A5;&#x8FD1;y&#x201D;&#x548C;&#x201C;L(&#x177;, y)&#x8DB3;&#x591F;&#x5C0F;&#x201D;&#x7684;&#x8D8B;&#x52BF;&#x662F;&#x4E00;&#x81F4;&#x7684;&#x3002;</p>
+<blockquote>
+<p>&#x6211;&#x7684;&#x95EE;&#x9898;&#x662F;&#xFF1A;&#x5E94;&#x8BE5;&#x8BA9;&#x635F;&#x5931;&#x51FD;&#x6570;L(&#x177;, y)&#x8D8B;&#x8FD1;&#x4E8E;0&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x65E0;&#x9650;&#x5C0F;&#x5230;&#x8D1F;&#x6570;&#x5427;&#xFF1F;&#x56E0;&#x4E3A;&#x4ECE;&#x76F4;&#x89C2;&#x610F;&#x4E49;&#x4E0A;&#x6765;&#x770B;&#x635F;&#x5931;&#x51FD;&#x6570;&#x8868;&#x793A;&#x177;&#x548C;y&#x4E4B;&#x95F4;&#x7684;&#x5DEE;&#x8DDD;&#xFF0C;&#x592A;&#x5927;&#x548C;&#x592A;&#x5C0F;&#x90FD;&#x4E0D;&#x5BF9;&#x5440;&#xFF1F;</p>
+</blockquote>
+<p>&#x635F;&#x5931;&#x51FD;&#x6570;&#x662F;&#x4F5C;&#x4E3A;&#x5355;&#x6837;&#x672C;&#x800C;&#x8A00;&#x7684;&#xFF0C;&#x5BF9;&#x4E8E;&#x6574;&#x4E2A;&#x6837;&#x672C;&#x7A7A;&#x95F4;&#xFF0C;&#x5219;&#x8981;&#x8003;&#x5BDF;&#x6210;&#x672C;&#x51FD;&#x6570;</p>
+<p><span class="math inline">\(J(w, b) = \frac{1}{m}\sum_{i=1}^{m} [y^{(i)}\log&#x177;^{(i)} + (1-y^{(i)})\log(1-&#x177;^{(i)})]\)</span></p>
+<h1 id="&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;">2.4 &#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;</h1>
+<p>&#x5BF9;&#x4E8E;&#x4E00;&#x7EF4;&#x51F8;&#x51FD;&#x6570; <img src="/2018/03/11/2018/0311DeepLearningAI02/GradientDescent.png"> <span class="math inline">\(Repeat\{ \\ &#x3000;w := w - \alpha\frac{dJ_{(w)}}{dw} \\ \}\)</span></p>
+<p>&#x5148;&#x968F;&#x673A;&#x627E;&#x4E00;&#x4E2A;&#x70B9;&#xFF0C;&#x8BA1;&#x7B97;&#x51FD;&#x6570;&#x5728;&#x6B64;&#x5904;&#x7684;&#x5BFC;&#x6570;&#xFF0C;&#x518D;&#x4E0D;&#x65AD;&#x91CD;&#x590D;&#x8FD0;&#x7B97;<span class="math inline">\(w := w - \alpha\frac{dJ_{(w)}}{dw}\)</span>&#x76F4;&#x5230;&#x51FD;&#x6570;&#x4E0E;&#x524D;&#x4E00;&#x4E2A;&#x70B9;&#x7684;&#x5DEE;&#x503C;&#x5C0F;&#x4E8E;&#x67D0;&#x4E2A;&#x9608;&#x503C;&#x3002;&#x3B1;&#x53EB;&#x505A;&#x5B66;&#x4E60;&#x7387;&#xFF0C;&#x662F;&#x6BCF;&#x6B21;&#x8FED;&#x4EE3;&#x7684;&#x6B65;&#x957F;&#x3002;&#x901A;&#x8FC7;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x627E;&#x5230;&#x51FD;&#x6570;&#x7684;&#x6700;&#x5C0F;&#x503C;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x6210;&#x672C;&#x51FD;&#x6570;&#xFF0C;&#x5B83;&#x6709;&#x591A;&#x4E2A;&#x53D8;&#x91CF;&#xFF0C;&#x4E0E;&#x4E00;&#x7EF4;&#x51FD;&#x6570;&#x4E0D;&#x540C;&#x4E4B;&#x5904;&#x5728;&#x4E8E;&#x539F;&#x6765;&#x7684;&#x6C42;&#x5BFC;&#x8FD0;&#x7B97;&#x8981;&#x6539;&#x6210;&#x6C42;&#x504F;&#x5BFC;&#xFF0C;&#x539F;&#x7406;&#x548C;&#x4E00;&#x7EF4;&#x51FD;&#x6570;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;&#x5BF9;&#x4E8E;J(w, b)&#xFF1A;</p>
+<p><span class="math inline">\(Repeat\{ \\ &#x3000;w := w - \alpha\frac{dJ(w, b)}{dw} \\ &#x3000;b := b - \alpha\frac{dJ(w, b)}{db} \\ \}\)</span></p>
+<blockquote>
+<p>&#x5BF9;&#x4E8E;&#x4E00;&#x7EF4;&#x51FD;&#x6570;&#xFF0C;&#x4E3A;&#x5565;&#x4E0D;&#x8BA9;&#x3B1;&#x5BF9;&#x5E94;&#x4E00;&#x4E2A;&#x51E0;&#x4F55;&#x610F;&#x4E49;&#xFF1F;&#x6211;&#x76F4;&#x89C2;&#x7406;&#x89E3;&#x8BA4;&#x4E3A;&#x3B1;&#x672C;&#x5E94;&#x662F;&#x5F26;&#x957F;&#xFF0C;&#x4F46;&#x4E0D;&#x5E78;&#x7684;&#x662F;<span class="math inline">\(\frac{dJ(w)}{dw}\)</span>&#x662F;&#x659C;&#x7387;&#x800C;&#x4E0D;&#x662F;cos&#xFF01;&#x56E0;&#x6B64;&#x6240;&#x8C13;&#x7684;&#x6B65;&#x957F;&#x3B1;&#x53EA;&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x503C;&#xFF0C;&#x5176;&#x4E58;&#x6570;<span class="math inline">\(\frac{dJ(w)}{dw}\)</span>&#x4E5F;&#x53EA;&#x8868;&#x660E;&#x4E00;&#x4E2A;&#x5927;&#x81F4;&#x7684;&#x65B9;&#x5411;&#x3002;</p>
+</blockquote>
+<h1 id="&#x5BFC;&#x6570;&#x8BA1;&#x7B97;&#x4E4B;&#x8BA1;&#x7B97;&#x56FE;">2.8 &#x5BFC;&#x6570;&#x8BA1;&#x7B97;&#x4E4B;&#x8BA1;&#x7B97;&#x56FE;</h1>
+<blockquote>
+<p>&#x672C;&#x8282;&#x9996;&#x6B21;&#x63D0;&#x5230;&#x4E86;&#x201C;&#x6B63;&#x5411;&#x4F20;&#x64AD;&#x201D;&#x548C;&#x201C;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x201D;&#xFF0C;&#x6B63;&#x5411;&#x4F20;&#x64AD;&#x5C31;&#x662F;&#x5C06;&#x5404;&#x53D8;&#x91CF;&#x7EC4;&#x7EC7;&#x6210;&#x590D;&#x5408;&#x51FD;&#x6570;&#xFF0C;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x5C31;&#x662F;&#x5BF9;&#x590D;&#x5408;&#x51FD;&#x6570;&#x9010;&#x7EA7;&#x6C42;&#x5BFC;&#x3002;&#x8FD9;&#x4E48;&#x7B80;&#x5355;&#x7684;&#x8FC7;&#x7A0B;&#x4E3A;&#x4EC0;&#x4E48;&#x79F0;&#x4E3A;&#x201C;&#x6B63;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x201D;&#x548C;&#x201C;&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#x201D;&#x5462;&#xFF1F;</p>
+</blockquote>
+<h1 id="&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x4E2D;&#x7684;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;">2.9 &#x903B;&#x8F91;&#x56DE;&#x5F52;&#x4E2D;&#x7684;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;</h1>
+<p>&#x7ED9;&#x5B9A;</p>
+<p><span class="math inline">\(z = w^{T}x+b &#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;... &#x2460; \\ &#x177; = a = &#x3C3;(z)=\frac{1}{1+e^{-z}} &#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3000;... &#x2461; \\ L(a, y) = -(y\log(a) + (1-y)\log(1-a)) &#x3000;... &#x2462;\)</span></p>
+<p>&#x63A5;&#x4E0B;&#x9010;&#x7EA7;&#x7EC4;&#x7EC7;&#x590D;&#x5408;&#x51FD;&#x6570;&#xFF1A; <img src="/2018/03/11/2018/0311DeepLearningAI02/img01.png"> &#x518D;&#x5229;&#x7528;&#x8BA1;&#x7B97;&#x56FE;&#x6C42;&#x5BFC;&#xFF1A; &#x2463; <span class="math inline">\(da = \frac{dL(a, y)}{da} = -\frac{y}{a} + \frac{(1-y)}{(1-a)}\)</span></p>
+<p>&#x2464; <span class="math inline">\(dz = \frac{dL}{dz} = \frac{dL}{da} \frac{da}{dz}\)</span></p>
+<p>&#x3000;&#x3000;<span class="math inline">\(= (-\frac{y}{a} + \frac{(1-y)}{(1-a)}) (-1)(1+e^{-z})^{-2}(-1)e^{-z}\)</span> &#x3000;&#x3000;&#x3010;&#x5C06;&#x2463;&#x4EE3;&#x5165;<span class="math inline">\(\frac{dL}{da}\)</span>&#xFF0C;&#x5E76;&#x5BF9;&#x2461;&#x6C42;&#x5BFC;&#x3011;</p>
+<p>&#x3000;&#x3000;<span class="math inline">\(= (-\frac{y}{a} + \frac{(1-y)}{(1-a)}) \frac{1}{1+e^{-z}} \frac{e^{-z}}{1+e^{-z}}\)</span></p>
+<p>&#x3000;&#x3000; <span class="math inline">\(=(-\frac{y}{a} + \frac{(1-y)}{(1-a)})a(1-a)\)</span> &#x3000;&#x3000;&#x3000;&#x3000;&#x3000;&#x3010;&#x5C06;&#x2461;&#x4EE3;&#x5165;&#x3011;</p>
+<p>&#x3000;&#x3000;<span class="math inline">\(=-y(1-a) + a(1-y) \\ =a - y\)</span></p>
+<p>&#x2465; <span class="math inline">\(dw_{1} = \frac{dL}{dw_{1}} = \frac{dL}{dz} \frac{dz}{dw_{1}} = dz x_{1} = x_{1} dz\)</span></p>
+<p>&#x3000;<span class="math inline">\(dw_{2} = x_{2} dz\)</span></p>
+<p>&#x3000;<span class="math inline">\(db = dz\)</span></p>
+<p>&#x5C06;&#x2465;&#x4EE3;&#x5165;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;&#x5F97;&#x5230;&#xFF1A;</p>
+<p><span class="math inline">\(Repeat\{ \\ w_{1} := w_{1} - &#x3B1; &#xB7; dw_{1} \\ w_{2} := w_{2} - &#x3B1; &#xB7; dw_{2} \\ b := b - &#x3B1; &#xB7; db \\ \}\)</span></p>
+<h1 id="&#x6709;m&#x4E2A;&#x6837;&#x672C;&#x7684;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;">2.10 &#x6709;m&#x4E2A;&#x6837;&#x672C;&#x7684;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;</h1>
+<p>&#x7ED3;&#x5408;&#x4E0A;&#x4E00;&#x8282;&#x7ED3;&#x8BBA;&#xFF0C;&#x5F53;&#x6709;m&#x4E2A;&#x6837;&#x672C;&#x65F6;&#xFF0C;&#x6210;&#x672C;&#x51FD;&#x6570;&#xFF1A;</p>
+<p><span class="math inline">\(J(w, b) = \frac{1}{m} \sum_{i=1}^{m}L(a^{(i)}, y^{(i)})\)</span></p>
+<p>&#x5176;&#x4E2D;<span class="math inline">\(a^{(i)} = &#x177;^{(i)} = &#x3C3;(z^{(i)} = &#x3C3;(w^Tx^{(i)} + b)\)</span></p>
+<p>&#x4E8E;&#x662F;<span class="math inline">\(\frac{dJ(w,b)}{dw} = \frac{1}{m}\sum_{i=1}^{m}\frac{d}{dw}L(a^{(i)}, y{(i)})\)</span></p>
+<p>&#x5E94;&#x7528;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x7684;&#x4F2A;&#x4EE3;&#x7801;&#x8868;&#x4E3A;&#xFF1A;</p>
+<p><span class="math inline">\(J=0; dw_{1}=0; dw_{2}=0; db=0; \\ For i=1..m &#x3000;&#x3000; &#x3010;&#x5FAA;&#x73AF;I&#x3011; \\ &#x3000;z^{(i)}=w^{T}x^{(i)}+b \\ &#x3000;a^{(i)} = &#x3C3;(z^{(i)}) \\ &#x3000;J += -[y^{(i)}\log a^{(i)} + (1-y^{(i)})\log(1-a^{(i)})] \\ &#x3000;dz^{(i)} = a^{(i)} - y^{(i)} &#x3000;&#x3000;&#x3010;&#x5C06;&#x2464;&#x4EE3;&#x5165;&#x3011;&#x3000; \\ &#x3000;dw_{1} += {x_{1}}^{(i)}dz^{(i)} &#x3000; &#x3010;&#x5C06;&#x2465;&#x4EE3;&#x5165;&#x3011; &#x3010;&#x5FAA;&#x73AF;II&#x3011; \\ &#x3000;dw_{2} += {x_{2}}^{(i)}dz^{(i)} \\ &#x3000;db += dz^{(i)} \\ J=J/m; \; dw_{1}=dw_{1}/m; \; dw_{2}=dw_{2}/m; \; db=db/m; \\ w_{1} := w_{1} - &#x3B1;&#xB7;dw_{1} \\ w_{2} := w_{2} - &#x3B1;&#xB7;dw_{2} \\ b := b - &#x3B1;&#xB7;db\)</span></p>
+<p>&#x8FD9;&#x53EA;&#x5E94;&#x7528;&#x4E86;&#x4E00;&#x8F6E;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#xFF0C;&#x5176;&#x4E2D;&#x5305;&#x542B;&#x4E24;&#x4E2A;&#x5FAA;&#x73AF;&#xFF1A;&#x3010;&#x5FAA;&#x73AF;I&#x3011;&#x662F;&#x904D;&#x5386;&#x6240;&#x6709;&#x6837;&#x672C;&#xFF0C;&#x3010;&#x5FAA;&#x73AF;II&#x3011;&#x662F;&#x904D;&#x5386;&#x6BCF;&#x4E2A;&#x6837;&#x672C;&#x91CC;&#x7684;&#x6240;&#x6709;&#x7279;&#x5F81;&#x3002;</p>
+<h1 id="&#x5411;&#x91CF;&#x5316;">2.11&#x5411;&#x91CF;&#x5316;</h1>
+<p>&#x7406;&#x8BBA;&#x5DF2;&#x7ECF;&#x8BB2;&#x5B8C;&#x4E86;&#xFF0C;&#x5269;&#x4E0B;&#x7684;&#x5DE5;&#x4F5C;&#x5C31;&#x662F;&#x5982;&#x4F55;&#x901A;&#x8FC7;&#x5411;&#x91CF;&#x5316;&#x6D88;&#x9664;&#x524D;&#x4E00;&#x5C0F;&#x8282;&#x4E2D;&#x7684;&#x4E24;&#x4E2A;&#x5FAA;&#x73AF;&#xFF0C;&#x8BA9;&#x4EE3;&#x7801;&#x8DD1;&#x5F97;&#x66F4;&#x6709;&#x6548;&#x7387;&#x3002; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"></div><div class="line">a = np.random.rand(<span class="number">100000</span>)</div><div class="line">b = np.random.rand(<span class="number">100000</span>)</div><div class="line"></div><div class="line">c = np.dot(a, b)    <span class="comment"># &#x2460;</span></div><div class="line"></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">100000</span>):  <span class="comment"># &#x2461;</span></div><div class="line">    c += a[i]*b[i]</div></pre></td></tr></table></figure></p>
+<p>&#x4EE3;&#x7801;&#x2460;&#x548C;&#x2461;&#x5728;&#x7ED3;&#x679C;&#x4E0A;&#x662F;&#x7B49;&#x4EF7;&#x7684;&#xFF0C;&#x524D;&#x8005;&#x5C31;&#x662F;&#x5411;&#x91CF;&#x5316;&#x7684;&#x5199;&#x6CD5;&#xFF0C;&#x66F4;&#x7B80;&#x6D01;&#x4E14;&#x66F4;&#x6709;&#x6548;&#x7387;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;<span class="math inline">\(z=w^{T}x+b\)</span>&#xFF0C;&#x5176;&#x4E2D;<span class="math inline">\(w=\left\lgroup \matrix{w_{1} \cr w_{2} \cr ... \cr w_{n_{x}} }\right \rgroup\)</span>&#xFF0C;<span class="math inline">\(x=\left\lgroup \matrix{x_{1} \cr x_{2} \cr ... \cr x_{n_{x}} }\right \rgroup\)</span>&#xFF0C; <span class="math inline">\(w\in\mathbb{R}^n_{x}, \;x\in\mathbb{R}^n_{x}\)</span></p>
+<p>&#x6C42;&#x89E3;z&#x975E;&#x5411;&#x91CF;&#x5316;&#x7684;&#x5199;&#x6CD5;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">z=<span class="number">0</span></div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(nx):</div><div class="line">    z += w[i] * x[i]</div><div class="line">z += b</div></pre></td></tr></table></figure></p>
+<p>&#x5411;&#x91CF;&#x5316;&#x7684;&#x5199;&#x6CD5;&#x53EA;&#x9700;&#x8981;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line">z = np.dot(w, x) + b</div></pre></td></tr></table></figure></p>
+<p>CPU&#x548C;GPU&#x90FD;&#x6709;&#x5E76;&#x884C;&#x5316;&#x7684;&#x6307;&#x4EE4;&#xFF0C;&#x53C8;&#x53EB;SIMD&#xFF08;&#x5355;&#x6307;&#x4EE4;&#x6D41;&#x591A;&#x6570;&#x636E;&#x6D41; single instruments multiple data&#xFF09;&#xFF0C;&#x5728;python&#x4E2D;&#x6709;&#x4F7F;&#x7528;SIMD&#x7684;&#x5185;&#x7F6E;&#x51FD;&#x6570;&#xFF0C;&#x5982;<code>np.function</code>&#xFF0C;GPU&#x66F4;&#x64C5;&#x957F;&#x6267;&#x884C;SIMD&#x3002;</p>
+<h1 id="&#x66F4;&#x591A;&#x5411;&#x91CF;&#x5316;&#x7684;&#x4F8B;&#x5B50;">2.12 &#x66F4;&#x591A;&#x5411;&#x91CF;&#x5316;&#x7684;&#x4F8B;&#x5B50;</h1>
+<p>&#x5C3D;&#x91CF;&#x4F7F;&#x7528;np&#x7684;&#x5411;&#x91CF;&#x753B;&#x51FD;&#x6570;&#x6765;&#x53D6;&#x4EE3;for&#x5FAA;&#x73AF;&#xFF0C;&#x4F8B;&#x5982;&#xFF1A;</p>
+<p><span class="math inline">\(v=\left\lgroup \matrix{v_{1} \cr v_{2} \cr ... \cr v_{n} }\right \rgroup\)</span>&#xFF0C;&#x6C42;<span class="math inline">\(u=\left\lgroup \matrix{e^{v_{1}} \cr e^{v_{2}} \cr ... \cr e^{v_{n}} }\right \rgroup\)</span></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">u = np.zeros((n, <span class="number">1</span>))</div><div class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(n):    <span class="comment"># &#x975E;&#x5411;&#x91CF;&#x5316;&#x7684;&#x5199;&#x6CD5;</span></div><div class="line">    u[i] = math.exp(v[i])</div><div class="line">    </div><div class="line">u = np.exp(v)      <span class="comment"># &#x5411;&#x91CF;&#x5316;&#x7684;&#x5199;&#x6CD5;</span></div></pre></td></tr></table></figure>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x5229;&#x7528;&#x5411;&#x91CF;&#x5316;&#x5C06;2.10&#x4F2A;&#x7801;&#x4E2D;&#x7684;for&#x5FAA;&#x73AF;&#x6D88;&#x9664;&#x6389;&#xFF1A;</p>
+<p><span class="math inline">\(J=0; \\ dw_{1}=0; dw_{2}=0; &#x3000;&#x3010;&#x66FF;&#x6362;&#x4E3A;dw = np.zeros((n_x, 1))&#x3011; \\ db=0; \\ For i=1..m \\ &#x3000;z^{(i)}=w^{T}x^{(i)}+b &#x3000;&#x3010;&#x66FF;&#x6362;&#x4E3A;Z=W.T * X + b = np.dot(W.T, X) + b&#x3011; \\ &#x3000;a^{(i)} = &#x3C3;(z^{(i)}) &#x3000; &#x3000; &#x3000;&#x3010;&#x66FF;&#x6362;&#x4E3A;A = sigmoid(Z)&#x3011; \\ &#x3000;J += -[y^{(i)}\log a^{(i)} + (1-y^{(i)})\log(1-a^{(i)})] \\ &#x3000;dz^{(i)} = a^{(i)} - y^{(i)} &#x3000;&#x3010;&#x66FF;&#x6362;&#x4E3A;dZ = A - Y&#x3011; \\ &#x3000;dw_{1} += {x_{1}}^{(i)}dz^{(i)} &#x3000; &#x3010;&#x66FF;&#x6362;&#x4E3A;dW = (1/m) * X * dZ&#x3011; \\ &#x3000;dw_{2} += {x_{2}}^{(i)}dz^{(i)} \\ &#x3000;db += dz^{(i)} &#x3000; &#x3000; &#x3000;&#x3000; &#x3000;&#x3010;&#x66FF;&#x6362;&#x4E3A;db = (1/m) * np.sum(dZ)&#x3011; \\ J=J/m; \\ dw_{1}=dw_{1}/m; \; dw_{2}=dw_{2}/m; &#x3000; &#x3010;&#x66FF;&#x6362;&#x4E3A;dW /= m&#x3011; \\ db=db/m; \\ w_{1} := w_{1} - &#x3B1;&#xB7;dw_{1} \\ w_{2} := w_{2} - &#x3B1;&#xB7;dw_{2} \\ b := b - &#x3B1;&#xB7;db\)</span></p>
+<h1 id="&#x6709;m&#x4E2A;&#x6837;&#x672C;&#x7684;&#x5411;&#x91CF;&#x5316;&#x903B;&#x8F91;&#x56DE;&#x5F52;">2.13 &#x6709;m&#x4E2A;&#x6837;&#x672C;&#x7684;&#x5411;&#x91CF;&#x5316;&#x903B;&#x8F91;&#x56DE;&#x5F52;</h1>
+<p>&#x5BF9;&#x4E8E;&#x6709;m&#x4E2A;&#x6837;&#x672C;&#xFF1A;</p>
+<p><span class="math inline">\(z^{(1)} = w^{T}x^{(1)} + b \; \; \; z^{(2)} = w^{T}x^{(2)} + b \; \; ... \; z^{(m)} = w^{T}x^{(m)} + b \; \; \;\)</span></p>
+<p><span class="math inline">\(a^{(1)}=&#x3C3;(z^{(1)}) \; \; \; \; \; \; \; a^{(2)}=&#x3C3;(z^{(2)}) \; \; \; \; \; \; ... \; a^{(m)}=&#x3C3;(z^{(m)}) \; \; \;\)</span></p>
+<p>&#x53EF;&#x4EE4;<span class="math inline">\(X=\begin{bmatrix}\mid&amp;\mid&amp;&amp;\mid\\x^{(1)}&amp;x^{(2)}&amp;\cdots&amp;x^{(m)}\\ \mid&amp;\mid&amp;&amp;\mid\end{bmatrix} \; \in \mathbb{R}^{n_{x}&#xD7;m}\)</span></p>
+<p>&#x5219;$Z = [Z^{(1)} ; Z^{(2)} ; ... ; Z^{(m)}] = W^{T}&#xB7;X + [b, b, ..., b] $</p>
+<p>&#x4F7F;&#x7528;&#x5411;&#x91CF;&#x5316;&#x7684;&#x4EE3;&#x7801;&#x5199;&#x4F5C; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Z = np.dot(W.T, X) + b</div></pre></td></tr></table></figure></p>
+<p>&#x5B9E;&#x6570;b&#x88AB;&#x81EA;&#x52A8;&#x6269;&#x5C55;&#x4E3A;&#x77E9;&#x9635;&#xFF0C;&#x8FD9;&#x5728;python&#x4E2D;&#x88AB;&#x79F0;&#x4F5C;&#x5E7F;&#x64AD;&#x3002;</p>
+<p><span class="math inline">\(A = [a^{(1)}, a^{(2)}, ..., a^{(m)}] = &#x3C3;(Z)\)</span></p>
+<h1 id="&#x5411;&#x91CF;&#x5316;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x6210;&#x672C;&#x51FD;&#x6570;&#x7684;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;">2.14 &#x5411;&#x91CF;&#x5316;&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x6210;&#x672C;&#x51FD;&#x6570;&#x7684;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;</h1>
+<p>&#x7EE7;&#x7EED;&#x5411;&#x91CF;&#x5316;2.12&#x4E2D;&#x7684;&#x4F2A;&#x7801;&#xFF1A;</p>
+<p><span class="math inline">\(A = [a^{(1)}, a^{(2)}, ..., a^{(m)}] \; \; \; \\ Y = [y^{(1)}, y^{(2)}, ..., y^{(m)}] \\ Z = W^{T}X + b = np.dot(W.T, X) + b \\ A = &#x3C3;(Z) \\ dZ = A - Y \\ dW = \frac{1}{m}XdZ^{T} \\ db = \frac{1}{m} np.sum(dZ) \\ W := W - &#x3B1;&#xB7;dW \\ b := b - &#x3B1;&#xB7;db\)</span></p>
+<p>&#x4EE5;&#x4E0A;&#x662F;&#x4E00;&#x6B21;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x7684;&#x8FED;&#x4EE3;&#xFF0C;&#x82E5;&#x8981;&#x8FDB;&#x884C;n&#x8F6E;&#x8FED;&#x4EE3;&#xFF0C;&#x8FD8;&#x662F;&#x9700;&#x8981;&#x4E00;&#x4E2A;n&#x7684;&#x5FAA;&#x73AF;&#xFF0C;&#x8FD9;&#x4E2A;&#x6700;&#x5916;&#x5C42;&#x5FAA;&#x73AF;&#x662F;&#x65E0;&#x6CD5;&#x907F;&#x514D;&#x7684;&#x3002;</p>
+<h1 id="&#x4F5C;&#x4E1A;">&#x4F5C;&#x4E1A;</h1>
+<p>&#x4F5C;&#x4E1A;&#x9898;&#x76EE;&#x4EE5;&#x53CA;&#x76F8;&#x5173;&#x7684;&#x6570;&#x636E;&#x5728;&#x7F51;&#x4E0A;&#x53EF;&#x4EE5;&#x627E;&#x5F97;&#x5230;&#xFF0C;&#x7531;&#x4E8E;&#x6570;&#x636E;&#x91CF;&#x592A;&#x5927;&#xFF0C;&#x5C31;&#x4E0D;&#x4E0A;&#x4F20;&#x4E86;&#x3002;</p>
+<h2 id="&#x9898;&#x76EE;">&#x9898;&#x76EE;</h2>
+<p>&#x7ED9;&#x5B9A;209&#x4E2A;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x548C;50&#x4E2A;&#x6D4B;&#x8BD5;&#x6837;&#x672C;&#xFF0C;&#x6BCF;&#x4E2A;&#x6837;&#x672C;&#x5305;&#x542B;&#x4E00;&#x5F20;&#x56FE;&#x7247;&#x5E76;&#x6807;&#x6CE8;&#x4E86;&#x8BE5;&#x56FE;&#x4E2D;&#x662F;&#x5426;&#x5305;&#x542B;&#x732B;&#xFF0C;&#x4F7F;&#x7528;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;&#x8BAD;&#x7EC3;&#x4E00;&#x4E2A;&#x6A21;&#x578B;&#xFF0C;&#x7528;&#x6765;&#x8BC6;&#x522B;&#x7ED9;&#x5B9A;&#x7684;&#x56FE;&#x7247;&#x4E2D;&#x662F;&#x5426;&#x5305;&#x542B;&#x732B;&#x3002;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x548C;&#x6D4B;&#x8BD5;&#x6837;&#x672C;&#x6587;&#x4EF6;&#x683C;&#x5F0F;&#x4E00;&#x6837;&#xFF0C;&#x90FD;&#x5305;&#x542B;&#x4E09;&#x4E2A;dataset&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">/list_classes, shape:(2, )</div><div class="line">    value:[b&apos;non-cat&apos; b&apos;cat&apos;]&#x3000;&#x3000;&#x3000;# &#x6807;&#x6CE8;&#x8BCD;&#x5178;&#xFF0C;&#x8868;&#x793A;&#x6CA1;&#x732B;&#x548C;&#x6709;&#x732B;&#x7684;&#x6587;&#x5B57;&#x8868;&#x8FF0;</div><div class="line"> </div><div class="line">/train_set_x, shape:(209, 64, 64, 3)   # &#x5171;209&#x5F20;&#x56FE;&#x7247;&#xFF0C;&#x6BCF;&#x5F20;&#x56FE;&#x7247;&#x662F;64 * 64 * 3</div><div class="line">    value:[[[[ 17  31  56]        # &#x56FE;&#x7247;&#x6570;&#x636E;</div><div class="line">    [ 22  33  59]</div><div class="line">    [ 25  35  62]</div><div class="line">    ...,</div><div class="line">    [  1  28  57]</div><div class="line">    [  1  26  56]</div><div class="line">    [  1  22  51]]</div><div class="line">    ...</div><div class="line">    </div><div class="line">/train_set_y, shape:(209,)        # &#x5171;209&#x4E2A;&#x6807;&#x6CE8;</div><div class="line">    value:[0 0 1 ... 0 0 0]</div></pre></td></tr></table></figure></p>
+<h2 id="&#x4E3B;&#x5E72;&#x903B;&#x8F91;">&#x4E3B;&#x5E72;&#x903B;&#x8F91;</h2>
+<p>&#x4E3B;&#x5E72;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># &#x8FD4;&#x56DE;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x548C;&#x6D4B;&#x8BD5;&#x6837;&#x672C;&#x7684;&#x6570;&#x636E;&#x3001;&#x6807;&#x6CE8;&#xFF0C;classes&#x662F;&#x6807;&#x6CE8;&#x5BF9;&#x5E94;&#x7684;&#x542B;&#x4E49;</span></div><div class="line">train_set_x_orig, train_set_y, test_set_x_orig, test_set_y, classes = self.load_dataset()</div><div class="line"></div><div class="line">m_train = train_set_x_orig.shape[<span class="number">0</span>]     <span class="comment"># &#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x7684;&#x4E2A;&#x6570;&#xFF1A;209</span></div><div class="line">m_test = test_set_x_orig.shape[<span class="number">0</span>]       <span class="comment"># &#x6D4B;&#x8BD5;&#x6837;&#x672C;&#x7684;&#x4E2A;&#x6570;&#xFF1A;50</span></div><div class="line">num_px = train_set_x_orig.shape[<span class="number">1</span>]      <span class="comment"># &#x56FE;&#x7247;&#x7684;&#x5BBD;&#x3001;&#x9AD8;&#x50CF;&#x7D20;&#x6570;&#xFF1A;64</span></div><div class="line"></div><div class="line"><span class="comment"># &#x5C06;&#x8BAD;&#x7EC3;&#x548C;&#x6D4B;&#x8BD5;&#x6837;&#x672C;&#x6241;&#x5E73;&#x5316;&#xFF0C;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E00;&#x5F20;&#x56FE;&#xFF0C;&#x5C06; (64, 64, 3) &#x7684;&#x56FE;&#x7247;&#x8F6C;&#x6210;(64*64*3, 1)</span></div><div class="line"><span class="comment"># &#x5BF9;&#x4E8E;&#x6574;&#x4E2A;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#xFF0C;&#x5C06;(209, 64, 64, 3)&#x8F6C;&#x6210;(209, -1).T&#xFF0C;&#x6CE8;&#x610F;&#x6709;&#x4E2A;&#x8F6C;&#x7F6E;&#xFF0C;&#x8F6C;&#x7F6E;&#x540E;&#x6BCF;&#x4E00;&#x5217;&#x662F;&#x4E00;&#x4E2A;&#x6837;&#x672C;&#xFF0C;</span></div><div class="line"><span class="comment"># &#x67D0;&#x5217;&#x7684;&#x6BCF;&#x4E00;&#x884C;&#x662F;&#x56FE;&#x7247;&#x7684;&#x4E00;&#x4E2A;&#x7279;&#x5F81;&#x3002;&#x8BAD;&#x7EC3;&#x96C6;&#x5171;209&#x884C;&#xFF08;&#x4E2A;&#x6837;&#x672C;&#xFF09;&#xFF0C;12288&#x4E2A;&#x7279;&#x5F81;&#x3002;&#x53C2;&#x89C1;&#x7B14;&#x8BB0;2.1&#x3002;</span></div><div class="line">train_set_x_flatten = train_set_x_orig.reshape(train_set_x_orig.shape[<span class="number">0</span>],<span class="number">-1</span>).T</div><div class="line">test_set_x_flatten = test_set_x_orig.reshape(test_set_x_orig.shape[<span class="number">0</span>],<span class="number">-1</span>).T</div><div class="line"></div><div class="line"><span class="comment"># &#x6807;&#x51C6;&#x5316;&#x6570;&#x636E;&#xFF0C;&#x8BA9;&#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x2208;[0, 1]</span></div><div class="line">train_set_x = train_set_x_flatten / <span class="number">255.</span></div><div class="line">test_set_x = test_set_x_flatten / <span class="number">255.</span></div><div class="line"></div><div class="line"><span class="comment"># &#x8BAD;&#x7EC3;&#x51FA;&#x6A21;&#x578B; &#x1F3C1;</span></div><div class="line">d = self.model(train_set_x, train_set_y, test_set_x, test_set_y, num_iterations = <span class="number">2000</span>, learning_rate = <span class="number">0.005</span>, print_cost = <span class="keyword">True</span>)</div><div class="line"></div><div class="line"><span class="comment"># &#x9A8C;&#x8BC1;&#x6A21;&#x578B;</span></div><div class="line">fname = os.path.join(self.imagesDir, <span class="string">&apos;my_image2.jpg&apos;</span>)</div><div class="line">image = np.array(ndimage.imread(fname, flatten=<span class="keyword">False</span>))</div><div class="line">my_image = scipy.misc.imresize(image, size=(num_px, num_px)).reshape((<span class="number">1</span>, num_px*num_px*<span class="number">3</span>)).T</div><div class="line">my_predicted_image = self.predict(d[<span class="string">&apos;w&apos;</span>], d[<span class="string">&apos;b&apos;</span>], my_image)</div><div class="line">logging.info(my_predicted_image)</div></pre></td></tr></table></figure></p>
+<h2 id="&#x8BAD;&#x7EC3;&#x6A21;&#x578B;">&#x8BAD;&#x7EC3;&#x6A21;&#x578B;</h2>
+<p>&#x4E3B;&#x5E72;&#x903B;&#x8F91;&#x975E;&#x5E38;&#x7B80;&#x5355;&#xFF0C;&#x65E0;&#x9700;&#x8FC7;&#x591A;&#x89E3;&#x91CA;&#xFF0C;&#x6DF1;&#x5165;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x90E8;&#x5206;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">model</span><span class="params">(self, X_train, Y_train, X_test, Y_test, num_iterations = <span class="number">2000</span>, learning_rate = <span class="number">0.5</span>, print_cost = False)</span>:</span></div><div class="line">    w, b = self.initialize_with_zeros(X_train.shape[<span class="number">0</span>]) <span class="comment"># w&#x5143;&#x7D20;&#x4E2A;&#x6570;&#x7B49;&#x4E8E;&#x7279;&#x5F81;&#x6570;&#xFF0C;b&#x662F;&#x4E00;&#x4E2A;&#x5B9E;&#x6570;&#xFF0C;&#x5C06;&#x4ED6;&#x4EEC;&#x521D;&#x59CB;&#x5316;&#x4E3A;0</span></div><div class="line"></div><div class="line">    <span class="comment"># &#x5B66;&#x4E60;&#x7387;&#x4E3A;learning_rate&#xFF0C;&#x7ECF;&#x8FC7;num_iterations&#x8F6E;&#x8FED;&#x4EE3;&#xFF0C;&#x83B7;&#x5F97;&#x6A21;&#x578B;&#x53C2;&#x6570; &#x1F3C1;</span></div><div class="line">    parameters, grads, costs = self.optimize(w, b, X_train, Y_train, num_iterations, learning_rate, print_cost=<span class="keyword">True</span>)</div><div class="line"></div><div class="line">    w = parameters[<span class="string">&quot;w&quot;</span>]</div><div class="line">    b = parameters[<span class="string">&quot;b&quot;</span>]</div><div class="line"></div><div class="line">    <span class="comment"># &#x9A8C;&#x8BC1;&#x6A21;&#x578B;&#x5728;&#x8BAD;&#x7EC3;&#x96C6;&#x548C;&#x6D4B;&#x8BD5;&#x96C6;&#x4E0A;&#x7684;&#x51C6;&#x786E;&#x7387;</span></div><div class="line">    Y_prediction_test = self.predict(w, b, X_test)</div><div class="line">    Y_prediction_train = self.predict(w, b, X_train)</div><div class="line">    print(<span class="string">&quot;train accuracy: {} %&quot;</span>.format(<span class="number">100</span> - np.mean(np.abs(Y_prediction_train - Y_train)) * <span class="number">100</span>))</div><div class="line">    print(<span class="string">&quot;test accuracy: {} %&quot;</span>.format(<span class="number">100</span> - np.mean(np.abs(Y_prediction_test - Y_test)) * <span class="number">100</span>))</div><div class="line"></div><div class="line">    <span class="comment"># &#x8FD9;&#x662F;&#x6784;&#x6210;&#x6A21;&#x578B;&#x7684;&#x5168;&#x90E8;&#x5143;&#x7D20;&#xFF0C;&#x5BF9;&#x672A;&#x6765;&#x6709;&#x7528;&#x7684;&#x5C31;&#x662F;w&#x548C;b</span></div><div class="line">    d = {<span class="string">&quot;costs&quot;</span>: costs,</div><div class="line">         <span class="string">&quot;Y_prediction_test&quot;</span>: Y_prediction_test, </div><div class="line">         <span class="string">&quot;Y_prediction_train&quot;</span> : Y_prediction_train, </div><div class="line">         <span class="string">&quot;w&quot;</span> : w, </div><div class="line">         <span class="string">&quot;b&quot;</span> : b,</div><div class="line">         <span class="string">&quot;learning_rate&quot;</span> : learning_rate,</div><div class="line">         <span class="string">&quot;num_iterations&quot;</span>: num_iterations}</div><div class="line"></div><div class="line">    <span class="keyword">return</span> d</div></pre></td></tr></table></figure></p>
+<h3 id="&#x591A;&#x8F6E;&#x8FED;&#x4EE3;">&#x591A;&#x8F6E;&#x8FED;&#x4EE3;</h3>
+<p>&#x6240;&#x8C13;&#x201C;&#x6A21;&#x578B;&#x201D;&#x6838;&#x5FC3;&#x5C31;&#x662F;&#x7ECF;&#x8FC7;&#x82E5;&#x5E72;&#x8F6E;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;&#x7684;&#x8FED;&#x4EE3;&#xFF0C;&#x5F97;&#x5230;&#x4EE4;&#x6210;&#x672C;&#x51FD;&#x6570;&#x6700;&#x5C0F;&#x7684;w&#x548C;b&#xFF0C;&#x8BAD;&#x7EC3;&#x7684;&#x6838;&#x5FC3;&#x903B;&#x8F91;&#x5728;&#x51FD;&#x6570;<code>optimize(...)</code>&#x4E2D;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">optimize</span><span class="params">(self, w, b, X, Y, num_iterations, learning_rate, print_cost = False)</span>:</span></div><div class="line">    costs = []</div><div class="line"></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(num_iterations):</div><div class="line">        grads, cost = self.propagate(w, b, X, Y) <span class="comment"># &#x4E00;&#x6B21;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x1F3C1;</span></div><div class="line"></div><div class="line">        dw = grads[<span class="string">&quot;dw&quot;</span>]</div><div class="line">        db = grads[<span class="string">&quot;db&quot;</span>]</div><div class="line"></div><div class="line">        w = w - learning_rate * dw</div><div class="line">        b = b - learning_rate * db</div><div class="line"></div><div class="line">        <span class="comment"># Record the costs</span></div><div class="line">        <span class="keyword">if</span> i % <span class="number">100</span> == <span class="number">0</span>:</div><div class="line">            costs.append(cost)</div><div class="line"></div><div class="line">        ...</div><div class="line"></div><div class="line">    params = {<span class="string">&quot;w&quot;</span>: w, <span class="string">&quot;b&quot;</span>: b}</div><div class="line"></div><div class="line">    grads = {<span class="string">&quot;dw&quot;</span>: dw, <span class="string">&quot;db&quot;</span>: db}</div><div class="line"></div><div class="line">    <span class="keyword">return</span> params, grads, costs</div></pre></td></tr></table></figure></p>
+<h3 id="&#x68AF;&#x5EA6;&#x4E0B;&#x964D;">&#x68AF;&#x5EA6;&#x4E0B;&#x964D;</h3>
+<p><code>propagate(...)</code>&#x4E2D;&#x662F;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x7684;&#x6838;&#x5FC3;&#x903B;&#x8F91;&#xFF0C;&#x5BF9;&#x5E94;&#x7B14;&#x8BB0;&#x7684;2.14&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">propagate</span><span class="params">(self, w, b, X, Y)</span>:</span></div><div class="line">    m = X.shape[<span class="number">1</span>]</div><div class="line"></div><div class="line">    A = self.sigmoid(np.dot(w.T,X) + b)            <span class="comment"># compute activation</span></div><div class="line">    cost = -(np.sum(np.dot(Y,np.log(A).T)+np.dot((<span class="number">1</span>-Y),np.log(<span class="number">1</span>-A).T)))/m      <span class="comment"># compute cost</span></div><div class="line"></div><div class="line">    dw = (np.dot(X,(A-Y).T))/m</div><div class="line">    db = (np.sum(A-Y))/m</div><div class="line"></div><div class="line">    ...</div><div class="line">    cost = np.squeeze(cost)</div><div class="line"></div><div class="line">    grads = {<span class="string">&quot;dw&quot;</span>: dw, <span class="string">&quot;db&quot;</span>: db}</div><div class="line"></div><div class="line">    <span class="keyword">return</span> grads, cost</div></pre></td></tr></table></figure></p>
+<p>&#x8FC7;&#x7A0B;&#x8FD8;&#x662F;&#x975E;&#x5E38;&#x6E05;&#x6670;&#x7684;&#xFF0C;&#x6A21;&#x578B;&#x8BAD;&#x7EC3;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x5C06;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x548C;&#x6D4B;&#x8BD5;&#x6837;&#x672C;&#x4EE3;&#x5165;&#x6A21;&#x578B;&#xFF0C;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#x7684;&#x7CBE;&#x5EA6;&#x662F;99%&#xFF0C;&#x6D4B;&#x8BD5;&#x6837;&#x672C;&#x7684;&#x7CBE;&#x5EA6;&#x662F;70%&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">train accuracy: 99.04306220095694 %</div><div class="line">test accuracy: 70.0 %</div></pre></td></tr></table></figure></p>
+<p>&#x968F;&#x4FBF;&#x627E;&#x5F20;&#x56FE;&#xFF0C;&#x5E26;&#x5165;<code>predict(...)</code>&#x51FD;&#x6570;&#xFF0C;&#x5373;&#x53EF;&#x9A8C;&#x8BC1;&#x6709;&#x6548;&#x6027;&#x3002;</p>
+<h1 id="&#x601D;&#x8003;">&#x601D;&#x8003;</h1>
+<p>&#x786E;&#x5B9E;&#x548C;&#x4F20;&#x7EDF;&#x7684;&#x7F16;&#x7A0B;&#x601D;&#x8DEF;&#x5B8C;&#x5168;&#x4E0D;&#x540C;&#xFF1A;&#x4F20;&#x7EDF;&#x7684;&#x7F16;&#x7A0B;&#x601D;&#x8DEF;&#x4E2D;&#x5BF9;/&#x9519;&#x662F;&#x4E2A;&#x786E;&#x5B9A;&#x7684;&#x503C;&#xFF0C;&#x6B63;&#x5982;if/else&#x6216;true/false&#xFF0C;&#x975E;&#x6B64;&#x5373;&#x5F7C;&#x7684;&#x3002;&#x5F53;&#x7ED3;&#x679C;&#x548C;&#x9884;&#x671F;&#x53D1;&#x751F;&#x4E0D;&#x4E00;&#x81F4;&#xFF0C;&#x90A3;&#x53EB;bug&#xFF0C;&#x987A;&#x7740;&#x4EE3;&#x7801;&#x5F80;&#x91CC;&#x67E5;&#xFF0C;&#x4E00;&#x5B9A;&#x80FD;&#x67E5;&#x5230;&#x4E0D;&#x4E00;&#x81F4;&#x7684;&#x539F;&#x56E0;&#x3002;</p>
+<p>&#x800C;&#x6DF1;&#x5EA6;&#x5B66;&#x4E60;&#x4F3C;&#x4E4E;&#x66F4;&#x9760;&#x8FD1;&#x771F;&#x5B9E;&#x4E16;&#x754C;&#xFF0C;&#x56E0;&#x4E3A;&#x771F;&#x5B9E;&#x4E16;&#x754C;&#x4E2D;&#x5F88;&#x591A;&#x5224;&#x65AD;&#x4E0D;&#x662F;&#x975E;&#x9ED1;&#x5373;&#x767D;&#xFF0C;&#x800C;&#x662F;&#x6982;&#x7387;&#x7684;&#xFF0C;&#x6211;&#x8BA4;&#x4E3A;&#x8FD9;&#x662F;&#x4E16;&#x754C;&#x7684;&#x672C;&#x8D28;&#x3002;&#x4F46;&#x8FD9;&#x7ED9;&#x95EE;&#x9898;&#x7684;&#x89E3;&#x51B3;&#x5E26;&#x6765;&#x9EBB;&#x70E6;&#x2014;&#x2014;&#x5F53;&#x7ED3;&#x679C;&#x548C;&#x9884;&#x671F;&#x4E0D;&#x4E00;&#x81F4;&#x65F6;&#xFF0C;&#x4F60;&#x6CA1;&#x6709;&#x53EF;&#x987A;&#x85E4;&#x6478;&#x74DC;&#x7684;&#x903B;&#x8F91;&#x70B9;&#x6765;&#x8868;&#x660E;&#x5230;&#x5E95;&#x54EA;&#x91CC;&#x51FA;&#x4E86;&#x95EE;&#x9898;&#x3002;&#x6700;&#x591A;&#x53EA;&#x80FD;&#x786E;&#x8BA4;&#x201C;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x201D;&#x7684;&#x7B97;&#x6CD5;&#x662F;&#x4E0D;&#x662F;&#x6B63;&#x786E;&#xFF0C;&#x6A21;&#x578B;&#x4EA7;&#x751F;&#x7684;&#x662F;&#x4E00;&#x6279;&#x795E;&#x7ECF;&#x5143;&#xFF0C;&#x9488;&#x5BF9;&#x5177;&#x4F53;&#x7684;&#x4E00;&#x5F20;&#x56FE;&#x7247;&#xFF0C;&#x65E0;&#x6CD5;&#x4EBA;&#x8089;&#x5224;&#x65AD;&#x67D0;&#x4E2A;&#x795E;&#x7ECF;&#x5143;&#x7684;&#x6743;&#x91CD;&#x662F;&#x5426;&#x6B63;&#x786E;&#x3002;</p>
+<p>&#x4F5C;&#x4E1A;&#x91CC;images/&#x4E2D;&#x7684;&#x56FE;&#x7247;&#xFF0C;&#x6A21;&#x578B;&#x90FD;&#x80FD;&#x5224;&#x65AD;&#x6B63;&#x786E;&#xFF0C;&#x4F46;&#x6211;&#x4ECE;&#x7F51;&#x4E0A;&#x968F;&#x4FBF;&#x627E;&#x51E0;&#x5F20;&#x732B;&#x56FE;&#x6254;&#x7ED9;&#x6A21;&#x578B;&#xFF0C;&#x7ED3;&#x679C;&#x662F;&#x9519;&#x8BEF;&#x7684;&#x3002;&#x6211;&#x4E0D;&#x77E5;&#x9053;&#x8BE5;&#x5982;&#x4F55;&#x6539;&#x8FDB;&#x624D;&#x80FD;&#x8BA9;&#x65B0;&#x56FE;&#x8BC6;&#x522B;&#x6B63;&#x786E;&#x3002;&#x76F4;&#x89C2;&#x7684;&#x60F3;&#x6CD5;&#x53EF;&#x80FD;&#x662F;&#x5582;&#x7ED9;&#x6A21;&#x578B;&#x66F4;&#x591A;&#x7684;&#x8BAD;&#x7EC3;&#x6837;&#x672C;&#xFF0C;&#x53EF;&#x662F;&#x5982;&#x4F55;&#x505A;&#x51FA;&#x4E00;&#x4E2A;&#x91CF;&#x5316;&#x7684;&#x9884;&#x6D4B;&#x5462;&#xFF1F;&#x9700;&#x8981;&#x5582;&#x591A;&#x5C11;&#xFF1F;&#x80FD;&#x8FBE;&#x5230;&#x4EC0;&#x4E48;&#x6837;&#x7684;&#x6C34;&#x5E73;&#xFF1F;&#x4E0D;&#x540C;&#x7684;&#x4EBA;&#x7C7B;&#x5927;&#x8111;&#x5BF9;&#x4E8E;&#x65B0;&#x4E8B;&#x7269;&#x7684;&#x5B66;&#x4E60;&#x6548;&#x7387;&#x4E5F;&#x662F;&#x4E0D;&#x4E00;&#x6837;&#x7684;&#xFF0C;&#x5BF9;&#x4E8E;&#x540C;&#x4E00;&#x6279;&#x6837;&#x672C;&#xFF0C;&#x6709;&#x6CA1;&#x6709;&#x53EF;&#x80FD;&#x6539;&#x8FDB;&#x6A21;&#x578B;&#xFF0C;&#x4EE4;&#x5176;&#x6548;&#x679C;&#x5F97;&#x5230;&#x63D0;&#x5347;&#x5462;&#xFF1F;&#x600E;&#x4E48;&#x6539;&#x8FDB;&#xFF1F;</p>
+<p>&#x6211;&#x76F8;&#x4FE1;&#x8FD9;&#x4E9B;&#x95EE;&#x9898;&#x5728;&#x672A;&#x6765;&#x7684;&#x8BFE;&#x7A0B;&#x4E2D;&#x4F1A;&#x6709;&#x89E3;&#x7B54;&#xFF0C;&#x7EE7;&#x7EED;&#x5B66;&#x4E60;&#x5427;&#xFF01;</p>
+<hr>
+<p>&#x672C;&#x6587;&#x4EE3;&#x7801;&#x53C2;&#x89C1;<a href="https://github.com/palanceli/MachineLearningSample/blob/master/DeepLearningAIHomeWorks/mywork.py" class="uri" target="_blank" rel="external">https://github.com/palanceli/MachineLearningSample/blob/master/DeepLearningAIHomeWorks/mywork.py</a>&#x7684;<code>class Coding1_1</code>&#x90E8;&#x5206;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/随笔/" rel="tag">#随笔</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/09/2018/0309DeepLearningAI01/" rel="next" title="DeepLearning开悟">
+                <i class="fa fa-chevron-left"></i> DeepLearning开悟
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/12/2018/0312DeepLearningAI03/" rel="prev" title="DeepLearning.ai笔记（二）">
+                DeepLearning.ai笔记（二） <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/03/11/2018/0311DeepLearningAI02/"
+           data-title="DeepLearning.ai笔记（一）" data-url="http://palanceli.github.io/2018/03/11/2018/0311DeepLearningAI02/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">165</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">55</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#样本的表示"><span class="nav-text">2.1 样本的表示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归问题"><span class="nav-text">2.2 逻辑回归问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归的损失函数和成本函数"><span class="nav-text">2.3 逻辑回归的损失函数和成本函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#梯度下降法"><span class="nav-text">2.4 梯度下降法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#导数计算之计算图"><span class="nav-text">2.8 导数计算之计算图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#逻辑回归中的梯度下降法"><span class="nav-text">2.9 逻辑回归中的梯度下降法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有m个样本的梯度下降法"><span class="nav-text">2.10 有m个样本的梯度下降法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#向量化"><span class="nav-text">2.11向量化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#更多向量化的例子"><span class="nav-text">2.12 更多向量化的例子</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有m个样本的向量化逻辑回归"><span class="nav-text">2.13 有m个样本的向量化逻辑回归</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#向量化逻辑回归成本函数的梯度下降法"><span class="nav-text">2.14 向量化逻辑回归成本函数的梯度下降法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#作业"><span class="nav-text">作业</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#题目"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#主干逻辑"><span class="nav-text">主干逻辑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#训练模型"><span class="nav-text">训练模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多轮迭代"><span class="nav-text">多轮迭代</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梯度下降"><span class="nav-text">梯度下降</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#思考"><span class="nav-text">思考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
