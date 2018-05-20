@@ -1,0 +1,890 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="随笔," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x4E0A;&amp;#x4E86;&amp;#x8FD9;&amp;#x4E48;&amp;#x591A;&amp;#x8282;&amp;#x8BFE;&amp;#xFF0C;&amp;#x5F53;&amp;#x81EA;&amp;#x5DF1;&amp;#x52A8;&amp;#x624B;&amp;#x4F7F;&amp;#x7528;TensorFlow&amp;#x5199;&amp;#x673A;&amp;#x5668;&amp;#x5B66;&amp;#x4E60;&amp;#x7684;&amp;#x4EE3;&amp;#x7801;&amp;#x65F">
+<meta property="og:type" content="article">
+<meta property="og:title" content="从一个最简单的例子理解梯度下降">
+<meta property="og:url" content="http://palanceli.github.io/2018/05/20/2018/0520GradientDescent/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x4E0A;&amp;#x4E86;&amp;#x8FD9;&amp;#x4E48;&amp;#x591A;&amp;#x8282;&amp;#x8BFE;&amp;#xFF0C;&amp;#x5F53;&amp;#x81EA;&amp;#x5DF1;&amp;#x52A8;&amp;#x624B;&amp;#x4F7F;&amp;#x7528;TensorFlow&amp;#x5199;&amp;#x673A;&amp;#x5668;&amp;#x5B66;&amp;#x4E60;&amp;#x7684;&amp;#x4EE3;&amp;#x7801;&amp;#x65F">
+<meta property="og:image" content="http://palanceli.github.io/2018/05/20/2018/0520GradientDescent/img01.png">
+<meta property="og:updated_time" content="2018-05-20T08:42:44.901Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="从一个最简单的例子理解梯度下降">
+<meta name="twitter:description" content="&amp;#x4E0A;&amp;#x4E86;&amp;#x8FD9;&amp;#x4E48;&amp;#x591A;&amp;#x8282;&amp;#x8BFE;&amp;#xFF0C;&amp;#x5F53;&amp;#x81EA;&amp;#x5DF1;&amp;#x52A8;&amp;#x624B;&amp;#x4F7F;&amp;#x7528;TensorFlow&amp;#x5199;&amp;#x673A;&amp;#x5668;&amp;#x5B66;&amp;#x4E60;&amp;#x7684;&amp;#x4EE3;&amp;#x7801;&amp;#x65F">
+<meta name="twitter:image" content="http://palanceli.github.io/2018/05/20/2018/0520GradientDescent/img01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2018/05/20/2018/0520GradientDescent/"/>
+
+  <title> 从一个最简单的例子理解梯度下降 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '1Grug_XAD_ps3zyBywoo','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                从一个最简单的例子理解梯度下降
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-20T14:00:00+08:00" content="2018-05-20">
+              2018-05-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/05/20/2018/0520GradientDescent/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/20/2018/0520GradientDescent/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x4E0A;&#x4E86;&#x8FD9;&#x4E48;&#x591A;&#x8282;&#x8BFE;&#xFF0C;&#x5F53;&#x81EA;&#x5DF1;&#x52A8;&#x624B;&#x4F7F;&#x7528;TensorFlow&#x5199;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7684;&#x4EE3;&#x7801;&#x65F6;&#xFF0C;&#x8FD8;&#x662F;&#x89C9;&#x5F97;&#x6709;&#x70B9;&#x6655;&#xFF0C;&#x7ECF;&#x5E38;&#x5728;&#x4E00;&#x4E2A;&#x70B9;&#x4E0A;&#x8981;&#x7422;&#x78E8;&#x534A;&#x5929;&#x3002;&#x5B9E;&#x5728;&#x662F;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x7684;&#x601D;&#x60F3;&#x548C;&#x4F20;&#x7EDF;&#x7684;&#x7F16;&#x7A0B;&#x65B9;&#x5F0F;&#x5DEE;&#x522B;&#x592A;&#x5927;&#x4E86;&#xFF0C;&#x9700;&#x8981;&#x4E0D;&#x65AD;&#x5730;&#x8BAD;&#x7EC3;&#xFF0C;&#x5E76;&#x5728;&#x601D;&#x60F3;&#x548C;&#x4EE3;&#x7801;&#x95F4;&#x53BB;&#x505A;&#x78E8;&#x5408;&#xFF0C;&#x624D;&#x80FD;&#x8FBE;&#x5230;&#x81EA;&#x7136;&#x8FC7;&#x6E21;&#x3002;&#x672C;&#x8282;&#x5C31;&#x4ECE;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;Tensorflow&#x4EE3;&#x7801;&#x6765;&#x7406;&#x89E3;&#x5B83;&#x548C;&#x80CC;&#x540E;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x3002;<br>
+<a id="more"></a></p>
+<h1 id="&#x9898;&#x76EE;">&#x9898;&#x76EE;</h1>
+<p>&#x7ED9;&#x5B9A;&#x82E5;&#x5E72;&#x4E2A;(x, y)&#x7684;&#x6563;&#x70B9;&#xFF0C;&#x5B83;&#x4EEC;&#x5927;&#x81F4;&#x7B26;&#x5408;<code>y = w&#xB7;x + b</code>&#x7684;&#x5173;&#x7CFB;&#xFF0C;&#x4F46;&#x662F;&#x4F1A;&#x5728;&#x4E0A;&#x4E0B;&#x6D6E;&#x52A8;&#xFF0C;&#x901A;&#x8FC7;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6C42;&#x51FA;w&#x548C;b&#x7684;&#x503C;&#x3002;</p>
+<h1 id="&#x751F;&#x6210;&#x6570;&#x636E;">&#x751F;&#x6210;&#x6570;&#x636E;</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</div><div class="line"><span class="keyword">import</span> tensorflow <span class="keyword">as</span> tf</div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createData</span><span class="params">(self, m=<span class="number">100</span>, D=<span class="number">1</span>)</span>:</span></div><div class="line">    <span class="string">&apos;&apos;&apos; </span></div><div class="line">    m &#x6837;&#x672C;&#x6570;</div><div class="line">    D &#x6BCF;&#x4E2A;&#x6837;&#x672C;&#x7684;&#x7EF4;&#x5EA6;</div><div class="line">    &#x6784;&#x9020;&#x8BAD;&#x7EC3;&#x6570;&#x636E; y = 0.8x + 1.2 &#xB1; epsilon</div><div class="line">    &apos;&apos;&apos;</div><div class="line">    epsilon = <span class="number">0.01</span></div><div class="line">    X = np.float32(np.random.rand(m, D))    </div><div class="line">    Y = np.dot(<span class="number">0.8</span>, X) + <span class="number">1.2</span> + np.random.randn(m, D) * epsilon</div><div class="line">    <span class="keyword">return</span> X.T, Y.T</div></pre></td></tr></table></figure>
+<p>X&#x662F;&#x751F;&#x6210;&#x4E86;m&#x4E2A;D&#x7EF4;&#x968F;&#x673A;&#x6570;&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x7684;&#x662F;&#xFF1A;<code>np.random.rand(...)</code>&#x751F;&#x6210;&#x7684;&#x968F;&#x673A;&#x6570;&#x662F;<code>float64</code>&#xFF0C;&#x800C;&#x5728;&#x968F;&#x540E;&#x901A;&#x8FC7;<code>tf.random_uniform(...)</code>&#x751F;&#x6210;&#x7684;&#x662F;<code>float32</code>&#xFF0C;&#x4E8C;&#x8005;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x8FD0;&#x7B97;&#xFF0C;&#x56E0;&#x6B64;&#x8FD9;&#x91CC;&#x505A;&#x4E86;&#x4E00;&#x4E2A;&#x5F3A;&#x5236;&#x8F6C;&#x6362;&#x3002;X&#x4E3A;m&#xD7;D&#xFF0C;&#x4E3A;m&#xD7;1&#xFF0C;&#x5728;&#x8FD4;&#x56DE;&#x65F6;&#x9700;&#x8981;&#x505A;&#x8F6C;&#x7F6E;&#xFF1A;<br>
+<span class="math inline">\(X=\begin{bmatrix}\mid&amp;\mid&amp;&amp;\mid\\x^{(1)}&amp;x^{(2)}&amp;\cdots&amp;x^{(m)}\\ \mid&amp;\mid&amp;&amp;\mid\end{bmatrix} , Y=[y^{(1)} y^{(2)} ... y^{(m)}] \;\)</span></p>
+<p>&#x628A;&#x6570;&#x636E;&#x663E;&#x793A;&#x5728;&#x5750;&#x6807;&#x7CFB;&#x4E2D;&#xFF0C; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tc1</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="string">&apos;&apos;&apos; &#x5728;&#x56FE;&#x8868;&#x4E2D;&#x663E;&#x793A;&#x6570;&#x636E; &apos;&apos;&apos;</span></div><div class="line">    X, Y = self.createData()</div><div class="line"></div><div class="line">    plt.ylabel(<span class="string">&apos;y&apos;</span>)</div><div class="line">    plt.xlabel(<span class="string">&apos;x&apos;</span>)</div><div class="line">    plt.scatter(X, Y, s=<span class="number">1</span>, cmap=plt.cm.Spectral)</div><div class="line">    plt.show()</div></pre></td></tr></table></figure></p>
+<p>&#x5C55;&#x73B0;&#x5982;&#x4E0B;&#xFF1A;<br>
+<img src="/2018/05/20/2018/0520GradientDescent/img01.png"></p>
+<h1 id="&#x89E3;&#x9898;">&#x89E3;&#x9898;</h1>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tc2</span><span class="params">(self)</span>:</span></div><div class="line">    m = <span class="number">100</span> <span class="comment"># &#x6837;&#x672C;&#x6570;</span></div><div class="line">    D = <span class="number">1</span>   <span class="comment"># &#x6BCF;&#x4E2A;&#x6837;&#x672C;&#x7684;&#x7EF4;&#x5EA6;</span></div><div class="line">    xData, yData = self.createData(m=m, D=D)</div><div class="line"></div><div class="line">    <span class="comment"># &#x6784;&#x9020;&#x7EBF;&#x6027;&#x6A21;&#x578B; y = W&#xB7;x + b</span></div><div class="line">    b = tf.Variable(tf.zeros([<span class="number">1</span>]))</div><div class="line">    W = tf.Variable(tf.random_uniform([<span class="number">1</span>, D], minval=<span class="number">-1.0</span>, maxval=<span class="number">1.0</span>, dtype=tf.float32))</div><div class="line">    y = tf.matmul(W, xData) + b</div><div class="line"></div><div class="line">    <span class="comment"># &#x5B9A;&#x4E49;&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF1A;&#x6700;&#x5C0F;&#x5316;&#x65B9;&#x5DEE; loss = &#x2211;(y-&#x177;)&#xB2;</span></div><div class="line">    loss = tf.reduce_mean(tf.square(y - yData))</div><div class="line">    optimizer = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>) <span class="comment"># &#x3B1;=0.5</span></div><div class="line">    train = optimizer.minimize(loss)</div><div class="line"></div><div class="line">    <span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">        sess.run(tf.initialize_all_variables())</div><div class="line">        <span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">101</span>):</div><div class="line">            sess.run(train)     <span class="comment"># &#x6267;&#x884C;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#xFF0C;&#x8BAD;&#x7EC3;&#x6A21;&#x578B;</span></div><div class="line">            <span class="keyword">if</span> step % <span class="number">20</span> == <span class="number">0</span>:</div><div class="line">                evalW = sess.run(W)</div><div class="line">                w = evalW[<span class="number">0</span>][<span class="number">0</span>]</div><div class="line">                logging.info(<span class="string">&apos;03d: W = %.2f, b = %.2f&apos;</span> % (step, w, sess.run(b)))</div></pre></td></tr></table></figure>
+<p>&#x6700;&#x6838;&#x5FC3;&#x9700;&#x8981;&#x7422;&#x78E8;&#x7684;&#x4EE3;&#x7801;&#x662F;&#x7B2C;20&#x884C;<code>sess.run(train)</code>&#xFF0C;&#x5B83;&#x6267;&#x884C;&#x7684;&#x662F;<code>train = optimizer.minimize(loss)</code>&#x3002;&#x6839;&#x636E;<a href="http://localhost:4000/2018/03/11/2018/0311DeepLearningAI02/#&#x903B;&#x8F91;&#x56DE;&#x5F52;&#x4E2D;&#x7684;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#x6CD5;" target="_blank" rel="external">&#x300A;DeepLearning.ai&#x7B14;&#x8BB0;&#xFF08;&#x4E00;&#xFF09;&#x300B;</a>&#x4E2D;&#x7684;&#x7406;&#x8BBA;&#xFF0C;&#x5B83;&#x6267;&#x884C;&#x4E86;&#x4E24;&#x6B65;&#xFF1A;</p>
+<ol style="list-style-type: decimal">
+<li>&#x6B63;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#xFF1A;&#x6839;&#x636E;W&#x548C;b&#x7684;&#x5F53;&#x524D;&#x503C;&#xFF0C;&#x5C06;X&#x4EE3;&#x5165;&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF0C;&#x6C42;L</li>
+<li>&#x53CD;&#x5411;&#x4F20;&#x64AD;&#x7B97;&#x6CD5;&#xFF1A;&#x6C42;<span class="math inline">\(dW=\frac{dL}{dW}&#x548C;db=\frac{dL}{db}\)</span>&#xFF0C;&#x5E76;&#x4EE3;&#x5165;<br>
+<span class="math inline">\(W:=W-&#x3B1;&#xB7;dW&#x548C;b:=b-&#x3B1;&#xB7;db\)</span>&#x66F4;&#x65B0;&#x8FD9;&#x4E24;&#x4E2A;&#x503C;</li>
+</ol>
+<p>&#x6267;&#x884C;&#x7684;&#x7ED3;&#x679C;&#x4E3A;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">13:46 0105 INFO     000: W = 0.26, b = 2.07</div><div class="line">13:46 0105 INFO     020: W = 0.60, b = 1.31</div><div class="line">13:46 0105 INFO     040: W = 0.75, b = 1.23</div><div class="line">13:46 0105 INFO     060: W = 0.78, b = 1.21</div><div class="line">13:46 0105 INFO     080: W = 0.79, b = 1.20</div><div class="line">13:46 0105 INFO     100: W = 0.80, b = 1.20</div></pre></td></tr></table></figure></p>
+<h1 id="&#x9A8C;&#x8BC1;&#x7CBE;&#x5EA6;">&#x9A8C;&#x8BC1;&#x7CBE;&#x5EA6;</h1>
+<p>&#x5982;&#x679C;&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x7B97;&#x51FA;W&#x548C;b&#x7684;&#x503C;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x5C31;&#x6B64;&#x6253;&#x4F4F;&#x4E86;&#xFF0C;&#x800C;&#x901A;&#x5E38;&#x8FD8;&#x9700;&#x8981;&#x6839;&#x636E;&#x5F00;&#x53D1;&#x96C6;&#x6216;&#x6D4B;&#x8BD5;&#x96C6;&#x9A8C;&#x8BC1;&#x6A21;&#x578B;&#x7684;&#x7CBE;&#x5EA6;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x628A;&#x8BAD;&#x7EC3;&#x4EE3;&#x7801;&#x7A0D;&#x4F5C;&#x4FEE;&#x6539;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tcMain</span><span class="params">(self)</span>:</span></div><div class="line">    m = <span class="number">100</span> <span class="comment"># &#x6837;&#x672C;&#x6570;</span></div><div class="line">    D = <span class="number">1</span>   <span class="comment"># &#x6BCF;&#x4E2A;&#x6837;&#x672C;&#x7684;&#x7EF4;&#x5EA6;</span></div><div class="line">    xTrain, yTrain = self.createData(m=m, D=D)</div><div class="line"></div><div class="line">    <span class="comment"># &#x6784;&#x9020;&#x7EBF;&#x6027;&#x6A21;&#x578B; y = W&#xB7;x + b</span></div><div class="line">    x = tf.placeholder(<span class="string">&quot;float&quot;</span>, [<span class="number">1</span>, <span class="keyword">None</span>])</div><div class="line">    y = tf.placeholder(<span class="string">&quot;float&quot;</span>, [<span class="number">1</span>, <span class="keyword">None</span>])</div><div class="line">    b = tf.Variable(tf.zeros([<span class="number">1</span>]))</div><div class="line">    W = tf.Variable(tf.random_uniform([<span class="number">1</span>, D], minval=<span class="number">-1.0</span>, maxval=<span class="number">1.0</span>, dtype=tf.float32))</div><div class="line">    yHat = tf.matmul(W, x) + b</div><div class="line"></div><div class="line">    <span class="comment"># &#x5B9A;&#x4E49;&#x635F;&#x5931;&#x51FD;&#x6570;&#xFF1A;&#x6700;&#x5C0F;&#x5316;&#x65B9;&#x5DEE; loss = &#x2211;(y-&#x177;)&#xB2;</span></div><div class="line">    loss = tf.reduce_mean(tf.square(yHat - y))</div><div class="line">    optimizer = tf.train.GradientDescentOptimizer(<span class="number">0.5</span>) <span class="comment"># &#x3B1;=0.5</span></div><div class="line">    train = optimizer.minimize(loss)</div><div class="line"></div><div class="line">    <span class="keyword">with</span> tf.Session() <span class="keyword">as</span> sess:</div><div class="line">        sess.run(tf.initialize_all_variables())</div><div class="line">        <span class="keyword">for</span> step <span class="keyword">in</span> range(<span class="number">0</span>, <span class="number">101</span>):</div><div class="line">            sess.run(train, feed_dict={x:xTrain, y:yTrain})     <span class="comment"># &#x6267;&#x884C;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#xFF0C;&#x8BAD;&#x7EC3;&#x6A21;&#x578B;</span></div><div class="line">            <span class="keyword">if</span> step % <span class="number">20</span> == <span class="number">0</span>:</div><div class="line">                evalW = sess.run(W)</div><div class="line">                w = evalW[<span class="number">0</span>][<span class="number">0</span>]</div><div class="line">                logging.info(<span class="string">&apos;%03d: W = %.2f, b = %.2f&apos;</span> % (step, w, sess.run(b)))</div><div class="line"></div><div class="line">        <span class="comment"># &#x8BC4;&#x4F30;&#x6A21;&#x578B;</span></div><div class="line">        xDev, yDev = self.createData(m=<span class="number">10</span>, D=D)</div><div class="line">        correct_prediction = tf.reduce_mean(tf.abs(yHat - yDev)/yDev)</div><div class="line">        accuracy = float(<span class="number">1</span> - sess.run(correct_prediction, feed_dict={x: xDev})) * <span class="number">100.</span></div><div class="line">        logging.info(<span class="string">&apos;accuracy=%.2f%%&apos;</span> % accuracy)</div></pre></td></tr></table></figure></p>
+<p>&#x4E24;&#x6BB5;&#x4EE3;&#x7801;&#x5728;&#x6784;&#x9020;&#x6A21;&#x578B;&#x65F6;&#x4F5C;&#x4E86;&#x4FEE;&#x6539;&#xFF1A;&#x524D;&#x8005;&#x76F4;&#x63A5;&#x5C06;&#x8BAD;&#x7EC3;&#x96C6;&#x4EE3;&#x5165;&#x6A21;&#x578B;&#x516C;&#x5F0F;&#xFF0C;&#x8FDB;&#x5165;&#x8BAD;&#x7EC3;&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x628A;&#x6A21;&#x578B;&#x548C;&#x8BAD;&#x7EC3;&#x96C6;&#x7ED1;&#x6B7B;&#x4E86;&#x3002;&#x5C14;&#x540E;&#x5728;&#x8BC4;&#x4F30;&#x6A21;&#x578B;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9700;&#x8981;&#x518D;&#x6B21;&#x5C06;&#x5F00;&#x53D1;&#x96C6;&#x4EE3;&#x5165;&#x6A21;&#x578B;&#x516C;&#x5F0F;&#xFF0C;&#x4E3A;&#x4E86;&#x63D0;&#x9AD8;&#x590D;&#x7528;&#x6027;&#xFF0C;&#x4E0A;&#x4F8B;&#x5C06;&#x6570;&#x636E;&#x96C6;&#x6539;&#x4E3A;&#x5360;&#x4F4D;&#x7B26;&#xFF0C;&#x5728;&#x8BAD;&#x7EC3;&#x548C;&#x9A8C;&#x8BC1;&#x7684;&#x65F6;&#x5019;&#x5206;&#x522B;&#x4F20;&#x5165;&#x8BAD;&#x7EC3;&#x96C6;&#x548C;&#x5F00;&#x53D1;&#x96C6;&#x3002;<br>
+&#x628A;&#x7CBE;&#x5EA6;&#x516C;&#x5F0F;&#x5B9A;&#x4E49;&#x4E3A;&#xFF1A;<span class="math inline">\(&#x2211;|(y-&#x177;)/y|\)</span>&#x3002;<br>
+&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x7684;&#x8F93;&#x51FA;&#x4E3A;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">16:31 0107 INFO     000: W = 0.56, b = 2.04</div><div class="line">16:31 0107 INFO     020: W = 0.65, b = 1.29</div><div class="line">16:31 0107 INFO     040: W = 0.76, b = 1.22</div><div class="line">16:31 0107 INFO     060: W = 0.79, b = 1.20</div><div class="line">16:31 0107 INFO     080: W = 0.80, b = 1.20</div><div class="line">16:31 0107 INFO     100: W = 0.80, b = 1.20</div><div class="line">16:31 0114 INFO     accuracy=99.29%</div></pre></td></tr></table></figure></p>
+<h1 id="&#x603B;&#x7ED3;">&#x603B;&#x7ED3;</h1>
+<p>&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#x6CA1;&#x4EC0;&#x4E48;&#x5B9E;&#x8D28;&#x7528;&#x5904;&#xFF0C;&#x4F46;&#x662F;&#x6240;&#x6709;&#x7684;&#x673A;&#x5668;&#x5B66;&#x4E60;&#x4EE3;&#x7801;&#x5927;&#x81F4;&#x90FD;&#x662F;&#x8FD9;&#x4E48;&#x4E2A;&#x7ED3;&#x6784;&#xFF0C;&#x5F53;&#x9047;&#x5230;&#x8D39;&#x89E3;&#x7684;&#x60C5;&#x51B5;&#x65F6;&#xFF0C;&#x56DE;&#x8FC7;&#x5934;&#x6765;&#x770B;&#x770B;&#x8FD9;&#x6BB5;&#x4EE3;&#x7801;&#xFF0C;&#x80FD;&#x8FC5;&#x901F;&#x627E;&#x5230;&#x7406;&#x8BBA;&#x548C;&#x4EE3;&#x7801;&#x4E4B;&#x95F4;&#x7684;&#x6865;&#x3002;</p>
+<p>&#x672C;&#x8282;&#x4EE3;&#x7801;&#x53EF;&#x53C2;&#x89C1;&#xFF1A;<br>
+<a href="https://github.com/palanceli/MachineLearningSample/blob/master/TensorFlow/s01baseGD.py" target="_blank" rel="external">https://github.com/palanceli/MachineLearningSample/blob/master/TensorFlow/s01baseGD.py&#x4E4B;LinearRegression</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/随笔/" rel="tag">#随笔</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/19/2018/0519TensorFlowRoadmap/" rel="next" title="TensorFlow知识地图">
+                <i class="fa fa-chevron-left"></i> TensorFlow知识地图
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/05/20/2018/0520GradientDescent/"
+           data-title="从一个最简单的例子理解梯度下降" data-url="http://palanceli.github.io/2018/05/20/2018/0520GradientDescent/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">184</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">60</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#题目"><span class="nav-text">题目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生成数据"><span class="nav-text">生成数据</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解题"><span class="nav-text">解题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#验证精度"><span class="nav-text">验证精度</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#总结"><span class="nav-text">总结</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
