@@ -1,0 +1,876 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="随笔," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Deep MNIST for Experts&amp;#x662F;TensorFlow Get Started&amp;#x4E2D;HelloWorld&amp;#x7EA7;&amp;#x522B;&amp;#x7684;&amp;#x7684;&amp;#x4F8B;&amp;#x5B50;&amp;#x3002;&amp;#x5B83;&amp;#x5206;&amp;#x4E24;&amp;#x4E2A;&amp;#x7248;&amp;#x672C;&amp;#xFF1A;MNIST For ML Begin">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Deep MNIST for Experts代码分析">
+<meta property="og:url" content="http://palanceli.github.io/2018/05/20/2018/0520MNISTForExperts/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="Deep MNIST for Experts&amp;#x662F;TensorFlow Get Started&amp;#x4E2D;HelloWorld&amp;#x7EA7;&amp;#x522B;&amp;#x7684;&amp;#x7684;&amp;#x4F8B;&amp;#x5B50;&amp;#x3002;&amp;#x5B83;&amp;#x5206;&amp;#x4E24;&amp;#x4E2A;&amp;#x7248;&amp;#x672C;&amp;#xFF1A;MNIST For ML Begin">
+<meta property="og:image" content="http://palanceli.github.io/2018/05/20/2018/0520MNISTForExperts/img01.png">
+<meta property="og:image" content="http://palanceli.github.io/2018/05/20/2018/0520MNISTForExperts/img02.png">
+<meta property="og:updated_time" content="2018-05-20T15:11:05.805Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Deep MNIST for Experts代码分析">
+<meta name="twitter:description" content="Deep MNIST for Experts&amp;#x662F;TensorFlow Get Started&amp;#x4E2D;HelloWorld&amp;#x7EA7;&amp;#x522B;&amp;#x7684;&amp;#x7684;&amp;#x4F8B;&amp;#x5B50;&amp;#x3002;&amp;#x5B83;&amp;#x5206;&amp;#x4E24;&amp;#x4E2A;&amp;#x7248;&amp;#x672C;&amp;#xFF1A;MNIST For ML Begin">
+<meta name="twitter:image" content="http://palanceli.github.io/2018/05/20/2018/0520MNISTForExperts/img01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2018/05/20/2018/0520MNISTForExperts/"/>
+
+  <title> Deep MNIST for Experts代码分析 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '1Grug_XAD_ps3zyBywoo','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Deep MNIST for Experts代码分析
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-05-20T14:00:00+08:00" content="2018-05-20">
+              2018-05-20
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/05/20/2018/0520MNISTForExperts/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/05/20/2018/0520MNISTForExperts/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://www.tensorflow.org/versions/r1.1/get_started/mnist/pros#evaluate_the_model" target="_blank" rel="external">Deep MNIST for Experts</a>&#x662F;TensorFlow <code>Get Started</code>&#x4E2D;HelloWorld&#x7EA7;&#x522B;&#x7684;&#x7684;&#x4F8B;&#x5B50;&#x3002;&#x5B83;&#x5206;&#x4E24;&#x4E2A;&#x7248;&#x672C;&#xFF1A;<code>MNIST For ML Beginners</code>&#x548C;<code>Deep MNIST for Experts</code>&#x3002;&#x524D;&#x8005;&#x91C7;&#x7528;&#x6CA1;&#x6709;&#x9690;&#x85CF;&#x5C42;&#x7684;&#x68AF;&#x5EA6;&#x4E0B;&#x964D;&#xFF0C;&#x7ED3;&#x5408;&#x4E0A;&#x4E00;&#x7BC7;&#x7B14;&#x8BB0;&#x5F88;&#x5BB9;&#x6613;&#x770B;&#x660E;&#x767D;&#xFF1B;&#x540E;&#x8005;&#x4F7F;&#x7528;&#x4E86;&#x6DF1;&#x5EA6;&#x795E;&#x7ECF;&#x7F51;&#x7EDC;&#xFF0C;&#x672C;&#x8282;&#x91CD;&#x70B9;&#x5206;&#x6790;&#x5B83;&#x3002;</p>
+<a id="more"></a>
+<h1 id="&#x4EE3;&#x7801;">&#x4EE3;&#x7801;</h1>
+<p>&#x4EE3;&#x7801;&#x5728;&#x6846;&#x67B6;&#x4E0A;&#x5F88;&#x7B80;&#x5355;&#xFF0C;&#x548C;&#x4E0A;&#x4E00;&#x8282;&#x7684;&#x4F8B;&#x5B50;&#x76F8;&#x6BD4;&#xFF0C;&#x53EA;&#x4E0D;&#x8FC7;&#x591A;&#x4E86;&#x51E0;&#x5C42;&#x8FD0;&#x7B97;&#x7684;&#x53E0;&#x52A0; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">tcMain</span><span class="params">(self)</span>:</span></div><div class="line">    mnist = self.loadData()</div><div class="line">    sess = tf.InteractiveSession()</div><div class="line"></div><div class="line">    x = tf.placeholder(<span class="string">&quot;float&quot;</span>, shape=[<span class="keyword">None</span>, <span class="number">784</span>]) <span class="comment"># ?&#xD7;784</span></div><div class="line">    y_ = tf.placeholder(<span class="string">&quot;float&quot;</span>, shape=[<span class="keyword">None</span>, <span class="number">10</span>]) <span class="comment"># ?&#xD7;10</span></div><div class="line">    <span class="comment"># &#x7B2C;&#x4E00;&#x5C42;&#x5377;&#x79EF;&#xFF1A;&#x5377;&#x79EF;&#x6838;&#x4E3A;5&#xD7;5&#xFF0C;&#x901A;&#x9053;&#x6570;&#x4E3A;1&#xFF0C;&#x5171;32&#x4E2A;&#x5377;&#x79EF;&#x6838;</span></div><div class="line">    W_conv1 = self.weight_variable([<span class="number">5</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">32</span>])</div><div class="line">    b_conv1 = self.bias_variable([<span class="number">32</span>])</div><div class="line"></div><div class="line">    <span class="comment"># &#x4E3A;&#x4E86;&#x7528;&#x5377;&#x79EF;&#x5C42;&#xFF0C;&#x628A;x&#x53D8;&#x6210;&#x4E00;&#x4E2A;4d&#x5411;&#x91CF;&#xFF0C;&#x5176;&#x7B2C;2&#x3001;&#x7B2C;3&#x7EF4;&#x4E3A;&#x5BBD;&#x3001;&#x9AD8;&#xFF0C;&#x6700;&#x540E;&#x4E00;&#x7EF4;&#x4E3A;&#x989C;&#x8272;&#x901A;&#x9053;&#x6570;</span></div><div class="line">    <span class="comment"># (&#x56E0;&#x4E3A;&#x662F;&#x7070;&#x5EA6;&#x56FE;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x7684;&#x901A;&#x9053;&#x6570;&#x4E3A;1&#xFF0C;&#x5982;&#x679C;&#x662F;rgb&#x5F69;&#x8272;&#x56FE;&#xFF0C;&#x5219;&#x4E3A;3)&#x3002;</span></div><div class="line">    x_image = tf.reshape(x, [<span class="number">-1</span>,<span class="number">28</span>,<span class="number">28</span>,<span class="number">1</span>])</div><div class="line">    <span class="comment"># &#x6784;&#x9020;&#x672C;&#x5C42;&#x8FD0;&#x7B97;</span></div><div class="line">    h_conv1 = tf.nn.relu(self.conv2d(x_image, W_conv1) + b_conv1)</div><div class="line">    h_pool1 = self.max_pool_2x2(h_conv1)</div><div class="line"></div><div class="line">    <span class="comment"># &#x7B2C;&#x4E8C;&#x5C42;&#x5377;&#x79EF;</span></div><div class="line">    W_conv2 = self.weight_variable([<span class="number">5</span>, <span class="number">5</span>, <span class="number">32</span>, <span class="number">64</span>])</div><div class="line">    b_conv2 = self.bias_variable([<span class="number">64</span>])</div><div class="line"></div><div class="line">    h_conv2 = tf.nn.relu(self.conv2d(h_pool1, W_conv2) + b_conv2)</div><div class="line">    h_pool2 = self.max_pool_2x2(h_conv2)</div><div class="line"></div><div class="line">    <span class="comment"># &#x5168;&#x8FDE;&#x63A5;&#x5C42;</span></div><div class="line">    W_fc1 = self.weight_variable([<span class="number">7</span> * <span class="number">7</span> * <span class="number">64</span>, <span class="number">1024</span>])</div><div class="line">    b_fc1 = self.bias_variable([<span class="number">1024</span>])</div><div class="line"></div><div class="line">    h_pool2_flat = tf.reshape(h_pool2, [<span class="number">-1</span>, <span class="number">7</span>*<span class="number">7</span>*<span class="number">64</span>])</div><div class="line">    h_fc1 = tf.nn.relu(tf.matmul(h_pool2_flat, W_fc1) + b_fc1)</div><div class="line"></div><div class="line">    <span class="comment"># Dropout</span></div><div class="line">    <span class="comment"># &#x4E3A;&#x4E86;&#x51CF;&#x5C11;&#x8FC7;&#x62DF;&#x5408;&#xFF0C;&#x5728;&#x8F93;&#x51FA;&#x5C42;&#x4E4B;&#x524D;&#x52A0;&#x5165;dropout&#x3002;&#x7528;&#x4E00;&#x4E2A;placeholder&#x6765;&#x4EE3;&#x8868;&#x4E00;&#x4E2A;&#x795E;&#x7ECF;&#x5143;&#x7684;</span></div><div class="line">    <span class="comment"># &#x8F93;&#x51FA;&#x5728;dropout&#x4E2D;&#x4FDD;&#x6301;&#x4E0D;&#x53D8;&#x7684;&#x6982;&#x7387;&#x3002;&#x5728;&#x8BAD;&#x7EC3;&#x8FC7;&#x7A0B;&#x4E2D;&#x542F;&#x7528;dropout&#xFF0C;&#x5728;&#x6D4B;&#x8BD5;&#x8FC7;&#x7A0B;&#x4E2D;&#x5173;&#x95ED;dropout&#x3002;</span></div><div class="line">    <span class="comment"># TensorFlow&#x7684;tf.nn.dropout&#x64CD;&#x4F5C;&#x9664;&#x4E86;&#x53EF;&#x4EE5;&#x5C4F;&#x853D;&#x795E;&#x7ECF;&#x5143;&#x7684;&#x8F93;&#x51FA;&#x5916;&#xFF0C;&#x8FD8;&#x4F1A;&#x81EA;&#x52A8;&#x5904;&#x7406;&#x795E;&#x7ECF;&#x5143;&#x8F93;</span></div><div class="line">    <span class="comment"># &#x51FA;&#x503C;&#x7684;scale&#x3002;&#x6240;&#x4EE5;&#x7528;dropout&#x7684;&#x65F6;&#x5019;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x8003;&#x8651;scale&#x3002;</span></div><div class="line">    keep_prob = tf.placeholder(<span class="string">&quot;float&quot;</span>)</div><div class="line">    h_fc1_drop = tf.nn.dropout(h_fc1, keep_prob)</div><div class="line"></div><div class="line">    <span class="comment"># &#x8F93;&#x51FA;&#x5C42;</span></div><div class="line">    W_fc2 = self.weight_variable([<span class="number">1024</span>, <span class="number">10</span>])</div><div class="line">    b_fc2 = self.bias_variable([<span class="number">10</span>])</div><div class="line"></div><div class="line">    y_conv=tf.nn.softmax(tf.matmul(h_fc1_drop, W_fc2) + b_fc2)</div><div class="line"></div><div class="line">    cross_entropy = -tf.reduce_sum(y_*tf.log(y_conv))</div><div class="line">    train_step = tf.train.AdamOptimizer(<span class="number">1e-4</span>).minimize(cross_entropy)</div><div class="line">    correct_prediction = tf.equal(tf.argmax(y_conv,<span class="number">1</span>), tf.argmax(y_,<span class="number">1</span>))</div><div class="line">    accuracy = tf.reduce_mean(tf.cast(correct_prediction, <span class="string">&quot;float&quot;</span>))</div><div class="line">    sess.run(tf.initialize_all_variables())</div><div class="line"></div><div class="line">    train_writer = tf.summary.FileWriter(<span class="string">&apos;summary&apos;</span>, sess.graph)  </div><div class="line">    <span class="comment"># &#x8BAD;&#x7EC3;&#x7F51;&#x7EDC;</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">2000</span>):</div><div class="line">        batch = mnist.train.next_batch(<span class="number">50</span>)</div><div class="line">        <span class="keyword">if</span> i%<span class="number">100</span> == <span class="number">0</span>:</div><div class="line">            train_accuracy = accuracy.eval(feed_dict={</div><div class="line">                x:batch[<span class="number">0</span>], y_: batch[<span class="number">1</span>], keep_prob: <span class="number">1.0</span>})</div><div class="line">            train_accuracy = float(train_accuracy) * <span class="number">100.</span></div><div class="line">            logging.info(<span class="string">&quot;step %d, training accuracy: %.2f%%&quot;</span>%(i, train_accuracy))</div><div class="line">        train_step.run(feed_dict={x: batch[<span class="number">0</span>], y_: batch[<span class="number">1</span>], keep_prob: <span class="number">0.5</span>})</div><div class="line">    <span class="comment"># &#x9A8C;&#x8BC1;&#x6D4B;&#x8BD5;&#x96C6;</span></div><div class="line">    test_accuracy = accuracy.eval(feed_dict={</div><div class="line">            x: mnist.test.images, y_: mnist.test.labels, keep_prob: <span class="number">1.0</span>})</div><div class="line">    test_accuracy = float(test_accuracy) * <span class="number">100.</span></div><div class="line">    logging.info(<span class="string">&quot;test accuracy: %.2f%%&quot;</span>%test_accuracy)</div><div class="line"></div><div class="line">    train_writer.close()</div></pre></td></tr></table></figure></p>
+<p>&#x4F46;&#x662F;&#x4ECE;&#x4EE3;&#x7801;&#x5F97;&#x5230;&#x7F51;&#x7EDC;&#x7684;&#x7ED3;&#x6784;&#x56FE;&#x5E76;&#x4E0D;&#x5BB9;&#x6613;&#xFF1A; <img src="/2018/05/20/2018/0520MNISTForExperts/img01.png"></p>
+<h1 id="&#x4F7F;&#x7528;tf.summary&#x751F;&#x6210;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;&#x56FE;">&#x4F7F;&#x7528;tf.summary&#x751F;&#x6210;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;&#x56FE;</h1>
+<p>&#x5728;&#x7F51;&#x7EDC;&#x6784;&#x5EFA;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x6709;&#x4E00;&#x884C;&#x4EE3;&#x7801;<br>
+<code>train_writer = tf.summary.FileWriter(&apos;summary&apos;, sess.graph)</code><br>
+&#x8FD9;&#x662F;&#x7528;tf&#x81EA;&#x52A8;&#x751F;&#x6210;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;&#x3002;&#x5728;&#x4EE3;&#x7801;&#x8FD0;&#x884C;&#x5B8C;&#x6210;&#x540E;&#xFF0C;&#x5B83;&#x4F1A;&#x5728;<code>./summary</code>&#x76EE;&#x5F55;&#x4E0B;&#x751F;&#x6210;NN&#x7F51;&#x7EDC;&#x4FE1;&#x606F;&#x3002;&#x6267;&#x884C;&#x547D;&#x4EE4;&#xFF1A; <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ tensorboard --logdir=./summary</div><div class="line">TensorBoard 1.6.0 at http://palancedeMacBook-Pro.local:6006 (Press CTRL+C to quit)</div></pre></td></tr></table></figure></p>
+<p>&#x7136;&#x540E;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x4E2D;&#x8F93;&#x5165;&#xFF1A;http://localhost:6006&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x81EA;&#x52A8;&#x751F;&#x6210;&#x7684;&#x7F51;&#x7EDC;&#x7ED3;&#x6784;&#x56FE;&#xFF1A; <img src="/2018/05/20/2018/0520MNISTForExperts/img02.png"></p>
+<h1 id="&#x53C2;&#x8003;&#x8D44;&#x6599;">&#x53C2;&#x8003;&#x8D44;&#x6599;</h1>
+<p><a href="https://www.tensorflow.org/versions/r1.1/get_started/mnist/pros#evaluate_the_model" target="_blank" rel="external">Deep MNIST for Experts</a><br>
+&#x672C;&#x8282;&#x4EE3;&#x7801;&#x53EF;&#x53C2;&#x89C1;&#xFF1A;<br>
+<a href="https://github.com/palanceli/MachineLearningSample/blob/master/TensorFlow/s02mnist.py" target="_blank" rel="external">https://github.com/palanceli/MachineLearningSample/blob/master/TensorFlow/s02mnist.py&#x4E4B;MnistAdv</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/随笔/" rel="tag">#随笔</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/20/2018/0520GradientDescent/" rel="next" title="从一个最简单的例子理解梯度下降">
+                <i class="fa fa-chevron-left"></i> 从一个最简单的例子理解梯度下降
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/05/20/2018/0520MNISTForExperts/"
+           data-title="Deep MNIST for Experts代码分析" data-url="http://palanceli.github.io/2018/05/20/2018/0520MNISTForExperts/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">185</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">24</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">58</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用tf.summary生成网络结构图"><span class="nav-text">使用tf.summary生成网络结构图</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考资料"><span class="nav-text">参考资料</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
