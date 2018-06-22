@@ -1,0 +1,944 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="随笔," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="&amp;#x4ECE; https://github.com/rspivak/lsbasi &amp;#x770B;&amp;#x5230;&amp;#x4E86;&amp;#x8FD9;&amp;#x7BC7;&amp;#x6587;&amp;#x7AE0;&amp;#xFF0C;&amp;#x5B83;&amp;#x4E0D;&amp;#x4EC5;&amp;#x6DF1;&amp;#x5165;&amp;#x6D45;&amp;#x51FA;&amp;#x5730;&amp;#x8BB2;&amp;#x8FF0;&amp;#x4E86;&amp;#x60">
+<meta property="og:type" content="article">
+<meta property="og:title" content="编写编译器和解释器一">
+<meta property="og:url" content="http://palanceli.github.io/2018/06/18/2018/0618BuildASimpleInterpreter1/index.html">
+<meta property="og:site_name" content="Palance's Blog">
+<meta property="og:description" content="&amp;#x4ECE; https://github.com/rspivak/lsbasi &amp;#x770B;&amp;#x5230;&amp;#x4E86;&amp;#x8FD9;&amp;#x7BC7;&amp;#x6587;&amp;#x7AE0;&amp;#xFF0C;&amp;#x5B83;&amp;#x4E0D;&amp;#x4EC5;&amp;#x6DF1;&amp;#x5165;&amp;#x6D45;&amp;#x51FA;&amp;#x5730;&amp;#x8BB2;&amp;#x8FF0;&amp;#x4E86;&amp;#x60">
+<meta property="og:image" content="http://palanceli.github.io/2018/06/18/2018/0618BuildASimpleInterpreter1/img01.png">
+<meta property="og:image" content="http://palanceli.github.io/2018/06/18/2018/0618BuildASimpleInterpreter1/img02.png">
+<meta property="og:image" content="http://palanceli.github.io/2018/06/18/2018/0618BuildASimpleInterpreter1/img03.png">
+<meta property="og:image" content="http://palanceli.github.io/2018/06/18/2018/0618BuildASimpleInterpreter1/img04.png">
+<meta property="og:image" content="http://palanceli.github.io/2018/06/18/2018/0618BuildASimpleInterpreter1/img05.png">
+<meta property="og:updated_time" content="2018-06-19T15:10:07.747Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="编写编译器和解释器一">
+<meta name="twitter:description" content="&amp;#x4ECE; https://github.com/rspivak/lsbasi &amp;#x770B;&amp;#x5230;&amp;#x4E86;&amp;#x8FD9;&amp;#x7BC7;&amp;#x6587;&amp;#x7AE0;&amp;#xFF0C;&amp;#x5B83;&amp;#x4E0D;&amp;#x4EC5;&amp;#x6DF1;&amp;#x5165;&amp;#x6D45;&amp;#x51FA;&amp;#x5730;&amp;#x8BB2;&amp;#x8FF0;&amp;#x4E86;&amp;#x60">
+<meta name="twitter:image" content="http://palanceli.github.io/2018/06/18/2018/0618BuildASimpleInterpreter1/img01.png">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+
+
+
+  <link rel="canonical" href="http://palanceli.github.io/2018/06/18/2018/0618BuildASimpleInterpreter1/"/>
+
+  <title> 编写编译器和解释器一 | Palance's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?e9c9a05f15583e8039e36cfe85103e96";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Palance's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="st-search-show-outputs">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <form class="site-search-form">
+  <input type="text" id="st-search-input" class="st-search-input st-default-search-input" />
+</form>
+
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+    (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+    e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install', '1Grug_XAD_ps3zyBywoo','2.0.0');
+</script>
+
+
+
+    </div>
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                编写编译器和解释器一
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2018-06-18T14:00:00+08:00" content="2018-06-18">
+              2018-06-18
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/编译器/" itemprop="url" rel="index">
+                    <span itemprop="name">编译器</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2018/06/18/2018/0618BuildASimpleInterpreter1/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/06/18/2018/0618BuildASimpleInterpreter1/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>&#x4ECE; <a href="https://github.com/rspivak/lsbasi" class="uri" target="_blank" rel="external">https://github.com/rspivak/lsbasi</a> &#x770B;&#x5230;&#x4E86;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x5B83;&#x4E0D;&#x4EC5;&#x6DF1;&#x5165;&#x6D45;&#x51FA;&#x5730;&#x8BB2;&#x8FF0;&#x4E86;&#x600E;&#x4E48;&#x4ECE;&#x5934;&#x5199;&#x4E00;&#x4E2A;&#x7F16;&#x8BD1;&#x5668;&#x3001;&#x89E3;&#x91CA;&#x5668;&#xFF0C;&#x5176;&#x4E2D;&#x6709;&#x4E0D;&#x5C11;&#x95EA;&#x5149;&#x7684;&#x89C2;&#x70B9;&#x503C;&#x5F97;&#x54C1;&#x5473;&#x3002;</p>
+<a id="more"></a>
+<p>&#x6587;&#x7AE0;&#x7CFB;&#x5217;&#x5171;14&#x7BC7;&#xFF0C;&#x9996;&#x7BC7;&#x5F00;&#x5934;&#x5C31;&#x5F15;&#x5165;<a href="http://steve-yegge.blogspot.com/" target="_blank" rel="external">Steve Yegge</a>&#x725B;&#x7684;&#x4E00;&#x53E5;&#x8BDD;&#x2014;&#x2014;&#x201C;&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x77E5;&#x9053;&#x7F16;&#x8BD1;&#x5668;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;&#xFF0C;&#x4F60;&#x5C31;&#x4E0D;&#x4F1A;&#x7406;&#x89E3;&#x8BA1;&#x7B97;&#x673A;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;&#x3002;&#x5982;&#x679C;&#x4F60;&#x4E0D;&#x80FD;100%&#x786E;&#x8BA4;&#x4F60;&#x6DF1;&#x523B;&#x7406;&#x89E3;&#x7F16;&#x8BD1;&#x5668;&#x7684;&#x5DE5;&#x4F5C;&#x539F;&#x7406;&#xFF0C;&#x90A3;&#x4E48;&#x4F60;&#x591A;&#x534A;&#x662F;&#x4E0D;&#x7406;&#x89E3;&#x7684;&#x201D;&#x3002;&#x5173;&#x4E8E;<a href="http://steve-yegge.blogspot.com/" target="_blank" rel="external">Steve Yegge</a>&#x53C8;&#x662F;&#x4E00;&#x4E2A;&#x6709;&#x610F;&#x601D;&#x7684;&#x5927;&#x725B;&#xFF0C;&#x4ED6;&#x6709;&#x5F88;&#x591A;&#x535A;&#x5BA2;&#x6587;&#x7AE0;&#x88AB;&#x7FFB;&#x8BD1;&#x6210;&#x4E2D;&#x6587;&#x3002;</p>
+<h1 id="&#x6211;&#x4E3A;&#x4EC0;&#x4E48;&#x5173;&#x6CE8;&#x5B83;">&#x6211;&#x4E3A;&#x4EC0;&#x4E48;&#x5173;&#x6CE8;&#x5B83;&#xFF1F;</h1>
+<p>&#x901A;&#x5E38;&#x5B66;&#x4E60;&#x4E00;&#x95E8;&#x6280;&#x80FD;&#x90FD;&#x4F1A;&#x88AB;&#x6559;&#x80B2;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5B66;&#x4E60;&#xFF0C;&#x800C;&#x6211;&#x4E00;&#x822C;&#x90FD;&#x4E0D;&#x770B;&#x8FD9;&#x7C7B;&#x9648;&#x8FF0;&#xFF0C;&#x4E00;&#x65B9;&#x9762;&#x56E0;&#x4E3A;&#x6211;&#x5728;&#x5B66;&#x4E60;&#x4E4B;&#x524D;&#x5BF9;&#x4E8E;&#x4E3A;&#x4EC0;&#x4E48;&#x8981;&#x5B66;&#x5DF2;&#x7ECF;&#x60F3;&#x5F97;&#x5F88;&#x6E05;&#x695A;&#xFF0C;&#x53E6;&#x4E00;&#x65B9;&#x9762;&#x8FD9;&#x7C7B;&#x63CF;&#x8FF0;&#x50CF;&#x62C9;&#x5BA2;&#x7684;&#x5E7F;&#x544A;&#x4E00;&#x6837;&#x6CA1;&#x5565;&#x65B0;&#x610F;&#x3002;&#x4F46;&#x5728;&#x8FD9;&#x7BC7;&#x6587;&#x7AE0;&#x91CC;&#x5173;&#x4E8E;&#x201C;&#x4E3A;&#x4EC0;&#x4E48;&#x201D;&#x6211;&#x8FD8;&#x662F;&#x8BFB;&#x4E86;&#x4E24;&#x904D;&#xFF1A;</p>
+<ol style="list-style-type: decimal">
+<li>&#x5199;&#x4E00;&#x4E2A;&#x7F16;&#x8BD1;&#x5668;&#x548C;&#x89E3;&#x91CA;&#x5668;&#xFF0C;&#x9700;&#x8981;&#x7EC4;&#x5408;&#x4F7F;&#x7528;&#x5F88;&#x591A;&#x79CD;&#x6280;&#x672F;&#xFF0C;&#x8FD9;&#x4E9B;&#x6280;&#x672F;&#x5728;&#x5199;&#x4EFB;&#x4F55;&#x8F6F;&#x4EF6;&#x7684;&#x65F6;&#x5019;&#x90FD;&#x662F;&#x6709;&#x7528;&#x7684;&#x3002;&#x8FD9;&#x6709;&#x52A9;&#x4E8E;&#x4F60;&#x63D0;&#x5347;&#x8FD9;&#x4E9B;&#x6280;&#x80FD;&#xFF0C;&#x5E76;&#x6210;&#x4E3A;&#x66F4;&#x725B;&#x903C;&#x7684;&#x8F6F;&#x4EF6;&#x5DE5;&#x7A0B;&#x5E08;&#x3002;</li>
+<li>&#x5E2E;&#x52A9;&#x4F60;&#x6DF1;&#x523B;&#x7406;&#x89E3;&#x8BA1;&#x7B97;&#x673A;&#x662F;&#x5982;&#x4F55;&#x5DE5;&#x4F5C;&#x7684;&#x3002;&#x7F16;&#x8BD1;&#x5668;&#x548C;&#x89E3;&#x91CA;&#x5668;&#x5728;&#x5916;&#x90E8;&#x770B;&#x6765;&#x5C31;&#x50CF;&#x9B54;&#x672F;&#x4E00;&#x6837;&#xFF0C;&#x4F46;&#x662F;&#x4F60;&#x4E0D;&#x5E94;&#x8BE5;&#x6EE1;&#x8DB3;&#x4E8E;&#x8FD9;&#x79CD;&#x5883;&#x754C;&#xFF0C;&#x800C;&#x5E94;&#x8BE5;&#x63ED;&#x5F00;&#x6784;&#x5EFA;&#x5B83;&#x4EEC;&#x7684;&#x795E;&#x79D8;&#x9762;&#x7EB1;&#xFF0C;&#x7406;&#x89E3;&#x5185;&#x90E8;&#x673A;&#x5236;&#x8BA9;&#x4E00;&#x5207;&#x5C3D;&#x5728;&#x638C;&#x63A7;&#x3002;</li>
+<li>&#x5982;&#x679C;&#x4F60;&#x8981;&#x521B;&#x5EFA;&#x81EA;&#x5DF1;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x6216;&#x8005;&#x7279;&#x5B9A;&#x9886;&#x57DF;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x4F60;&#x5C31;&#x5FC5;&#x987B;&#x81EA;&#x5DF1;&#x5199;&#x89E3;&#x91CA;&#x5668;&#x548C;&#x7F16;&#x8BD1;&#x5668;&#x3002;&#x6700;&#x8FD1;&#x65B0;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x4E0D;&#x65AD;&#x6D8C;&#x73B0;&#xFF0C;Elixir, Go, Rust&#x7B49;&#x7B49;&#x3002;</li>
+</ol>
+<p>&#x7B2C;1&#x70B9;&#x662F;&#x6211;&#x5728;&#x8BFB;&#x5B8C;&#x5168;&#x90E8;&#x6587;&#x7AE0;&#x540E;&#x611F;&#x540C;&#x8EAB;&#x53D7;&#x7684;&#xFF0C;&#x672C;&#x6765;&#x4E0D;&#x6253;&#x7B97;&#x5728;&#x8FD9;&#x4E2A;&#x5C42;&#x9762;&#x82B1;&#x592A;&#x591A;&#x7CBE;&#x529B;&#xFF0C;&#x56E0;&#x4E3A;&#x6211;&#x5728;&#x4ECA;&#x5E74;&#x5B66;&#x4E60;&#x7684;&#x8DEF;&#x7EBF;&#x56FE;&#x662F;&#x673A;&#x5668;&#x5B66;&#x4E60;&#xFF0C;&#x4E86;&#x89E3;&#x7F16;&#x8BD1;&#x5668;&#x662F;&#x4E3A;&#x4E86;&#x89E3;&#x51B3;iOS&#x4E0B;&#x4F7F;&#x7528;OC&#x70ED;&#x66F4;&#x65B0;&#x7684;&#x95EE;&#x9898;&#x3002;&#x4F46;&#x662F;&#x8BFB;&#x4E86;&#x8FD9;&#x4E00;&#x7CFB;&#x5217;&#x7684;&#x6587;&#x7AE0;&#x4E4B;&#x540E;&#xFF0C;&#x4E0D;&#x4EC5;&#x51B3;&#x5B9A;&#x518D;&#x6DF1;&#x5165;&#x7CBE;&#x8BFB;&#x4E00;&#x904D;&#xFF0C;&#x8FD8;&#x6709;&#x5FC5;&#x8981;&#x8DDF;&#x7740;&#x4E00;&#x8D77;&#x52A8;&#x624B;&#x73A9;&#x73A9;&#xFF0C;&#x8FD9;&#x662F;&#x4E00;&#x6BB5;&#x6709;&#x8DA3;&#x3001;&#x6709;&#x6599;&#x7684;&#x65C5;&#x7A0B;&#x3002;</p>
+<p>&#x7B2C;3&#x70B9;&#x542C;&#x8D77;&#x6765;&#x6709;&#x70B9;&#x7275;&#x5F3A;&#xFF0C;&#x5C3D;&#x7BA1;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x5C42;&#x51FA;&#x4E0D;&#x7A77;&#xFF0C;&#x4F46;&#x8FD9;&#x4E16;&#x754C;&#x4E0A;&#x9700;&#x8981;&#x81EA;&#x5DF1;&#x8BBE;&#x8BA1;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#x5E76;&#x4E14;&#x6709;&#x4EF7;&#x503C;&#x7684;&#x4ECD;&#x662F;&#x51E4;&#x6BDB;&#x9E9F;&#x89D2;&#x3002;&#x4F46;&#x6700;&#x8FD1;&#x8FD8;&#x771F;&#x662F;&#x9047;&#x5230;&#x4E86;&#x8FD9;&#x7C7B;&#x7684;&#x6311;&#x6218;&#x2014;&#x2014;&#x6211;&#x7684;&#x76EE;&#x6807;&#x4E0D;&#x662F;&#x8BBE;&#x8BA1;&#x4E00;&#x95E8;&#x88AB;&#x5E7F;&#x6CDB;&#x5E94;&#x7528;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x800C;&#x662F;&#x8981;&#x8BBE;&#x8BA1;&#x4E00;&#x4E2A;OC&#x7684;&#x7F16;&#x8BD1;&#x5668;&#x548C;&#x89E3;&#x91CA;&#x5668;&#xFF0C;&#x4EE5;&#x652F;&#x6301;iOS&#x4E0B;&#x4EE3;&#x7801;&#x7684;&#x70ED;&#x66F4;&#x65B0;&#x3002;</p>
+<h1 id="&#x4EC0;&#x4E48;&#x662F;&#x7F16;&#x8BD1;&#x5668;&#x548C;&#x89E3;&#x91CA;&#x5668;">&#x4EC0;&#x4E48;&#x662F;&#x7F16;&#x8BD1;&#x5668;&#x548C;&#x89E3;&#x91CA;&#x5668;&#xFF1F;</h1>
+<p>&#x7FFB;&#x8BD1;&#x5668;&#x548C;&#x89E3;&#x91CA;&#x5668;&#x7684;&#x4F5C;&#x7528;&#x90FD;&#x662F;&#x5C06;&#x9AD8;&#x7EA7;&#x8BED;&#x8A00;&#x5199;&#x7684;&#x6E90;&#x4EE3;&#x7801;&#x7FFB;&#x8BD1;&#x6210;&#x66F4;&#x4F4E;&#x7EA7;&#x7684;&#x5F62;&#x5F0F;&#x3002;<strong>&#x7F16;&#x8BD1;&#x5668;Compiler</strong>&#x76F4;&#x63A5;&#x5C06;&#x5B83;&#x7FFB;&#x8BD1;&#x6210;&#x673A;&#x5668;&#x8BED;&#x8A00;&#xFF0C;&#x800C;<strong>&#x89E3;&#x91CA;&#x5668;Interpreper</strong>&#x5219;&#x662F;&#x5C06;&#x5B83;&#x7FFB;&#x8BD1;&#x6210;&#x4ECB;&#x4E8E;&#x9AD8;&#x7EA7;&#x8BED;&#x8A00;&#x548C;&#x673A;&#x5668;&#x8BED;&#x8A00;&#x7684;&#x4E2D;&#x95F4;&#x5F62;&#x5F0F;&#x3002;&#x53C2;&#x8003;&#x300A;&#x8BA1;&#x7B97;&#x673A;&#x7CFB;&#x7EDF;&#x8981;&#x7D20;&#x2014;&#x2014;&#x4ECE;&#x96F6;&#x5F00;&#x59CB;&#x6784;&#x5EFA;&#x73B0;&#x4EE3;&#x8BA1;&#x7B97;&#x673A;&#x300B;&#x7684;&#x63D2;&#x56FE;&#xFF1A; <img src="/2018/06/18/2018/0618BuildASimpleInterpreter1/img01.png"></p>
+<p>&#x56FE;&#x4E2D;&#x7684;<strong>&#x7F16;&#x8BD1;&#x5668;+&#x865A;&#x62DF;&#x673A;+&#x6C47;&#x7F16;&#x7F16;&#x8BD1;&#x5668;</strong>&#x662F;&#x672C;&#x6587;&#x8BF4;&#x7684;&#x7F16;&#x8BD1;&#x5668;&#xFF0C;&#x56FE;&#x4E2D;&#x7684;<strong>&#x7F16;&#x8BD1;&#x5668;</strong>&#x662F;&#x672C;&#x6587;&#x4E2D;&#x7684;&#x89E3;&#x91CA;&#x5668;&#x3002;</p>
+<p>&#x89E3;&#x91CA;&#x5668;&#x5904;&#x7406;&#x4EE3;&#x7801;&#x7684;&#x5B8C;&#x6574;&#x6D41;&#x7A0B;&#x5982;&#x4E0B;&#xFF1A;</p>
+<p><img src="/2018/06/18/2018/0618BuildASimpleInterpreter1/img02.png"> <strong>&#x8BCD;&#x6CD5;&#x5206;&#x6790;lexical analyzer</strong>&#x662F;&#x5C06;&#x8F93;&#x5165;&#x7684;&#x5B57;&#x7B26;&#x6D41;&#x5206;&#x5272;&#x6210;token&#xFF0C;&#x8FD9;&#x662F;&#x89E3;&#x91CA;&#x5176;&#x5904;&#x7406;&#x4EE3;&#x7801;&#x7684;&#x7B2C;&#x4E00;&#x6B65;&#xFF0C;&#x5B83;&#x5C06;&#x8F93;&#x5165;&#x5B57;&#x7B26;&#x6D41;&#x8F6C;&#x6210;token&#x6D41;&#x3002;<br>
+<strong>token</strong>&#x662F;&#x5177;&#x6709;&#x7C7B;&#x578B;&#x548C;&#x503C;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x7528;&#x6765;&#x63CF;&#x8FF0;&#x7F16;&#x8BD1;&#x540E;&#x7684;&#x57FA;&#x672C;&#x5355;&#x4F4D;&#x3002; <strong>&#x8BCD;&#x4F4D;lexeme</strong>&#x662F;&#x5F62;&#x6210;&#x4E00;&#x4E2A;token&#x7684;&#x5B57;&#x7B26;&#x5E8F;&#x5217;&#x3002;<br>
+&#x4ECE;token&#x6D41;&#x4E2D;&#x67E5;&#x627E;&#x7B26;&#x5408;&#x9884;&#x671F;&#x7684;&#x8BED;&#x6CD5;&#x7ED3;&#x6784;&#x7684;&#x8FC7;&#x7A0B;&#x79F0;&#x4E3A;<strong>&#x89E3;&#x6790;parsing</strong>&#x4E5F;&#x79F0;&#x4E3A;<strong>&#x8BED;&#x6CD5;&#x5206;&#x6790;syntax analysis</strong>&#xFF0C;&#x6267;&#x884C;&#x89E3;&#x6790;&#x7684;&#x90E8;&#x5206;&#x79F0;&#x4E3A;<strong>&#x89E3;&#x6790;&#x5668;parser</strong>&#x4E5F;&#x79F0;&#x4E3A;<strong>&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5668;syntax analyzer</strong>&#x3002;</p>
+<h1 id="&#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x5668;">&#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x5668;</h1>
+<p>&#x51FD;&#x6570;<code>Interpreper::get_next_token()</code>&#x627F;&#x62C5;<strong>&#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x5668;lexical analyzer</strong>&#x7684;&#x89D2;&#x8272;&#xFF0C;&#x6BCF;&#x6B21;&#x8C03;&#x7528;&#x4ECE;&#x8F93;&#x5165;&#x5B57;&#x7B26;&#x6D41;&#x4E2D;&#x89E3;&#x6790;&#x4E00;&#x4E2A;token&#x5E76;&#x8FD4;&#x56DE;&#xFF1A; <img src="/2018/06/18/2018/0618BuildASimpleInterpreter1/img03.png"></p>
+<p>&#x5728;Part1&#x4E2D;&#xFF0C;&#x4E3B;&#x903B;&#x8F91;&#x5199;&#x5728;&#x51FD;&#x6570;<code>Interpreper::expr()</code>&#x4E2D;&#xFF1A; <img src="/2018/06/18/2018/0618BuildASimpleInterpreter1/img04.png"> <code>Interpreper::get_next_token()</code>&#x8D1F;&#x8D23;&#x89E3;&#x6790;&#x4E00;&#x4E2A;token&#xFF0C;<code>Interpreper::eat(...)</code>&#x8D1F;&#x8D23;&#x786E;&#x8BA4;&#x8BE5;token&#x662F;&#x5426;&#x7B26;&#x5408;&#x9884;&#x671F;&#xFF0C;&#x5E76;&#x6267;&#x884C;&#x4E0B;&#x4E00;&#x6B21;<code>Interpreper::get_next_token()</code>&#x3002;<br>
+<code>Interpreper::expr()</code>&#x627F;&#x62C5;<strong>&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5668;syntax analyzer</strong>&#x7684;&#x89D2;&#x8272;&#xFF0C;&#x5B83;&#x5199;&#x6B7B;&#x4E86;&#x89E3;&#x6790;&#x7684;&#x987A;&#x5E8F;&#x662F;&#xFF1A;<code>INTEGER - PLUS - INTEGER</code>&#x2014;&#x2014;&#x8FD9;&#x5C31;&#x662F;&#x7B26;&#x5408;&#x9884;&#x671F;&#x7684;&#x8BED;&#x6CD5;&#x89C4;&#x8303;&#x3002;&#x5C06;<code>get_next_token()</code>&#x548C;<code>eat(...)</code>&#x5206;&#x5F00;&#x662F;&#x4E3A;&#x4E86;&#x5C06;&#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x548C;&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5206;&#x79BB;&#x2014;&#x2014;&#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x53EA;&#x5173;&#x6CE8;&#x8F93;&#x5165;&#x4E32;&#x7684;&#x5408;&#x6CD5;&#x6027;&#xFF0C;&#x800C;&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5219;&#x5173;&#x6CE8;token&#x6D41;&#x7684;&#x987A;&#x5E8F;&#x662F;&#x5426;&#x7B26;&#x5408;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x3002; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">(object)</span>:</span></div><div class="line">    ...</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">&apos;&apos;&apos; &#x53EA;&#x8D1F;&#x8D23;&#x89E3;&#x6790;&#x51FA;&#x4E00;&#x4E2A;&#x5408;&#x6CD5;&#x7684;Token&#x5B57;&#x4E32; &apos;&apos;&apos;</span></div><div class="line">        ...</div><div class="line">        <span class="keyword">if</span> current_char.isdigit():</div><div class="line">            token = Token(INTEGER, int(current_char))</div><div class="line">            self.pos += <span class="number">1</span></div><div class="line">            <span class="keyword">return</span> token</div><div class="line"></div><div class="line">        <span class="keyword">if</span> current_char == <span class="string">&apos;+&apos;</span>:</div><div class="line">            token = Token(PLUS, current_char)</div><div class="line">            self.pos += <span class="number">1</span></div><div class="line">            <span class="keyword">return</span> token</div><div class="line">        ...</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></div><div class="line">        <span class="string">&apos;&apos;&apos; &#x5982;&#x679C;dangqianToken&#x7B26;&#x5408;&#x9884;&#x671F;&#xFF0C;&#x5219;&#x7EE7;&#x7EED;&#x6267;&#x884C;&#x8BCD;&#x6CD5;&#x5206;&#x6790; &apos;&apos;&apos;</span></div><div class="line">        ...</div><div class="line">        <span class="keyword">if</span> self.current_token.type == token_type:</div><div class="line">            self.current_token = self.get_next_token()</div><div class="line">        ...</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></div><div class="line">        <span class="string">&apos;&apos;&apos; &#x4EE5;&#x6B64;&#x83B7;&#x53D6;&#xFF1A;INTEGER - PLUS - INTEGER&#xFF0C;&#x5B8C;&#x6210;&#x8BA1;&#x7B97; &apos;&apos;&apos;</span></div><div class="line">        ...</div><div class="line">        self.current_token = self.get_next_token()</div><div class="line">        ...</div><div class="line">        left = self.current_token</div><div class="line">        self.eat(INTEGER)</div><div class="line">        ...</div><div class="line">        op = self.current_token</div><div class="line">        self.eat(PLUS)</div><div class="line">        ...</div><div class="line">        right = self.current_token</div><div class="line">        self.eat(INTEGER)</div><div class="line">        ...</div><div class="line">        result = left.value + right.value</div><div class="line">        <span class="keyword">return</span> result</div></pre></td></tr></table></figure></p>
+<h2 id="part2">Part2</h2>
+<p>&#x5728;&#x7B2C;&#x4E8C;&#x7BC7;&#x4E2D;&#x6DFB;&#x52A0;&#x4E86;&#x4E09;&#x4E2A;&#x529F;&#x80FD;&#xFF1A;<br>
+&#x2460;&#x5904;&#x7406;&#x7A7A;&#x683C;<br>
+&#x2461;&#x652F;&#x6301;&#x591A;&#x4F4D;&#x6570;&#x5B57;<br>
+&#x2462;&#x652F;&#x6301;&#x51CF;&#x6CD5;<br>
+&#x663E;&#x7136;&#x8FD9;&#x4E09;&#x90E8;&#x5206;&#x90FD;&#x4E0E;&#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x5668;&#x76F8;&#x5173;&#x3002;&#x5728;<code>Interpreper::get_next_token()</code>&#x8FC7;&#x7A0B;&#x4E2D;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x5F53;&#x524D;&#x7B26;&#x53F7;&#x662F;&#x7A7A;&#x683C;&#xFF0C;&#x5C31;&#x7EE7;&#x7EED;&#x5411;&#x540E;&#x89E3;&#x6790;&#xFF1B;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x662F;&#x6570;&#x5B57;&#xFF0C;&#x5219;&#x7EE7;&#x7EED;&#x5411;&#x540E;&#x89E3;&#x6790;&#xFF0C;&#x76F4;&#x5230;&#x975E;&#x6570;&#x5B57;&#xFF0C;&#x518D;&#x628A;&#x521A;&#x521A;&#x7F13;&#x5B58;&#x7684;&#x5B57;&#x7A9C;&#x8F6C;&#x6210;&#x6570;&#x503C;&#xFF1B;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x662F;&#x7B26;&#x53F7;<code>-</code>&#xFF0C;&#x5219;&#x8FD4;&#x56DE;Token&#x3002; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">skip_whitespace</span><span class="params">(self)</span>:</span> <span class="comment"># &#x2460;</span></div><div class="line">    <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> self.current_char.isspace():</div><div class="line">        self.advance()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">integer</span><span class="params">(self)</span>:</span>          <span class="comment"># &#x2461;&#x5B83;&#x548C;&#x2460;&#x7684;&#x5B9E;&#x73B0;&#x975E;&#x5E38;&#x76F8;&#x4F3C;</span></div><div class="line">    ...</div><div class="line">    result = <span class="string">&apos;&apos;</span></div><div class="line">    <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span> <span class="keyword">and</span> self.current_char.isdigit():</div><div class="line">        result += self.current_char</div><div class="line">        self.advance()</div><div class="line">    <span class="keyword">return</span> int(result)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></div><div class="line">    ...</div><div class="line">    <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">        <span class="keyword">if</span> self.current_char.isspace():</div><div class="line">            self.skip_whitespace()   <span class="comment"># &#x2460;</span></div><div class="line">            <span class="keyword">continue</span></div><div class="line"></div><div class="line">        <span class="keyword">if</span> self.current_char.isdigit():</div><div class="line">            <span class="keyword">return</span> Token(INTEGER, self.integer())</div><div class="line">        ...</div><div class="line">        <span class="keyword">if</span> self.current_char == <span class="string">&apos;-&apos;</span>: <span class="comment"># &#x2462;</span></div><div class="line">            self.advance()</div><div class="line">            <span class="keyword">return</span> Token(MINUS, <span class="string">&apos;-&apos;</span>)</div><div class="line">        ...</div></pre></td></tr></table></figure></p>
+<p>&#x6700;&#x540E;&#x5728;<code>Interpreper::expr()</code>&#x4E2D;&#x66F4;&#x65B0;&#x8BED;&#x4E49;&#x5206;&#x6790;&#x903B;&#x8F91;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></div><div class="line">    ...</div><div class="line">    self.current_token = self.get_next_token()</div><div class="line">    ...</div><div class="line">    left = self.current_token</div><div class="line">    self.eat(INTEGER)</div><div class="line">    ...</div><div class="line">    op = self.current_token</div><div class="line">    <span class="keyword">if</span> op.type == PLUS:</div><div class="line">        self.eat(PLUS)</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        self.eat(MINUS) <span class="comment"># &#x652F;&#x6301;&#x51CF;&#x53F7;&#x8FD0;&#x7B97;</span></div><div class="line">    ...</div><div class="line">    right = self.current_token</div><div class="line">    self.eat(INTEGER)</div><div class="line">    ...</div><div class="line">    <span class="keyword">if</span> op.type == PLUS:</div><div class="line">        result = left.value + right.value</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        result = left.value - right.value</div><div class="line">    <span class="keyword">return</span> result</div></pre></td></tr></table></figure></p>
+<h1 id="&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5668;">&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5668;</h1>
+<p>&#x5B66;&#x4E60;&#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x5668;&#x65F6;&#x5DF2;&#x7ECF;&#x63A5;&#x89E6;&#x5230;&#x4E86;&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5668;<code>Interpreper::expr()</code>&#xFF0C;&#x90A3;&#x662F;&#x4E00;&#x4E2A;&#x6781;&#x5176;&#x7B80;&#x964B;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x5B83;hard code&#x4E86;&#x201C;&#x6574;&#x578B;&#x6570; &#x2192; &#x52A0;/&#x51CF; &#x2192; &#x6574;&#x578B;&#x6570;&#x201D;&#x7684;&#x8BED;&#x6CD5;&#x903B;&#x8F91;&#x3002;&#x5728;&#x6587;&#x7AE0;&#x7684;<a href="https://ruslanspivak.com/lsbasi-part3/" target="_blank" rel="external">Part3</a>&#x5BF9;&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5668;&#x505A;&#x4E86;&#x6269;&#x5C55;&#xFF0C;&#x4F7F;&#x4E4B;&#x652F;&#x6301;&#x6CA1;&#x6709;&#x62EC;&#x53F7;&#x7684;&#x6574;&#x578B;&#x6570;&#x503C;&#x7684;&#x52A0;&#x51CF;&#x8FD0;&#x7B97;&#xFF1A;</p>
+<p><img src="/2018/06/18/2018/0618BuildASimpleInterpreter1/img05.png"> &#x7531;&#x4E8E;&#x53EA;&#x6D89;&#x53CA;&#x5230;&#x8BED;&#x6CD5;&#x89C4;&#x5219;&#x7684;&#x53D8;&#x5316;&#xFF0C;&#x56E0;&#x6B64;&#x5728;&#x4EE3;&#x7801;&#x4E0A;&#x53EA;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5668;&#x5373;&#x53EF;&#x3002;&#x8FD9;&#x91CC;&#x5C31;&#x663E;&#x793A;&#x51FA;&#x4E86;&#x628A;&#x8BCD;&#x6CD5;&#x3001;&#x8BED;&#x6CD5;&#x5206;&#x5F00;&#x7684;&#x597D;&#x5904;&#x3002; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">term</span><span class="params">(self)</span>:</span></div><div class="line">    <span class="string">&apos;&apos;&apos; &#x53EA;&#x63A5;&#x53D7;INTEGER&#x4E00;&#x79CD;term &apos;&apos;&apos;</span></div><div class="line">    token = self.current_token</div><div class="line">    self.eat(INTEGER)</div><div class="line">    <span class="keyword">return</span> token.value</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></div><div class="line">    ...</div><div class="line">    self.current_token = self.get_next_token()</div><div class="line"></div><div class="line">    result = self.term()</div><div class="line">    <span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (PLUS, MINUS):</div><div class="line">        token = self.current_token</div><div class="line">        <span class="keyword">if</span> token.type == PLUS:</div><div class="line">            self.eat(PLUS)</div><div class="line">            result = result + self.term()</div><div class="line">        <span class="keyword">elif</span> token.type == MINUS:</div><div class="line">            self.eat(MINUS)</div><div class="line">            result = result - self.term()</div><div class="line"></div><div class="line">    <span class="keyword">return</span> result</div></pre></td></tr></table></figure></p>
+<p>&#x800C;&#x4E14;&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5668;&#x7684;&#x4EE3;&#x7801;&#x548C;&#x8BED;&#x6CD5;&#x56FE;&#x662F;&#x76F4;&#x63A5;&#x5BF9;&#x5E94;&#x7684;&#xFF0C;&#x975E;&#x5E38;&#x76F4;&#x89C2;&#x3002;</p>
+<h1 id="&#x4E0A;&#x4E0B;&#x6587;&#x65E0;&#x5173;&#x6587;&#x6CD5;&#x548C;bnf&#x8868;&#x793A;&#x6CD5;">&#x4E0A;&#x4E0B;&#x6587;&#x65E0;&#x5173;&#x6587;&#x6CD5;&#x548C;BNF&#x8868;&#x793A;&#x6CD5;</h1>
+<p><code>&#x4E0A;&#x4E0B;&#x6587;&#x65E0;&#x5173;&#x8BED;&#x6CD5;context-free grammars</code>&#x6216;<code>BNF&#xFF08;Backus-Naur Form&#xFF09;&#x8868;&#x793A;&#x6CD5;</code>&#x662F;&#x4E00;&#x5957;&#x7528;&#x6765;&#x8868;&#x793A;&#x8BED;&#x6CD5;&#x89C4;&#x5219;&#x7684;&#x534F;&#x8BAE;&#xFF0C;&#x5F62;&#x5982;&#xFF1A;<br>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">expr    : factor((MUL|DIV) factor)*</div><div class="line">factor  : INTEGER</div></pre></td></tr></table></figure></p>
+<p>BNF&#x8868;&#x793A;&#x6CD5;&#x7684;&#x4F18;&#x70B9;&#x5728;&#x4E8E;&#xFF1A;&#x5B83;&#x66F4;&#x7D27;&#x51D1;&#xFF0C;&#x4E5F;&#x662F;&#x66F4;&#x6587;&#x6863;&#x5316;&#x7684;&#x8868;&#x8FF0;&#x65B9;&#x5F0F;&#xFF0C;&#x4ECE;&#x8BE5;&#x8868;&#x8FF0;&#x6CD5;&#x5230;&#x4EE3;&#x7801;&#x7684;&#x8F6C;&#x6362;&#x6BD4;&#x8F83;&#x5BB9;&#x6613;&#x3002;<br>
+&#x5982;&#x4E0A;&#x4F8B;&#x6240;&#x793A;&#xFF0C;&#x4E00;&#x4E2A;&#x8BED;&#x6CD5;&#x7531;&#x4E00;&#x7CFB;&#x5217;&#x89C4;&#x5219;&#x7EC4;&#x6210;&#x3002;&#x4E00;&#x6761;&#x89C4;&#x5219;&#x5192;&#x53F7;&#x5DE6;&#x7AEF;&#x7531;&#x4E00;&#x4E2A;&#x975E;&#x7EC8;&#x7ED3;&#x7B26;&#x7EC4;&#x6210;&#xFF0C;&#x79F0;&#x4E3A;<strong>&#x5934;&#x90E8;</strong>&#x6216;<strong>&#x5DE6;&#x4FA7;</strong>&#xFF0C;&#x5192;&#x53F7;&#x53F3;&#x7AEF;&#x7531;&#x4E00;&#x7CFB;&#x5217;&#x7EC8;&#x7ED3;&#x7B26;&#x6216;&#x975E;&#x7EC8;&#x7ED3;&#x7B26;&#x7EC4;&#x6210;&#xFF0C;&#x79F0;&#x4E3A;<strong>&#x4E3B;&#x4F53;</strong>&#x6216;<strong>&#x53F3;&#x4FA7;</strong>&#x3002;<br>
+&#x4E0A;&#x4F8B;&#x4E2D;&#x50CF;MUL, DIV&#x548C;INTEGER&#x8FD9;&#x6837;&#x7684;&#x53D8;&#x91CF;&#x79F0;&#x4E3A;<strong>&#x7EC8;&#x7ED3;&#x7B26;</strong>&#xFF0C;&#x50CF;exp, factor&#x8FD9;&#x6837;&#x7684;&#x53D8;&#x91CF;&#x79F0;&#x4E3A;<strong>&#x975E;&#x7EC8;&#x7ED3;&#x7B26;</strong>&#x3002;<br>
+&#x7B2C;&#x4E00;&#x6761;&#x89C4;&#x5219;&#x5DE6;&#x4FA7;&#x7684;&#x975E;&#x7EC8;&#x7ED3;&#x7B26;&#x79F0;&#x4E3A;<strong>&#x5F00;&#x59CB;&#x7B26;&#x53F7;</strong>&#xFF0C;&#x4E0A;&#x4F8B;&#x4E2D;&#x7684;&#x5F00;&#x59CB;&#x7B26;&#x53F7;&#x662F;expr&#x3002;<br>
+&#x672C;&#x6587;&#x4F7F;&#x7528;&#x7684;BNF&#x8868;&#x793A;&#x6CD5;&#x662F;&#x4E00;&#x7C7B;&#x53D8;&#x79CD;&#xFF0C;&#x5176;&#x4E2D;&#x7684;&#x7B26;&#x53F7;&#x542B;&#x4E49;&#x4E3A;&#xFF1A;</p>
+<ul>
+<li><code>|</code>&#x8868;&#x793A;&#x6216;</li>
+<li><code>(...)</code>&#x8868;&#x793A;&#x4E00;&#x7EC4;&#x7EC8;&#x7ED3;&#x7B26;&#x6216;&#x975E;&#x7EC8;&#x7ED3;&#x7B26;&#x7684;&#x7EC4;&#x5408;</li>
+<li><code>(...)*</code>&#x8868;&#x793A;0&#x4E2A;&#x6216;&#x591A;&#x4E2A;&#x7EC4;&#x5408;</li>
+</ul>
+<p>&#x901A;&#x8FC7;&#x89E3;&#x91CA;&#x8BED;&#x6CD5;&#x5F62;&#x6210;&#x7684;&#x53E5;&#x5B50;&#x6765;&#x5B9A;&#x4E49;&#x4E00;&#x79CD;&#x8BED;&#x8A00;&#xFF0C;&#x89E3;&#x91CA;&#x7684;&#x6D41;&#x7A0B;&#x4E3A;&#xFF1A;&#x4ECE;&#x5F00;&#x59CB;&#x7B26;&#x53F7;&#x4E3A;&#x8D77;&#x70B9;&#xFF0C;&#x53CD;&#x590D;&#x4F7F;&#x7528;&#x89C4;&#x5219;&#x4E3B;&#x4F53;&#x66FF;&#x6362;&#x975E;&#x7EC8;&#x7ED3;&#x7B26;&#xFF0C;&#x76F4;&#x5230;&#x751F;&#x6210;&#x7684;&#x53E5;&#x5B50;&#x4EC5;&#x5305;&#x542B;&#x7EC8;&#x7ED3;&#x7B26;&#x3002;&#x8BE5;&#x53E5;&#x5B50;&#x5C31;&#x6784;&#x6210;&#x4E86;&#x8BED;&#x6CD5;&#x6240;&#x5B9A;&#x4E49;&#x7684;&#x8BED;&#x8A00;&#x3002;<br>
+&#x6309;&#x7167;&#x8FD9;&#x79CD;&#x89C4;&#x5219;&#xFF0C;&#x5982;&#x679C;&#x8BED;&#x6CD5;&#x65E0;&#x6CD5;&#x6D3E;&#x751F;&#x51FA;&#x67D0;&#x4E2A;&#x8868;&#x8FBE;&#x5F0F;&#xFF0C;&#x90A3;&#x4E48;&#x5C31;&#x8BF4;&#x660E;&#x8BE5;&#x8868;&#x8FBE;&#x5F0F;&#x4E0D;&#x7B26;&#x5408;&#x8BE5;&#x8BED;&#x6CD5;&#x3002;</p>
+<p>&#x4EE5;&#x4E0B;&#x662F;&#x5C06;&#x8BED;&#x6CD5;&#x6620;&#x5C04;&#x6210;&#x4EE3;&#x7801;&#x7684;&#x89C4;&#x5219;&#xFF1A;</p>
+<ol style="list-style-type: decimal">
+<li><p>&#x4E3A;&#x8BED;&#x6CD5;&#x4E2D;&#x5B9A;&#x4E49;&#x7684;&#x6BCF;&#x6761;&#x89C4;&#x5219;<code>R</code>&#xFF0C;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x540C;&#x540D;&#x51FD;&#x6570;<code>R()</code>&#xFF0C;&#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;&#x9075;&#x5FAA;&#x8BE5;&#x6761;&#x8BED;&#x6CD5;&#x89C4;&#x5219;&#x7684;&#x5B9A;&#x4E49;&#x3002;&#x4F8B;&#x5982;&#x5C06;<code>expr  : factor((MUL|DIV)factor)*</code>&#x8F6C;&#x4E3A;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></div><div class="line">    self.factor()</div><div class="line">    ...</div></pre></td></tr></table></figure></p></li>
+<li><p>&#x6216;&#x89C4;&#x5219;&#xFF08;&#x5982;(a1|a2|...an)&#xFF09;&#x6620;&#x5C04;&#x4E3A;<code>if-elif-else</code>&#x8BED;&#x53E5;&#x3002;&#x4F8B;&#x5982;&#x5C06;<code>(MUL|DIV)</code>&#x8F6C;&#x4E3A;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">token = self.current_token</div><div class="line"><span class="keyword">if</span> token.type == MUL:</div><div class="line">    ...</div><div class="line"><span class="keyword">elif</span> token.type == DIV:</div><div class="line">    ...</div></pre></td></tr></table></figure></p></li>
+<li><p><code>(...)*</code>&#x89C4;&#x5219;&#x6620;&#x5C04;&#x4E3A;while&#x8BED;&#x53E5;&#x3002;&#x4F8B;&#x5982;&#x5C06;<code>((MUL|DIV)factor)*</code>&#x8F6C;&#x4E3A;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (MUL, DIV):</div><div class="line">    ...</div></pre></td></tr></table></figure></p></li>
+<li><p>&#x5C06;&#x89C4;&#x5219;&#x4E2D;&#x7684;&#x6BCF;&#x4E2A;token&#x5F15;&#x7528;T&#x6620;&#x5C04;&#x4E3A;&#x4E00;&#x4E2A;<code>eat(T)</code>&#x7684;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x3002;<code>eat(T)</code>&#x51FD;&#x6570;&#x786E;&#x8BA4;&#x5F53;&#x524D;token&#x7684;&#x7C7B;&#x578B;&#x662F;&#x5426;&#x4E3A;T&#xFF0C;&#x5982;&#x679C;&#x662F;&#x5219;&#x7EE7;&#x7EED;&#x89E3;&#x6790;&#x4E0B;&#x4E00;&#x4E2A;token&#xFF0C;&#x5E76;&#x8D4B;&#x7ED9;<code>current_token</code>&#x3002;&#x4F8B;&#x5982;&#x5C06;<code>INTEGER</code>&#x8F6C;&#x4E3A;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">self.eat(INTEGER)</div></pre></td></tr></table></figure></p></li>
+</ol>
+<p>&#x4E8E;&#x662F;&#x5BF9;&#x4E8E;&#x672C;&#x8282;&#x521D;&#x7ED9;&#x51FA;&#x7684;&#x8BED;&#x6CD5;&#x4F8B;&#x5B50;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">expr    : factor((MUL|DIV) factor)*</div><div class="line">factor  : INTEGER</div></pre></td></tr></table></figure></p>
+<p>&#x8F6C;&#x6210;&#x4EE3;&#x7801;&#x5C31;&#x662F;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></div><div class="line">    self.factor()</div><div class="line">    <span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (MUL, DIV):</div><div class="line">        token = self.current_token</div><div class="line">        <span class="keyword">if</span> token.type == MUL:</div><div class="line">            self.eat(MUL)</div><div class="line">            self.factor()</div><div class="line">        <span class="keyword">elif</span> token.type == DIV:</div><div class="line">            self.eat(DIV)</div><div class="line">            self.factor()</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">factor</span><span class="params">(self)</span>:</span></div><div class="line">    self.eat(INTEGER)</div></pre></td></tr></table></figure></p>
+<p>Part4&#x7684;&#x4EE3;&#x7801;&#x7528;&#x4E8E;&#x89E3;&#x6790;&#x4E0A;&#x4F8B;&#x4E2D;&#x7684;&#x8BED;&#x6CD5;&#xFF0C;&#x5B83;&#x5C06;&#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x5668;&#x548C;&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5668;&#x5206;&#x6210;&#x4E24;&#x4E2A;&#x7C7B;&#x6765;&#x5B9A;&#x4E49;&#xFF0C;&#x4E5F;&#x4F7F;&#x4E8C;&#x8005;&#x7684;&#x804C;&#x8D23;&#x66F4;&#x52A0;&#x660E;&#x6670;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lexer</span><span class="params">(object)</span>:</span>    <span class="comment"># &#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x5668;</span></div><div class="line">    ...</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">advance</span><span class="params">(self)</span>:</span> <span class="comment"># &#x6B65;&#x8FDB;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;</span></div><div class="line">        ...</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">skip_whitespace</span><span class="params">(self)</span>:</span></div><div class="line">        ...</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">integer</span><span class="params">(self)</span>:</span> <span class="comment"># &#x89E3;&#x6790;&#x4E00;&#x4E2A;&#x6574;&#x578B;&#x6570;</span></div><div class="line">        ...</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></div><div class="line">        ...</div><div class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">if</span> self.current_char.isspace():</div><div class="line">                self.skip_whitespace()</div><div class="line">                <span class="keyword">continue</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.current_char.isdigit():</div><div class="line">                <span class="keyword">return</span> Token(INTEGER, self.integer())</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.current_char == <span class="string">&apos;*&apos;</span>:</div><div class="line">                self.advance()</div><div class="line">                <span class="keyword">return</span> Token(MUL, <span class="string">&apos;*&apos;</span>)</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.current_char == <span class="string">&apos;/&apos;</span>:</div><div class="line">                self.advance()</div><div class="line">                <span class="keyword">return</span> Token(DIV, <span class="string">&apos;/&apos;</span>)</div><div class="line">            ...</div><div class="line">        <span class="keyword">return</span> Token(EOF, <span class="keyword">None</span>)</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">(object)</span>:</span>  <span class="comment"># &#x8BED;&#x6CD5;&#x5206;&#x6790;&#x5668;</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, lexer)</span>:</span></div><div class="line">        ...</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">eat</span><span class="params">(self, token_type)</span>:</span></div><div class="line">        ...</div><div class="line">        <span class="keyword">if</span> self.current_token.type == token_type:</div><div class="line">            self.current_token = self.lexer.get_next_token()</div><div class="line">        ...</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factor</span><span class="params">(self)</span>:</span></div><div class="line">        ...</div><div class="line">        token = self.current_token</div><div class="line">        self.eat(INTEGER)</div><div class="line">        <span class="keyword">return</span> token.value</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></div><div class="line">        ...</div><div class="line">        result = self.factor()</div><div class="line"></div><div class="line">        <span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (MUL, DIV):</div><div class="line">            token = self.current_token</div><div class="line">            <span class="keyword">if</span> token.type == MUL:</div><div class="line">                self.eat(MUL)</div><div class="line">                result = result * self.factor()</div><div class="line">            <span class="keyword">elif</span> token.type == DIV:</div><div class="line">                self.eat(DIV)</div><div class="line">                result = result / self.factor()</div><div class="line"></div><div class="line">        <span class="keyword">return</span> result</div></pre></td></tr></table></figure></p>
+<p>&#x5176;&#x4E2D;&#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x5668;<code>Lexer</code>&#x7684;&#x5B9E;&#x73B0;&#x548C;&#x524D;&#x9762;&#x7AE0;&#x8282;&#x6CA1;&#x4EC0;&#x4E48;&#x53D8;&#x5316;&#xFF1B;&#x4E3B;&#x8981;&#x662F;<code>Interpeter::expr(...)</code>&#x4F7F;&#x7528;&#x4E86;&#x6620;&#x5C04;&#x89C4;&#x5219;&#x3002;</p>
+<h1 id="&#x8003;&#x8651;&#x8FD0;&#x7B97;&#x4F18;&#x5148;&#x7EA7;">&#x8003;&#x8651;&#x8FD0;&#x7B97;&#x4F18;&#x5148;&#x7EA7;</h1>
+<p>&#x4E58;&#x9664;&#x6CD5;&#x7684;&#x4F18;&#x5148;&#x7EA7;&#x9AD8;&#x4E8E;&#x52A0;&#x51CF;&#x6CD5;&#xFF0C;&#x600E;&#x4E48;&#x5728;&#x8BED;&#x6CD5;&#x4E2D;&#x4F53;&#x73B0;&#x51FA;&#x8BE5;&#x4F18;&#x5148;&#x7EA7;&#x5462;&#xFF1F;&#x53EF;&#x4EE5;&#x603B;&#x7ED3;&#x51FA;2&#x6761;&#x89C4;&#x5219;&#xFF1A;</p>
+<ol style="list-style-type: decimal">
+<li>&#x5BF9;&#x6BCF;&#x4E00;&#x7EA7;&#x7684;&#x8FD0;&#x7B97;&#xFF0C;&#x5B9A;&#x4E49;&#x4E00;&#x6761;&#x89C4;&#x5219;&#xFF0C;&#x5DE6;&#x4FA7;&#x4E3A;&#x672C;&#x7EA7;&#x975E;&#x7EC8;&#x7ED3;&#x7B26;&#xFF0C;&#x89C4;&#x5219;&#x4F53;&#x5305;&#x542B;&#x672C;&#x7EA7;&#x7684;&#x8FD0;&#x7B97;&#x548C;&#x66F4;&#x9AD8;&#x7EA7;&#x522B;&#x7684;&#x975E;&#x7EC8;&#x7ED3;&#x7B26;&#x3002;</li>
+<li>&#x4E3A;&#x6700;&#x57FA;&#x672C;&#x7684;&#x5143;&#x7D20;&#x521B;&#x5EFA;&#x4E00;&#x6761;&#x89C4;&#x5219;&#xFF0C;&#x5DE6;&#x4FA7;&#x4E3A;&#x975E;&#x7EC8;&#x7ED3;&#x7B26;&#xFF0C;&#x53F3;&#x4FA7;&#x4E3A;&#x8BE5;&#x57FA;&#x672C;&#x5143;&#x7D20;&#xFF0C;&#x5982;INTEGER&#x3002;&#x4E8E;&#x662F;&#x5BF9;&#x4E8E;N&#x7EA7;&#x8FD0;&#x7B97;&#x5171;&#x6709;N+1&#x6761;&#x89C4;&#x5219;&#xFF0C;&#x6BCF;&#x4E2A;&#x7EA7;&#x522B;&#x4E00;&#x6761;+&#x57FA;&#x672C;&#x5143;&#x7D20;&#x4E00;&#x6761;&#x3002;</li>
+</ol>
+<p>&#x5C06;&#x8FD9;&#x4E24;&#x6761;&#x89C4;&#x5219;&#x5E94;&#x7528;&#x4E8E;&#x52A0;&#x51CF;&#x4E58;&#x9664;&#x56DB;&#x5219;&#x8FD0;&#x7B97;&#xFF0C;&#x5B9A;&#x4E49;&#x5176;&#x8BED;&#x6CD5;&#x4E3A;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">expr    : term((PLUS|MINUS)term)*</div><div class="line">term    : factor((MUL|DIV)factor)*</div><div class="line">factor  : INTEGER</div></pre></td></tr></table></figure></p>
+<p>&#x4E8E;&#x662F;&#x5E94;&#x7528;&#x4E0A;&#x4E00;&#x8282;&#x7531;&#x8BED;&#x6CD5;&#x5230;&#x4EE3;&#x7801;&#x7684;&#x6620;&#x5C04;&#x89C4;&#x5219;&#xFF0C;&#x8F6C;&#x6362;&#x4EE3;&#x7801;&#x4E3A;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lexer</span><span class="params">(object)</span>:</span></div><div class="line">    ...</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></div><div class="line">        ...</div><div class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.current_char.isspace():</div><div class="line">                self.skip_whitespace()</div><div class="line">                <span class="keyword">continue</span></div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.current_char.isdigit():</div><div class="line">                <span class="keyword">return</span> Token(INTEGER, self.integer())</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.current_char == <span class="string">&apos;+&apos;</span>:</div><div class="line">                self.advance()</div><div class="line">                <span class="keyword">return</span> Token(PLUS, <span class="string">&apos;+&apos;</span>)</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.current_char == <span class="string">&apos;-&apos;</span>:</div><div class="line">                self.advance()</div><div class="line">                <span class="keyword">return</span> Token(MINUS, <span class="string">&apos;-&apos;</span>)</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.current_char == <span class="string">&apos;*&apos;</span>:</div><div class="line">                self.advance()</div><div class="line">                <span class="keyword">return</span> Token(MUL, <span class="string">&apos;*&apos;</span>)</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.current_char == <span class="string">&apos;/&apos;</span>:</div><div class="line">                self.advance()</div><div class="line">                <span class="keyword">return</span> Token(DIV, <span class="string">&apos;/&apos;</span>)</div><div class="line">            ...</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">(object)</span>:</span></div><div class="line">    ...</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">term</span><span class="params">(self)</span>:</span></div><div class="line">        result = self.factor()</div><div class="line"></div><div class="line">        <span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (MUL, DIV):</div><div class="line">            token = self.current_token</div><div class="line">            <span class="keyword">if</span> token.type == MUL:</div><div class="line">                self.eat(MUL)</div><div class="line">                result = result * self.factor()</div><div class="line">            <span class="keyword">elif</span> token.type == DIV:</div><div class="line">                self.eat(DIV)</div><div class="line">                result = result / self.factor()</div><div class="line"></div><div class="line">        <span class="keyword">return</span> result</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">expr</span><span class="params">(self)</span>:</span></div><div class="line">        result = self.term()</div><div class="line"></div><div class="line">        <span class="keyword">while</span> self.current_token.type <span class="keyword">in</span> (PLUS, MINUS):</div><div class="line">            token = self.current_token</div><div class="line">            <span class="keyword">if</span> token.type == PLUS:</div><div class="line">                self.eat(PLUS)  <span class="comment"># 14 + 2 * </span></div><div class="line">                result = result + self.term() </div><div class="line">            <span class="keyword">elif</span> token.type == MINUS:</div><div class="line">                self.eat(MINUS)</div><div class="line">                result = result - self.term()</div><div class="line"></div><div class="line">        <span class="keyword">return</span> result</div></pre></td></tr></table></figure></p>
+<p>&#x4EE5;&#x4E0A;&#x662F;Part5&#x5F15;&#x5165;&#x7684;&#x5185;&#x5BB9;&#xFF0C;&#x91CD;&#x70B9;&#x662F;<code>Interpreter::term()</code>&#x548C;<code>Interpreter::expr()</code>&#x7684;&#x53D8;&#x5316;&#x3002;&#x6709;&#x4E86;&#x6620;&#x5C04;&#x89C4;&#x5219;&#xFF0C;&#x4EE3;&#x7801;&#x5F88;&#x5BB9;&#x6613;&#x770B;&#x61C2;&#xFF1B;&#x5982;&#x679C;&#x629B;&#x5F00;&#x89C4;&#x5219;&#x76F4;&#x5954;&#x4EE3;&#x7801;&#xFF0C;&#x96BE;&#x5EA6;&#x5C06;&#x9AD8;&#x51FA;&#x4E00;&#x4E2A;&#x91CF;&#x7EA7;&#x3002;</p>
+<p>Part6&#x53EA;&#x662F;&#x5728;Part5&#x7684;&#x57FA;&#x7840;&#x4E0A;&#x652F;&#x6301;&#x4E86;&#x62EC;&#x53F7;&#xFF0C;&#x8BED;&#x6CD5;&#x88AB;&#x4FEE;&#x6539;&#x4E3A;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">expr    : term((PLUS|MINUS)term)*</div><div class="line">term    : factor((MUL|DIV)factor)*</div><div class="line">factor  : INTEGER | LPAREN expr RPAREN</div></pre></td></tr></table></figure></p>
+<p>&#x7EE7;&#x7EED;&#x5957;&#x7528;&#x516C;&#x5F0F;&#xFF0C;&#x53EA;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x8BCD;&#x6CD5;&#x5206;&#x6790;&#x5668;&#x5BF9;&#x62EC;&#x53F7;Token&#x7684;&#x89E3;&#x6790;&#x548C;&#x8BED;&#x6CD5;&#x5206;&#x6790;&#x4E2D;factor&#x51FD;&#x6570;&#xFF1A; <figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Lexer</span><span class="params">(object)</span>:</span></div><div class="line">    ...</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">get_next_token</span><span class="params">(self)</span>:</span></div><div class="line">        ...</div><div class="line">        <span class="keyword">while</span> self.current_char <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</div><div class="line">            ...</div><div class="line">            <span class="keyword">if</span> self.current_char == <span class="string">&apos;(&apos;</span>:</div><div class="line">                self.advance()</div><div class="line">                <span class="keyword">return</span> Token(LPAREN, <span class="string">&apos;(&apos;</span>)</div><div class="line"></div><div class="line">            <span class="keyword">if</span> self.current_char == <span class="string">&apos;)&apos;</span>:</div><div class="line">                self.advance()</div><div class="line">                <span class="keyword">return</span> Token(RPAREN, <span class="string">&apos;)&apos;</span>)</div><div class="line">            ...</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span><span class="params">(object)</span>:</span></div><div class="line">    ...</div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">factor</span><span class="params">(self)</span>:</span></div><div class="line">        ...</div><div class="line">        token = self.current_token</div><div class="line">        <span class="keyword">if</span> token.type == INTEGER:</div><div class="line">            self.eat(INTEGER)</div><div class="line">            <span class="keyword">return</span> token.value</div><div class="line">        <span class="keyword">elif</span> token.type == LPAREN: <span class="comment"># &#x5982;&#x679C;&#x9047;&#x5230;&#x5DE6;&#x62EC;&#x53F7;</span></div><div class="line">            self.eat(LPAREN)</div><div class="line">            result = self.expr()</div><div class="line">            self.eat(RPAREN)</div><div class="line">            <span class="keyword">return</span> result</div><div class="line">    ...</div></pre></td></tr></table></figure></p>
+<p>&#x51E0;&#x4E4E;&#x4E0D;&#x9700;&#x8981;&#x601D;&#x8003;&#x3002;</p>
+<h1 id="&#x6CE8;&#x91CD;&#x5B66;&#x4E60;&#x539F;&#x7406;">&#x6CE8;&#x91CD;&#x5B66;&#x4E60;&#x539F;&#x7406;</h1>
+<p>&#x5728;Part2&#x7684;&#x5F00;&#x5934;&#xFF0C;&#x4F5C;&#x8005;&#x5F15;&#x7528;&#x4E86;Burger &#x548C; Starbird&#x5728;&#x300A;The 5 Elements of Effective Thinking&#x300B;&#x8FD9;&#x672C;&#x4E66;&#x4E2D;&#x8BB2;&#x8FF0;&#x7684;&#x4E00;&#x5219;&#x6545;&#x4E8B;&#x3002;&#x4EAB;&#x8A89;&#x4E16;&#x754C;&#x7684;&#x5C0F;&#x53F7;&#x6F14;&#x594F;&#x5BB6;Tony Plog&#x5728;&#x4E00;&#x6B21;&#x5927;&#x5E08;&#x73ED;&#x57F9;&#x8BAD;&#x4E2D;&#xFF0C;&#x8BA9;&#x5B66;&#x751F;&#x4EEC;&#x5148;&#x6F14;&#x594F;&#x4E00;&#x9996;&#x590D;&#x6742;&#x7684;&#x97F3;&#x4E50;&#x7247;&#x6BB5;&#xFF0C;&#x5B66;&#x751F;&#x4EEC;&#x6F14;&#x594F;&#x7684;&#x5F88;&#x597D;&#xFF1B;&#x4E4B;&#x540E;&#x518D;&#x8BA9;&#x4ED6;&#x4EEC;&#x6F14;&#x594F;&#x4E00;&#x6BB5;&#x975E;&#x5E38;&#x57FA;&#x672C;&#x7B80;&#x5355;&#x7684;&#x97F3;&#x4E50;&#xFF0C;&#x548C;&#x524D;&#x9762;&#x7684;&#x6F14;&#x594F;&#x76F8;&#x6BD4;&#x542C;&#x8D77;&#x6765;&#x663E;&#x5F97;&#x975E;&#x5E38;&#x5E7C;&#x7A1A;&#x3002;&#x6F14;&#x594F;&#x7ED3;&#x675F;&#x540E;&#xFF0C;&#x8001;&#x5E08;&#x4E5F;&#x6F14;&#x594F;&#x4E86;&#x4E00;&#x904D;&#x540C;&#x6837;&#x7684;&#x4E50;&#x6BB5;&#xFF0C;&#x4F46;&#x662F;&#x8001;&#x5E08;&#x7684;&#x6F14;&#x594F;&#x5374;&#x542C;&#x4E0D;&#x51FA;&#x5E7C;&#x7A1A;&#x2014;&#x2014;&#x5DEE;&#x5F02;&#x662F;&#x660E;&#x663E;&#x7684;&#x3002;Tony&#x89E3;&#x91CA;&#x9053;&#xFF1A;&#x53EA;&#x6709;&#x638C;&#x63E1;&#x6F14;&#x594F;&#x7B80;&#x5355;&#x4E50;&#x53E5;&#x7684;&#x6280;&#x5DE7;&#xFF0C;&#x624D;&#x80FD;&#x5728;&#x6F14;&#x594F;&#x590D;&#x6742;&#x4E50;&#x53E5;&#x65F6;&#x66F4;&#x6709;&#x638C;&#x63A7;&#x529B;&#x3002;&#x8FD9;&#x5219;&#x6545;&#x4E8B;&#x5F88;&#x6709;&#x542F;&#x53D1;&#x6027;&#xFF1A;&#x8981;&#x57F9;&#x517B;&#x771F;&#x6B63;&#x7684;&#x6280;&#x827A;&#xFF0C;&#x5FC5;&#x987B;&#x6CE8;&#x91CD;&#x638C;&#x63E1;&#x7B80;&#x5355;&#x7684;&#x57FA;&#x672C;&#x601D;&#x60F3;&#x3002;&#x6B63;&#x5982;&#x827E;&#x9ED8;&#x751F;&#x6240;&#x8BF4;&#xFF1A;&#x201C;&#x5982;&#x679C;&#x4F60;&#x53EA;&#x5B66;&#x4E60;&#x65B9;&#x6CD5;&#xFF0C;&#x4F60;&#x5C06;&#x88AB;&#x7ED1;&#x6B7B;&#x5230;&#x65B9;&#x6CD5;&#x4E0A;&#x3002;&#x5982;&#x679C;&#x4F60;&#x5B66;&#x4E60;&#x539F;&#x7406;&#xFF0C;&#x4F60;&#x5C06;&#x53EF;&#x4EE5;&#x81EA;&#x5DF1;&#x8BBE;&#x8BA1;&#x9002;&#x5408;&#x81EA;&#x5DF1;&#x7684;&#x65B9;&#x6CD5;&#x3002;&#x201D;</p>
+<p>&#x6B63;&#x662F;&#x51FA;&#x4E8E;&#x8FD9;&#x6BB5;&#x6587;&#x5B57;&#xFF0C;&#x6211;&#x624D;&#x51B3;&#x5B9A;&#x6DF1;&#x5165;&#x6D88;&#x5316;&#x5305;&#x542B;&#x8FD9;14&#x7BC7;&#x6587;&#x7AE0;&#x7684;&#x7F16;&#x8BD1;&#x5668;&#x7CFB;&#x5217;&#x3002;</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/随笔/" rel="tag">#随笔</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/20/2018/0520GradientDescent/" rel="next" title="从一个简单的例子体会TensorFlow的使用">
+                <i class="fa fa-chevron-left"></i> 从一个简单的例子体会TensorFlow的使用
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/19/2018/0619BuildASimpleInterpreter2/" rel="prev" title="编写编译器和解释器二">
+                编写编译器和解释器二 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/06/18/2018/0618BuildASimpleInterpreter1/"
+           data-title="编写编译器和解释器一" data-url="http://palanceli.github.io/2018/06/18/2018/0618BuildASimpleInterpreter1/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://avatars0.githubusercontent.com/u/13184524"
+               alt="Palance Li" />
+          <p class="site-author-name" itemprop="name">Palance Li</p>
+          <p class="site-description motion-element" itemprop="description">学习，重生</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">188</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">26</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">59</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/palanceli" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://blog.csdn.net/zchongr" target="_blank" title="我的CSDN">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的CSDN
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.cnblogs.com/palance/" target="_blank" title="我的博客园">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的博客园
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.jianshu.com/" target="_blank" title="我的简书">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  我的简书
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#我为什么关注它"><span class="nav-text">我为什么关注它？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#什么是编译器和解释器"><span class="nav-text">什么是编译器和解释器？</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#词法分析器"><span class="nav-text">词法分析器</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#part2"><span class="nav-text">Part2</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#语法分析器"><span class="nav-text">语法分析器</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#上下文无关文法和bnf表示法"><span class="nav-text">上下文无关文法和BNF表示法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#考虑运算优先级"><span class="nav-text">考虑运算优先级</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#注重学习原理"><span class="nav-text">注重学习原理</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Palance Li</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"palanceli"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+       search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+    'use strict';
+    $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+            // get the contents from search data
+            isfetched = true;
+            $('.popup').detach().appendTo('.header-inner');
+            var datas = $( "entry", xmlResponse ).map(function() {
+                return {
+                    title: $( "title", this ).text(),
+                    content: $("content",this).text(),
+                    url: $( "url" , this).text()
+                };
+            }).get();
+            var $input = document.getElementById(search_id);
+            var $resultContent = document.getElementById(content_id);
+            $input.addEventListener('input', function(){
+                var matchcounts = 0;
+                var str='<ul class=\"search-result-list\">';
+                var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                $resultContent.innerHTML = "";
+                if (this.value.trim().length > 1) {
+                // perform local searching
+                datas.forEach(function(data) {
+                    var isMatch = true;
+                    var content_index = [];
+                    var data_title = data.title.trim().toLowerCase();
+                    var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                    var data_url = data.url;
+                    var index_title = -1;
+                    var index_content = -1;
+                    var first_occur = -1;
+                    // only match artiles with not empty titles and contents
+                    if(data_title != '' && data_content != '') {
+                        keywords.forEach(function(keyword, i) {
+                            index_title = data_title.indexOf(keyword);
+                            index_content = data_content.indexOf(keyword);
+                            if( index_title < 0 && index_content < 0 ){
+                                isMatch = false;
+                            } else {
+                                if (index_content < 0) {
+                                    index_content = 0;
+                                }
+                                if (i == 0) {
+                                    first_occur = index_content;
+                                }
+                            }
+                        });
+                    }
+                    // show search results
+                    if (isMatch) {
+                        matchcounts += 1;
+                        str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                        var content = data.content.trim().replace(/<[^>]+>/g,"");
+                        if (first_occur >= 0) {
+                            // cut out 100 characters
+                            var start = first_occur - 20;
+                            var end = first_occur + 80;
+                            if(start < 0){
+                                start = 0;
+                            }
+                            if(start == 0){
+                                end = 50;
+                            }
+                            if(end > content.length){
+                                end = content.length;
+                            }
+                            var match_content = content.substring(start, end);
+                            // highlight all keywords
+                            keywords.forEach(function(keyword){
+                                var regS = new RegExp(keyword, "gi");
+                                match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                            });
+
+                            str += "<p class=\"search-result\">" + match_content +"...</p>"
+                        }
+                        str += "</li>";
+                    }
+                })};
+                str += "</ul>";
+                if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+                if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+                $resultContent.innerHTML = str;
+            });
+            proceedsearch();
+        }
+    });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+  </script>
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+      var all = MathJax.Hub.getAllJax(), i;
+      for (i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+    });
+  </script>
+  <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+
+  
+
+  
+
+</body>
+</html>
