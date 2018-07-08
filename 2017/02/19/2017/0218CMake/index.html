@@ -355,153 +355,156 @@
       
 
       
-        <p>&#x6700;&#x8FD1;&#x5728;&#x65B0;&#x7684;Windows&#x7CFB;&#x7EDF;&#x4E0B;&#x4F7F;&#x7528;CMake+Boost&#xFF0C;&#x4E0D;&#x614E;&#x8E29;&#x4E86;&#x597D;&#x591A;&#x5751;&#xFF0C;&#x6D6A;&#x8D39;&#x4E0D;&#x5C11;&#x65F6;&#x95F4;&#x3002;&#x5907;&#x5FD8;&#x5982;&#x4E0B;&#xFF1A; <a id="more"></a> # &#x5B89;&#x88C5;Boost&#x524D;&#x5148;&#x5B89;&#x88C5;python &#x524D;&#x6587;&#x66FE;&#x7ECF;&#x4ECB;&#x7ECD;&#x8FC7;&#xFF0C;&#x5B89;&#x88C5;&#x4F7F;&#x7528;Boost&#x672C;&#x6765;&#x662F;&#x5F88;&#x7B80;&#x5355;&#x7684;&#xFF0C;&#x53EA;&#x8981;&#x6267;&#x884C;<code>booststrap.bat</code>&#x548C;<code>b2.exe</code>&#x5373;&#x53EF;&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x4E00;&#x5B9A;&#x8981;&#x4ED4;&#x7EC6;&#x770B;&#x4E8C;&#x8005;&#x7684;&#x6267;&#x884C;&#x7ED3;&#x679C;&#xFF0C;<code>b2.exe</code>&#x597D;&#x50CF;&#x4F9D;&#x8D56;python&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5B89;&#x88C5;python&#xFF0C;&#x8FD9;&#x4E2A;&#x7F16;&#x8BD1;&#x4F1A;&#x62A5;&#x9519;&#x3002;python&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x540E;&#x8981;&#x628A;<code>python.exe</code>&#x7684;&#x8DEF;&#x5F84;&#x6DFB;&#x52A0;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;<code>PATH</code>&#x4E2D;&#x3002;</p>
-<h1 id="&#x7F16;&#x8BD1;boost">&#x7F16;&#x8BD1;Boost</h1>
-<p>&#x7F16;&#x8BD1;&#x53C2;&#x6570;&#x5F62;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A; <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">b2.exe --build-dir=build --stagedir=./stage/x64 --build-type=complete address-model=64 threading=multi --toolset=msvc-14.0 runtime-link=static -j 12</div></pre></td></tr></table></figure></p>
-<table style="width:14%;">
-<colgroup>
-<col width="6%">
-<col width="6%">
-</colgroup>
+        <p>&#x6700;&#x8FD1;&#x5728;&#x65B0;&#x7684;Windows&#x7CFB;&#x7EDF;&#x4E0B;&#x4F7F;&#x7528;CMake+Boost&#xFF0C;&#x4E0D;&#x614E;&#x8E29;&#x4E86;&#x597D;&#x591A;&#x5751;&#xFF0C;&#x6D6A;&#x8D39;&#x4E0D;&#x5C11;&#x65F6;&#x95F4;&#x3002;&#x5907;&#x5FD8;&#x5982;&#x4E0B;&#xFF1A;<br><a id="more"></a></p>
+<h1 id="&#x5B89;&#x88C5;Boost&#x524D;&#x5148;&#x5B89;&#x88C5;python"><a href="#&#x5B89;&#x88C5;Boost&#x524D;&#x5148;&#x5B89;&#x88C5;python" class="headerlink" title="&#x5B89;&#x88C5;Boost&#x524D;&#x5148;&#x5B89;&#x88C5;python"></a>&#x5B89;&#x88C5;Boost&#x524D;&#x5148;&#x5B89;&#x88C5;python</h1><p>&#x524D;&#x6587;&#x66FE;&#x7ECF;&#x4ECB;&#x7ECD;&#x8FC7;&#xFF0C;&#x5B89;&#x88C5;&#x4F7F;&#x7528;Boost&#x672C;&#x6765;&#x662F;&#x5F88;&#x7B80;&#x5355;&#x7684;&#xFF0C;&#x53EA;&#x8981;&#x6267;&#x884C;<code>booststrap.bat</code>&#x548C;<code>b2.exe</code>&#x5373;&#x53EF;&#x3002;&#x6CE8;&#x610F;&#xFF1A;&#x4E00;&#x5B9A;&#x8981;&#x4ED4;&#x7EC6;&#x770B;&#x4E8C;&#x8005;&#x7684;&#x6267;&#x884C;&#x7ED3;&#x679C;&#xFF0C;<code>b2.exe</code>&#x597D;&#x50CF;&#x4F9D;&#x8D56;python&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5B89;&#x88C5;python&#xFF0C;&#x8FD9;&#x4E2A;&#x7F16;&#x8BD1;&#x4F1A;&#x62A5;&#x9519;&#x3002;python&#x5B89;&#x88C5;&#x5B8C;&#x6210;&#x540E;&#x8981;&#x628A;<code>python.exe</code>&#x7684;&#x8DEF;&#x5F84;&#x6DFB;&#x52A0;&#x5230;&#x73AF;&#x5883;&#x53D8;&#x91CF;<code>PATH</code>&#x4E2D;&#x3002;</p>
+<h1 id="&#x7F16;&#x8BD1;Boost"><a href="#&#x7F16;&#x8BD1;Boost" class="headerlink" title="&#x7F16;&#x8BD1;Boost"></a>&#x7F16;&#x8BD1;Boost</h1><p>&#x7F16;&#x8BD1;&#x53C2;&#x6570;&#x5F62;&#x5F0F;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">b2.exe --build-dir=build --stagedir=./stage/x64 --build-type=complete address-model=64 threading=multi --toolset=msvc-14.0 runtime-link=static -j 12</div></pre></td></tr></table></figure></p>
+<div class="table-container">
+<table>
 <thead>
-<tr class="header">
+<tr>
 <th>&#x53C2;&#x6570;</th>
 <th>&#x8BF4;&#x660E;</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>variant=debug/release</td>
 <td>&#x7F16;&#x8BD1;&#x7248;&#x672C;&#x7C7B;&#x578B;&#xFF0C;debug&#x7248;&#x6587;&#x4EF6;&#x540D;&#x6709;_d&#xFF0C;release&#x7248;&#x6CA1;&#x6709;&#xFF0C;&#x751F;&#x6210;_d&#x4E5F;&#x5FC5;&#x7136;&#x4F7F;&#x7528;debug&#x7248;&#x7684;C++&#x8FD0;&#x884C;&#x65F6;&#x5E93;&#xFF0C;&#x56E0;&#x6B64;_gd&#x662F;&#x540C;&#x65F6;&#x51FA;&#x73B0;&#x7684;</td>
 </tr>
-<tr class="even">
+<tr>
 <td>link=static/shared</td>
 <td>&#x7F16;&#x8BD1;&#x4E3A;&#x9759;&#x6001;&#x5E93;&#x8FD8;&#x662F;&#x52A8;&#x6001;&#x5E93;&#xFF0C;&#x751F;&#x6210;.lib&#x8FD8;&#x662F;.dll&#xFF0C;&#x5BF9;&#x5E94;&#x6587;&#x4EF6;&#x4E2D;&#x7684;BOOST_LIB_PREFIX</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>threading=single/multi</td>
 <td>&#x4F7F;&#x7528;&#x5355;&#x7EBF;&#x7A0B;&#x8FD8;&#x662F;&#x591A;&#x7EBF;&#x7A0B;CRT&#xFF0C;&#x591A;&#x7EBF;&#x7A0B;&#x7248;&#x6587;&#x4EF6;&#x540D;&#x6709;_mt&#xFF0C;&#x5355;&#x7EBF;&#x7A0B;&#x7248;&#x6CA1;&#x6709;&#x3002;&#x5BF9;&#x5E94;&#x6587;&#x4EF6;&#x4E2D;&#x7684;BOOST_LIB_THREAD_OPT</td>
 </tr>
-<tr class="even">
+<tr>
 <td>runtime-link=static/shared</td>
 <td>&#x9759;&#x6001;&#x8FD8;&#x662F;&#x52A8;&#x6001;&#x94FE;&#x63A5;CRT&#xFF0C;&#x9759;&#x6001;&#x94FE;&#x63A5;&#x6587;&#x4EF6;&#x540D;&#x6709;_s&#xFF0C;&#x5BF9;&#x5E94;&#x6587;&#x4EF6;&#x4E2D;&#x7684;BOOST_LIB_THREAD_OPT</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>address-model=32/64</td>
 <td>32&#x4F4D;&#x6216;64&#x4F4D;&#x7F16;&#x8BD1;</td>
 </tr>
-<tr class="even">
-<td>--toolset</td>
+<tr>
+<td>&#x2014;toolset</td>
 <td>C++&#x7F16;&#x8BD1;&#x5668;</td>
 </tr>
-<tr class="odd">
-<td>--build-dir=[builddir]</td>
+<tr>
+<td>&#x2014;build-dir=[builddir]</td>
 <td>&#x5B58;&#x653E;&#x7F16;&#x8BD1;&#x7684;&#x4E34;&#x65F6;&#x6587;&#x4EF6;</td>
 </tr>
-<tr class="even">
-<td>--stagedir=[stagedir]</td>
+<tr>
+<td>&#x2014;stagedir=[stagedir]</td>
 <td>&#x5B58;&#x653E;&#x7F16;&#x8BD1;&#x540E;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#xFF0C;&#x9ED8;&#x8BA4;&#x662F;stage</td>
 </tr>
-<tr class="odd">
-<td>--build-type=complete</td>
+<tr>
+<td>&#x2014;build-type=complete</td>
 <td>&#x7F16;&#x8BD1;&#x6240;&#x6709;&#x7248;&#x672C;&#xFF0C;&#x5426;&#x5219;&#x53EA;&#x7F16;&#x8BD1;&#x4E00;&#x5C0F;&#x90E8;&#x5206;&#x7248;&#x672C;&#xFF08;&#x76F8;&#x5F53;&#x4E8E;:variant=release, threading=multi;link=shared/static;runtime-link=shared&#xFF09;</td>
 </tr>
-<tr class="even">
-<td>--with-[library]</td>
-<td>&#x53EA;&#x7F16;&#x8BD1;&#x6307;&#x5B9A;&#x7684;&#x5E93;&#xFF0C;&#x5982;&#x8F93;&#x5165;--with-regex&#x5C31;&#x53EA;&#x7F16;&#x8BD1;regex&#x5E93;&#x4E86;&#x3002;</td>
+<tr>
+<td>&#x2014;with-[library]</td>
+<td>&#x53EA;&#x7F16;&#x8BD1;&#x6307;&#x5B9A;&#x7684;&#x5E93;&#xFF0C;&#x5982;&#x8F93;&#x5165;&#x2014;with-regex&#x5C31;&#x53EA;&#x7F16;&#x8BD1;regex&#x5E93;&#x4E86;&#x3002;</td>
 </tr>
-<tr class="odd">
-<td>--show-libraries</td>
+<tr>
+<td>&#x2014;show-libraries</td>
 <td>&#x663E;&#x793A;&#x9700;&#x8981;&#x7F16;&#x8BD1;&#x7684;&#x5E93;&#x540D;&#x79F0;</td>
 </tr>
 </tbody>
 </table>
-<h2 id="&#x751F;&#x6210;&#x6587;&#x4EF6;&#x7684;&#x547D;&#x540D;&#x89C4;&#x5219;">&#x751F;&#x6210;&#x6587;&#x4EF6;&#x7684;&#x547D;&#x540D;&#x89C4;&#x5219;</h2>
-<p>&#x4EE5;<code>libboost_regex-vc71-mt-d-1_34.lib</code>&#x4E3A;&#x4F8B;&#xFF1A; * <code>lib</code> &#x524D;&#x7F00;&#xFF1A;&#x9664;&#x4E86;Microsoft Windows&#x4E4B;&#x5916;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;Boost&#x5E93;&#x7684;&#x540D;&#x5B57;&#x90FD;&#x4EE5;&#x6B64;&#x5B57;&#x7B26;&#x4E32;&#x5F00;&#x59CB;&#x3002;&#x5728;Windows&#x4E0A;&#xFF0C;&#x53EA;&#x6709;&#x666E;&#x901A;&#x7684;&#x9759;&#x6001;&#x5E93;&#x4F7F;&#x7528;lib&#x524D;&#x7F00;&#xFF1B;&#x5BFC;&#x5165;&#x5E93;&#x548C;DLL&#x4E0D;&#x4F7F;&#x7528;&#x3002; * <code>boost_regex</code> &#x5E93;&#x540D;&#x79F0;&#xFF1A;&#x6240;&#x6709;boost&#x5E93;&#x540D;&#x6587;&#x4EF6;&#x4EE5;boost_&#x5F00;&#x5934;&#x3002; * <code>-vc71</code> Toolset &#x6807;&#x8BB0;&#xFF1A;&#x6807;&#x8BC6;&#x4E86;&#x6784;&#x5EFA;&#x8BE5;&#x5E93;&#x6240;&#x7528;&#x7684;toolset&#x548C;&#x7248;&#x672C;&#x3002; * <code>-mt</code> Threading &#x6807;&#x8BB0;&#xFF1A;&#x6807;&#x8BC6;&#x6784;&#x5EFA;&#x8BE5;&#x5E93;&#x542F;&#x7528;&#x4E86;&#x591A;&#x7EBF;&#x7A0B;&#x652F;&#x6301;&#x3002;&#x4E0D;&#x652F;&#x6301;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x5E93;&#x6CA1;&#x6709;-mt&#x3002; * <code>-d</code> ABI&#x6807;&#x8BB0;&#xFF1A;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E00;&#x79CD;&#x7279;&#x6027;&#xFF0C;&#x5411;&#x6807;&#x8BB0;&#x4E2D;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5B57;&#x6BCD;&#xFF1A;</p>
+</div>
+<h2 id="&#x751F;&#x6210;&#x6587;&#x4EF6;&#x7684;&#x547D;&#x540D;&#x89C4;&#x5219;"><a href="#&#x751F;&#x6210;&#x6587;&#x4EF6;&#x7684;&#x547D;&#x540D;&#x89C4;&#x5219;" class="headerlink" title="&#x751F;&#x6210;&#x6587;&#x4EF6;&#x7684;&#x547D;&#x540D;&#x89C4;&#x5219;"></a>&#x751F;&#x6210;&#x6587;&#x4EF6;&#x7684;&#x547D;&#x540D;&#x89C4;&#x5219;</h2><p>&#x4EE5;<code>libboost_regex-vc71-mt-d-1_34.lib</code>&#x4E3A;&#x4F8B;&#xFF1A;</p>
+<ul>
+<li><code>lib</code>  &#x524D;&#x7F00;&#xFF1A;&#x9664;&#x4E86;Microsoft Windows&#x4E4B;&#x5916;&#xFF0C;&#x6BCF;&#x4E00;&#x4E2A;Boost&#x5E93;&#x7684;&#x540D;&#x5B57;&#x90FD;&#x4EE5;&#x6B64;&#x5B57;&#x7B26;&#x4E32;&#x5F00;&#x59CB;&#x3002;&#x5728;Windows&#x4E0A;&#xFF0C;&#x53EA;&#x6709;&#x666E;&#x901A;&#x7684;&#x9759;&#x6001;&#x5E93;&#x4F7F;&#x7528;lib&#x524D;&#x7F00;&#xFF1B;&#x5BFC;&#x5165;&#x5E93;&#x548C;DLL&#x4E0D;&#x4F7F;&#x7528;&#x3002;</li>
+<li><code>boost_regex</code> &#x5E93;&#x540D;&#x79F0;&#xFF1A;&#x6240;&#x6709;boost&#x5E93;&#x540D;&#x6587;&#x4EF6;&#x4EE5;boost_&#x5F00;&#x5934;&#x3002;</li>
+<li><code>-vc71</code> Toolset &#x6807;&#x8BB0;&#xFF1A;&#x6807;&#x8BC6;&#x4E86;&#x6784;&#x5EFA;&#x8BE5;&#x5E93;&#x6240;&#x7528;&#x7684;toolset&#x548C;&#x7248;&#x672C;&#x3002;</li>
+<li><code>-mt</code> Threading &#x6807;&#x8BB0;&#xFF1A;&#x6807;&#x8BC6;&#x6784;&#x5EFA;&#x8BE5;&#x5E93;&#x542F;&#x7528;&#x4E86;&#x591A;&#x7EBF;&#x7A0B;&#x652F;&#x6301;&#x3002;&#x4E0D;&#x652F;&#x6301;&#x591A;&#x7EBF;&#x7A0B;&#x7684;&#x5E93;&#x6CA1;&#x6709;-mt&#x3002;</li>
+<li><code>-d</code> ABI&#x6807;&#x8BB0;&#xFF1A;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E00;&#x79CD;&#x7279;&#x6027;&#xFF0C;&#x5411;&#x6807;&#x8BB0;&#x4E2D;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x5B57;&#x6BCD;&#xFF1A;</li>
+</ul>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>&#x6807;&#x8BB0;</th>
 <th>&#x542B;&#x4E49;</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>s</td>
 <td>&#x9759;&#x6001;&#x94FE;&#x63A5;CRT</td>
 </tr>
-<tr class="even">
+<tr>
 <td>g</td>
 <td>&#x4F7F;&#x7528;&#x8C03;&#x8BD5;&#x7248;&#x672C;&#x7684;CRT</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>d</td>
 <td>&#x6784;&#x5EFA;&#x8C03;&#x8BD5;&#x7248;&#x672C;&#x7684;Boost</td>
 </tr>
-<tr class="even">
+<tr>
 <td>y</td>
 <td>&#x4F7F;&#x7528;Python&#x7684;&#x7279;&#x6B8A;&#x8C03;&#x8BD5;&#x6784;&#x5EFA;</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>p</td>
 <td>&#x4F7F;&#x7528;STLPort&#x6807;&#x51C6;&#x5E93;&#x800C;&#x4E0D;&#x662F;&#x7F16;&#x8BD1;&#x5668;&#x63D0;&#x4F9B;&#x7684;&#x9ED8;&#x8BA4;&#x5E93;</td>
 </tr>
-<tr class="even">
+<tr>
 <td>n</td>
 <td>&#x4F7F;&#x7528;STLPort&#x5DF2;&#x88AB;&#x5F03;&#x7528;&#x7684;&#x201C;native iostreams&#x201D;</td>
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
-<li><code>-1_34</code> &#x7248;&#x672C;&#x6807;&#x8BB0;&#xFF1A;&#x5B8C;&#x6574;&#x7684;Boost&#x53D1;&#x5E03;&#x53F7;&#xFF0C;&#x4E0B;&#x5212;&#x7EBF;&#x4EE3;&#x66FF;&#x70B9;&#x3002;&#x4F8B;&#x5982;&#xFF0C;1.31.1&#x7248;&#x672C;&#x5C06;&#x88AB;&#x6807;&#x8BB0;&#x4E3A;&#x201C;-1_31_1&#x201D;&#x3002;</li>
-<li><code>.lib</code> &#x6269;&#x5C55;&#x540D;&#xFF1A;&#x53D6;&#x51B3;&#x4E8E;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;&#x5728;&#x5927;&#x591A;&#x6570;unix&#x5E73;&#x53F0;&#x4E0A;&#xFF0C;.a&#x662F;&#x9759;&#x6001;&#x5E93;&#xFF0C;.so&#x662F;&#x5171;&#x4EAB;&#x5E93;&#x3002;&#x5728;Windows&#x4E0A;&#xFF0C;.dll&#x8868;&#x793A;&#x5171;&#x4EAB;&#x5E93;&#xFF0C;.lib&#x662F;&#x9759;&#x6001;&#x6216;&#x5BFC;&#x5165;&#x5E93;&#x3002;</li>
+<li><code>-1_34</code><br>&#x7248;&#x672C;&#x6807;&#x8BB0;&#xFF1A;&#x5B8C;&#x6574;&#x7684;Boost&#x53D1;&#x5E03;&#x53F7;&#xFF0C;&#x4E0B;&#x5212;&#x7EBF;&#x4EE3;&#x66FF;&#x70B9;&#x3002;&#x4F8B;&#x5982;&#xFF0C;1.31.1&#x7248;&#x672C;&#x5C06;&#x88AB;&#x6807;&#x8BB0;&#x4E3A;&#x201C;-1_31_1&#x201D;&#x3002;</li>
+<li><code>.lib</code><br>&#x6269;&#x5C55;&#x540D;&#xFF1A;&#x53D6;&#x51B3;&#x4E8E;&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x3002;&#x5728;&#x5927;&#x591A;&#x6570;unix&#x5E73;&#x53F0;&#x4E0A;&#xFF0C;.a&#x662F;&#x9759;&#x6001;&#x5E93;&#xFF0C;.so&#x662F;&#x5171;&#x4EAB;&#x5E93;&#x3002;&#x5728;Windows&#x4E0A;&#xFF0C;.dll&#x8868;&#x793A;&#x5171;&#x4EAB;&#x5E93;&#xFF0C;.lib&#x662F;&#x9759;&#x6001;&#x6216;&#x5BFC;&#x5165;&#x5E93;&#x3002;</li>
 </ul>
-<p>&#x53EF;&#x89C1;&#xFF0C;32&#x4F4D;&#x6216;64&#x4F4D;&#x4FE1;&#x606F;&#x5E76;&#x4E0D;&#x4F53;&#x73B0;&#x5728;&#x6587;&#x4EF6;&#x547D;&#x540D;&#x4E2D;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x5206;&#x76EE;&#x5F55;&#x5B58;&#x653E;&#x3002;&#x901A;&#x5E38;&#x5728;&#x751F;&#x6210;&#x5E93;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x8981;&#x6267;&#x884C;&#x5982;&#x4E0B;&#x4E24;&#x6761;&#x547D;&#x4EE4;&#xFF1A; <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">b2.exe --build-dir=build --stagedir=./stage/x64 --build-type=complete address-model=64 threading=multi --toolset=msvc-14.0 runtime-link=static -j 12</div><div class="line">b2.exe --build-dir=build --stagedir=./stage/win32 --build-type=complete address-model=32 threading=multi --toolset=msvc-14.0 runtime-link=static -j 12</div></pre></td></tr></table></figure></p>
-<h1 id="&#x4F7F;&#x7528;boost">&#x4F7F;&#x7528;Boost</h1>
-<h2 id="&#x4F7F;&#x7528;3264&#x4F4D;&#x7248;&#x672C;">&#x4F7F;&#x7528;32/64&#x4F4D;&#x7248;&#x672C;</h2>
-<p>&#x53EF;&#x4EE5;&#x5728;CMake&#x4E2D;&#x52A0;&#x5165;&#x5982;&#x4E0B;&#x5224;&#x65AD;&#x5E76;&#x8BBE;&#x7F6E;<code>Boost_LIBRARY_DIR</code>&#xFF1A; <figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">if</span>(CMAKE_SIZEOF_VOID_P <span class="keyword">EQUAL</span> <span class="number">8</span>)</div><div class="line">  <span class="keyword">set</span>(Boost_LIBRARY_DIR <span class="string">&quot;$ENV{BOOST_ROOT}\\stage\\x64\\lib&quot;</span>)</div><div class="line"><span class="keyword">elseif</span>(CMAKE_SIZEOF_VOID_P <span class="keyword">EQUAL</span> <span class="number">4</span>)</div><div class="line">  <span class="keyword">set</span>(Boost_LIBRARY_DIR <span class="string">&quot;$ENV{BOOST_ROOT}\\stage\\win32\\lib&quot;</span>)</div><div class="line"><span class="keyword">endif</span>()</div><div class="line"></div><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_LIBS <span class="keyword">ON</span>)</div><div class="line"><span class="keyword">find_package</span>(Boost COMPONENTS program_options log REQUIRED)</div><div class="line"></div><div class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Boost_LIBRARIES:${Boost_LIBRARIES}&quot;</span>)</div></pre></td></tr></table></figure></p>
-<p>&#x6267;&#x884C; <code>cmake -G &quot;Visual Studio 14 Win64&quot; ..</code> &#x8F93;&#x51FA;<code>Boost_LIBRARIES</code>&#x4E3A;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-- Boost_LIBRARIES:.../stage/x64/lib/libboost_xxx-mt-s-1_62.lib;...</div></pre></td></tr></table></figure></p>
-<p>&#x6267;&#x884C; <code>cmake -G &quot;Visual Studio 14&quot; ..</code> &#x8F93;&#x51FA;<code>Boost_LIBRARIES</code>&#x4E3A;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-- Boost_LIBRARIES:.../stage/Win32/lib/libboost_xxx-mt-s-1_62.lib;...</div></pre></td></tr></table></figure></p>
-<h2 id="&#x591A;&#x7EBF;&#x7A0B;crt&#x5F00;&#x5173;">&#x591A;&#x7EBF;&#x7A0B;&#x3001;CRT&#x5F00;&#x5173;</h2>
-<p>&#x4F7F;&#x7528;Boost&#x65F6;&#xFF0C;&#x5728;CMake&#x4E2D;&#x6709;&#x76F8;&#x5E94;&#x7684;&#x9009;&#x9879;&#x5BF9;&#x5E94;&#x4E0D;&#x540C;&#x7684;Boost&#x751F;&#x6210;&#x5E93;&#xFF1A;</p>
+<p>&#x53EF;&#x89C1;&#xFF0C;32&#x4F4D;&#x6216;64&#x4F4D;&#x4FE1;&#x606F;&#x5E76;&#x4E0D;&#x4F53;&#x73B0;&#x5728;&#x6587;&#x4EF6;&#x547D;&#x540D;&#x4E2D;&#xFF0C;&#x56E0;&#x6B64;&#x9700;&#x8981;&#x5206;&#x76EE;&#x5F55;&#x5B58;&#x653E;&#x3002;&#x901A;&#x5E38;&#x5728;&#x751F;&#x6210;&#x5E93;&#x6587;&#x4EF6;&#x65F6;&#xFF0C;&#x8981;&#x6267;&#x884C;&#x5982;&#x4E0B;&#x4E24;&#x6761;&#x547D;&#x4EE4;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">b2.exe --build-dir=build --stagedir=./stage/x64 --build-type=complete address-model=64 threading=multi --toolset=msvc-14.0 runtime-link=static -j 12</div><div class="line">b2.exe --build-dir=build --stagedir=./stage/win32 --build-type=complete address-model=32 threading=multi --toolset=msvc-14.0 runtime-link=static -j 12</div></pre></td></tr></table></figure></p>
+<h1 id="&#x4F7F;&#x7528;Boost"><a href="#&#x4F7F;&#x7528;Boost" class="headerlink" title="&#x4F7F;&#x7528;Boost"></a>&#x4F7F;&#x7528;Boost</h1><h2 id="&#x4F7F;&#x7528;32-64&#x4F4D;&#x7248;&#x672C;"><a href="#&#x4F7F;&#x7528;32-64&#x4F4D;&#x7248;&#x672C;" class="headerlink" title="&#x4F7F;&#x7528;32/64&#x4F4D;&#x7248;&#x672C;"></a>&#x4F7F;&#x7528;32/64&#x4F4D;&#x7248;&#x672C;</h2><p>&#x53EF;&#x4EE5;&#x5728;CMake&#x4E2D;&#x52A0;&#x5165;&#x5982;&#x4E0B;&#x5224;&#x65AD;&#x5E76;&#x8BBE;&#x7F6E;<code>Boost_LIBRARY_DIR</code>&#xFF1A;<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">if</span>(CMAKE_SIZEOF_VOID_P <span class="keyword">EQUAL</span> <span class="number">8</span>)</div><div class="line">  <span class="keyword">set</span>(Boost_LIBRARY_DIR <span class="string">&quot;$ENV{BOOST_ROOT}\\stage\\x64\\lib&quot;</span>)</div><div class="line"><span class="keyword">elseif</span>(CMAKE_SIZEOF_VOID_P <span class="keyword">EQUAL</span> <span class="number">4</span>)</div><div class="line">  <span class="keyword">set</span>(Boost_LIBRARY_DIR <span class="string">&quot;$ENV{BOOST_ROOT}\\stage\\win32\\lib&quot;</span>)</div><div class="line"><span class="keyword">endif</span>()</div><div class="line"></div><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_LIBS <span class="keyword">ON</span>)</div><div class="line"><span class="keyword">find_package</span>(Boost COMPONENTS program_options log REQUIRED)</div><div class="line"></div><div class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Boost_LIBRARIES:${Boost_LIBRARIES}&quot;</span>)</div></pre></td></tr></table></figure></p>
+<p>&#x6267;&#x884C;<br><code>cmake -G &quot;Visual Studio 14 Win64&quot; ..</code><br>&#x8F93;&#x51FA;<code>Boost_LIBRARIES</code>&#x4E3A;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-- Boost_LIBRARIES:.../stage/x64/lib/libboost_xxx-mt-s-1_62.lib;...</div></pre></td></tr></table></figure></p>
+<p>&#x6267;&#x884C;<br><code>cmake -G &quot;Visual Studio 14&quot; ..</code><br>&#x8F93;&#x51FA;<code>Boost_LIBRARIES</code>&#x4E3A;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">-- Boost_LIBRARIES:.../stage/Win32/lib/libboost_xxx-mt-s-1_62.lib;...</div></pre></td></tr></table></figure></p>
+<h2 id="&#x591A;&#x7EBF;&#x7A0B;&#x3001;CRT&#x5F00;&#x5173;"><a href="#&#x591A;&#x7EBF;&#x7A0B;&#x3001;CRT&#x5F00;&#x5173;" class="headerlink" title="&#x591A;&#x7EBF;&#x7A0B;&#x3001;CRT&#x5F00;&#x5173;"></a>&#x591A;&#x7EBF;&#x7A0B;&#x3001;CRT&#x5F00;&#x5173;</h2><p>&#x4F7F;&#x7528;Boost&#x65F6;&#xFF0C;&#x5728;CMake&#x4E2D;&#x6709;&#x76F8;&#x5E94;&#x7684;&#x9009;&#x9879;&#x5BF9;&#x5E94;&#x4E0D;&#x540C;&#x7684;Boost&#x751F;&#x6210;&#x5E93;&#xFF1A;</p>
+<div class="table-container">
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>&#x9009;&#x9879;</th>
 <th>&#x8BF4;&#x660E;</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
+<tr>
 <td>Boost_USE_MULTITHREADED</td>
 <td>&#x4F7F;&#x7528;&#x4E0E;&#x5355;&#x7EBF;&#x7A0B;/&#x591A;&#x7EBF;&#x7A0B;&#x94FE;&#x63A5;CRT&#x7684;Boost&#xFF08;_mt&#xFF09;&#xFF0C;&#x9ED8;&#x8BA4;ON</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Boost_USE_STATIC_LIBS</td>
 <td>&#x4F7F;&#x7528;Boost&#x7684;&#x9759;&#x6001;/&#x52A8;&#x6001;&#x5E93;&#xFF0C;&#x9ED8;&#x8BA4;OFF</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Boost_USE_STATIC_RUNTIME</td>
 <td>&#x4F7F;&#x7528;&#x9759;&#x6001;/&#x52A8;&#x6001;&#x94FE;&#x63A5;CRT&#x7684;Boost&#xFF08;_s&#xFF09;&#xFF0C;&#x9ED8;&#x8BA4;&#x503C;&#x4F9D;&#x8D56;&#x5E73;&#x53F0;</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Boost_USE_DEBUG_RUNTIME</td>
 <td>&#x4F7F;&#x7528;&#x94FE;&#x63A5;&#x4E86;debug/release&#x7248;CRT&#x7684;Boost&#xFF08;_g)&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;ON</td>
 </tr>
 </tbody>
 </table>
-<p>&#x4F46;&#x6211;&#x53D1;&#x73B0;&#x8FD9;&#x51E0;&#x4E2A;&#x5F00;&#x5173;&#x5B9E;&#x9645;&#x4E0A;&#x5E76;&#x4E0D;&#x662F;&#x5E73;&#x884C;&#x7684;&#x5404;&#x7BA1;&#x5404;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A; <figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_LIBS <span class="keyword">ON</span>)</div><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_RUNTIME <span class="keyword">ON</span>)</div><div class="line"><span class="keyword">set</span>(Boost_USE_DEBUG_RUNTIME <span class="keyword">ON</span>)</div><div class="line"><span class="keyword">set</span>(Boost_USE_MULTITHREADED <span class="keyword">ON</span>)</div><div class="line"></div><div class="line"><span class="keyword">find_package</span>(Boost COMPONENTS log REQUIRED)</div><div class="line"></div><div class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Boost_LIBRARIES:${Boost_LIBRARIES}&quot;</span>)</div></pre></td></tr></table></figure></p>
-<p>&#x6267;&#x884C; <code>cmake -G &quot;Visual Studio 14&quot; ..</code></p>
-<p>** <code>Boost_USE_STATIC_LIBS=ON</code> **&#xFF0C;&#x8F93;&#x51FA;&#x7684;<code>Boost_LIBRARIES</code>&#x4E3A;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">...libboost_xxx-mt-s-1_62.lib;...</div></pre></td></tr></table></figure></p>
-<p>** <code>Boost_USE_STATIC_RUNTIME=ON</code> **&#xFF0C;<code>Boost_LIBRARIES</code>&#x4E3A;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">optimized;...libboost_xxx-mt-s-1_62.lib;</div><div class="line">debug;...libboost_xxx-mt-sgd-1_62.lib;</div></pre></td></tr></table></figure></p>
-<p>&#x6B64;&#x65F6;&#x5982;&#x679C;<code>Boost_USE_DEBUG_RUNTIME=OFF</code>&#x5219;&#x4E0D;&#x751F;&#x6210;sgd&#x7248;&#x672C;&#x3002; &#x5982;&#x679C;<code>Boost_USE_STATIC_RUNTIME=OFF</code>&#xFF0C;&#x5F00;&#x5173;<code>Boost_USE_DEBUG_RUNTIME</code>&#x5C06;&#x4E0D;&#x8D77;&#x4F5C;&#x7528;&#xFF0C;<code>Boost_LIBRARIES</code>&#x603B;&#x662F;&#x4E3A;&#xFF1A; <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">optimized;...libboost_xxx-mt-s-1_62.lib;</div></pre></td></tr></table></figure></p>
-<p>&#x6240;&#x4EE5;&#x4E00;&#x822C;&#x9759;&#x6001;&#x94FE;&#x63A5;Boost&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x4E24;&#x884C;&#x5373;&#x53EF;&#x6EE1;&#x8DB3;Debug&#x548C;Release&#x7248;&#x672C;&#x7684;&#x94FE;&#x63A5;&#xFF1A; <figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_LIBS <span class="keyword">ON</span>)</div><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_RUNTIME <span class="keyword">ON</span>)</div></pre></td></tr></table></figure></p>
+</div>
+<p>&#x4F46;&#x6211;&#x53D1;&#x73B0;&#x8FD9;&#x51E0;&#x4E2A;&#x5F00;&#x5173;&#x5B9E;&#x9645;&#x4E0A;&#x5E76;&#x4E0D;&#x662F;&#x5E73;&#x884C;&#x7684;&#x5404;&#x7BA1;&#x5404;&#x7684;&#xFF0C;&#x6BD4;&#x5982;&#xFF1A;<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_LIBS <span class="keyword">ON</span>)</div><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_RUNTIME <span class="keyword">ON</span>)</div><div class="line"><span class="keyword">set</span>(Boost_USE_DEBUG_RUNTIME <span class="keyword">ON</span>)</div><div class="line"><span class="keyword">set</span>(Boost_USE_MULTITHREADED <span class="keyword">ON</span>)</div><div class="line"></div><div class="line"><span class="keyword">find_package</span>(Boost COMPONENTS log REQUIRED)</div><div class="line"></div><div class="line"><span class="keyword">message</span>(STATUS <span class="string">&quot;Boost_LIBRARIES:${Boost_LIBRARIES}&quot;</span>)</div></pre></td></tr></table></figure></p>
+<p>&#x6267;&#x884C;<br><code>cmake -G &quot;Visual Studio 14&quot; ..</code></p>
+<p><strong> <code>Boost_USE_STATIC_LIBS=ON</code> </strong>&#xFF0C;&#x8F93;&#x51FA;&#x7684;<code>Boost_LIBRARIES</code>&#x4E3A;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">...libboost_xxx-mt-s-1_62.lib;...</div></pre></td></tr></table></figure></p>
+<p><strong> <code>Boost_USE_STATIC_RUNTIME=ON</code> </strong>&#xFF0C;<code>Boost_LIBRARIES</code>&#x4E3A;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">optimized;...libboost_xxx-mt-s-1_62.lib;</div><div class="line">debug;...libboost_xxx-mt-sgd-1_62.lib;</div></pre></td></tr></table></figure></p>
+<p>&#x6B64;&#x65F6;&#x5982;&#x679C;<code>Boost_USE_DEBUG_RUNTIME=OFF</code>&#x5219;&#x4E0D;&#x751F;&#x6210;sgd&#x7248;&#x672C;&#x3002;<br>&#x5982;&#x679C;<code>Boost_USE_STATIC_RUNTIME=OFF</code>&#xFF0C;&#x5F00;&#x5173;<code>Boost_USE_DEBUG_RUNTIME</code>&#x5C06;&#x4E0D;&#x8D77;&#x4F5C;&#x7528;&#xFF0C;<code>Boost_LIBRARIES</code>&#x603B;&#x662F;&#x4E3A;&#xFF1A;<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">optimized;...libboost_xxx-mt-s-1_62.lib;</div></pre></td></tr></table></figure></p>
+<p>&#x6240;&#x4EE5;&#x4E00;&#x822C;&#x9759;&#x6001;&#x94FE;&#x63A5;Boost&#x65F6;&#xFF0C;&#x4F7F;&#x7528;&#x5982;&#x4E0B;&#x4E24;&#x884C;&#x5373;&#x53EF;&#x6EE1;&#x8DB3;Debug&#x548C;Release&#x7248;&#x672C;&#x7684;&#x94FE;&#x63A5;&#xFF1A;<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_LIBS <span class="keyword">ON</span>)</div><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_RUNTIME <span class="keyword">ON</span>)</div></pre></td></tr></table></figure></p>
 <p>Release&#x7248;&#x4F7F;&#x7528;&#xFF1A;</p>
-<h1 id="&#x7F16;&#x8BD1;boost&#x4F7F;&#x7528;&#x7684;vs&#x8981;&#x548C;cmake&#x7F16;&#x8BD1;&#x5DE5;&#x7A0B;&#x4F7F;&#x7528;&#x7684;vs&#x7248;&#x672C;&#x4E00;&#x81F4;">&#x7F16;&#x8BD1;Boost&#x4F7F;&#x7528;&#x7684;VS&#x8981;&#x548C;CMake&#x7F16;&#x8BD1;&#x5DE5;&#x7A0B;&#x4F7F;&#x7528;&#x7684;VS&#x7248;&#x672C;&#x4E00;&#x81F4;</h1>
-<p>&#x6765;<code>boost_1_62_0\stage\lib</code>&#x4E0B;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x7F16;&#x8BD1;&#x51FA;&#x6765;&#x7684;lib&#x6587;&#x4EF6;&#x540D;&#x662F;&#x5305;&#x542B;VC&#x7248;&#x672C;&#x53F7;&#x7684;&#xFF0C;&#x5982;&#xFF1A; <code>libboost_atomic-vc140-mt-1_62.lib</code>&#x3002; <code>vc140</code>&#x5BF9;&#x5E94;Visual Studio 2015&#xFF0C;&#x5982;&#x679C;&#x6B64;&#x65F6;CMake&#x7F16;&#x8BD1;project&#x7684;Visual Studio&#x7248;&#x672C;&#x4E0D;&#x662F;2015&#xFF0C;&#x800C;&#x53C8;&#x4F9D;&#x8D56;&#x4E86;Boost&#xFF1A; <figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_LIBS <span class="keyword">ON</span>) </div><div class="line"><span class="keyword">find_package</span>(Boost COMPONENTS program_options log REQUIRED)</div></pre></td></tr></table></figure></p>
+<h1 id="&#x7F16;&#x8BD1;Boost&#x4F7F;&#x7528;&#x7684;VS&#x8981;&#x548C;CMake&#x7F16;&#x8BD1;&#x5DE5;&#x7A0B;&#x4F7F;&#x7528;&#x7684;VS&#x7248;&#x672C;&#x4E00;&#x81F4;"><a href="#&#x7F16;&#x8BD1;Boost&#x4F7F;&#x7528;&#x7684;VS&#x8981;&#x548C;CMake&#x7F16;&#x8BD1;&#x5DE5;&#x7A0B;&#x4F7F;&#x7528;&#x7684;VS&#x7248;&#x672C;&#x4E00;&#x81F4;" class="headerlink" title="&#x7F16;&#x8BD1;Boost&#x4F7F;&#x7528;&#x7684;VS&#x8981;&#x548C;CMake&#x7F16;&#x8BD1;&#x5DE5;&#x7A0B;&#x4F7F;&#x7528;&#x7684;VS&#x7248;&#x672C;&#x4E00;&#x81F4;"></a>&#x7F16;&#x8BD1;Boost&#x4F7F;&#x7528;&#x7684;VS&#x8981;&#x548C;CMake&#x7F16;&#x8BD1;&#x5DE5;&#x7A0B;&#x4F7F;&#x7528;&#x7684;VS&#x7248;&#x672C;&#x4E00;&#x81F4;</h1><p>&#x6765;<code>boost_1_62_0\stage\lib</code>&#x4E0B;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x7F16;&#x8BD1;&#x51FA;&#x6765;&#x7684;lib&#x6587;&#x4EF6;&#x540D;&#x662F;&#x5305;&#x542B;VC&#x7248;&#x672C;&#x53F7;&#x7684;&#xFF0C;&#x5982;&#xFF1A;<br><code>libboost_atomic-vc140-mt-1_62.lib</code>&#x3002;<br><code>vc140</code>&#x5BF9;&#x5E94;Visual Studio 2015&#xFF0C;&#x5982;&#x679C;&#x6B64;&#x65F6;CMake&#x7F16;&#x8BD1;project&#x7684;Visual Studio&#x7248;&#x672C;&#x4E0D;&#x662F;2015&#xFF0C;&#x800C;&#x53C8;&#x4F9D;&#x8D56;&#x4E86;Boost&#xFF1A;<br><figure class="highlight cmake"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span>(Boost_USE_STATIC_LIBS <span class="keyword">ON</span>) </div><div class="line"><span class="keyword">find_package</span>(Boost COMPONENTS program_options log REQUIRED)</div></pre></td></tr></table></figure></p>
 <p>&#x8FD9;&#x4F1A;&#x5BFC;&#x81F4;CMake&#x80FD;&#x627E;&#x5230;Boost&#xFF0C;&#x5374;&#x627E;&#x4E0D;&#x5230;&#x9700;&#x8981;&#x7684;<code>program_options</code>&#x548C;<code>log</code>&#x7EC4;&#x4EF6;&#xFF0C;&#x8FD9;&#x662F;&#x56E0;&#x4E3A;CMake&#x8981;&#x627E;&#x4E0E;&#x6307;&#x5B9A;Visual Studio&#x7248;&#x672C;&#x5BF9;&#x5E94;&#x7684;libboost&#x5E93;&#x6587;&#x4EF6;&#x3002;&#x62A5;&#x51FA;&#x7684;&#x9519;&#x662F;&#x627E;&#x4E0D;&#x5230;&#x6307;&#x5B9A;&#x7684;Boost&#x7248;&#x672C;&#xFF0C;&#x5176;&#x5B9E;&#x8DDF;Boost&#x7248;&#x672C;&#x65E0;&#x5173;&#xFF0C;&#x8DDF;&#x7F16;&#x8BD1;&#x5B83;&#x4F7F;&#x7528;&#x7684;VS&#x7248;&#x672C;&#x6709;&#x5173;&#x3002;</p>
-<h1 id="&#x73AF;&#x5883;&#x53D8;&#x91CF;boost_root">&#x73AF;&#x5883;&#x53D8;&#x91CF;BOOST_ROOT</h1>
-<p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF0C;BOOST_ROOT&#x7684;&#x503C;&#x4E3A;boost&#x6240;&#x5728;&#x7684;&#x4E0A;&#x4E00;&#x7EA7;&#x76EE;&#x5F55;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x7684;&#x76EE;&#x5F55;&#x5982;&#x4E0B;&#xFF1A; <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">c:\boost_1_62_0   &lt;-- BOOST_ROOT&#x6307;&#x5411;&#x8FD9;&#x91CC;</div><div class="line">    &#x251C;&#x2500;bin.v2</div><div class="line">    &#x251C;&#x2500;boost</div><div class="line">    &#x251C;&#x2500;doc</div><div class="line">    &#x251C;&#x2500;libs</div><div class="line">    &#x251C;&#x2500;more</div><div class="line">    &#x251C;&#x2500;stage</div><div class="line">    &#x251C;&#x2500;status</div><div class="line">    &#x251C;&#x2500;tools</div><div class="line">    &#x2514;&#x2500;...</div></pre></td></tr></table></figure></p>
+<h1 id="&#x73AF;&#x5883;&#x53D8;&#x91CF;BOOST-ROOT"><a href="#&#x73AF;&#x5883;&#x53D8;&#x91CF;BOOST-ROOT" class="headerlink" title="&#x73AF;&#x5883;&#x53D8;&#x91CF;BOOST_ROOT"></a>&#x73AF;&#x5883;&#x53D8;&#x91CF;BOOST_ROOT</h1><p>&#x5982;&#x679C;&#x6307;&#x5B9A;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF0C;BOOST_ROOT&#x7684;&#x503C;&#x4E3A;boost&#x6240;&#x5728;&#x7684;&#x4E0A;&#x4E00;&#x7EA7;&#x76EE;&#x5F55;&#xFF0C;&#x6BD4;&#x5982;&#x6211;&#x7684;&#x76EE;&#x5F55;&#x5982;&#x4E0B;&#xFF1A;<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">c:\boost_1_62_0   &lt;-- BOOST_ROOT&#x6307;&#x5411;&#x8FD9;&#x91CC;</div><div class="line">    &#x251C;&#x2500;bin.v2</div><div class="line">    &#x251C;&#x2500;boost</div><div class="line">    &#x251C;&#x2500;doc</div><div class="line">    &#x251C;&#x2500;libs</div><div class="line">    &#x251C;&#x2500;more</div><div class="line">    &#x251C;&#x2500;stage</div><div class="line">    &#x251C;&#x2500;status</div><div class="line">    &#x251C;&#x2500;tools</div><div class="line">    &#x2514;&#x2500;...</div></pre></td></tr></table></figure></p>
 <p>&#x73AF;&#x5883;&#x53D8;&#x91CF;&#x5E94;&#x8BBE;&#x4E3A;&#xFF1A;<code>BOOST_ROOT=c:\boost_1_62_0</code>&#x3002;</p>
 <p>&#x6211;&#x5C1D;&#x8BD5;&#x4E0D;&#x5199;&#x8FD9;&#x4E2A;&#x73AF;&#x5883;&#x53D8;&#x91CF;&#xFF0C;&#x53D1;&#x73B0;CMake&#x4F9D;&#x7136;&#x80FD;&#x627E;&#x5230;Boost&#xFF0C;&#x90A3;&#x5C31;&#x4E0D;&#x8981;&#x5199;&#x4E86;&#x5427;~</p>
 
@@ -701,7 +704,7 @@
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#编译boost"><span class="nav-text">编译Boost</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成文件的命名规则"><span class="nav-text">生成文件的命名规则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用boost"><span class="nav-text">使用Boost</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用3264位版本"><span class="nav-text">使用32/64位版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程crt开关"><span class="nav-text">多线程、CRT开关</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译boost使用的vs要和cmake编译工程使用的vs版本一致"><span class="nav-text">编译Boost使用的VS要和CMake编译工程使用的VS版本一致</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境变量boost_root"><span class="nav-text">环境变量BOOST_ROOT</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#安装Boost前先安装python"><span class="nav-text">安装Boost前先安装python</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译Boost"><span class="nav-text">编译Boost</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#生成文件的命名规则"><span class="nav-text">生成文件的命名规则</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用Boost"><span class="nav-text">使用Boost</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用32-64位版本"><span class="nav-text">使用32/64位版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多线程、CRT开关"><span class="nav-text">多线程、CRT开关</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#编译Boost使用的VS要和CMake编译工程使用的VS版本一致"><span class="nav-text">编译Boost使用的VS要和CMake编译工程使用的VS版本一致</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#环境变量BOOST-ROOT"><span class="nav-text">环境变量BOOST_ROOT</span></a></li></ol></div>
             
           </div>
         </section>
